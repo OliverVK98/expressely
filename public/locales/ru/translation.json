@@ -1,4 +1,7 @@
 {
   "Translate": "Perevesti",
-  "Language": "Russkij"
+  "Language": "Russkij",
+  "Page not found": "Stranica ne najdena",
+  "Unexpected error occured": "Proizoshla nepredvidennaya oshibka",
+  "Reload page": "Perezagruzit' stranicu"
 }
