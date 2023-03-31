@@ -1,6 +1,6 @@
-import { Button, ThemeButton } from 'shared/ui/Button/ui/Button';
+import { Button, ButtonTheme } from 'shared/ui/Button/ui/Button';
 
 export {
     Button,
-    ThemeButton,
+    ButtonTheme,
 };
