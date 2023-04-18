@@ -1,22 +1,22 @@
-import 'app/styles/index.scss';
 import { Story } from '@storybook/react';
-import { Provider } from 'react-redux';
-import { createReduxStore, StateSchema } from 'app/providers/StoreProvider';
-import { DeepPartial } from '@reduxjs/toolkit';
+import { StateSchema, StoreProvider } from 'app/providers/StoreProvider';
+import { loginReducer } from 'features/AuthByUsername/model/slice/loginSlice';
+import { profileReducer } from 'entities/Profile';
+import { ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 
-export const StoreDecorator = (story: () => Story) => {
-    const initialState: DeepPartial<StateSchema> = {
-        counter: {
-            value: 10,
-        },
-    };
-    const store = createReduxStore(initialState as StateSchema);
-
-    return (
-        <Provider store={store}>
-            {
-                story()
-            }
-        </Provider>
-    );
+const defaultAsyncReducers: ReducersList = {
+    loginForm: loginReducer,
+    profile: profileReducer,
 };
+
+export const StoreDecorator = (
+    state: DeepPartial<StateSchema>,
+    asyncReducers?: ReducersList,
+) => (StoryComponent: Story) => (
+    <StoreProvider
+        initialState={state}
+        asyncReducers={{ ...defaultAsyncReducers, ...asyncReducers }}
+    >
+        <StoryComponent />
+    </StoreProvider>
+);
