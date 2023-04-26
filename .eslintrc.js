@@ -56,6 +56,7 @@ module.exports = {
             ],
         }],
         'no-undef': 'off',
+        'react/no-array-index-key': 'off',
     },
     overrides: [
         {

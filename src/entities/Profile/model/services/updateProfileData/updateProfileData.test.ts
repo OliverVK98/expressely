@@ -13,6 +13,7 @@ const data = {
     avatar: 'https://cdn0.iconfinder.com/data/icons/business-and-it-person/512/person7-512.png',
     username: 'admin',
     city: 'Miami',
+    id: '1',
 };
 
 describe('updateProfileData.test', () => {

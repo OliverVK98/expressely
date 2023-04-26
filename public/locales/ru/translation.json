@@ -29,5 +29,14 @@
   "Select currency": "Select currency",
   "Select country": "Select country",
   "Data is missing": "Data is missing",
-  "Server error": "Server error"
+  "Server error": "Server error",
+  "Article Not Found": "Article Not Found",
+  "There was an error loading an article you requested": "There was an error loading an article you requested",
+  "Copy": "Copy",
+  "Comments": "Comments",
+  "No comments": "No comments",
+  "Add your comment": "Add your comment",
+  "Send": "Send",
+  "Read more...": "Read more...",
+  "Back to All articles": "Back to All articles"
 }
