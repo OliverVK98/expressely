@@ -1,6 +1,6 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Modal } from 'shared/ui/Modal';
-import { LoginFormAsync as LoginForm } from 'features/AuthByUsername/ui/LoginForm/LoginForm.async';
+import { LoginFormAsync as LoginForm } from 'features/authByUsername/ui/LoginForm/LoginForm.async';
 import { Suspense } from 'react';
 import { Loader } from 'shared/ui/Loader';
 

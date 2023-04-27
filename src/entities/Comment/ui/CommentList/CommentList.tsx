@@ -34,6 +34,7 @@ export const CommentList = memo((props: CommentListProps) => {
                         <CommentCard
                             className={cls.comment}
                             comment={comment}
+                            key={comment.id}
                         />
                     ))
                     : <Text text={t('No comments')} />

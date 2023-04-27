@@ -4,25 +4,25 @@ import { Button, ButtonTheme } from 'shared/ui/Button';
 import { Input } from 'shared/ui/Input';
 import { useSelector } from 'react-redux';
 import { memo, useCallback } from 'react';
-import { loginActions, loginReducer } from 'features/AuthByUsername/model/slice/loginSlice';
-import { loginByUsername } from 'features/AuthByUsername';
+import { loginActions, loginReducer } from 'features/authByUsername/model/slice/loginSlice';
 import { Text, TextTheme } from 'shared/ui/Text';
 import i18n from 'shared/config/i18n/i18n';
 import {
     getLoginUsername,
-} from 'features/AuthByUsername/model/selectors/getLoginUsername/getLoginUsername';
+} from 'features/authByUsername/model/selectors/getLoginUsername/getLoginUsername';
 import {
     getLoginIsLoading,
-} from 'features/AuthByUsername/model/selectors/getLoginIsLoading/getLoginIsLoading';
+} from 'features/authByUsername/model/selectors/getLoginIsLoading/getLoginIsLoading';
 import {
     getLoginPassword,
-} from 'features/AuthByUsername/model/selectors/getLoginPassword/getLoginPassword';
-import { getLoginError } from 'features/AuthByUsername/model/selectors/getLoginError/getLoginError';
+} from 'features/authByUsername/model/selectors/getLoginPassword/getLoginPassword';
+import { getLoginError } from 'features/authByUsername/model/selectors/getLoginError/getLoginError';
 import {
     DynamicModuleLoader,
     ReducersList,
 } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { loginByUsername } from '../..';
 import cls from './LoginForm.module.scss';
 
 export interface LoginFormProps {
