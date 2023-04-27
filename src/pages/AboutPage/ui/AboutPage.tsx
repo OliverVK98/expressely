@@ -1,14 +1,15 @@
 import React, { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Page } from 'shared/ui/Page';
 
 const AboutPage = () => {
     const { t } = useTranslation('about');
 
     return (
         <Suspense fallback="/">
-            <div>
+            <Page>
                 {t('About Page')}
-            </div>
+            </Page>
         </Suspense>
     );
 };
