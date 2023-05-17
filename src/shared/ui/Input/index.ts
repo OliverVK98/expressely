@@ -1,4 +1,4 @@
-import { Input } from 'shared/ui/Input/ui/Input';
+import { Input } from './ui/Input';
 
 export {
     Input,

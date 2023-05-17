@@ -1,7 +1,7 @@
 import { StateSchema } from 'app/providers/StoreProvider';
 import {
     getLoginPassword,
-} from 'features/authByUsername/model/selectors/getLoginPassword/getLoginPassword';
+} from './getLoginPassword';
 
 describe('getLoginPassword.test', () => {
     test('should return password', () => {

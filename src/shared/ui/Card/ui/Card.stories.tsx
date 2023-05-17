@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text } from 'shared/ui/Text';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Text } from '../../Text';
 
 import { Card } from './Card';
 
@@ -8,7 +8,9 @@ export default {
     title: 'shared/Card',
     component: Card,
     argTypes: {
-        backgroundColor: { control: 'color' },
+        backgroundColor: {
+            control: 'color',
+        },
     },
 } as ComponentMeta<typeof Card>;
 

@@ -4,29 +4,23 @@ import { Button, ButtonTheme } from 'shared/ui/Button';
 import { Input } from 'shared/ui/Input';
 import { useSelector } from 'react-redux';
 import { memo, useCallback } from 'react';
-import { loginActions, loginReducer } from 'features/authByUsername/model/slice/loginSlice';
 import { Text, TextTheme } from 'shared/ui/Text';
 import i18n from 'shared/config/i18n/i18n';
-import {
-    getLoginUsername,
-} from 'features/authByUsername/model/selectors/getLoginUsername/getLoginUsername';
-import {
-    getLoginIsLoading,
-} from 'features/authByUsername/model/selectors/getLoginIsLoading/getLoginIsLoading';
-import {
-    getLoginPassword,
-} from 'features/authByUsername/model/selectors/getLoginPassword/getLoginPassword';
-import { getLoginError } from 'features/authByUsername/model/selectors/getLoginError/getLoginError';
 import {
     DynamicModuleLoader,
     ReducersList,
 } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { loginActions, loginReducer } from '../../model/slice/loginSlice';
+import { getLoginUsername } from '../../model/selectors/getLoginUsername/getLoginUsername';
+import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
+import { getLoginPassword } from '../../model/selectors/getLoginPassword/getLoginPassword';
+import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
 import { loginByUsername } from '../..';
 import cls from './LoginForm.module.scss';
 
 export interface LoginFormProps {
-    className?:string;
+    className?: string;
     onSuccess: () => void;
 }
 
@@ -42,16 +36,27 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
     const password = useSelector(getLoginPassword);
     const error = useSelector(getLoginError);
 
-    const onChangeUsername = useCallback((value: string) => {
-        dispatch(loginActions.setUsername(value));
-    }, [dispatch]);
+    const onChangeUsername = useCallback(
+        (value: string) => {
+            dispatch(loginActions.setUsername(value));
+        },
+        [dispatch],
+    );
 
-    const onChangePassword = useCallback((value: string) => {
-        dispatch(loginActions.setPassword(value));
-    }, [dispatch]);
+    const onChangePassword = useCallback(
+        (value: string) => {
+            dispatch(loginActions.setPassword(value));
+        },
+        [dispatch],
+    );
 
     const onLoginClick = useCallback(async () => {
-        const result = await dispatch(loginByUsername({ username, password }));
+        const result = await dispatch(
+            loginByUsername({
+                username,
+                password,
+            }),
+        );
         if (result.meta.requestStatus === 'fulfilled') {
             onSuccess();
         }
@@ -61,16 +66,12 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
         <DynamicModuleLoader removerAfterUnmount reducers={initialReducers}>
             <div className={classNames(cls.LoginForm, {}, [className])}>
                 <Text title={t('Sign In Form')} />
-                {
-                    error && (
-                        <Text
-                            text={
-                                i18n.t('Incorrect login or password')
-                            }
-                            theme={TextTheme.ERROR}
-                        />
-                    )
-                }
+                {error && (
+                    <Text
+                        text={i18n.t('Incorrect login or password')}
+                        theme={TextTheme.ERROR}
+                    />
+                )}
                 <Input
                     autofocus
                     className={cls.input}
@@ -92,9 +93,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
                     onClick={onLoginClick}
                     disabled={isLoading}
                 >
-                    {
-                        t('Sign In')
-                    }
+                    {t('Sign In')}
                 </Button>
             </div>
         </DynamicModuleLoader>

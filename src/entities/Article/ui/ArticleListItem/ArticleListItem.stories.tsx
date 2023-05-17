@@ -1,18 +1,22 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { Article, ArticleView } from 'entities/Article';
+import { Article, ArticleView } from '../..';
 import { ArticleListItem } from './ArticleListItem';
 
 export default {
     title: 'entities/ArticleListItem',
     component: ArticleListItem,
     argTypes: {
-        backgroundColor: { control: 'color' },
+        backgroundColor: {
+            control: 'color',
+        },
     },
 } as ComponentMeta<typeof ArticleListItem>;
 
-const Template: ComponentStory<typeof ArticleListItem> = (args) => <ArticleListItem {...args} />;
+const Template: ComponentStory<typeof ArticleListItem> = (args) => (
+    <ArticleListItem {...args} />
+);
 
 const article = {
     id: '1',
@@ -26,12 +30,7 @@ const article = {
         username: 'OKezik',
         avatar: 'https://xakep.ru/wp-content/uploads/2018/05/171485/KuroiSH-hacker.jpg',
     },
-    type: [
-        'IT',
-        'SCIENCE',
-        'POLITICS',
-        'ECONOMICS',
-    ],
+    type: ['IT', 'SCIENCE', 'POLITICS', 'ECONOMICS'],
     blocks: [
         {
             id: '1',

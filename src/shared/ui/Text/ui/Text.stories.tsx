@@ -1,15 +1,17 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Text } from 'shared/ui/Text';
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from 'app/providers/ThemeProvider';
-import { TextSize, TextTheme } from 'shared/ui/Text/ui/Text';
+import { Text } from '..';
+import { TextSize, TextTheme } from './Text';
 
 export default {
     title: 'shared/Text',
     component: Text,
     argTypes: {
-        backgroundColor: { control: 'color' },
+        backgroundColor: {
+            control: 'color',
+        },
     },
 } as ComponentMeta<typeof Text>;
 
@@ -65,4 +67,11 @@ SizeL.args = {
     title: 'Test Title',
     text: 'Test Text',
     size: TextSize.L,
+};
+
+export const SizeS = Template.bind({});
+SizeS.args = {
+    title: 'Test Title',
+    text: 'Test Text',
+    size: TextSize.S,
 };

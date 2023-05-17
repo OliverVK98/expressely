@@ -6,7 +6,9 @@ export default {
     title: 'shared/Select',
     component: Select,
     argTypes: {
-        backgroundColor: { control: 'color' },
+        backgroundColor: {
+            control: 'color',
+        },
     },
 } as ComponentMeta<typeof Select>;
 
@@ -16,7 +18,13 @@ export const Primary = Template.bind({});
 Primary.args = {
     label: 'test label',
     options: [
-        { value: '123', content: 'First Item' },
-        { value: '123', content: 'Second Item' },
+        {
+            value: '123',
+            content: 'First Item',
+        },
+        {
+            value: '123',
+            content: 'Second Item',
+        },
     ],
 };

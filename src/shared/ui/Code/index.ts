@@ -1,4 +1,4 @@
-import { Code } from 'shared/ui/Code/ui/Code';
+import { Code } from './ui/Code';
 
 export {
     Code,

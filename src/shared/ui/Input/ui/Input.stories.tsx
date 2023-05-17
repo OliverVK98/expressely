@@ -1,12 +1,14 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { Input } from 'shared/ui/Input';
+import { Input } from '..';
 
 export default {
     title: 'shared/Input',
     component: Input,
     argTypes: {
-        backgroundColor: { control: 'color' },
+        backgroundColor: {
+            control: 'color',
+        },
     },
 } as ComponentMeta<typeof Input>;
 

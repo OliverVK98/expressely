@@ -7,7 +7,9 @@ export default {
     title: 'shared/Page',
     component: Page,
     argTypes: {
-        backgroundColor: { control: 'color' },
+        backgroundColor: {
+            control: 'color',
+        },
     },
 } as ComponentMeta<typeof Page>;
 

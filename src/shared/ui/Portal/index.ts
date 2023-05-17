@@ -1,4 +1,4 @@
-import { Portal } from 'shared/ui/Portal/ui/Portal';
+import { Portal } from './ui/Portal';
 
 export {
     Portal,

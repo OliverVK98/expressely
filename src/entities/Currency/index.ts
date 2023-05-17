@@ -1,4 +1,4 @@
-import { CurrencySelect } from 'entities/Currency/ui/CurrencySelect/CurrencySelect';
+import { CurrencySelect } from './ui/CurrencySelect/CurrencySelect';
 import { Currency } from './model/types/currency';
 
 export {

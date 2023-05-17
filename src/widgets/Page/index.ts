@@ -1,4 +1,4 @@
-import { Page } from 'widgets/Page/ui/Page';
+import { Page } from './ui/Page';
 
 export {
     Page,

@@ -1,7 +1,12 @@
-import { userReducer, userActions } from 'entities/User/model/slice/userSlice';
-import { UserSchema, User } from 'entities/User/model/types/userSchema';
-import { getUserAuthData } from 'entities/User/model/selectors/getUserAuthData/getUserAuthData';
-import { getUserInit } from 'entities/User/model/selectors/getUserInit/getUserInit';
+import {
+    isUserManager,
+    isUserAdmin,
+    getUserRoles,
+} from 'entities/User/model/selectors/getUserRoles/roleSelector';
+import { userReducer, userActions } from './model/slice/userSlice';
+import { UserSchema, User, UserRole } from './model/types/userSchema';
+import { getUserAuthData } from './model/selectors/getUserAuthData/getUserAuthData';
+import { getUserInit } from './model/selectors/getUserInit/getUserInit';
 
 export {
     userActions,
@@ -10,4 +15,8 @@ export {
     UserSchema,
     getUserAuthData,
     getUserInit,
+    isUserManager,
+    isUserAdmin,
+    UserRole,
+    getUserRoles,
 };

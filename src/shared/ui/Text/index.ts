@@ -1,4 +1,4 @@
-import { Text, TextTheme } from 'shared/ui/Text/ui/Text';
+import { Text, TextTheme } from './ui/Text';
 
 export {
     Text,

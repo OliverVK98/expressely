@@ -6,12 +6,15 @@ export default {
     title: 'entities/CurrencySelect',
     component: CurrencySelect,
     argTypes: {
-        backgroundColor: { control: 'color' },
+        backgroundColor: {
+            control: 'color',
+        },
     },
 } as ComponentMeta<typeof CurrencySelect>;
 
-const Template: ComponentStory<typeof CurrencySelect> = (args) => <CurrencySelect {...args} />;
+const Template: ComponentStory<typeof CurrencySelect> = (args) => (
+    <CurrencySelect {...args} />
+);
 
 export const Primary = Template.bind({});
-Primary.args = {
-};
+Primary.args = {};

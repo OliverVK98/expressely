@@ -9,12 +9,16 @@ export default {
     title: 'pages/NotFoundPage',
     component: NotFoundPage,
     argTypes: {
-        backgroundColor: { control: 'color' },
+        backgroundColor: {
+            control: 'color',
+        },
     },
 } as ComponentMeta<typeof NotFoundPage>;
 
 // @ts-ignore
-const Template: ComponentStory<typeof NotFoundPage> = (args) => <NotFoundPage {...args} />;
+const Template: ComponentStory<typeof NotFoundPage> = (args) => (
+    <NotFoundPage {...args} />
+);
 
 export const Light = Template.bind({});
 Light.args = {};

@@ -12,43 +12,52 @@ export default {
     title: 'pages/ProfilePage',
     component: ProfilePage,
     argTypes: {
-        backgroundColor: { control: 'color' },
+        backgroundColor: {
+            control: 'color',
+        },
     },
 } as ComponentMeta<typeof ProfilePage>;
 
 // @ts-ignore
-const Template: ComponentStory<typeof ProfilePage> = (args) => <ProfilePage {...args} />;
+const Template: ComponentStory<typeof ProfilePage> = (args) => (
+    <ProfilePage {...args} />
+);
 
 export const Light = Template.bind({});
 Light.args = {};
-Light.decorators = [StoreDecorator({
-    profile: {
-        form: {
-            age: 22,
-            country: Country.USA,
-            firstname: 'Oliver',
-            lastname: 'Kezik',
-            currency: Currency.USD,
-            avatar: 'https://cdn0.iconfinder.com/data/icons/business-and-it-person/512/person7-512.png',
-            username: 'admin',
-            city: 'Miami',
+Light.decorators = [
+    StoreDecorator({
+        profile: {
+            form: {
+                age: 22,
+                country: Country.USA,
+                firstname: 'Oliver',
+                lastname: 'Kezik',
+                currency: Currency.USD,
+                avatar: 'https://cdn0.iconfinder.com/data/icons/business-and-it-person/512/person7-512.png',
+                username: 'admin',
+                city: 'Miami',
+            },
         },
-    },
-})];
+    }),
+];
 
 export const Dark = Template.bind({});
 Dark.args = {};
-Dark.decorators = [ThemeDecorator(Theme.DARK), StoreDecorator({
-    profile: {
-        form: {
-            age: 22,
-            country: Country.USA,
-            firstname: 'Oliver',
-            lastname: 'Kezik',
-            currency: Currency.USD,
-            avatar: 'https://cdn0.iconfinder.com/data/icons/business-and-it-person/512/person7-512.png',
-            username: 'admin',
-            city: 'Miami',
+Dark.decorators = [
+    ThemeDecorator(Theme.DARK),
+    StoreDecorator({
+        profile: {
+            form: {
+                age: 22,
+                country: Country.USA,
+                firstname: 'Oliver',
+                lastname: 'Kezik',
+                currency: Currency.USD,
+                avatar: 'https://cdn0.iconfinder.com/data/icons/business-and-it-person/512/person7-512.png',
+                username: 'admin',
+                city: 'Miami',
+            },
         },
-    },
-})];
+    }),
+];

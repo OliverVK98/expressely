@@ -1,4 +1,4 @@
-import { Card } from 'shared/ui/Card/ui/Card';
+import { Card } from './ui/Card';
 
 export {
     Card,

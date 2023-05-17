@@ -9,7 +9,9 @@ export default {
     title: 'shared/Modal',
     component: Modal,
     argTypes: {
-        backgroundColor: { control: 'color' },
+        backgroundColor: {
+            control: 'color',
+        },
     },
 } as ComponentMeta<typeof Modal>;
 

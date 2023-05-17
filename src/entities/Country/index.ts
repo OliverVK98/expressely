@@ -1,5 +1,5 @@
-import { Country } from 'entities/Country/model/types/country';
-import { CountrySelect } from 'entities/Country/ui/CountrySelect/CountrySelect';
+import { Country } from './model/types/country';
+import { CountrySelect } from './ui/CountrySelect/CountrySelect';
 
 export {
     Country,

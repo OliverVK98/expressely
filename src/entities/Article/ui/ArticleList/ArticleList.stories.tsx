@@ -8,11 +8,15 @@ export default {
     title: 'entities/Article/ArticleList',
     component: ArticleList,
     argTypes: {
-        backgroundColor: { control: 'color' },
+        backgroundColor: {
+            control: 'color',
+        },
     },
 } as ComponentMeta<typeof ArticleList>;
 
-const Template: ComponentStory<typeof ArticleList> = (args) => <ArticleList {...args} />;
+const Template: ComponentStory<typeof ArticleList> = (args) => (
+    <ArticleList {...args} />
+);
 
 const article = {
     id: '1',
@@ -26,12 +30,7 @@ const article = {
         username: 'OKezik',
         avatar: 'https://xakep.ru/wp-content/uploads/2018/05/171485/KuroiSH-hacker.jpg',
     },
-    type: [
-        'IT',
-        'SCIENCE',
-        'POLITICS',
-        'ECONOMICS',
-    ],
+    type: ['IT', 'SCIENCE', 'POLITICS', 'ECONOMICS'],
     blocks: [
         {
             id: '1',
@@ -110,24 +109,20 @@ LoadingSmall.args = {
 
 export const ListSmall = Template.bind({});
 ListSmall.args = {
-    articles: new Array(9)
-        .fill(0)
-        .map((item, index) => ({
-            ...article,
-            id: String(index),
-        })),
+    articles: new Array(9).fill(0).map((item, index) => ({
+        ...article,
+        id: String(index),
+    })),
     isLoading: false,
     view: ArticleView.SMALL,
 };
 
 export const ListBig = Template.bind({});
 ListBig.args = {
-    articles: new Array(9)
-        .fill(0)
-        .map((item, index) => ({
-            ...article,
-            id: String(index),
-        })),
+    articles: new Array(9).fill(0).map((item, index) => ({
+        ...article,
+        id: String(index),
+    })),
     isLoading: false,
     view: ArticleView.BIG,
 };

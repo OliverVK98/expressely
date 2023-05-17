@@ -7,9 +7,7 @@ const AboutPage = () => {
 
     return (
         <Suspense fallback="/">
-            <Page>
-                {t('About Page')}
-            </Page>
+            <Page>{t('About Page')}</Page>
         </Suspense>
     );
 };

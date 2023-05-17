@@ -1,4 +1,4 @@
-import { Avatar } from 'shared/ui/Avatar/ui/Avatar';
+import { Avatar } from './ui/Avatar';
 
 export {
     Avatar,

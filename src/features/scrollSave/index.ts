@@ -1,9 +1,9 @@
-import { ScrollSaveSchema } from 'features/scrollSave/model/types/scrollSaveSchema';
-import { getScrollSaveByPath } from 'features/scrollSave/model/selectors/scrollSaveSelector';
+import { ScrollSaveSchema } from './model/types/scrollSaveSchema';
+import { getScrollSaveByPath } from './model/selectors/scrollSaveSelector';
 import {
     scrollSaveActions,
     scrollSaveReducer,
-} from 'features/scrollSave/model/slices/scrollSaveSlice';
+} from './model/slices/scrollSaveSlice';
 
 export {
     ScrollSaveSchema,

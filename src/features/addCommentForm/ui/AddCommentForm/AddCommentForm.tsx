@@ -7,12 +7,13 @@ import {
     DynamicModuleLoader,
     ReducersList,
 } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { HStack } from 'shared/ui/Stack';
 import {
     addCommentFormActions,
     addCommentFormReducer,
-} from 'features/addCommentForm/model/slices/addCommentFormSlice';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+} from '../../model/slices/addCommentFormSlice';
 import cls from './AddCommentForm.module.scss';
 import {
     getAddCommentFormError,
@@ -21,7 +22,7 @@ import {
 
 interface AddCommentFormProps {
     className?: string;
-    onSendComment: (text: string) => void
+    onSendComment: (text: string) => void;
 }
 
 const reducers: ReducersList = {
@@ -35,9 +36,12 @@ const AddCommentForm = (props: AddCommentFormProps) => {
     const text = useSelector(getAddCommentFormText);
     const error = useSelector(getAddCommentFormError);
 
-    const onCommentTextChange = useCallback((value:string) => {
-        dispatch(addCommentFormActions.setText(value));
-    }, [dispatch]);
+    const onCommentTextChange = useCallback(
+        (value: string) => {
+            dispatch(addCommentFormActions.setText(value));
+        },
+        [dispatch],
+    );
 
     const onSendHandler = useCallback(() => {
         onSendComment(text || '');
@@ -46,22 +50,21 @@ const AddCommentForm = (props: AddCommentFormProps) => {
 
     return (
         <DynamicModuleLoader reducers={reducers}>
-            <div className={classNames(cls.AddCommentForm, {}, [className])}>
+            <HStack
+                justify="between"
+                max
+                className={classNames(cls.AddCommentForm, {}, [className])}
+            >
                 <Input
                     value={text}
                     placeholder={t('Add your comment')}
                     onChange={onCommentTextChange}
                     className={cls.input}
                 />
-                <Button
-                    theme={ButtonTheme.OUTLINE}
-                    onClick={onSendHandler}
-                >
-                    {
-                        t('Send')
-                    }
+                <Button theme={ButtonTheme.OUTLINE} onClick={onSendHandler}>
+                    {t('Send')}
                 </Button>
-            </div>
+            </HStack>
         </DynamicModuleLoader>
     );
 };

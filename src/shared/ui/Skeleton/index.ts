@@ -1,4 +1,4 @@
-import { Skeleton } from 'shared/ui/Skeleton/ui/Skeleton';
+import { Skeleton } from './ui/Skeleton';
 
 export {
     Skeleton,

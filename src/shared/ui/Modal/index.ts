@@ -1,4 +1,4 @@
-import { Modal } from 'shared/ui/Modal/ui/Modal';
+import { Modal } from './ui/Modal';
 
 export {
     Modal,

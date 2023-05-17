@@ -1,4 +1,4 @@
-import { Icon } from 'shared/ui/Icon/ui/Icon';
+import { Icon } from './ui/Icon';
 
 export {
     Icon,
