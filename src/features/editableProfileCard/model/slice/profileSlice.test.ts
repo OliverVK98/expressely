@@ -1,13 +1,9 @@
-import { Country } from 'entities/Country';
-import { Currency } from 'entities/Currency';
-import { ProfileSchema, ValidateProfileError } from 'features/editableProfileCard';
-import {
-    profileActions,
-    profileReducer,
-} from 'features/editableProfileCard/model/slice/profileSlice';
-import {
-    updateProfileData,
-} from 'features/editableProfileCard/model/services/updateProfileData/updateProfileData';
+import { Country } from '@/entities/Country';
+import { Currency } from '@/entities/Currency';
+import { ProfileSchema } from '../../model/types/editableProfileCardSchema';
+import { ValidateProfileError } from '../../model/consts/consts';
+import { profileActions, profileReducer } from './profileSlice';
+import { updateProfileData } from '../services/updateProfileData/updateProfileData';
 
 const data = {
     age: 22,
@@ -23,18 +19,22 @@ const data = {
 describe('profileSlice.test', () => {
     test('test set readonly', () => {
         const state: DeepPartial<ProfileSchema> = { readonly: false };
-        expect(profileReducer(
-            state as ProfileSchema,
-            profileActions.setReadOnly(true),
-        )).toEqual({ readonly: true });
+        expect(
+            profileReducer(
+                state as ProfileSchema,
+                profileActions.setReadOnly(true),
+            ),
+        ).toEqual({ readonly: true });
     });
 
     test('test cancel edit', () => {
-        const state: DeepPartial<ProfileSchema> = { data, form: { username: '' } };
-        expect(profileReducer(
-            state as ProfileSchema,
-            profileActions.cancelEdit(),
-        )).toEqual({
+        const state: DeepPartial<ProfileSchema> = {
+            data,
+            form: { username: '' },
+        };
+        expect(
+            profileReducer(state as ProfileSchema, profileActions.cancelEdit()),
+        ).toEqual({
             readonly: true,
             validateErrors: undefined,
             data,
@@ -44,12 +44,14 @@ describe('profileSlice.test', () => {
 
     test('test update profile', () => {
         const state: DeepPartial<ProfileSchema> = { form: { username: '123' } };
-        expect(profileReducer(
-            state as ProfileSchema,
-            profileActions.updateProfile({
-                username: '1234',
-            }),
-        )).toEqual({
+        expect(
+            profileReducer(
+                state as ProfileSchema,
+                profileActions.updateProfile({
+                    username: '1234',
+                }),
+            ),
+        ).toEqual({
             form: {
                 username: '1234',
             },
@@ -61,10 +63,9 @@ describe('profileSlice.test', () => {
             isLoading: false,
             validateErrors: [ValidateProfileError.SERVER_ERROR],
         };
-        expect(profileReducer(
-            state as ProfileSchema,
-            updateProfileData.pending,
-        )).toEqual({
+        expect(
+            profileReducer(state as ProfileSchema, updateProfileData.pending),
+        ).toEqual({
             isLoading: true,
             validateErrors: undefined,
         });
@@ -74,10 +75,12 @@ describe('profileSlice.test', () => {
         const state: DeepPartial<ProfileSchema> = {
             isLoading: true,
         };
-        expect(profileReducer(
-            state as ProfileSchema,
-            updateProfileData.fulfilled(data, ''),
-        )).toEqual({
+        expect(
+            profileReducer(
+                state as ProfileSchema,
+                updateProfileData.fulfilled(data, ''),
+            ),
+        ).toEqual({
             isLoading: false,
             validateErrors: undefined,
             readonly: true,

@@ -1,11 +1,8 @@
-import { classNames } from 'shared/lib/classNames/classNames';
 import { memo } from 'react';
-import { Text } from 'shared/ui/Text';
-import { Card } from 'shared/ui/Card';
-import { Avatar } from 'shared/ui/Avatar';
-import { Skeleton } from 'shared/ui/Skeleton';
-import { Button, ButtonTheme } from 'shared/ui/Button';
-import { ArticleView } from '../..';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { Card } from '@/shared/ui/Card';
+import { Skeleton } from '@/shared/ui/Skeleton';
+import { ArticleView } from '../../model/consts/consts';
 import cls from './ArticleListItem.module.scss';
 
 interface ArticleListItemSkeletonProps {

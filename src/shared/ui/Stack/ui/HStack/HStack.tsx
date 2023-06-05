@@ -1,5 +1,5 @@
-import { Flex, FlexProps } from 'shared/ui/Stack/ui/Flex/Flex';
 import React from 'react';
+import { Flex, FlexProps } from '../Flex/Flex';
 
 type HStackProps = Omit<FlexProps, 'direction'> & {
     ref?: React.RefObject<HTMLDivElement>;

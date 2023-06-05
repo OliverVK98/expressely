@@ -1,7 +1,7 @@
-import { TestAsyncThunk } from 'shared/config/tests/TestAyncThunk/TestAsyncThunk';
-import { Country } from 'entities/Country';
-import { Currency } from 'entities/Currency';
-import { ValidateProfileError } from 'features/editableProfileCard';
+import { TestAsyncThunk } from '@/shared/config/tests/TestAyncThunk/TestAsyncThunk';
+import { Country } from '@/entities/Country';
+import { Currency } from '@/entities/Currency';
+import { ValidateProfileError } from '../../../model/consts/consts';
 import { updateProfileData } from './updateProfileData';
 
 const data = {
@@ -40,9 +40,7 @@ describe('updateProfileData.test', () => {
         const result = await thunk.callThunk();
 
         expect(result.meta.requestStatus).toBe('rejected');
-        expect(result.payload).toEqual([
-            ValidateProfileError.SERVER_ERROR,
-        ]);
+        expect(result.payload).toEqual([ValidateProfileError.SERVER_ERROR]);
     });
 
     test('validate error', async () => {

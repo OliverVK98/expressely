@@ -1,15 +1,15 @@
-import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import { memo, useCallback } from 'react';
-import { Input } from 'shared/ui/Input';
-import { Button, ButtonTheme } from 'shared/ui/Button';
+import { useSelector } from 'react-redux';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { Input } from '@/shared/ui/Input';
+import { Button, ButtonTheme } from '@/shared/ui/Button';
 import {
     DynamicModuleLoader,
     ReducersList,
-} from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { HStack } from 'shared/ui/Stack';
+} from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { HStack } from '@/shared/ui/Stack';
 import {
     addCommentFormActions,
     addCommentFormReducer,
@@ -51,6 +51,7 @@ const AddCommentForm = (props: AddCommentFormProps) => {
     return (
         <DynamicModuleLoader reducers={reducers}>
             <HStack
+                data-testid="AddCommentForm"
                 justify="between"
                 max
                 className={classNames(cls.AddCommentForm, {}, [className])}
@@ -60,8 +61,13 @@ const AddCommentForm = (props: AddCommentFormProps) => {
                     placeholder={t('Add your comment')}
                     onChange={onCommentTextChange}
                     className={cls.input}
+                    data-testid="AddCommentForm.Input"
                 />
-                <Button theme={ButtonTheme.OUTLINE} onClick={onSendHandler}>
+                <Button
+                    data-testid="AddCommentForm.Button"
+                    theme={ButtonTheme.OUTLINE}
+                    onClick={onSendHandler}
+                >
                     {t('Send')}
                 </Button>
             </HStack>

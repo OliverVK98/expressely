@@ -1,22 +1,22 @@
-import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
-import { Button, ButtonTheme } from 'shared/ui/Button';
-import { Input } from 'shared/ui/Input';
 import { useSelector } from 'react-redux';
 import { memo, useCallback } from 'react';
-import { Text, TextTheme } from 'shared/ui/Text';
-import i18n from 'shared/config/i18n/i18n';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { Button, ButtonTheme } from '@/shared/ui/Button';
+import { Input } from '@/shared/ui/Input';
+import { Text, TextTheme } from '@/shared/ui/Text';
+import i18n from '@/shared/config/i18n/i18n';
 import {
     DynamicModuleLoader,
     ReducersList,
-} from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+} from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { loginActions, loginReducer } from '../../model/slice/loginSlice';
 import { getLoginUsername } from '../../model/selectors/getLoginUsername/getLoginUsername';
 import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
 import { getLoginPassword } from '../../model/selectors/getLoginPassword/getLoginPassword';
 import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
-import { loginByUsername } from '../..';
+import { loginByUsername } from '../../model/services/loginByUsername/loginByUsername';
 import cls from './LoginForm.module.scss';
 
 export interface LoginFormProps {

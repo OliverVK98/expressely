@@ -1,10 +1,9 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
-import { Theme } from 'app/providers/ThemeProvider';
-import { Dark } from 'widgets/PageError/ui/PageError.stories';
+import { ThemeDecorator } from '@/shared/config/storybook/ThemeDecorator/ThemeDecorator';
 import { AppLink, AppLinkTheme } from './AppLink';
+import { Theme } from '@/shared/const/theme';
 
 export default {
     title: 'shared/AppLink',

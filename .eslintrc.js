@@ -18,7 +18,14 @@ module.exports = {
         ecmaVersion: 'latest',
         sourceType: 'module',
     },
-    plugins: ['react', '@typescript-eslint', 'i18next', 'react-hooks'],
+    plugins: [
+        'react',
+        '@typescript-eslint',
+        'i18next',
+        'react-hooks',
+        'ulbi-tv-plugin',
+        'unused-imports',
+    ],
     rules: {
         'react/jsx-filename-extension': [
             2,
@@ -26,6 +33,7 @@ module.exports = {
         ],
         'import/no-unresolved': 'off',
         'import/prefer-default-export': 'off',
+        'unused-imports/no-unused-imports': 'error',
         // come back to this
         'no-unused-vars': 'off',
         'react/require-default-props': 'off',
@@ -50,6 +58,8 @@ module.exports = {
                     'align',
                     'direction',
                     'gap',
+                    'border',
+                    'feature',
                 ],
             },
         ],
@@ -71,6 +81,20 @@ module.exports = {
         'no-undef': 'off',
         'react/no-array-index-key': 'off',
         'react/jsx-max-props-per-line': ['error', { maximum: 3 }],
+        'ulbi-tv-plugin/path-checker': ['error', { alias: '@' }],
+        'ulbi-tv-plugin/public-api-imports': [
+            'error',
+            {
+                alias: '@',
+            },
+        ],
+        'ulbi-tv-plugin/layer-imports': [
+            'error',
+            {
+                alias: '@',
+                ignoreImportPatterns: ['**/StoreProvider'],
+            },
+        ],
     },
     overrides: [
         {

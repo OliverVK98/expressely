@@ -1,10 +1,4 @@
-import {
-    Profile,
-
-} from './model/types/profileSchema';
+import { Profile } from './model/types/profileSchema';
 import { ProfileCard } from './ui/ProfileCard/ProfileCard';
 
-export {
-    Profile,
-    ProfileCard,
-};
+export { type Profile, ProfileCard };

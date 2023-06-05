@@ -1,20 +1,25 @@
-import { ArticleDetails } from './ui/ArticleDetails/ArticleDetails';
 import {
-    Article, ArticleView, ArticleSortField, ArticleType,
-} from './model/types/article';
+    ArticleSortField,
+    ArticleType,
+    ArticleView,
+    ArticleBlockType,
+} from './model/consts/consts';
+import { ArticleDetails } from './ui/ArticleDetails/ArticleDetails';
+import { Article } from './model/types/article';
 import { ArticleDetailsSchema } from './model/types/articleDetailsSchema';
 import { getArticleDetailsData } from './model/selectors/getArticleDetails';
-import { ArticleViewSelector } from './ui/ArticleViewSelector/ArticleViewSelector';
-import { ArticleTypeTabs } from './ui/ArticleTypeTabs/ArticleTypeTabs';
+import { ArticleList } from './ui/ArticleList/ArticleList';
+import { articleDetailsReducer } from './model/slice/articleDetailsSlice';
 
 export {
     ArticleDetails,
-    Article,
-    ArticleDetailsSchema,
+    type Article,
+    type ArticleDetailsSchema,
+    ArticleBlockType,
     getArticleDetailsData,
     ArticleView,
-    ArticleViewSelector,
     ArticleSortField,
     ArticleType,
-    ArticleTypeTabs,
+    ArticleList,
+    articleDetailsReducer,
 };

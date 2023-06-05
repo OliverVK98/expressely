@@ -1,7 +1,7 @@
-import { StateSchema } from 'app/providers/StoreProvider';
+import { StateSchema } from '@/app/providers/StoreProvider';
 import {
     getProfileError,
-} from 'features/editableProfileCard/model/selectors/getProfileError/getProfileError';
+} from './getProfileError';
 
 describe('getProfileError.test', () => {
     test('should return data', () => {

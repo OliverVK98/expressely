@@ -1,6 +1,3 @@
 import { Tabs, TabItem } from './ui/Tabs';
 
-export {
-    Tabs,
-    TabItem,
-};
+export { Tabs, type TabItem };

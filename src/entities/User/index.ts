@@ -2,21 +2,28 @@ import {
     isUserManager,
     isUserAdmin,
     getUserRoles,
-} from 'entities/User/model/selectors/getUserRoles/roleSelector';
+} from './model/selectors/getUserRoles/roleSelector';
+import { UserRole } from './model/consts/consts';
 import { userReducer, userActions } from './model/slice/userSlice';
-import { UserSchema, User, UserRole } from './model/types/userSchema';
+import { UserSchema, User } from './model/types/userSchema';
 import { getUserAuthData } from './model/selectors/getUserAuthData/getUserAuthData';
 import { getUserInit } from './model/selectors/getUserInit/getUserInit';
+import { useJsonSettings } from './model/selectors/getUserJsonSettings/getUserJsonSettings';
+import { saveJsonSettings } from './model/services/saveJsonSettings';
+import { initAuthData } from './model/services/initAuthData';
 
 export {
     userActions,
     userReducer,
-    User,
-    UserSchema,
+    type User,
+    type UserSchema,
     getUserAuthData,
     getUserInit,
     isUserManager,
     isUserAdmin,
     UserRole,
     getUserRoles,
+    useJsonSettings,
+    saveJsonSettings,
+    initAuthData,
 };

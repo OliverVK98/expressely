@@ -1,6 +1,6 @@
-import { classNames, Mods } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import React, { memo, ReactNode } from 'react';
+import { classNames, Mods } from '@/shared/lib/classNames/classNames';
 import cls from './Flex.module.scss';
 
 export type FlexJustify = 'start' | 'center' | 'end' | 'between';
@@ -57,6 +57,7 @@ export const Flex = memo((props: FlexProps) => {
         align = 'center',
         gap,
         max,
+        ...otherProps
     } = props;
     const { t } = useTranslation();
 
@@ -72,7 +73,10 @@ export const Flex = memo((props: FlexProps) => {
     };
 
     return (
-        <div className={classNames(cls.Flex, mods, [className, ...classes])}>
+        <div
+            className={classNames(cls.Flex, mods, [className, ...classes])}
+            {...otherProps}
+        >
             {children}
         </div>
     );

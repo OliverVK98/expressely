@@ -6,7 +6,7 @@ import {
 } from './model/slices/scrollSaveSlice';
 
 export {
-    ScrollSaveSchema,
+    type ScrollSaveSchema,
     getScrollSaveByPath,
     scrollSaveActions,
     scrollSaveReducer,

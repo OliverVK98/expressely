@@ -1,18 +1,18 @@
-import { UserSchema } from 'entities/User';
 import {
     AnyAction, CombinedState, EnhancedStore, ReducersMapObject,
 } from '@reduxjs/toolkit';
-import { ReducerManagerType } from 'app/providers/StoreProvider/config/createReducerManager';
 import { AxiosInstance } from 'axios';
-import { ArticleDetailsSchema } from 'entities/Article';
-import { ArticleDetailsPageSchema } from 'pages/ArticleDetailsPage';
-import { AddCommentFormSchema } from 'features/addCommentForm';
-import { ArticlesPageSchema } from 'pages/ArticlesPage';
 import { Reducer } from 'redux';
-import { ScrollSaveSchema } from 'features/scrollSave';
-import { LoginSchema } from 'features/authByUsername';
-import { rtkApi } from 'shared/api/rtkApi';
-import { ProfileSchema } from 'features/editableProfileCard';
+import { UserSchema } from '@/entities/User';
+import { ReducerManagerType } from '@/app/providers/StoreProvider/config/createReducerManager';
+import { ArticleDetailsSchema } from '@/entities/Article';
+import { ArticleDetailsPageSchema } from '@/pages/ArticleDetailsPage';
+import { AddCommentFormSchema } from '@/features/addCommentForm';
+import { ArticlesPageSchema } from '@/pages/ArticlesPage';
+import { ScrollSaveSchema } from '@/features/scrollSave';
+import { LoginSchema } from '@/features/authByUsername';
+import { rtkApi } from '@/shared/api/rtkApi';
+import { ProfileSchema } from '@/features/editableProfileCard';
 
 export interface StateSchema {
     user: UserSchema;

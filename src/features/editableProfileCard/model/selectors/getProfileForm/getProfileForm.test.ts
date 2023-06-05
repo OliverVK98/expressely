@@ -1,9 +1,9 @@
-import { StateSchema } from 'app/providers/StoreProvider';
-import { Country } from 'entities/Country';
-import { Currency } from 'entities/Currency';
+import { StateSchema } from '@/app/providers/StoreProvider';
+import { Country } from '@/entities/Country';
+import { Currency } from '@/entities/Currency';
 import {
     getProfileForm,
-} from 'features/editableProfileCard/model/selectors/getProfileForm/getProfileForm';
+} from './getProfileForm';
 
 const data = {
     age: 22,

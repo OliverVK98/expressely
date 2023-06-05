@@ -1,8 +1,6 @@
-import { StateSchema } from 'app/providers/StoreProvider';
-import {
-    getProfileValidateErrors,
-} from 'features/editableProfileCard/model/selectors/getProfileValidateErrors/getProfileValidateErrors';
-import { ValidateProfileError } from 'features/editableProfileCard';
+import { StateSchema } from '@/app/providers/StoreProvider';
+import { getProfileValidateErrors } from './getProfileValidateErrors';
+import { ValidateProfileError } from '../../../model/consts/consts';
 
 describe('getProfileValidateErrors.test', () => {
     test('should return true', () => {
@@ -22,6 +20,8 @@ describe('getProfileValidateErrors.test', () => {
 
     test('working with empty state', () => {
         const state: DeepPartial<StateSchema> = {};
-        expect(getProfileValidateErrors(state as StateSchema)).toEqual(undefined);
+        expect(getProfileValidateErrors(state as StateSchema)).toEqual(
+            undefined,
+        );
     });
 });

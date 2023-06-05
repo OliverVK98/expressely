@@ -1,3 +1,3 @@
-import { ForbiddenPageAsync } from 'pages/ForbiddenPage/ui/ForbiddenPage.async';
+import { ForbiddenPageAsync } from './ui/ForbiddenPage.async';
 
 export { ForbiddenPageAsync as ForbiddenPage };

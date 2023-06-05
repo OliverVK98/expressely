@@ -1,19 +1,21 @@
-import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import { HTMLAttributeAnchorTarget, memo } from 'react';
-import { Text } from 'shared/ui/Text';
-import { Icon } from 'shared/ui/Icon';
-import EyeIcon from 'shared/assets/icons/eye-20-20.svg';
-import { Card } from 'shared/ui/Card';
-import { useHover } from 'shared/lib/hooks/useHover/useHover';
-import { Avatar } from 'shared/ui/Avatar';
-import { Button, ButtonTheme } from 'shared/ui/Button';
-import { AppLink } from 'shared/ui/AppLink';
-import { RoutePath } from 'shared/config/routeConfig/routeConfig';
-import { ArticleBlockType, ArticleTextBlock } from '../../model/types/article';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { Text } from '@/shared/ui/Text';
+import { Icon } from '@/shared/ui/Icon';
+import EyeIcon from '@/shared/assets/icons/eye-20-20.svg';
+import { Card } from '@/shared/ui/Card';
+import { useHover } from '@/shared/lib/hooks/useHover/useHover';
+import { Avatar } from '@/shared/ui/Avatar';
+import { Button, ButtonTheme } from '@/shared/ui/Button';
+import { AppLink } from '@/shared/ui/AppLink';
+import { ArticleBlockType, ArticleView } from '../../model/consts/consts';
+import { ArticleTextBlock, Article } from '../../model/types/article';
 import { ArticleTextBlockComponent } from '../ArticleTextBlockComponent/ArticleTextBlockComponent';
-import { Article, ArticleView } from '../..';
 import cls from './ArticleListItem.module.scss';
+import { Skeleton } from '@/shared/ui/Skeleton';
+import { getRouteArticleDetails } from '@/shared/const/router';
+import { AppImage } from '@/shared/ui/AppImage';
 
 interface ArticleListItemProps {
     className?: string;
@@ -41,7 +43,10 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
         ) as ArticleTextBlock;
 
         return (
-            <div className={classNames('', {}, [className, cls[view]])}>
+            <div
+                data-testid="ArticleListItem"
+                className={classNames('', {}, [className, cls[view]])}
+            >
                 <Card className={cls.card}>
                     <div className={cls.header}>
                         <Avatar size={30} src={article.user.avatar} />
@@ -53,7 +58,8 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
                     </div>
                     <Text title={article.title} className={cls.title} />
                     {types}
-                    <img
+                    <AppImage
+                        fallback={<Skeleton width="100%" height={250} />}
                         src={article.img}
                         className={cls.img}
                         alt={article.title}
@@ -67,7 +73,7 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
                     <div className={cls.footer}>
                         <AppLink
                             target={target}
-                            to={RoutePath.article_details + article.id}
+                            to={getRouteArticleDetails(article.id)}
                         >
                             <Button theme={ButtonTheme.OUTLINE}>
                                 {t('Continue reading...')}
@@ -82,8 +88,9 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
 
     return (
         <AppLink
+            data-testid="ArticleListItem"
             target={target}
-            to={RoutePath.article_details + article.id}
+            to={getRouteArticleDetails(article.id)}
             className={classNames(cls.ArticleListItem, {}, [
                 className,
                 cls[view],
@@ -92,7 +99,8 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
         >
             <Card className={cls.card}>
                 <div className={cls.imageWrapper}>
-                    <img
+                    <AppImage
+                        fallback={<Skeleton width={200} height={200} />}
                         alt={article.title}
                         src={article.img}
                         className={cls.img}

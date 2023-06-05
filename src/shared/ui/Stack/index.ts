@@ -1,5 +1,5 @@
-import { HStack } from 'shared/ui/Stack/ui/HStack/HStack';
-import { VStack } from 'shared/ui/Stack/ui/VStack/VStack';
+import { HStack } from './ui/HStack/HStack';
+import { VStack } from './ui/VStack/VStack';
 
 export {
     HStack,

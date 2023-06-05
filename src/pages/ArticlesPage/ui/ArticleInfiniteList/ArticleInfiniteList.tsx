@@ -1,14 +1,14 @@
-import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
-import { ArticleList } from 'entities/Article/ui/ArticleList/ArticleList';
 import { useSelector } from 'react-redux';
-import { getArticles } from 'pages/ArticlesPage/model/slices/articlesPageSlice';
+import { ArticleList } from '@/entities/Article';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { getArticles } from '../../model/slices/articlesPageSlice';
 import {
     getArticlesPageError,
     getArticlesPageIsLoading,
     getArticlesPageView,
-} from 'pages/ArticlesPage/model/selectors/articlesPageSelectors';
+} from '../../model/selectors/articlesPageSelectors';
 import cls from './ArticleInfiniteList.module.scss';
 
 interface ArticleInfiniteListProps {

@@ -1,40 +1,37 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ThunkConfig } from 'app/providers/StoreProvider';
-import {
-    getProfileForm,
-} from 'features/editableProfileCard/model/selectors/getProfileForm/getProfileForm';
-import { ValidateProfileError } from 'features/editableProfileCard';
+import { ThunkConfig } from '@/app/providers/StoreProvider';
+import { getProfileForm } from '../../selectors/getProfileForm/getProfileForm';
+import { ValidateProfileError } from '../../../model/consts/consts';
 import { Profile } from '../../../../../entities/Profile';
-import {
-    validateProfileData,
-} from '../validateProfileData/validateProfileData';
+import { validateProfileData } from '../validateProfileData/validateProfileData';
 
 export const updateProfileData = createAsyncThunk<
     Profile,
     void,
-    ThunkConfig<ValidateProfileError[]>>(
-        'profile/updateProfileData',
-        async (_, thunkAPI) => {
-            const { extra, rejectWithValue, getState } = thunkAPI;
+    ThunkConfig<ValidateProfileError[]>
+>('profile/updateProfileData', async (_, thunkAPI) => {
+    const { extra, rejectWithValue, getState } = thunkAPI;
 
-            const formData = getProfileForm(getState());
+    const formData = getProfileForm(getState());
 
-            const errors = validateProfileData(formData);
+    const errors = validateProfileData(formData);
 
-            if (errors.length) {
-                return rejectWithValue(errors);
-            }
+    if (errors.length) {
+        return rejectWithValue(errors);
+    }
 
-            try {
-                const response = await extra.api.put<Profile>(`/profile/${formData?.id}`, formData);
+    try {
+        const response = await extra.api.put<Profile>(
+            `/profile/${formData?.id}`,
+            formData,
+        );
 
-                if (!response.data) {
-                    throw new Error();
-                }
+        if (!response.data) {
+            throw new Error();
+        }
 
-                return response.data;
-            } catch (e) {
-                return rejectWithValue([ValidateProfileError.SERVER_ERROR]);
-            }
-        },
-    );
+        return response.data;
+    } catch (e) {
+        return rejectWithValue([ValidateProfileError.SERVER_ERROR]);
+    }
+});

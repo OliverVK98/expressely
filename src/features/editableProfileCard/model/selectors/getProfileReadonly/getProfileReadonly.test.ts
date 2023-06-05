@@ -1,7 +1,7 @@
-import { StateSchema } from 'app/providers/StoreProvider';
+import { StateSchema } from '@/app/providers/StoreProvider';
 import {
     getProfileReadonly,
-} from 'features/editableProfileCard/model/selectors/getProfileReadonly/getProfileReadonly';
+} from './getProfileReadonly';
 
 describe('getProfileIsLoading.test', () => {
     test('should return true', () => {

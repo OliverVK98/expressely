@@ -56,6 +56,13 @@
     "Create new article": "Create new article",
     "Profile": "Profile",
     "Profile Not Found": "Profile Not Found",
-  "Admin Page": "Admin Page",
-  "You dont have access to view this page": "You dont have access to view this page"
+    "Admin Page": "Admin Page",
+    "You dont have access to view this page": "You dont have access to view this page",
+    "Please leave your feedback": "Please leave your feedback",
+    "Close": "Close",
+    "Please rate ": "Please rate ",
+    "Leave your feedback, this helps us improve quality ": "Leave your feedback, this helps us improve quality ",
+    "We appreciate your feedback": "We appreciate your feedback",
+    "Welcome to Articles Page": "Welcome to Articles Page",
+    "You can view articles and leave feedback & comments": "You can view articles and leave feedback & comments"
 }
