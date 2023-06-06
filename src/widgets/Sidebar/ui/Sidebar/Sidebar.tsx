@@ -2,11 +2,6 @@ import React, { memo, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { ThemeSwitcher } from '@/features/themeSwitcher';
-import { LangSwitcher } from '@/features/langSwitcher';
-import { Button, ButtonTheme } from '@/shared/ui/Button';
-import { ButtonSize } from '@/shared/ui/Button/ui/Button';
-import { VStack } from '@/shared/ui/Stack';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
 import { getSidebarItems } from '../../model/selectors/getSidebarItems';
 import cls from './Sidebar.module.scss';
@@ -14,6 +9,9 @@ import cls from './Sidebar.module.scss';
 interface SidebarProps {
     className?: string;
 }
+
+// TODO: Decompose into smaller components
+const DeprecatedSidebar = () => {};
 
 export const Sidebar = memo(({ className }: SidebarProps) => {
     const [collapsed, setCollapsed] = useState(false);
@@ -47,24 +45,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
                 [className],
             )}
         >
-            <Button
-                onClick={onToggle}
-                type="button"
-                data-testid="sidebar-toggle"
-                className={cls.collapseBtn}
-                theme={ButtonTheme.BACKGROUND_INVERTED}
-                square
-                size={ButtonSize.L}
-            >
-                {collapsed ? '>' : '<'}
-            </Button>
-            <VStack role="navigation" gap="8" className={cls.items}>
-                {itemsList}
-            </VStack>
-            <div className={cls.switchers}>
-                <ThemeSwitcher />
-                <LangSwitcher short={collapsed} className={cls.lang} />
-            </div>
+            fds
         </aside>
     );
 });

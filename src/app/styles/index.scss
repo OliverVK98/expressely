@@ -12,8 +12,10 @@
 }
 
 .app {
-    background: var(--bg-color);
+    background: var(--bg-redesigned);
     min-height: 100vh;
+    font: var(--font-m-redesigned);
+    color: var(--text-redesigned);
 }
 
 .content-page {
