@@ -17,7 +17,7 @@ interface PageProps extends TestProps {
     onScrollEnd?: () => void;
 }
 
-// TODO: add list virtualization for scrolling - use react-virtuoso
+// TODO: add list virtualization for scrolling - use react-virtuoso, fix infinite scroll
 
 export const Page = memo((props: PageProps) => {
     const { className, children, onScrollEnd } = props;

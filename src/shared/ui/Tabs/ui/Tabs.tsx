@@ -1,9 +1,8 @@
-import { useTranslation } from 'react-i18next';
 import { memo, ReactNode, useCallback } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Card } from '../../Card';
-import { CardTheme } from '../../Card/ui/Card';
 import cls from './Tabs.module.scss';
+import { Flex, FlexDirection } from '../../Stack/ui/Flex/Flex';
 
 export interface TabItem {
     value: string;
@@ -15,11 +14,11 @@ interface TabsProps {
     tabs: TabItem[];
     value: string;
     onTabClick: (tab: TabItem) => void;
+    direction?: FlexDirection;
 }
 
 export const Tabs = memo((props: TabsProps) => {
-    const { className, tabs, onTabClick, value } = props;
-    const { t } = useTranslation();
+    const { className, tabs, onTabClick, value, direction = 'row' } = props;
 
     const clickHandle = useCallback(
         (tab: TabItem) => () => {
@@ -29,21 +28,29 @@ export const Tabs = memo((props: TabsProps) => {
     );
 
     return (
-        <div className={classNames(cls.Tabs, {}, [className])}>
-            {tabs.map((tab) => (
-                <Card
-                    theme={
-                        tab.value === value
-                            ? CardTheme.NORMAL
-                            : CardTheme.OUTLINED
-                    }
-                    className={cls.tab}
-                    key={tab.value}
-                    onClick={clickHandle(tab)}
-                >
-                    {tab.content}
-                </Card>
-            ))}
-        </div>
+        <Flex
+            direction={direction}
+            gap="8"
+            className={classNames(cls.Tabs, {}, [className])}
+            align="start"
+        >
+            {tabs.map((tab) => {
+                const isSelected = tab.value === value;
+
+                return (
+                    <Card
+                        variant={isSelected ? 'light' : 'normal'}
+                        className={classNames(cls.tab, {
+                            [cls.selected]: isSelected,
+                        })}
+                        key={tab.value}
+                        onClick={clickHandle(tab)}
+                        border="round"
+                    >
+                        {tab.content}
+                    </Card>
+                );
+            })}
+        </Flex>
     );
 });

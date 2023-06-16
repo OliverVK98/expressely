@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { Text } from '../../Text';
+import { Text } from '../../_deprecated/Text';
 
 import { Card } from './Card';
 

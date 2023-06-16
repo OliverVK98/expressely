@@ -1,9 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { memo, useCallback, Suspense } from 'react';
 import { useSelector } from 'react-redux';
-import { classNames } from '@/shared/lib/classNames/classNames';
+import { VStack } from '@/shared/ui/Stack';
 import { Text } from '@/shared/ui/Text';
-import { TextSize } from '@/shared/ui/Text/ui/Text';
+import { Loader } from '@/shared/ui/_deprecated/Loader';
+import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from '../ArticleDetailsPage/ArticleDetailsPage.module.scss';
 import { AddCommentForm } from '@/features/addCommentForm';
 import { CommentList } from '@/entities/Comment';
@@ -12,8 +13,6 @@ import { getArticleCommentsIsLoading } from '../../model/selectors/comments';
 import { addCommentForArticle } from '../../model/services/addCommentForArticle/addCommentForArticle';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { fetchCommentsByArticleId } from '../../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';
-import { VStack } from '@/shared/ui/Stack';
-import { Loader } from '@/shared/ui/Loader';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 
 interface ArticleDetailsCommentsProps {
@@ -43,7 +42,7 @@ export const ArticleDetailsComments = memo(
         return (
             <VStack gap="16" max className={classNames('', {}, [className])}>
                 <Text
-                    size={TextSize.L}
+                    size="l"
                     className={cls.commentTitle}
                     title={t('Comments')}
                 />

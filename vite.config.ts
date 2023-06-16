@@ -2,8 +2,33 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 
+export const svgrOptions = {
+    icon: true,
+    svgoConfig: {
+        plugins: [
+            {
+                name: 'convertColors',
+                params: {
+                    currentColor: true,
+                },
+            },
+        ],
+    },
+};
+
 export default defineConfig({
-    plugins: [svgr({ exportAsDefault: true }), react()],
+    plugins: [
+        svgr({
+            exportAsDefault: true,
+            svgrOptions: {
+                replaceAttrValues: {
+                    fill: 'currentColor',
+                    color: 'currentColor',
+                },
+            },
+        }),
+        react(),
+    ],
     resolve: {
         alias: [{ find: '@', replacement: '/src' }],
     },

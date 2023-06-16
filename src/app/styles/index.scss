@@ -4,13 +4,6 @@
 @import "./themes/dark";
 @import "./themes/orange";
 
-.app,
-.app_modal,
-.app_drawer {
-    font: var(--font-m);
-    color: var(--primary-color);
-}
-
 .app {
     background: var(--bg-redesigned);
     min-height: 100vh;
@@ -28,11 +21,11 @@
 }
 
 *::-webkit-scrollbar-track {
-    background: var(--card-bg);
+    background: var(--light-bg-redesigned);
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: var(--inverted-bg-color);
+    background-color: var(--icon-redesigned);
     border-radius: 20px;
-    border: 2px solid var(--primary-color);
+    border: 1px solid var(--accent-redesigned);
 }

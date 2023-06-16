@@ -1,16 +1,16 @@
 import { useTranslation } from 'react-i18next';
 import { memo, useCallback, useState } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { Card } from '@/shared/ui/Card';
-import { HStack, VStack } from '@/shared/ui/Stack';
-import { Text } from '@/shared/ui/Text';
 import { StarRating } from '@/shared/ui/StarRating';
-import { Modal } from '@/shared/ui/Modal';
 import { Input } from '@/shared/ui/Input';
-import { Button, ButtonTheme } from '@/shared/ui/Button';
-import { BrowserView } from '@/shared/ui/BrowserView';
-import { MobileView } from '@/shared/ui/MobileView';
+import { Card } from '@/shared/ui/Card';
+import { Modal } from '@/shared/ui/Modal';
 import { Drawer } from '@/shared/ui/Drawer';
+import { Button } from '@/shared/ui/Button';
+import { BrowserView } from '@/shared/ui/BrowserView';
+import { HStack, VStack } from '@/shared/ui/Stack';
+import { MobileView } from '@/shared/ui/MobileView';
+import { Text } from '@/shared/ui/Text';
+import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './RatingCard.module.scss';
 
 interface RatingCardProps {
@@ -76,6 +76,8 @@ export const RatingCard = memo((props: RatingCardProps) => {
         <Card
             data-testid="RatingCard"
             max
+            padding="24"
+            border="round"
             className={classNames(cls.RatingCard, {}, [className])}
         >
             <VStack align="center" gap="8">
@@ -97,7 +99,6 @@ export const RatingCard = memo((props: RatingCardProps) => {
                                 <Button
                                     data-testid="RatingCard.Close"
                                     onClick={cancelHandler}
-                                    theme={ButtonTheme.OUTLINE_RED}
                                 >
                                     {t('Close')}
                                 </Button>

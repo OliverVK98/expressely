@@ -1,14 +1,14 @@
-import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { Avatar } from '@/shared/ui/Avatar';
-import { Text } from '@/shared/ui/Text';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { AppLink } from '@/shared/ui/AppLink';
-import { VStack } from '@/shared/ui/Stack';
+import { HStack, VStack } from '@/shared/ui/Stack';
+import { Avatar } from '@/shared/ui/Avatar';
+import { Text } from '@/shared/ui/Text';
+import { classNames } from '@/shared/lib/classNames/classNames';
 import { Comment } from '../../model/types/comment';
 import cls from './CommentCard.module.scss';
 import { getRouteProfile } from '@/shared/const/router';
+import { Card } from '@/shared/ui/Card';
 
 interface CommentCardProps {
     className?: string;
@@ -18,7 +18,6 @@ interface CommentCardProps {
 
 export const CommentCard = memo((props: CommentCardProps) => {
     const { className, comment, isLoading } = props;
-    const { t } = useTranslation();
 
     if (isLoading) {
         return (
@@ -45,22 +44,23 @@ export const CommentCard = memo((props: CommentCardProps) => {
     if (!comment) return null;
 
     return (
-        <VStack
-            data-testid="CommentCard.Content"
-            max
-            gap="8"
-            className={classNames(cls.CommentCard, {}, [className])}
-        >
-            <AppLink
-                to={getRouteProfile(comment.user.id)}
-                className={cls.header}
+        <Card max padding="24" border="round">
+            <VStack
+                data-testid="CommentCard.Content"
+                max
+                gap="8"
+                className={classNames(cls.CommentCard, {}, [className])}
             >
-                {comment.user.avatar ? (
-                    <Avatar size={30} src={comment.user.avatar} />
-                ) : null}
-                <Text className={cls.username} title={comment.user.username} />
-            </AppLink>
-            <Text className={cls.text} text={comment.text} />
-        </VStack>
+                <AppLink to={getRouteProfile(comment.user.id)}>
+                    <HStack gap="8">
+                        {comment.user.avatar ? (
+                            <Avatar size={30} src={comment.user.avatar} />
+                        ) : null}
+                        <Text bold title={comment.user.username} />
+                    </HStack>
+                </AppLink>
+                <Text text={comment.text} />
+            </VStack>
+        </Card>
     );
 });

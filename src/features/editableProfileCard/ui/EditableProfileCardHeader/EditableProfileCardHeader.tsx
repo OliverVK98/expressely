@@ -1,6 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
+import { Button } from '@/shared/ui/Button';
+import { HStack } from '@/shared/ui/Stack';
+import { Text } from '@/shared/ui/Text';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { getUserAuthData } from '@/entities/User';
 import { getProfileData } from '../../model/selectors/getProfileData/getProfileData';
@@ -8,9 +11,7 @@ import { getProfileReadonly } from '../../model/selectors/getProfileReadonly/get
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { profileActions } from '../../model/slice/profileSlice';
 import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData';
-import { HStack } from '@/shared/ui/Stack';
-import { Text } from '@/shared/ui/Text';
-import { Button, ButtonTheme } from '@/shared/ui/Button';
+import { Card } from '@/shared/ui/Card';
 
 interface EditableProfileCardHeaderProps {
     className?: string;
@@ -37,44 +38,45 @@ export const EditableProfileCardHeader = memo(
         }, [dispatch]);
 
         return (
-            <HStack
-                max
-                justify="between"
-                className={classNames('', {}, [className])}
-            >
-                <Text title={t('User Profile')} />
+            <Card border="partial" padding="16" max>
+                <HStack
+                    max
+                    justify="between"
+                    className={classNames('', {}, [className])}
+                >
+                    <Text title={t('User Profile')} />
 
-                {canEdit && (
-                    <div>
-                        {readonly ? (
-                            <Button
-                                theme={ButtonTheme.OUTLINE}
-                                onClick={onEdit}
-                                data-testid="EditableProfileCardHeader.EditButton"
-                            >
-                                {t('Edit')}
-                            </Button>
-                        ) : (
-                            <HStack gap="8">
+                    {canEdit && (
+                        <div>
+                            {readonly ? (
                                 <Button
-                                    theme={ButtonTheme.OUTLINE}
-                                    onClick={onCancelEdit}
-                                    data-testid="EditableProfileCardHeader.CancelButton"
+                                    onClick={onEdit}
+                                    data-testid="EditableProfileCardHeader.EditButton"
                                 >
-                                    {t('Cancel')}
+                                    {t('Edit')}
                                 </Button>
-                                <Button
-                                    theme={ButtonTheme.OUTLINE_RED}
-                                    onClick={onSaveEdit}
-                                    data-testid="EditableProfileCardHeader.SaveButton"
-                                >
-                                    {t('Save')}
-                                </Button>
-                            </HStack>
-                        )}
-                    </div>
-                )}
-            </HStack>
+                            ) : (
+                                <HStack gap="8">
+                                    <Button
+                                        onClick={onCancelEdit}
+                                        data-testid="EditableProfileCardHeader.CancelButton"
+                                        color="error"
+                                    >
+                                        {t('Cancel')}
+                                    </Button>
+                                    <Button
+                                        onClick={onSaveEdit}
+                                        data-testid="EditableProfileCardHeader.SaveButton"
+                                        color="success"
+                                    >
+                                        {t('Save')}
+                                    </Button>
+                                </HStack>
+                            )}
+                        </div>
+                    )}
+                </HStack>
+            </Card>
         );
     },
 );

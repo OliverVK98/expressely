@@ -1,6 +1,3 @@
-import { Text, TextTheme } from './ui/Text';
+import { Text } from './ui/Text';
 
-export {
-    Text,
-    TextTheme,
-};
+export { Text };

@@ -1,9 +1,9 @@
 .title {
-    color: var(--primary-color);
+    color: var(--text-redesigned);
 }
 
 .text {
-    color: var(--secondary-color);
+    color: var(--text-redesigned);
 }
 
 .error {
@@ -16,13 +16,13 @@
     }
 }
 
-.inverted {
+.accent {
     .title {
-        color: var(--inverted-primary-color);
+        color: var(--accent-redesigned);
     }
 
     .text {
-        color: var(--inverted-secondary-color);
+        color: var(--accent-redesigned);
     }
 }
 
@@ -65,5 +65,12 @@
 
     .text {
         font: var(--font-l);
+    }
+}
+
+.bold {
+    .title,
+    .text {
+        font-weight: 700;
     }
 }

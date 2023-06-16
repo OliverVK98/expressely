@@ -1,16 +1,13 @@
 import React, { memo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { Button, ButtonTheme } from '@/shared/ui/Button';
-import { getUserAuthData } from '@/entities/User';
-import { Text, TextTheme } from '@/shared/ui/Text';
-import { AppLink, AppLinkTheme } from '@/shared/ui/AppLink';
-import { LoginModal } from '@/features/authByUsername';
+import { Button } from '@/shared/ui/Button';
 import { HStack } from '@/shared/ui/Stack';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { getUserAuthData } from '@/entities/User';
+import { LoginModal } from '@/features/authByUsername';
 import { NotificationButton } from '@/features/notificationButton';
 import { AvatarDropdown } from '@/features/avatarDropdown';
-import { getRouteArticleCreate } from '@/shared/const/router';
 import cls from './Navbar.module.scss';
 
 interface NavbarProps {
@@ -33,23 +30,10 @@ const Navbar = memo(({ className }: NavbarProps) => {
     if (authData) {
         return (
             <header className={classNames(cls.Navbar, {}, [className])}>
-                <Text
-                    theme={TextTheme.INVERTED}
-                    className={cls.appName}
-                    title={t('TEST WEBPACK APP')}
-                />
-                <AppLink
-                    theme={AppLinkTheme.SECONDARY}
-                    to={getRouteArticleCreate()}
-                    className={cls.createBtn}
-                >
-                    {t('Create new article')}
-                </AppLink>
                 <HStack gap="16" className={cls.actions}>
                     <NotificationButton />
                     <AvatarDropdown />
                 </HStack>
-                <LoginModal isOpen={isAuthModal} onClose={onCloseModal} />
             </header>
         );
     }
@@ -57,7 +41,7 @@ const Navbar = memo(({ className }: NavbarProps) => {
     return (
         <header className={classNames(cls.Navbar, {}, [className])}>
             <Button
-                theme={ButtonTheme.CLEAR_INVERTED}
+                variant="outline"
                 className={cls.links}
                 onClick={onShowModal}
             >

@@ -1,9 +1,9 @@
 .options {
-    background: var(--listbox-bg);
+    background: var(--dark-bg-redesigned);
     position: absolute;
     z-index: 1000;
     border-radius: 12px;
-    box-shadow: 4px 4px 8px var(--listbox-bg);
+    box-shadow: 4px 4px 8px var(--dark-bg-redesigned);
 }
 
 .item {
@@ -16,4 +16,8 @@
     outline: none;
     padding: 0;
     margin: 0;
+}
+
+.selected {
+    background: var(--light-bg-redesigned);
 }

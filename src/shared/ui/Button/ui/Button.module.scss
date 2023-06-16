@@ -1,79 +1,101 @@
-.Button {
-    cursor: pointer;
-    color: var(--primary-color);
-    padding: 6px 15px;
-
-    &:hover {
-        opacity: 0.8;
-        fill-opacity: 80%;
-        stroke-opacity: 80%;
-    }
-}
-
-.clear,
-.clearInverted {
+.clear {
     padding: 0;
     border: none;
     background: none;
     outline: none;
 }
 
-.clearInverted {
-    color: var(--inverted-primary-color);
+.filled {
+    background: var(--light-bg-redesigned);
+    border: none;
+    outline: none;
+    border-radius: 34px;
 }
 
 .outline {
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
     background: none;
-}
+    border-radius: 34px;
 
-.outline_red {
-    border: 1px solid var(--red-light);
-    color: var(--red-light);
-    background: none;
-}
+    &.normal {
+        border: 2px solid var(--icon-redesigned);
 
-.background {
-    background: var(--bg-color);
-    color: var(--primary-color);
-    border: none;
-}
+        &:hover {
+            border: 2px solid var(--accent-redesigned);
+        }
+    }
 
-.backgroundInverted {
-    background: var(--inverted-bg-color);
-    color: var(--inverted-primary-color);
-    border: none;
+    &.success {
+        border: 2px solid var(--save-redesigned);
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &.error {
+        border: 2px solid var(--cancel-redesigned);
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
 }
 
 .square {
     padding: 0;
 }
 
-.square.size_m {
+.addonLeft,
+.addonRight {
+    display: flex;
+}
+
+.addonLeft svg,
+.addonRight svg {
+    color: var(--accent-redesigned);
+}
+
+.square.m {
     width: var(--font-line-m);
     height: var(--font-line-m);
 }
 
-.square.size_l {
+.Button {
+    cursor: pointer;
+    color: var(--text-redesigned);
+    padding: 6px 16px;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+        color: var(--accent-redesigned);
+
+        .addonLeft svg,
+        .addonRight svg {
+            color: var(--accent-redesigned);
+        }
+    }
+}
+
+.square.l {
     width: var(--font-line-l);
     height: var(--font-line-l);
 }
 
-.square.size_xl {
+.square.xl {
     width: var(--font-line-xl);
     height: var(--font-line-xl);
 }
 
-.size_m {
+.m {
     font: var(--font-m);
 }
 
-.size_l {
+.l {
     font: var(--font-l);
 }
 
-.size_xl {
+.xl {
     font: var(--font-xl);
 }
 
@@ -83,4 +105,8 @@
 
 .fullWidth {
     width: 100%;
+}
+
+.withAddon {
+    padding: 0 16px;
 }

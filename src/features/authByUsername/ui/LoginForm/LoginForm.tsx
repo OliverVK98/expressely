@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { memo, useCallback } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { Button, ButtonTheme } from '@/shared/ui/Button';
 import { Input } from '@/shared/ui/Input';
-import { Text, TextTheme } from '@/shared/ui/Text';
+import { Button } from '@/shared/ui/Button';
+import { Text } from '@/shared/ui/Text';
+import { classNames } from '@/shared/lib/classNames/classNames';
 import i18n from '@/shared/config/i18n/i18n';
 import {
     DynamicModuleLoader,
@@ -18,6 +18,7 @@ import { getLoginPassword } from '../../model/selectors/getLoginPassword/getLogi
 import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
 import { loginByUsername } from '../../model/services/loginByUsername/loginByUsername';
 import cls from './LoginForm.module.scss';
+import { VStack } from '@/shared/ui/Stack';
 
 export interface LoginFormProps {
     className?: string;
@@ -64,12 +65,15 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
 
     return (
         <DynamicModuleLoader removerAfterUnmount reducers={initialReducers}>
-            <div className={classNames(cls.LoginForm, {}, [className])}>
+            <VStack
+                gap="16"
+                className={classNames(cls.LoginForm, {}, [className])}
+            >
                 <Text title={t('Sign In Form')} />
                 {error && (
                     <Text
                         text={i18n.t('Incorrect login or password')}
-                        theme={TextTheme.ERROR}
+                        variant="error"
                     />
                 )}
                 <Input
@@ -88,14 +92,13 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
                     value={password}
                 />
                 <Button
-                    theme={ButtonTheme.OUTLINE}
                     className={cls.loginBtn}
                     onClick={onLoginClick}
                     disabled={isLoading}
                 >
                     {t('Sign In')}
                 </Button>
-            </div>
+            </VStack>
         </DynamicModuleLoader>
     );
 });

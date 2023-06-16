@@ -15,7 +15,7 @@ interface PopoverProps {
 
 export const Popover = memo((props: PopoverProps) => {
     const { className, trigger, direction = 'bottomRight', children } = props;
-    const menuClasses = [mapDirectionClass[direction]];
+    const menuClasses = [mapDirectionClass[direction], popupCls.menu];
 
     return (
         <HeadlessPopover

@@ -6,7 +6,8 @@ import cls from './Flex.module.scss';
 export type FlexJustify = 'start' | 'center' | 'end' | 'between';
 export type FlexAlign = 'start' | 'center' | 'end';
 export type FlexDirection = 'row' | 'column';
-export type FlexGap = '4' | '8' | '16' | '32';
+export type FlexGap = '4' | '8' | '16' | '24' | '32';
+export type FlexWrap = 'nowrap' | 'wrap';
 
 type DivProps = React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLDivElement>,
@@ -20,6 +21,7 @@ export interface FlexProps extends DivProps {
     align?: FlexAlign;
     direction: FlexDirection;
     gap?: FlexGap;
+    wrap?: FlexWrap;
     max?: boolean;
 }
 
@@ -45,6 +47,7 @@ const gapClasses: Record<FlexGap, string> = {
     4: cls.gap4,
     8: cls.gap8,
     16: cls.gap16,
+    24: cls.gap24,
     32: cls.gap32,
 };
 
@@ -57,6 +60,7 @@ export const Flex = memo((props: FlexProps) => {
         align = 'center',
         gap,
         max,
+        wrap = 'nowrap',
         ...otherProps
     } = props;
     const { t } = useTranslation();
@@ -66,6 +70,7 @@ export const Flex = memo((props: FlexProps) => {
         alignClasses[align],
         directionClasses[direction],
         gap && gapClasses[gap],
+        cls[wrap],
     ];
 
     const mods: Mods = {

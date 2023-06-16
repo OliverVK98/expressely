@@ -51,6 +51,7 @@ export const StarRating = memo((props: StarRatingProps) => {
                                 : cls.normal,
                         ],
                     )}
+                    clickable={!isSelected}
                     Svg={StartIcon}
                     key={starNumber}
                     width={size}

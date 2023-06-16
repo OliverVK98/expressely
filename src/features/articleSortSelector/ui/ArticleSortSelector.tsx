@@ -1,11 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { memo, useMemo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { Select } from '@/shared/ui/Select';
-import { SelectOption } from '@/shared/ui/Select/ui/Select';
+import { SelectOption } from '@/shared/ui/_deprecated/Select/ui/Select';
 import { SortOrder } from '@/shared/types/sort';
 import cls from './ArticleSortSelector.module.scss';
 import { ArticleSortField } from '@/entities/Article';
+import { ListBox } from '@/shared/ui/Popups';
+import { VStack } from '@/shared/ui/Stack';
+import { Text } from '@/shared/ui/Text';
 
 interface ArticleSortSelectorProps {
     className?: string;
@@ -53,19 +55,19 @@ export const ArticleSortSelector = memo((props: ArticleSortSelectorProps) => {
 
     return (
         <div className={classNames(cls.ArticleSortSelector, {}, [className])}>
-            <Select
-                options={sortFieldOptions}
-                label={t('Sort By')}
-                value={sort}
-                onChange={onChangeSort}
-            />
-            <Select
-                options={orderOptions}
-                label={t('Order')}
-                value={order}
-                onChange={onChangeOrder}
-                className={cls.order}
-            />
+            <VStack gap="8">
+                <Text text={t('Sort By')} />
+                <ListBox
+                    items={sortFieldOptions}
+                    value={sort}
+                    onChange={onChangeSort}
+                />
+                <ListBox
+                    items={orderOptions}
+                    value={order}
+                    onChange={onChangeOrder}
+                />
+            </VStack>
         </div>
     );
 });

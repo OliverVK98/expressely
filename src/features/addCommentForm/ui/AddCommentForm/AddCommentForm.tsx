@@ -1,15 +1,15 @@
 import { useTranslation } from 'react-i18next';
 import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { classNames } from '@/shared/lib/classNames/classNames';
 import { Input } from '@/shared/ui/Input';
-import { Button, ButtonTheme } from '@/shared/ui/Button';
+import { Button } from '@/shared/ui/Button';
+import { HStack } from '@/shared/ui/Stack';
+import { classNames } from '@/shared/lib/classNames/classNames';
 import {
     DynamicModuleLoader,
     ReducersList,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { HStack } from '@/shared/ui/Stack';
 import {
     addCommentFormActions,
     addCommentFormReducer,
@@ -19,6 +19,7 @@ import {
     getAddCommentFormError,
     getAddCommentFormText,
 } from '../../model/selectors/addCommentFormSelectors';
+import { Card } from '@/shared/ui/Card';
 
 interface AddCommentFormProps {
     className?: string;
@@ -50,27 +51,29 @@ const AddCommentForm = (props: AddCommentFormProps) => {
 
     return (
         <DynamicModuleLoader reducers={reducers}>
-            <HStack
-                data-testid="AddCommentForm"
-                justify="between"
-                max
-                className={classNames(cls.AddCommentForm, {}, [className])}
-            >
-                <Input
-                    value={text}
-                    placeholder={t('Add your comment')}
-                    onChange={onCommentTextChange}
-                    className={cls.input}
-                    data-testid="AddCommentForm.Input"
-                />
-                <Button
-                    data-testid="AddCommentForm.Button"
-                    theme={ButtonTheme.OUTLINE}
-                    onClick={onSendHandler}
+            <Card padding="24" border="round" max>
+                <HStack
+                    data-testid="AddCommentForm"
+                    justify="between"
+                    max
+                    gap="16"
+                    className={classNames(cls.AddCommentForm, {}, [className])}
                 >
-                    {t('Send')}
-                </Button>
-            </HStack>
+                    <Input
+                        value={text}
+                        placeholder={t('Add your comment')}
+                        onChange={onCommentTextChange}
+                        className={cls.input}
+                        data-testid="AddCommentForm.Input"
+                    />
+                    <Button
+                        data-testid="AddCommentForm.Button"
+                        onClick={onSendHandler}
+                    >
+                        {t('Send')}
+                    </Button>
+                </HStack>
+            </Card>
         </DynamicModuleLoader>
     );
 };

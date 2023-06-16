@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import { memo, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -12,10 +11,12 @@ import { ArticleInfiniteList } from '../ArticleInfiniteList/ArticleInfiniteList'
 import { articlesPageReducer } from '../../model/slices/articlesPageSlice';
 import { fetchNextArticlesPage } from '../../model/services/fetchNextArticlesPage/fetchNextArticlesPage';
 import { initArticlesPage } from '../../model/services/initArticlesPage/initArticlesPage';
-import { ArticlePageFilters } from '../ArticlePageFilters/ArticlePageFilters';
 import { Page } from '@/widgets/Page';
 import cls from './ArticlePage.module.scss';
 import { ArticlePageGreeting } from '@/features/articlePageGreeting';
+import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
+import { ViewSelectorContainer } from '../ViewSelectorContainer/ViewSelectorContainer';
+import { FiltersContainer } from '../FiltersContainer/FiltersContainer';
 
 interface ArticlesPageProps {
     className?: string;
@@ -27,7 +28,6 @@ const reducers: ReducersList = {
 
 const ArticlesPage = (props: ArticlesPageProps) => {
     const { className } = props;
-    const { t } = useTranslation();
     const dispatch = useAppDispatch();
 
     const [searchParams] = useSearchParams();
@@ -40,17 +40,24 @@ const ArticlesPage = (props: ArticlesPageProps) => {
         dispatch(initArticlesPage(searchParams));
     });
 
+    const content = (
+        <Page
+            data-testid="ArticlesPage"
+            onScrollEnd={onLoadNextPart}
+            className={classNames('', {}, [className])}
+        >
+            <ArticleInfiniteList className={cls.list} />
+            <ArticlePageGreeting />
+        </Page>
+    );
+
     return (
         <DynamicModuleLoader reducers={reducers} removerAfterUnmount={false}>
-            <Page
-                data-testid="ArticlesPage"
-                onScrollEnd={onLoadNextPart}
-                className={classNames('', {}, [className])}
-            >
-                <ArticlePageFilters />
-                <ArticleInfiniteList className={cls.list} />
-                <ArticlePageGreeting />
-            </Page>
+            <StickyContentLayout
+                left={<ViewSelectorContainer />}
+                right={<FiltersContainer />}
+                content={content}
+            />
         </DynamicModuleLoader>
     );
 };

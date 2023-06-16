@@ -527,13 +527,13 @@
       ]
     },
     {
-      "id": "18",
+      "id": "19",
       "title": "Научная статья - Биология",
       "subtitle": "БиологиЯ",
       "img": "https://avatars.mds.yandex.net/get-zen_doc/2746556/pub_5f50dd7e1a1ddf4776aa5569_5f50decd2506f211d1de6284/scale_1200",
       "views": 1022,
       "createdAt": "26.02.2022",
-      "userId": "1",
+      "userId": "2",
       "type": [
         "SCIENCE"
       ],
@@ -708,8 +708,8 @@
       "firstname": "Oliver",
       "lastname": "Kezik",
       "age": 25,
-      "currency": "USD",
-      "country": "Mexico",
+      "currency": "RUB",
+      "country": "Russia",
       "city": "New York",
       "username": "okezik",
       "avatar": "https://pic.rutubelist.ru/user/3b/27/3b2758ad5492a76b578f7ee072e4e894.jpg"
@@ -785,6 +785,12 @@
       "articleId": "4",
       "rate": 5,
       "id": "zzSEHow"
+    },
+    {
+      "userId": "1",
+      "articleId": "5",
+      "rate": 4,
+      "id": "oCTvJFo"
     }
   ],
   "profile-ratings": [

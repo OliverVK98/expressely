@@ -1,21 +1,16 @@
 import { useTranslation } from 'react-i18next';
 import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
+import { Skeleton } from '@/shared/ui/Skeleton';
+import { VStack } from '@/shared/ui/Stack';
+import { Text } from '@/shared/ui/Text';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { Text, TextTheme } from '@/shared/ui/Text';
-import { TextAlign, TextSize } from '@/shared/ui/Text/ui/Text';
-import { Skeleton } from '@/shared/ui/Skeleton';
-import { Avatar } from '@/shared/ui/Avatar';
-import EyeIcon from '@/shared/assets/icons/eye-20-20.svg';
-import CalendarIcon from '@/shared/assets/icons/calendar-20-20.svg';
-import { Icon } from '@/shared/ui/Icon';
 import {
     ReducersList,
     DynamicModuleLoader,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
-import { HStack, VStack } from '@/shared/ui/Stack';
 import { ArticleBlockType } from '../../model/consts/consts';
 import { ArticleBlock } from '../../model/types/article';
 import { fetchArticleById } from '../../model/services/fetchArticleById';
@@ -29,6 +24,7 @@ import {
     getArticleDetailsIsLoading,
 } from '../../model/selectors/getArticleDetails';
 import cls from './ArticleDetails.module.scss';
+import { AppImage } from '@/shared/ui/AppImage';
 
 interface ArticleDetailsProps {
     className?: string;
@@ -102,37 +98,23 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
     } else if (error) {
         content = (
             <Text
-                align={TextAlign.CENTER}
+                align="center"
                 title={t('There was an error loading an article you requested')}
-                theme={TextTheme.ERROR}
+                variant="error"
             />
         );
     } else {
         content = (
             <>
-                <HStack max justify="center">
-                    <Avatar
-                        className={cls.avatar}
-                        size={200}
-                        src={article?.img}
-                    />
-                </HStack>
-                <VStack max gap="4" data-testid="ArticleDetails.Info">
-                    <Text
-                        className={cls.title}
-                        title={article?.title}
-                        text={article?.subtitle}
-                        size={TextSize.L}
-                    />
-                    <HStack gap="8">
-                        <Icon Svg={EyeIcon} className={cls.icon} />
-                        <Text text={String(article?.createdAt)} />
-                    </HStack>
-                    <HStack gap="8">
-                        <Icon Svg={CalendarIcon} className={cls.icon} />
-                        <Text text={article?.createdAt} />
-                    </HStack>
-                </VStack>
+                <Text title={article?.title} size="l" bold />
+                <Text title={article?.subtitle} />
+                <AppImage
+                    className={cls.img}
+                    fallback={
+                        <Skeleton width="100%" height={420} border="16px" />
+                    }
+                    src={article?.img}
+                />
                 {article?.blocks.map(renderBlock)}
             </>
         );

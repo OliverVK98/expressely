@@ -1,64 +1,67 @@
-import { memo } from 'react';
+import { HTMLAttributes, memo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './Text.module.scss';
 
-export enum TextTheme {
-    PRIMARY = 'primary',
-    INVERTED = 'inverted',
-    ERROR = 'error',
-}
+export type TextVariant = 'primary' | 'error' | 'accent';
 
-export enum TextAlign {
-    RIGHT = 'right',
-    LEFT = 'left',
-    CENTER = 'center',
-}
+export type TextAlign = 'right' | 'left' | 'center';
 
-export enum TextSize {
-    S = 'size_s',
-    M = 'size_m',
-    L = 'size_l',
-}
+export type TextSize = 's' | 'm' | 'l';
 
-interface TextProps {
+type CustomDivHTMLAttributes = Omit<HTMLAttributes<HTMLDivElement>, 'title'>;
+interface TextProps extends CustomDivHTMLAttributes {
     className?: string;
     title?: string | null;
     text?: string | null;
-    theme?: TextTheme;
+    variant?: TextVariant;
     align?: TextAlign;
     size?: TextSize;
+    bold?: boolean;
     'data-testid'?: string;
 }
 
 type HeaderTagType = 'h1' | 'h2' | 'h3';
 
+const mapSizeToClass: Record<TextSize, string> = {
+    s: cls.size_s,
+    m: cls.size_m,
+    l: cls.size_l,
+};
+
 const mapSizeToHeaderTag: Record<TextSize, HeaderTagType> = {
-    [TextSize.S]: 'h3',
-    [TextSize.M]: 'h2',
-    [TextSize.L]: 'h1',
+    s: 'h3',
+    m: 'h2',
+    l: 'h1',
 };
 
 export const Text = memo((props: TextProps) => {
     const {
         className,
         text,
-        theme = TextTheme.PRIMARY,
+        variant = 'primary',
         title,
-        align = TextAlign.LEFT,
-        size = TextSize.M,
+        align = 'left',
+        size = 'm',
+        bold,
         'data-testid': dataTestId = '',
+        ...otherProps
     } = props;
 
     const HeaderTag = mapSizeToHeaderTag[size];
+    const sizeClass = mapSizeToClass[size];
+
+    const additionalClasses = [
+        className,
+        cls[variant],
+        cls[align],
+        cls[size],
+        cls[sizeClass],
+    ];
 
     return (
         <div
-            className={classNames('', {}, [
-                className,
-                cls[theme],
-                cls[align],
-                cls[size],
-            ])}
+            className={classNames('', { [cls.bold]: bold }, additionalClasses)}
+            {...otherProps}
         >
             {title && (
                 <HeaderTag

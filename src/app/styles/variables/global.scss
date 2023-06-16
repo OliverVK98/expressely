@@ -1,6 +1,6 @@
 :root {
-    --font-family-text-redesigned: "Nunito Sans", sans-serif;
-    --font-family-header-redesigned: "Roboto", sans-serif;
+    --font-family-text-redesigned: nunito sans, sans-serif;
+    --font-family-header-redesigned: roboto, sans-serif;
     --font-size-s: 12px;
     --font-line-s: 20px;
     --font-s: var(--font-size-s) / var(--font-line-s) var(--font-family-text-redesigned);
@@ -21,17 +21,4 @@
     --overlay-color: rgba(0 0 0 / 60%);
     --red-light: #f00;
     --red-dark: #ce0505;
-
-    // redesigned
-
-    // s
-
-
-    // m
-
-
-    // l
-
-    // xl
-
 }
