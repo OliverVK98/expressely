@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { memo, useEffect, useState } from 'react';
 import { Modal } from '@/shared/ui/Modal';
 import { Drawer } from '@/shared/ui/Drawer';
-import { Text } from '@/shared/ui/_deprecated/Text';
+import { Text } from '@/shared/ui/Text';
 import { saveJsonSettings, useJsonSettings } from '@/entities/User';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useIsMobile } from '@/shared/lib/hooks/useIsMobile/useIsMobile';

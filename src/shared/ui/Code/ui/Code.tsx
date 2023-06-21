@@ -18,13 +18,13 @@ export const Code = memo((props: CodeProps) => {
 
     return (
         <pre className={classNames(cls.Code, {}, [className])}>
+            <code className={cls.customCode}>{text}</code>
             <Icon
                 clickable
                 onClick={onCopy}
                 className={cls.copyBtn}
                 Svg={CopyIcon}
             />
-            <code>{text}</code>
         </pre>
     );
 });

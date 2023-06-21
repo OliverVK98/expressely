@@ -22,7 +22,7 @@ export const ArticleTextBlockComponent = memo(
                 ])}
             >
                 {block.title && (
-                    <Text title={block.title} className={cls.title} />
+                    <Text title={block.title} className={cls.title} bold />
                 )}
                 {block.paragraphs.map((paragraph, index) => (
                     <Text

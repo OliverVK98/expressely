@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { memo, useCallback, Suspense } from 'react';
 import { useSelector } from 'react-redux';
+import { Loader } from '@/shared/ui/Loader';
 import { VStack } from '@/shared/ui/Stack';
 import { Text } from '@/shared/ui/Text';
-import { Loader } from '@/shared/ui/_deprecated/Loader';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from '../ArticleDetailsPage/ArticleDetailsPage.module.scss';
 import { AddCommentForm } from '@/features/addCommentForm';

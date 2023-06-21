@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
 import { useParams } from 'react-router-dom';
 import { VStack } from '@/shared/ui/Stack';
@@ -8,7 +7,6 @@ import {
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Page } from '@/widgets/Page';
-import { ArticleRecommendationsList } from '@/features/articleRecommendationsList';
 import { ArticleDetailsComments } from '../ArticleDetailsComments/ArticleDetailsComments';
 import { ArticleRating } from '@/features/articleRating';
 import { articleDetailsPageReducer } from '../../model/slices';
@@ -16,6 +14,8 @@ import cls from './ArticleDetailsPage.module.scss';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { AdditionalInfoContainer } from '../AdditionalInfoContainer/AdditionalInfoContainer';
 import { DetailsContainer } from '../DetailsContainer/DetailsContainer';
+import { ArticleRecommendationsToolbarContainer } from '@/widgets/ArticleRecommendationsToolbar';
+import { ArticleRecommendationsList } from '@/features/articleRecommendationsList';
 
 interface ArticleDetailsPageProps {
     className?: string;
@@ -27,28 +27,32 @@ const reducers: ReducersList = {
 
 const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
     const { className } = props;
-    const { t } = useTranslation();
     const { id } = useParams<{
         id: string;
     }>();
 
     const content = (
         <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
-            <VStack gap="16">
+            <VStack gap="16" max>
                 <DetailsContainer />
                 <ArticleRating articleId={id!} />
+                {/* TODO: Delete component */}
                 <ArticleRecommendationsList />
                 <ArticleDetailsComments id={id!} />
             </VStack>
         </Page>
     );
 
+    const rightBarContent = (
+        <VStack gap="32">
+            <AdditionalInfoContainer />
+            <ArticleRecommendationsToolbarContainer />
+        </VStack>
+    );
+
     return (
         <DynamicModuleLoader reducers={reducers} removerAfterUnmount>
-            <StickyContentLayout
-                content={content}
-                right={<AdditionalInfoContainer />}
-            />
+            <StickyContentLayout content={content} right={rightBarContent} />
         </DynamicModuleLoader>
     );
 };

@@ -3,6 +3,7 @@ import { Text } from '@/shared/ui/Text';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ArticleImageBlock } from '../../model/types/article';
 import cls from './ArticleImageBlockComponent.module.scss';
+import { VStack } from '@/shared/ui/Stack';
 
 interface ArticleImageBlockComponentProps {
     className?: string;
@@ -14,14 +15,15 @@ export const ArticleImageBlockComponent = memo(
         const { className, block } = props;
 
         return (
-            <div
+            <VStack
+                max
                 className={classNames(cls.ArticleImageBlockComponent, {}, [
                     className,
                 ])}
             >
                 <img src={block.src} alt={block.title} className={cls.img} />
-                {block.title && <Text text={block.title} align="center" />}
-            </div>
+                {block.title && <Text text={block.title} align="left" />}
+            </VStack>
         );
     },
 );

@@ -1,8 +1,5 @@
 import { User } from '@/entities/User';
-import {
-    ArticleBlockType,
-    ArticleType,
-} from '../consts/consts';
+import { ArticleBlockType, ArticleType } from '../consts/consts';
 
 export interface ArticleBlockBase {
     id: string;
@@ -17,7 +14,7 @@ export interface ArticleCodeBlock extends ArticleBlockBase {
 export interface ArticleImageBlock extends ArticleBlockBase {
     type: ArticleBlockType.IMAGE;
     src: string;
-    title: string;
+    title?: string;
 }
 
 export interface ArticleTextBlock extends ArticleBlockBase {
@@ -35,7 +32,7 @@ export interface Article {
     id: string;
     user: User;
     title: string;
-    subtitle: string;
+    subtitle?: string;
     img: string;
     views: number;
     createdAt: string;

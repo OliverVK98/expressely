@@ -55,7 +55,7 @@ export const Text = memo((props: TextProps) => {
         cls[variant],
         cls[align],
         cls[size],
-        cls[sizeClass],
+        sizeClass,
     ];
 
     return (

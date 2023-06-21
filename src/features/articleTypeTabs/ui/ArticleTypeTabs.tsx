@@ -17,7 +17,7 @@ export const ArticleTypeTabs = memo((props: ArticleTypeTabsProps) => {
     const typeTabs = useMemo<TabItem[]>(
         () => [
             {
-                value: ArticleType.ALL,
+                value: ArticleType.All,
                 content: t('All Articles'),
             },
             {
@@ -25,11 +25,11 @@ export const ArticleTypeTabs = memo((props: ArticleTypeTabsProps) => {
                 content: t('IT'),
             },
             {
-                value: ArticleType.ECONOMICS,
+                value: ArticleType.Economics,
                 content: t('ECONOMICS'),
             },
             {
-                value: ArticleType.SCIENCE,
+                value: ArticleType.Science,
                 content: t('SCIENCE'),
             },
         ],

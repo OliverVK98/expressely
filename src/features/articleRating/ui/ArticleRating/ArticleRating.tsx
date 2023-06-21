@@ -57,6 +57,8 @@ const ArticleRating = memo((props: ArticleRatingProps) => {
 
     const rating = data?.[0];
 
+    // TODO: fix hover over stars
+
     return (
         <RatingCard
             onAccept={onAccept}

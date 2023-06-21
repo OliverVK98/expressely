@@ -6,10 +6,12 @@
     border: 1px solid var(--accent-redesigned);
     border-radius: 16px;
     width: 100%;
+    display: block;
+    white-space: pre-wrap;
 }
 
 .copyBtn {
     position: absolute;
-    right: 20px;
-    top: 20px;
+    right: 10px;
+    top: 10px;
 }

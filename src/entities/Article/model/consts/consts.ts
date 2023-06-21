@@ -16,8 +16,9 @@ export enum ArticleView {
 }
 
 export enum ArticleType {
-    ALL = 'ALL',
-    IT = 'IT',
-    SCIENCE = 'SCIENCE',
-    ECONOMICS = 'ECONOMICS',
+    'All' = 'All',
+    'IT' = 'IT',
+    'Science' = 'Science',
+    'Economics' = 'Economics',
+    'React' = 'React',
 }

@@ -7,6 +7,11 @@ import { mapDirectionClass } from '../../sharedStyles/consts';
 import cls from './Dropdown.module.scss';
 import popupCls from '../../sharedStyles/popup.module.scss';
 
+export interface SelectOption<T extends string> {
+    value: T;
+    content: string;
+}
+
 export interface DropdownItem {
     disabled?: boolean;
     content?: ReactNode;
