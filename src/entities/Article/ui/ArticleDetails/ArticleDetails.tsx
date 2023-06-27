@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import React, { memo, useCallback } from 'react';
+import React, { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { VStack } from '@/shared/ui/Stack';
@@ -11,12 +11,8 @@ import {
     DynamicModuleLoader,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
-import { ArticleBlockType } from '../../model/consts/consts';
-import { ArticleBlock } from '../../model/types/article';
 import { fetchArticleById } from '../../model/services/fetchArticleById';
 import { articleDetailsReducer } from '../../model/slice/articleDetailsSlice';
-import { ArticleTextBlockComponent } from '../ArticleTextBlockComponent/ArticleTextBlockComponent';
-import { ArticleImageBlockComponent } from '../ArticleImageBlockComponent/ArticleImageBlockComponent';
 import {
     getArticleDetailsData,
     getArticleDetailsError,
@@ -24,7 +20,7 @@ import {
 } from '../../model/selectors/getArticleDetails';
 import cls from './ArticleDetails.module.scss';
 import { AppImage } from '@/shared/ui/AppImage';
-import { ArticleCodeBlockComponent } from '../ArticleCodeBlockComponent/ArticleCodeBlockComponent';
+import { ArticleBlocksRenderer } from '../../ui/ArticleBlocksRenderer/ArticleBlocksRenderer';
 
 interface ArticleDetailsProps {
     className?: string;
@@ -42,37 +38,6 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
     const isLoading = useSelector(getArticleDetailsIsLoading);
     const article = useSelector(getArticleDetailsData);
     const error = useSelector(getArticleDetailsError);
-
-    const renderBlock = useCallback((block: ArticleBlock) => {
-        switch (block.type) {
-            case ArticleBlockType.CODE:
-                return (
-                    <ArticleCodeBlockComponent
-                        key={block.id}
-                        block={block}
-                        className={cls.block}
-                    />
-                );
-            case ArticleBlockType.TEXT:
-                return (
-                    <ArticleTextBlockComponent
-                        key={block.id}
-                        className={cls.block}
-                        block={block}
-                    />
-                );
-            case ArticleBlockType.IMAGE:
-                return (
-                    <ArticleImageBlockComponent
-                        key={block.id}
-                        block={block}
-                        className={cls.block}
-                    />
-                );
-            default:
-                return null;
-        }
-    }, []);
 
     useInitialEffect(() => {
         dispatch(fetchArticleById(id));
@@ -115,7 +80,7 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
                     }
                     src={article?.img}
                 />
-                {article?.blocks.map(renderBlock)}
+                <ArticleBlocksRenderer blocks={article?.blocks} />
             </>
         );
     }

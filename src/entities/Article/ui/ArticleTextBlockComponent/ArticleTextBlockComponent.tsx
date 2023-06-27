@@ -24,13 +24,17 @@ export const ArticleTextBlockComponent = memo(
                 {block.title && (
                     <Text title={block.title} className={cls.title} bold />
                 )}
-                {block.paragraphs.map((paragraph, index) => (
-                    <Text
-                        key={paragraph}
-                        text={paragraph}
-                        className={cls.paragraph}
-                    />
-                ))}
+                {block.subtitle && <Text title={block.subtitle} />}
+                {block.paragraphs.map((paragraph) => {
+                    if (paragraph === '') return null;
+                    return (
+                        <Text
+                            key={paragraph}
+                            text={paragraph}
+                            className={cls.paragraph}
+                        />
+                    );
+                })}
             </div>
         );
     },

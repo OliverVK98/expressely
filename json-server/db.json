@@ -847,6 +847,448 @@
           ]
         }
       ]
+    },
+    {
+      "id": "7",
+      "title": "Navigating the World of React.js Frameworks: An In-depth Guide",
+      "img": "https://miro.medium.com/v2/resize:fit:720/0*Z8ReTBVkC7nMsFnY",
+      "views": 1928,
+      "createdAt": "12.19.2022",
+      "userId": "1",
+      "type": [
+        "IT",
+        "React"
+      ],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "paragraphs": [
+            "React.js, developed by Facebook, is an open-source JavaScript library utilized for building user interfaces, predominantly for single-page applications. The rise of React.js can be attributed to its efficiency, flexibility, and the richness of its JavaScript library, making it an ideal tool for developers and businesses alike.",
+            "This article will guide you through the top React.js frameworks, their features, benefits, and the potential use cases they best serve. But before we dive in, let’s take a quick look at what React.js is and why it has become so popular among the developer community."
+          ]
+        },
+        {
+          "id": "2",
+          "type": "TEXT",
+          "title": "Understanding React.js",
+          "paragraphs": [
+            "React.js allows developers to create large web applications that can change data without reloading the page. It aims to be simple, fast, and scalable, which makes it a go-to tool for many developers and large-scale applications. React.js’ component-based architecture allows for code reuse, which considerably saves time and effort during development."
+          ]
+        },
+        {
+          "id": "3",
+          "type": "TEXT",
+          "title": "What is a React.js Framework?",
+          "paragraphs": [
+            "A Reactjs framework is a pre-prepared toolkit for developing applications. It provides a structure that organizes your code and makes maintaining your projects an easier task. Also, it often includes a collection of libraries for database access, templating, session, and cookie management, among other things."
+          ]
+        },
+        {
+          "id": "4",
+          "type": "TEXT",
+          "title": "Popular React.js Frameworks",
+          "paragraphs": [
+            "1. Next.js: Next.js, developed by Vercel, is a React framework best known for its feature-set that facilitates server-side rendering (SSR), static site generation (SSG), and the creation of API routes. By providing developers with capabilities to pre-render pages, it enhances SEO performance and ensures a faster page load time. Next.js also excels in automatic code-splitting, enabling developers to only load what’s necessary for each page, improving performance and the user experience.",
+            "2. Gatsby.js: Gatsby is a powerful React-based framework that specializes in generating static websites. Gatsby is perfect for content-driven sites that pull data from various sources. It leverages GraphQL at build time to fetch data and provides excellent performance optimization out of the box, such as automatic code splitting, prefetching of resources, and lazy-loading of assets. Gatsby’s strong focus on performance, SEO, and modern web technologies like PWA makes it an excellent choice for blogs, portfolio sites, and corporate websites.",
+            "3. Create React App (CRA): Created by Facebook, Create React App is more than just a framework; it’s a fully-featured build setup for React.js. CRA is a great starting point for beginners to React.js, offering a ready-to-use boilerplate to kick start React projects without worrying about build configuration. While it doesn’t offer server-side rendering or a built-in data layer like the other two, CRA excels in its simplicity and ease of use.",
+            "4. Redux Toolkit: Although not a full-fledged framework, Redux Toolkit deserves a mention for being the official, opinionated, batteries-included toolset for efficient Redux development. It is primarily used for state management in large-scale React applications, providing several utility functions that simplify the most common Redux use cases.",
+            "5. React Bootstrap: React Bootstrap is a complete re-implementation of the Bootstrap components using React. It has no dependency on either bootstrap.js or jQuery. If you’re using Bootstrap with React, this is the most recommended version to use.",
+            "6. Material-UI: This is a very popular React UI framework that implements Google’s Material Design. With a vast collection of reusable components and a variety of themes, Material-UI allows you to build sleek, robust React applications.",
+            "Each of these frameworks and libraries brings its own set of advantages, making React.js an even more potent tool. The choice between them depends on your project requirements, the learning curve you’re comfortable with, and the specific features you need."
+          ]
+        },
+        {
+          "id": "5",
+          "type": "IMAGE",
+          "src": "https://miro.medium.com/v2/resize:fit:720/0*sYgSMZKh2HjbkddV"
+        },
+        {
+          "id": "6",
+          "type": "TEXT",
+          "title": "Choosing the Right Framework",
+          "paragraphs": [
+            "Selecting the right framework for your project is an important decision that could significantly influence your productivity, satisfaction, and the ultimate success of your project. It is crucial to consider several factors before settling on a particular Reactjs frameworks. Here are some things to consider:",
+            "1. Project Requirements: Understand the specific needs and requirements of your project. For instance, if your application requires server-side rendering for SEO purposes, Next.js might be the best choice. If you’re creating a blog or a content-centric application that pulls data from various sources, Gatsby.js might serve you well.",
+            "2. Performance: Analyze the performance implications of the chosen framework. Next.js and Gatsby.js provide features such as automatic code-splitting and prefetching resources that improve the loading speed of your application.",
+            "3. Learning Curve: While all these frameworks are based on React, they each have their own learning curve. You need to consider the willingness and ability of your team to learn and adapt to the chosen framework. The documentation, community support, and availability of learning resources are factors to consider here.",
+            "4. Flexibility and Customizability: Some frameworks offer more flexibility than others when it comes to customization. For example, while Create React App (CRA) provides a simplified setup, it may lack certain flexibility compared to more configurable frameworks like Next.js.",
+            "5. Community and Ecosystem: A strong community and a rich ecosystem of plugins and integrations can be a valuable asset. They can make development easier, faster, and more enjoyable. Gatsby’s plugin ecosystem and the extensive resources available for Next.js are worth noting.",
+            "6. Long-term Maintenance: Consider the sustainability and longevity of the project. Check whether the framework is actively maintained and if it’s likely to be supported in the future.",
+            "7. Compatibility with other Libraries: If you’re planning to use other Reactjs libraries or Reactjs tools, ensure that they are compatible with the selected framework.",
+            "Remember, there is no one-size-fits-all when it comes to choosing a framework. The best approach is to understand your needs, explore the strengths and weaknesses of each option, and make an informed decision."
+          ]
+        },
+        {
+          "id": "7",
+          "type": "TEXT",
+          "title": "Conclusion",
+          "paragraphs": [
+            "The React.js ecosystem is rich and robust, offering a plethora of options when it comes to frameworks. Choosing the right framework depends on your project requirements, your familiarity with React.js, and your personal preferences. Regardless of the choice, the right React framework can offer a strong foundation for your application and significantly accelerate the development process.",
+            "CronJ IT Technologies is a leading React.js development company that leverages these frameworks to build scalable, efficient, and powerful applications. With a team of experienced hire dedicated React developers who keep themselves updated with the latest technologies, CronJ can help you navigate the world of React.js frameworks and choose the right one for your project."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "title": "HTML Forms: A Comprehensive Guide to Creating Web Forms",
+      "img": "https://miro.medium.com/v2/resize:fit:720/0*HDW1KP9yWyR4ShaJ",
+      "views": 389,
+      "createdAt": "03.19.2022",
+      "userId": "1",
+      "type": [
+        "IT"
+      ],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "paragraphs": [
+            "HTML forms are essential components of web applications, providing a user-friendly interface for collecting and submitting data. They enable users to interact with websites, submit queries, and provide input, creating dynamic and interactive web experiences. This comprehensive guide will walk you through the basics of HTML forms, discuss the various form elements, and share best practices for creating effective and accessible web forms."
+          ]
+        },
+        {
+          "id": "2",
+          "type": "TEXT",
+          "title": "What are HTML Forms?",
+          "paragraphs": [
+            "HTML forms are a collection of input elements and controls that allow users to provide information and interact with web applications. They are commonly used for tasks such as registering for an account, logging in, submitting queries, and placing orders."
+          ]
+        },
+        {
+          "id": "3",
+          "type": "TEXT",
+          "title": "How HTML Forms Work?",
+          "paragraphs": [
+            "HTML forms use the <form> element to define a form’s structure, and various input elements and controls are placed inside this container. When a user submits a form, the data is collected, and the browser sends it to a server-side script, typically using HTTP methods like GET or POST."
+          ]
+        },
+        {
+          "id": "4",
+          "type": "TEXT",
+          "title": "Creating an HTML Form",
+          "subtitle": "2.1 The <form> Element",
+          "paragraphs": [
+            "To create an HTML form, you need to use the <form> element as a container for all the form’s input elements and controls. The <form> element has various attributes, such as the “action” attribute, which specifies the URL to send the form data, and the “method” attribute, which defines the HTTP method (GET or POST) used to submit the data.",
+            "Example: "
+          ]
+        },
+        {
+          "id": "5",
+          "type": "CODE",
+          "code": "<form action=\"/submit-data\" method=\"POST\">\n    <!-- form elements go here -->\n</form>"
+        },
+        {
+          "id": "6",
+          "type": "TEXT",
+          "subtitle": "2.2 Input Elements",
+          "paragraphs": [
+            "HTML forms consist of different input elements, each serving a specific purpose. Some common input elements include:",
+            "• <input type=”text”>: A single-line text input field",
+            "• <input type=”password”>: A single-line password input field that obscures the entered characters",
+            "• <input type=”radio”>: A radio button, allowing users to select one option from a group",
+            "• <input type=”checkbox”>: A checkbox, enabling users to select multiple options from a group",
+            "• <input type=”submit”>: A submit button, which sends the form data to the server"
+          ]
+        },
+        {
+          "id": "7",
+          "type": "TEXT",
+          "subtitle": "2.3 Form Controls",
+          "paragraphs": [
+            "In addition to input elements, HTML forms also include form controls like:",
+            "• <label>: Associates a text label with a specific input element, improving accessibility",
+            "• <select>: Creates a dropdown list, allowing users to choose from multiple options",
+            "• <option>: Defines individual options within a <select> element",
+            "• <textarea>: Provides a multi-line text input area for users to enter larger amounts of text",
+            "• <button>: A versatile button element that can be customized with JavaScript"
+          ]
+        },
+        {
+          "id": "8",
+          "type": "IMAGE",
+          "src": "https://miro.medium.com/v2/resize:fit:720/0*K312n5rlBVfjj5Gu"
+        },
+        {
+          "id": "9",
+          "type": "TEXT",
+          "title": "HTML5 Form Enhancements",
+          "paragraphs": [
+            "HTML5 introduced several new input types and attributes, enhancing the usability and validation of web forms. Some notable additions include:",
+            "• <input type=”email”>: An input field specifically designed for email addresses",
+            "• <input type=”url”>: A URL input field that automatically validates the entered URL",
+            "• <input type=”number”>: A numeric input field that can be restricted to a specific range",
+            "• <input type=”date”>: A date input field that displays a date picker",
+            "• <input type=”search”>: A search input field with built-in search functionality",
+            "• “placeholder” attribute: Provides a hint or example text for input fields",
+            "• “required” attribute: Indicates that a specific input field must be filled in before the form can be submitted",
+            "• “pattern” attribute: Enables the use of regular expressions for input validation"
+          ]
+        },
+        {
+          "id": "10",
+          "type": "TEXT",
+          "title": "Best Practices for Creating HTML Forms",
+          "paragraphs": [
+            "1. Use Semantic Markup: Utilize appropriate input types and form controls to ensure a consistent and accessible user experience. Semantic markup improves the usability of your forms and makes them more accessible to screen readers and other assistive technologies.",
+            "2. Provide Clear Labels: Use the <label> element to associate labels with their corresponding input fields. Clear labels help users understand the purpose of each form field and improve the overall usability of your form.",
+            "3. Implement Client-Side Validation: Use HTML5 form attributes such as “required,” “pattern,” and “min” or “max” to validate user input before submission. Client-side validation improves the user experience by providing immediate feedback and reducing the load on your server.",
+            "4. Organize Form Fields: Group related form fields using the <fieldset> element and provide a descriptive <legend> to improve the form’s structure and accessibility.",
+            "5. Ensure Mobile-Friendliness: Design your forms with mobile users in mind, ensuring that form elements are large enough for touch input and that the form layout adapts well to different screen sizes.",
+            "6. Protect Against Security Threats: Safeguard your forms against common security threats such as cross-site scripting (XSS) and SQL injection by validating and sanitizing user input on both the client-side and server-side."
+          ]
+        },
+        {
+          "id": "11",
+          "type": "IMAGE",
+          "src": "https://miro.medium.com/v2/resize:fit:720/0*29SO1iqoVna53MDo"
+        },
+        {
+          "id": "12",
+          "type": "TEXT",
+          "title": "Conclusion",
+          "paragraphs": [
+            "HTML forms are a crucial component of web applications, enabling users to interact and provide input. By understanding the various form elements, applying best practices, and leveraging the enhancements introduced in HTML5, you can create efficient, accessible, and user-friendly web forms.",
+            "If you’re looking to develop a web application that requires exceptional UI/UX design and efficient form handling, consider partnering with CronJ, a leading web development company. Our team of experts can help you create responsive and interactive forms tailored to your specific needs. Visit our website for more information on our services and solutions."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "title": "The Incredibles of Generative AI",
+      "subtitle": "How three tech giants Microsoft, Google, and Amazon are competing with one another in the Generative AI race",
+      "img": "https://miro.medium.com/v2/resize:fit:720/format:webp/1*b3L1jwni6P8l0E-5Wvgjow.jpeg",
+      "views": 91,
+      "createdAt": "03.19.2023",
+      "userId": "1",
+      "type": [
+        "IT",
+        "AI"
+      ],
+      "blocks": [
+        {
+          "id": "1",
+          "type": "TEXT",
+          "paragraphs": [
+            "The tech world saw a renaissance in November 2022 when ChatGPT arrived. It created an explosion in the industry. Now we hear new announcements every other day about new generative AI tools.",
+            "Generative AI research requires a considerable budget, talent, and a massive corpus of data. It also needs the ready availability of scalable computing platforms. This article explores the efforts of three tech giants- Google, Amazon, and Microsoft. All three are betting big money on AI research and development (R&D) and product creation. Their tech partners are racing to get the upper hand in the generative AI domain.",
+            "Towards the end of this article, you see what Generative AI brings to the developers."
+          ]
+        },
+        {
+          "id": "2",
+          "type": "IMAGE",
+          "src": "https://miro.medium.com/v2/resize:fit:640/format:webp/1*sgAddYFkxb04YJ4hy3yAzg.png"
+        },
+        {
+          "id": "3",
+          "type": "TEXT",
+          "title": "How does Generative AI work?",
+          "paragraphs": [
+            "Let us try to understand, in layperson’s terms, how a Generative AI application answers a question:",
+            "• It first parses the input question to detect what words, phrases, and sentences most suitably represent the crux of the question. In this way, the tool ‘understands’ the question.",
+            "• Then it tries to discover the words, phrases, and sentences available in the sizeable pre-trained model that is nothing but a deep learning neural network, which potentially has the answer to the input question.",
+            "• Finally, it forms or generates sentences & paragraphs on the identified sections in the model to answer the question. It also randomizes the output sentences to give a slightly different flavor to the answer each time you ask the same question. The generative module of the tool does this."
+          ]
+        },
+        {
+          "id": "4",
+          "type": "TEXT",
+          "title": "How is a significant language model trained?",
+          "paragraphs": [
+            "The quality of answers a Generative AI application provides depends on how its large language model was trained. Training a model is a multi-stage process.",
+            "In the first stage of the model training process, humans play the role of the person asking questions and the chatbot answering them. The underlying model identifies the pattern of words and sentences in such a conversation. In this process, the correct answers are also ranked for their accuracy. This is supervised model training.",
+            "In the second stage, an automated process finds potentially correct words, phrases, and sentences from material available in the open domain for a given question taking clues from the patterns identified in the first phase. This part of the model training is called unsupervised training.",
+            "This combination of supervised and unsupervised model training makes it possible to create a humongous model in a relatively short time which obtains data from books, manuals, blogs, websites, and newspapers."
+          ]
+        },
+        {
+          "id": "5",
+          "type": "TEXT",
+          "title": "Google",
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "id": "6",
+          "type": "IMAGE",
+          "src": "https://miro.medium.com/v2/resize:fit:640/format:webp/1*aNjOvYpAaP2kt0CBf-lkLw.png"
+        },
+        {
+          "id": "7",
+          "type": "TEXT",
+          "paragraphs": [
+            "ChatGPT garnered so much attention for its detailed responses and precise answers across various domains of knowledge that it turned out to be the biggest existential threat to Google."
+          ]
+        },
+        {
+          "id": "8",
+          "type": "TEXT",
+          "title": "Bard",
+          "paragraphs": [
+            "Awakened by the challenge, Google introduced Bard. Google has unparalleled expertise in developing search engines, and it also has its cloud platform. This makes Google one of the most formidable players in the Generative AI space. Alphabet CEO unveiled Bard on February 6 this year (2023). At the start, It had a rough launch, but it has taken a giant leap since then to the recent Google I/O.",
+            "Google Bard uses the Internet to source information and provide fresh & up-to-date answers. Since Bard draws information from the Internet, it is more capable of answering open-ended questions. But, it can also produce errors or false information as the Internet is full of rogue propaganda sites. Bard is more formal but less humorous than ChatGPT. Additionally, It provides multiple draft answers to any question. Bard has inbuilt adaptive learning capabilities, allowing it to improve with user feedback on its answers. It uses a deep learning large language model named LaMDA (Language Model for Dialog Applications)."
+          ]
+        },
+        {
+          "id": "9",
+          "type": "TEXT",
+          "title": "Other applications",
+          "paragraphs": [
+            "Bard is not the only Generative AI application created by Google. Google has developed an AI image generator named Imagen, a text-to-image diffusion model. Google claims that human raters prefer Imagen over other competing models in side-by-side comparisons about sample quality and image-text alignment. Here are some example images created by Imagen."
+          ]
+        },
+        {
+          "id": "10",
+          "type": "IMAGE",
+          "src": "https://miro.medium.com/v2/resize:fit:720/format:webp/1*6RUO8eI6mCtkHt1R-f7NNA.png"
+        },
+        {
+          "id": "11",
+          "type": "TEXT",
+          "paragraphs": [
+            "Google also has an AI music generator Model named MusicLM. MusicLM can create high-fidelity music from given text descriptions or prompts. The prompt can be like “Create a jazz song with a saxophone and have a solo female voice in it”. The model can create music of different lengths, from a 10-second audio clip to an entire song. What makes it remarkable is that it can even take an existing song and produce it in a different sound and flavor."
+          ]
+        },
+        {
+          "id": "12",
+          "type": "TEXT",
+          "title": "Amazon",
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "id": "13",
+          "type": "IMAGE",
+          "src": "https://miro.medium.com/v2/resize:fit:720/format:webp/1*JWq9Seq8aM2RQDdLVBo95w.png"
+        },
+        {
+          "id": "14",
+          "type": "TEXT",
+          "paragraphs": [
+            "Amazon is coming up with many Generative AI services on its AWS platform. The most important among them is Amazon Bedrock , a cloud service that allows developers to build and scale generative AI applications. These applications can use pre-trained models created by AWS and some leading AI startups. Bedrock is currently available in a limited preview. Its models allow the development of generative AI applications and are available as a serverless API service.",
+            "Bedrock does not try to provide one model for all the needs. It provides many foundational pre-trained models that can be used for different needs. Some examples are:",
+            "• The AI21Lab’s foundational Jurassic model can generate text in many languages. Currently, it supports French, German, Spanish, Portuguese, Italian, and Dutch.",
+            "• Anthropic lab’s model Claude has LLM abilities. It can be used for conversations, question-answering, and workflow automation.",
+            "• Stable Diffusion generates unique, realistic, high-quality images, art, logos, and designs.",
+            "• Titan can summarise, generate, and classify text. It can also do open-ended Q&A, information extraction, embeddings, and search.",
+            "• Amazon SageMaker is a generic service that allows building, training, and deploying ML models for any use case."
+          ]
+        },
+        {
+          "id": "15",
+          "type": "TEXT",
+          "title": "Microsoft",
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "id": "16",
+          "type": "IMAGE",
+          "src": "https://miro.medium.com/v2/resize:fit:632/format:webp/1*Wk2U4jGiVjxVNaGSkkXzAg.png"
+        },
+        {
+          "id": "17",
+          "type": "TEXT",
+          "paragraphs": [
+            "Microsoft has established a long-term partnership with OpenAI. They intend to speed up breakthroughs in the Generative AI arena.",
+            "The new Bing with ChatGPT is available in Microsoft’s Edge browser. ChatGPT is also used in the Bing app and the mobile app version of the Edge web browser. Bing with ChatGPT allows the users to tell it to Stop responding while generating the answer live.",
+            "Microsoft’s Azure OpenAI Service empowers developers to build cutting-edge AI applications. The OpenAI Service provides OpenAI models for the same. It allows fine-tuning the OpenAI models with customer data and hyperparameters. Microsoft is also integrating another OpenAI product, the AI image generator DALL-E 2."
+          ]
+        },
+        {
+          "id": "18",
+          "type": "IMAGE",
+          "src": "https://miro.medium.com/v2/resize:fit:720/format:webp/1*HkD1FT2gKb_QIhvCGjhSZA.png"
+        },
+        {
+          "id": "19",
+          "type": "TEXT",
+          "paragraphs": [
+            "Microsoft’s new Bing chatbot is available on the iOS, Android Bing, Edge, and Skype apps."
+          ]
+        },
+        {
+          "id": "20",
+          "type": "TEXT",
+          "title": "Generative AI Tools for Developers",
+          "paragraphs": [
+            "Some people fear that the code-generation abilities of AI may make human programmers obsolete. But AI experts believe that Generative AI is not going to replace human developers any time soon. Instead, it will augment software developers. Developers need to learn to use AI tools as their assistants to become more productive. The Generative AI models have ushered in a new category of AI tools called coding companions. With coding companions, developers can become more creative and feel empowered. They can tackle complex problems and provide better solutions in a shorter time.",
+            "Google, Microsoft, and Amazon- are working towards creating feature-rich, powerful coding assistant tools. These tools can help software developers in many ways:",
+            "• Identify and suggest bug fixes in the given code",
+            "• Refactor code so that it conforms to the standard coding patterns",
+            "• Analyze code for adherence to coding guidelines. This can address many common coding issues.",
+            "• Identify and provide suggestions for fixing security vulnerabilities. The security vulnerabilities can be SQL Injection, Cross-site scripting, Cross-Site Request Forgery, etc.",
+            "• Porting the code written in one language to another",
+            "• Write unit tests",
+            "• Create CSS layout",
+            "• Accessibility compliance for WCAG levels A, AA, or AAA"
+          ]
+        },
+        {
+          "id": "21",
+          "type": "TEXT",
+          "title": "GitHub Copilot by Microsoft",
+          "paragraphs": [
+            "Github Copilot is a coding companion tool that uses OpenAI’s model Codex to generate code. It can write functions in real time. It supports popular development environments such as VS Code, Neovim, and JetBrains. It can generate Python, JavaScript, TypeScript, Ruby, Go, C#, and C++ code. The Github Copilot tool also has voice-activated capabilities. Developers having difficulties using a keyboard can code with their voice. It can also generate code based on comments. It also allows the developers to write code comments in languages other than English. It also helps translate words from English to other languages.",
+            "A developer can use GitHub Copilot to help find a correct Regex. The Ask Copilot feature of GitHub Copilot is of great help. It can explain a given code in plain English and some other supported human languages."
+          ]
+        },
+        {
+          "id": "22",
+          "type": "TEXT",
+          "title": "CodeWhisperer by Amazon",
+          "paragraphs": [
+            "Amazon has also created a Generative AI tool named CodeWhisperer for programmers. CodeWhispere is an AI coding companion to enhance developer productivity. It uses a foundational model to generate code suggestions in real time. CodeWhisperer can be integrated with IDEs such as VS Code, IntelliJ IDEA, AWS Cloud9, and many more. It can write code in Python, Java, JavaScript, TypeScript, C#, Go, Kotlin, Rust, PHP, and SQL."
+          ]
+        },
+        {
+          "id": "23",
+          "type": "IMAGE",
+          "src": "https://miro.medium.com/v2/resize:fit:720/format:webp/1*j8E3qfroZEoLMXezU4ZKyQ.png"
+        },
+        {
+          "id": "24",
+          "type": "TEXT",
+          "paragraphs": [
+            "At the moment, AWS CodeWhisperer has a slight edge over Github Copilot. CodeWhisperer’s NLP algorithms generate more accurate suggestions. GitHub Copilot sometimes generates code that is not correct."
+          ]
+        },
+        {
+          "id": "25",
+          "type": "TEXT",
+          "title": "Google Bard",
+          "paragraphs": [
+            "Google, too, having no intention to stay behind, is adding powerful coding capabilities in Bard. Bard is going to support code generation in more than 20 programming languages. These languages include Java, JavaScript, Python, C++, and Go. Bard’s features include code generation, optimization, debugging, and explanation. The code generated by Bard can run in the browser with Google Colab. Developers can also export it to an integrated development environment."
+          ]
+        },
+        {
+          "id": "26",
+          "type": "TEXT",
+          "title": "The sinister side of AI",
+          "paragraphs": [
+            "Famous author Yuval Noah Harari in his book Homo Deus: A Brief History of Tomorrow, writes about a new form of the Great Decoupling that separates intelligence from human consciousness through AI. He paints a gloomy picture of a future where Intelligent machines may overtake humans. Has Generative AI brought us closer to that dark future?",
+            "Generative AI tools can spread fallacy through AI-authored fake news that will be difficult to control by law enforcement agencies.",
+            "These AI tools provide a fertile ground for plagiarism and copyright infringement. If not appropriately guarded by the Generative AI tool makers, it will cause confidential and identity data theft.",
+            "The code generated by the coding companions is based on patterns learned from their training examples. Some of these examples might be subject to restrictive licenses. This may lead to copyright violations and other legal problems.",
+            "Biased answers may disturb specific communities unknowingly. It will help criminals in impersonation through fake audio and video. It may also facilitate tailored phishing. Deep fakes allow large-scale blackmailing."
+          ]
+        },
+        {
+          "id": "27",
+          "type": "TEXT",
+          "title": "Conclusion",
+          "paragraphs": [
+            "Google, Amazon, and Microsoft all have powerful Generative AI weapons in their arsenal, but the battle has just begun. Microsoft and its partner OpenAI are ahead in the race since it reached the pole first. Currently, ChatGPT and Bing are the best at accomplishing verbal tasks. Google Bard is the best for finding answers related to the latest affairs in the world. Amazon Bedrock has a great combination of AI models for creating custom generative AI applications. Amazon and Google tools are not yet available to the general public, but what they build may be a game changer.",
+            "The battle is on. Only time will tell who will emerge as the clear winner."
+          ]
+        }
+      ]
     }
   ],
   "comments": [

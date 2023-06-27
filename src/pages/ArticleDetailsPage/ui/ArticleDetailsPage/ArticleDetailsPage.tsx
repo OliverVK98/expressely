@@ -15,7 +15,6 @@ import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { AdditionalInfoContainer } from '../AdditionalInfoContainer/AdditionalInfoContainer';
 import { DetailsContainer } from '../DetailsContainer/DetailsContainer';
 import { ArticleRecommendationsToolbarContainer } from '@/widgets/ArticleRecommendationsToolbar';
-import { ArticleRecommendationsList } from '@/features/articleRecommendationsList';
 
 interface ArticleDetailsPageProps {
     className?: string;
@@ -37,7 +36,7 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
                 <DetailsContainer />
                 <ArticleRating articleId={id!} />
                 {/* TODO: Delete component */}
-                <ArticleRecommendationsList />
+                {/* <ArticleRecommendationsList /> */}
                 <ArticleDetailsComments id={id!} />
             </VStack>
         </Page>

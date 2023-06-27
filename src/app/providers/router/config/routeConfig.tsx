@@ -21,6 +21,7 @@ import {
     getRouteMain,
     getRouteProfile,
 } from '@/shared/const/router';
+import { ArticleCreatePage } from '@/pages/ArticleCreatePage';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.MAIN]: {
@@ -53,7 +54,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     },
     [AppRoutes.ARTICLE_CREATE]: {
         path: getRouteArticleCreate(),
-        element: <ArticleEditPage />,
+        element: <ArticleCreatePage />,
         authOnly: true,
     },
     [AppRoutes.ADMIN_PANEL]: {

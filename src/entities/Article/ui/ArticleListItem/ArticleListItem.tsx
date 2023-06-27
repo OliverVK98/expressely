@@ -29,12 +29,15 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
 
     const userInfo = (
         <>
-            <Avatar
-                size={32}
-                src={article.user.avatar}
-                className={cls.avatar}
-            />
-            <Text bold text={article.user.username} />
+            <HStack gap="4">
+                <Avatar
+                    size={32}
+                    src={article.user.avatar}
+                    className={cls.avatar}
+                />
+                <Text bold text={article.user.username} />
+            </HStack>
+            <Text text={article.type.slice(0, 2).join(', ')} bold />
         </>
     );
     const views = (
@@ -107,7 +110,7 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
                 cls[view],
             ])}
         >
-            <Card border="round" className={cls.card} padding="0">
+            <Card border="partial" className={cls.card} padding="0">
                 <AppImage
                     fallback={<Skeleton width="100%" height={200} />}
                     alt={article.title}
@@ -118,7 +121,7 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
                     <Text
                         text={article.title}
                         bold
-                        size="l"
+                        size="m"
                         className={cls.title}
                     />
                     <VStack gap="4" className={cls.footer} max>
@@ -129,7 +132,9 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
                             />
                             {views}
                         </HStack>
-                        <HStack gap="4">{userInfo}</HStack>
+                        <HStack gap="4" justify="between" max>
+                            {userInfo}
+                        </HStack>
                     </VStack>
                 </VStack>
             </Card>

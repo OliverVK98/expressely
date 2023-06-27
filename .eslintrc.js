@@ -64,6 +64,8 @@ module.exports = {
                     'color',
                     'size',
                     'wrap',
+                    'label',
+                    'text',
                 ],
             },
         ],
