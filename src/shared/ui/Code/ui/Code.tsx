@@ -38,7 +38,7 @@ export const Code = memo((props: CodeProps) => {
     if (contentEditable) {
         return (
             <pre className={classNames(cls.Code, {}, [className])}>
-                <code
+                <span
                     contentEditable
                     suppressContentEditableWarning
                     onInput={undefined}
@@ -47,7 +47,7 @@ export const Code = memo((props: CodeProps) => {
                     {...otherProps}
                 >
                     {textareaEl.current}
-                </code>
+                </span>
             </pre>
         );
     }

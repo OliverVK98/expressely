@@ -1,5 +1,4 @@
 import React, { memo, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { AppLogo } from '@/shared/ui/AppLogo';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -21,7 +20,6 @@ const DeprecatedSidebar = () => {};
 
 export const Sidebar = memo(({ className }: SidebarProps) => {
     const [collapsed, setCollapsed] = useState(false);
-    const { t } = useTranslation();
     const sidebarItemsList = useSelector(getSidebarItems);
 
     const onToggle = () => {

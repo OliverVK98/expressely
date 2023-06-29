@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Dispatch, memo, SetStateAction, useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './ArticleCreatePageHeader.module.scss';
@@ -9,59 +9,48 @@ import { Avatar } from '@/shared/ui/Avatar';
 import { Input } from '@/shared/ui/Input';
 import { Card } from '@/shared/ui/Card';
 import { getUserAuthData } from '@/entities/User';
-import { Article, ArticleType } from '@/entities/Article';
 import { ArticleTypeDropdown } from '../ArticleTypeDropdown/ArticleTypeDropdown';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import {
+    useArticleCreatePageImg,
+    useArticleCreatePageSubtitle,
+    useArticleCreatePageTitle,
+} from '../../model/selectors/articleCreatePageSelectors';
+import { articleCreatePageActions } from '../../model/slices/articleCreatePageSlice';
 
 interface ArticleCreatePageHeaderProps {
     className?: string;
-    header: Partial<Article>;
-    setHeader: Dispatch<SetStateAction<Partial<Article>>>;
 }
 
 export const ArticleCreatePageHeader = memo(
     (props: ArticleCreatePageHeaderProps) => {
-        const { className, header, setHeader } = props;
+        const { className } = props;
         const { t } = useTranslation();
+        const dispatch = useAppDispatch();
+        const imgSrc = useArticleCreatePageImg();
+        const title = useArticleCreatePageTitle();
         const userData = useSelector(getUserAuthData);
-
-        const setTypes = useCallback(
-            (types: ArticleType[]) => {
-                setHeader({
-                    ...header,
-                    type: types,
-                });
-            },
-            [header, setHeader],
-        );
+        const subtitle = useArticleCreatePageSubtitle();
 
         const onChangeTitle = useCallback(
             (title: string) => {
-                setHeader({
-                    ...header,
-                    title,
-                });
+                dispatch(articleCreatePageActions.setTitle(title));
             },
-            [header, setHeader],
+            [dispatch],
         );
 
         const onChangeSubtitle = useCallback(
             (subtitle: string) => {
-                setHeader({
-                    ...header,
-                    subtitle,
-                });
+                dispatch(articleCreatePageActions.setSubtitle(subtitle));
             },
-            [header, setHeader],
+            [dispatch],
         );
 
         const onChangeUrl = useCallback(
             (img: string) => {
-                setHeader({
-                    ...header,
-                    img,
-                });
+                dispatch(articleCreatePageActions.setImg(img));
             },
-            [header, setHeader],
+            [dispatch],
         );
 
         return (
@@ -83,23 +72,20 @@ export const ArticleCreatePageHeader = memo(
                     </HStack>
                     <Input
                         label="Title: "
-                        value={header.title}
+                        value={title}
                         onChange={onChangeTitle}
                     />
                     <Input
                         label="Subtitle: "
-                        value={header.subtitle}
+                        value={subtitle}
                         onChange={onChangeSubtitle}
                     />
                     <Input
                         label="Front Image URL: "
-                        value={header.img}
+                        value={imgSrc}
                         onChange={onChangeUrl}
                     />
-                    <ArticleTypeDropdown
-                        types={header.type}
-                        setTypes={setTypes}
-                    />
+                    <ArticleTypeDropdown />
                 </VStack>
             </Card>
         );

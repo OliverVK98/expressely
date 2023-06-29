@@ -8,29 +8,30 @@ import { Icon } from '@/shared/ui/Icon';
 import AddIcon from '@/shared/assets/icons/add.svg';
 import { Text } from '@/shared/ui/Text';
 import { Button } from '@/shared/ui/Button';
+import { useArticleCreatePageTypes } from '../../model/selectors/articleCreatePageSelectors';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { articleCreatePageActions } from '../../model/slices/articleCreatePageSlice';
 
 interface ArticleTypeDropdownProps {
     className?: string;
-    types?: ArticleType[];
-    setTypes: (types: ArticleType[]) => void;
 }
 
 export const ArticleTypeDropdown = memo((props: ArticleTypeDropdownProps) => {
-    const { className, types = [ArticleType.All], setTypes } = props;
+    const { className } = props;
     const { t } = useTranslation();
-
-    const onChangeType = useCallback(
-        (value: ArticleType, index: number) => {
-            const updatedTypes = [...types];
-            updatedTypes[index] = value;
-            setTypes(updatedTypes);
-        },
-        [setTypes, types],
-    );
+    const types = useArticleCreatePageTypes();
+    const dispatch = useAppDispatch();
 
     const onAddClick = useCallback(() => {
-        setTypes([...types, ArticleType.All]);
-    }, [types]);
+        dispatch(articleCreatePageActions.addType());
+    }, [dispatch]);
+
+    const onChangeType = useCallback(
+        (newType: ArticleType, index: number) => {
+            dispatch(articleCreatePageActions.updateType({ newType, index }));
+        },
+        [dispatch],
+    );
 
     return (
         <HStack max gap="8">

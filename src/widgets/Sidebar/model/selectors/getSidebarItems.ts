@@ -4,10 +4,12 @@ import HomeIcon from '@/shared/assets/icons/home.svg';
 import InfoIcon from '@/shared/assets/icons/info.svg';
 import ProfileIcon from '@/shared/assets/icons/avatar.svg';
 import ArticlesIcon from '@/shared/assets/icons/article.svg';
+import AddIcon from '@/shared/assets/icons/add.svg';
 
 import { SidebarItemType } from '../types/sidebar';
 import {
     getRouteAbout,
+    getRouteArticleCreate,
     getRouteArticles,
     getRouteMain,
     getRouteProfile,
@@ -39,6 +41,12 @@ export const getSidebarItems = createSelector(getUserAuthData, (userData) => {
                 path: getRouteArticles(),
                 Icon: ArticlesIcon,
                 text: 'Articles Page',
+                authOnly: true,
+            },
+            {
+                path: getRouteArticleCreate(),
+                Icon: AddIcon,
+                text: 'Create New Article',
                 authOnly: true,
             },
         );

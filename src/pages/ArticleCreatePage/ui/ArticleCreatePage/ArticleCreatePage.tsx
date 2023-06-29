@@ -1,57 +1,47 @@
-import { useTranslation } from 'react-i18next';
-import { memo, useCallback, useState } from 'react';
+import { memo } from 'react';
 import { ArticleBlockCreator } from '../ArticleBlockCreator/ArticleBlockCreator';
-import { Article, ArticleBlock, ArticleType } from '@/entities/Article';
-import { HStack, VStack } from '@/shared/ui/Stack';
+import { VStack } from '@/shared/ui/Stack';
 import { Page } from '@/widgets/Page';
 import { ArticleCreatePageHeader } from '../ArticleCreatePageHeader/ArticleCreatePageHeader';
-import { Button } from '@/shared/ui/Button';
+import {
+    DynamicModuleLoader,
+    ReducersList,
+} from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { articleCreatePageReducer } from '../..';
 import { ArticlePreviewModal } from '../ArticlePreviewModal/ArticlePreviewModal';
+import { ArticleCreateActions } from '../ArticleCreateActions/ArticleCreateActions';
+import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
+import { ArticleCreatePageSidebar } from '../ArticleCreatePageSidebar/ArticleCreatePageSidebar';
 
 interface ArticleCreatePageProps {
     className?: string;
 }
 
+const reducers: ReducersList = {
+    articleCreatePage: articleCreatePageReducer,
+};
+
 const ArticleCreatePage = memo((props: ArticleCreatePageProps) => {
     const { className } = props;
-    const { t } = useTranslation();
-    const [header, setHeader] = useState<Partial<Article>>({
-        title: '',
-        subtitle: '',
-        img: '',
-        type: [ArticleType.All],
-    });
-    const [blocks, setBlocks] = useState<ArticleBlock[]>([]);
-    const [modalOpen, setModalOpen] = useState(false);
 
-    const onClickModalHandler = useCallback(() => {
-        setModalOpen((prev) => !prev);
-    }, []);
-
-    return (
+    const content = (
         <Page className={className}>
             <VStack gap="16">
-                <ArticleCreatePageHeader
-                    header={header}
-                    setHeader={setHeader}
-                />
-                <ArticleBlockCreator blocks={blocks} setBlocks={setBlocks} />
-                <HStack max justify="end" gap="8">
-                    <Button onClick={onClickModalHandler}>
-                        {t('Preview article')}
-                    </Button>
-                    <Button color="success">{t('Publish article')}</Button>
-                </HStack>
+                <ArticleCreatePageHeader />
+                <ArticleBlockCreator />
+                <ArticleCreateActions />
             </VStack>
-            {modalOpen && (
-                <ArticlePreviewModal
-                    header={header}
-                    blocks={blocks}
-                    onClose={onClickModalHandler}
-                    isOpen={modalOpen}
-                />
-            )}
+            <ArticlePreviewModal />
         </Page>
+    );
+
+    return (
+        <DynamicModuleLoader reducers={reducers} removerAfterUnmount>
+            <StickyContentLayout
+                content={content}
+                right={<ArticleCreatePageSidebar />}
+            />
+        </DynamicModuleLoader>
     );
 });
 

@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback } from 'react';
 import {
     ArticleBlock,
     ArticleBlockType,
@@ -10,27 +10,31 @@ import {
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { Card } from '@/shared/ui/Card';
 import { Text } from '@/shared/ui/Text';
-import cls from '../sharedStyles/sharedStyles.module.scss';
 import { Button } from '@/shared/ui/Button';
+import cls from './ArticleBlocksReadonly.module.scss';
+import { articleCreatePageActions } from '../../model/slices/articleCreatePageSlice';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useArticleCreatePageBlocks } from '../../model/selectors/articleCreatePageSelectors';
 
 interface ArticleBlocksReadonlyProps {
     className?: string;
-    blocks: ArticleBlock[] | undefined;
-    onRemoveClick: (index: number) => void;
 }
 
 export const ArticleBlocksReadonly = memo(
     (props: ArticleBlocksReadonlyProps) => {
-        const { className, blocks, onRemoveClick } = props;
-        const [currentBlocks, setCurrentBlocks] = useState<
-            ArticleBlock[] | undefined
-        >(blocks);
-
-        useEffect(() => {
-            setCurrentBlocks(blocks);
-        }, [blocks]);
-
+        const { className } = props;
         const { t } = useTranslation();
+        const dispatch = useAppDispatch();
+        const blocks = useArticleCreatePageBlocks();
+
+        const onRemoveClick = useCallback(
+            (index: number) => {
+                if (blocks) {
+                    dispatch(articleCreatePageActions.removeBlockById(index));
+                }
+            },
+            [blocks, dispatch],
+        );
 
         const renderBlock = useCallback(
             (block: ArticleBlock, index: number) => {
@@ -111,10 +115,10 @@ export const ArticleBlocksReadonly = memo(
             [onRemoveClick, t],
         );
 
-        if (!currentBlocks) {
+        if (!blocks) {
             return null;
         }
 
-        return <>{currentBlocks.map(renderBlock)}</>;
+        return <>{blocks.map(renderBlock)}</>;
     },
 );
