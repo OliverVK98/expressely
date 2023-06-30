@@ -1,1 +1,4 @@
-export { MainPageAsync as MainPage } from './ui/MainPage.async';
+import { MainPageAsync } from './ui/MainPage/MainPage.async';
+import { MainPageSchema } from './model/types/mainPage';
+
+export { MainPageAsync as MainPage, type MainPageSchema };

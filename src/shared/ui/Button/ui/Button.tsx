@@ -1,5 +1,6 @@
 import React, {
     ButtonHTMLAttributes,
+    CSSProperties,
     ForwardedRef,
     forwardRef,
     ReactNode,
@@ -7,9 +8,8 @@ import React, {
 import { classNames, Mods } from '@/shared/lib/classNames/classNames';
 import cls from './Button.module.scss';
 
-export type ButtonVariant = 'clear' | 'outline' | 'filled';
+export type ButtonVariant = 'clear' | 'outline' | 'filled' | 'highlighted';
 export type ButtonColor = 'normal' | 'success' | 'error';
-
 export type ButtonSize = 'm' | 'l' | 'xl';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -24,6 +24,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     addonLeft?: ReactNode;
     addonRight?: ReactNode;
     color?: ButtonColor;
+    styles?: CSSProperties;
 }
 
 export const Button = forwardRef(
@@ -40,6 +41,7 @@ export const Button = forwardRef(
             addonLeft,
             addonRight,
             color = 'normal',
+            styles,
             ...otherProps
         } = props;
 
@@ -63,6 +65,7 @@ export const Button = forwardRef(
                 disabled={disabled}
                 data-testid={dataTestId}
                 ref={ref}
+                style={styles}
             >
                 <div className={cls.addonLeft}>{addonLeft}</div>
                 {children}

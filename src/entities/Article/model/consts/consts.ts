@@ -16,9 +16,19 @@ export enum ArticleView {
 }
 
 export enum ArticleType {
-    'All' = 'All',
-    'IT' = 'IT',
-    'Science' = 'Science',
-    'Economics' = 'Economics',
-    'React' = 'React',
+    All = 'All',
+    IT = 'IT',
+    Science = 'Science',
+    Economics = 'Economics',
+    React = 'React',
+    Programming = 'Programming',
+    Javascript = 'Javascript',
+    Math = 'Math',
+}
+
+export enum ArticleFeedType {
+    ALL = 'Articles',
+    DISCOVER = 'Discover',
+    HISTORY = 'History',
+    MY_ARTICLES = 'My Articles',
 }

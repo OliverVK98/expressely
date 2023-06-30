@@ -2,7 +2,6 @@ import { HTMLAttributeAnchorTarget, memo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './ArticleShortList.module.scss';
 import { HStack, VStack } from '@/shared/ui/Stack';
-import { Text } from '@/shared/ui/Text';
 import { Article } from '../../model/types/article';
 import { AppLink } from '@/shared/ui/AppLink';
 import { Icon } from '@/shared/ui/Icon';
@@ -23,11 +22,11 @@ export const ArticleShortList = memo((props: ArticleShortListProps) => {
         <Card
             max
             className={classNames(cls.ArticleShortList, {}, [className])}
-            border="partial"
+            border="default"
         >
             <AppLink target={target} to={getRouteArticleDetails(article.id)}>
                 <VStack max gap="4">
-                    <Text text={article.title} />
+                    {article.title}
                     <HStack max justify="between">
                         <HStack>
                             {article.views}

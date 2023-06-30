@@ -11,7 +11,7 @@ import { HStack } from '@/shared/ui/Stack';
 
 interface ArticleListProps {
     className?: string;
-    articles: Article[];
+    articles?: Article[];
     isLoading?: boolean;
     view?: ArticleView;
     target?: HTMLAttributeAnchorTarget;
@@ -47,7 +47,7 @@ export const ArticleList = memo((props: ArticleListProps) => {
         />
     );
 
-    if (!isLoading && !articles.length) {
+    if (!isLoading && !articles?.length) {
         return (
             <div className={classNames('', {}, [className, cls[view]])}>
                 <Text size="l" title={t('No articles found')} />
@@ -62,7 +62,9 @@ export const ArticleList = memo((props: ArticleListProps) => {
             data-testid="ArticleList"
             className={classNames('', {}, [className, cls[view]])}
         >
-            {articles.length > 0 ? articles.map(renderArticle) : null}
+            {articles?.length && articles?.length > 0
+                ? articles?.map(renderArticle)
+                : null}
             {isLoading && getSkeletons(view)}
         </HStack>
     );

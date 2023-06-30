@@ -12,6 +12,16 @@
     border-radius: 34px;
 }
 
+.highlighted {
+    background: none;
+    border: none;
+
+    &.normal {
+        border-bottom: 2px solid var(--icon-redesigned);
+        margin-bottom: -2px;
+    }
+}
+
 .outline {
     background: none;
     border-radius: 34px;
@@ -110,3 +120,4 @@
 .withAddon {
     padding: 0 16px;
 }
+

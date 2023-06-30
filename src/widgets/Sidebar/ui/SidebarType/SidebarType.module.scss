@@ -1,0 +1,22 @@
+.item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0 16px;
+}
+
+.link {
+    margin-left: 10px;
+    opacity: 1;
+}
+
+.collapsed {
+    padding: 0 8px;
+    height: 36px;
+
+    .link {
+        opacity: 0;
+        width: 0;
+        margin: 0;
+    }
+}

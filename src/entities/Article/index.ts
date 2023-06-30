@@ -3,6 +3,7 @@ import {
     ArticleView,
     ArticleBlockType,
     ArticleType,
+    ArticleFeedType,
 } from './model/consts/consts';
 import { ArticleDetails } from './ui/ArticleDetails/ArticleDetails';
 import {
@@ -24,20 +25,21 @@ import { ArticleImageBlockComponent } from './ui/ArticleImageBlockComponent/Arti
 import { ArticleTypeSelect } from './ui/ArticleTypeSelect/ArticleTypeSelect';
 
 export {
-    ArticleDetails,
+    type ArticleCodeBlock,
+    type ArticleImageBlock,
+    type ArticleTextBlock,
     type Article,
     type ArticleDetailsSchema,
     type ArticleBlock,
     ArticleBlockType,
-    getArticleDetailsData,
     ArticleView,
     ArticleSortField,
     ArticleType,
-    ArticleList,
+    ArticleFeedType,
     articleDetailsReducer,
-    type ArticleCodeBlock,
-    type ArticleImageBlock,
-    type ArticleTextBlock,
+    getArticleDetailsData,
+    ArticleList,
+    ArticleDetails,
     ArticleShortList,
     ArticleBlocksRenderer,
     ArticleTextBlockComponent,

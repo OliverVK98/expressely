@@ -16,32 +16,29 @@ export const ArticleListItemSkeleton = memo(
 
         if (view === ArticleView.BIG) {
             return (
-                <div className={classNames('', {}, [className, cls[view]])}>
-                    <Card className={cls.card}>
-                        <div className={cls.header}>
-                            <Skeleton border="50%" width={30} height={30} />
-                            <Skeleton
-                                width={150}
-                                height={16}
-                                className={cls.username}
-                            />
-                            <Skeleton
-                                width={150}
-                                height={16}
-                                className={cls.date}
-                            />
-                        </div>
+                <Card
+                    max
+                    className={classNames(cls.card, {}, [className, cls[view]])}
+                >
+                    <div className={cls.header}>
+                        <Skeleton border="50%" width={30} height={30} />
                         <Skeleton
-                            width={250}
-                            height={24}
-                            className={cls.title}
+                            width={150}
+                            height={16}
+                            className={cls.username}
                         />
-                        <Skeleton height={200} className={cls.img} />
-                        <div className={cls.footer}>
-                            <Skeleton height={36} width={200} />
-                        </div>
-                    </Card>
-                </div>
+                        <Skeleton
+                            width={150}
+                            height={16}
+                            className={cls.date}
+                        />
+                    </div>
+                    <Skeleton width={250} height={24} className={cls.title} />
+                    <Skeleton height={600} className={cls.img} />
+                    <div className={cls.footer}>
+                        <Skeleton height={36} width={200} />
+                    </div>
+                </Card>
             );
         }
 
