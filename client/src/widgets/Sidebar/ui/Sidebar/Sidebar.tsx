@@ -22,10 +22,6 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
     const sidebarItemsList = useSelector(getSidebarItems);
     const { t } = useTranslation();
 
-    const onToggle = () => {
-        setCollapsed((prev) => !prev);
-    };
-
     const itemsList = useMemo(
         () =>
             sidebarItemsList.map((item) => (
