@@ -1,0 +1,8 @@
+node_modules
+/build
+.idea
+extractedTranslations
+/storybook-static
+.loki/report.html
+.loki/report.json
+/report/unit

@@ -5,8 +5,6 @@
     "main": "index.js",
     "scripts": {
         "start": "webpack serve --env port=3000",
-        "start:dev": "concurrently \"npm run start\" \"npm run start:server\"",
-        "start:server": "node ./json-server/index.js --port:8000",
         "build:prod": "webpack --env mode=production",
         "build:dev": "webpack --env mode=development",
         "lint:ts": "eslint \"./src/**/*.{ts,tsx}\"",
