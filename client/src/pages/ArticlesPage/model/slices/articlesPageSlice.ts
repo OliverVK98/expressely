@@ -37,7 +37,7 @@ const articlesPageSlice = createSlice({
         limit: 9,
         sort: ArticleSortField.CREATED,
         search: '',
-        order: 'asc',
+        order: 'ASC',
         type: ArticleType.All,
     }),
     reducers: {

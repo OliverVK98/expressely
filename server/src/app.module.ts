@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, ValidationPipe } from '@nestjs/common';
 import { MiddlewareConsumer } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as session from 'express-session';
@@ -17,6 +17,7 @@ import {
   User,
   UserModule,
 } from './core';
+import { APP_PIPE } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -45,7 +46,14 @@ import {
     RatingModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_PIPE,
+      useValue: new ValidationPipe({
+        whitelist: true,
+      }),
+    },
+  ],
 })
 export class AppModule {
   constructor(private configService: ConfigService) {}

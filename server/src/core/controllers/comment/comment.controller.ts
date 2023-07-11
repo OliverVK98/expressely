@@ -1,7 +1,9 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { CommentService } from '../../services/comment/comment.service';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('user')
+@Controller('comment')
+@ApiTags('comment')
 export class CommentController {
   constructor(private notificationService: CommentService) {}
 

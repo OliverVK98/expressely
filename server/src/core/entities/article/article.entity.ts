@@ -6,7 +6,7 @@ import {
   OneToMany,
   CreateDateColumn,
 } from 'typeorm';
-import { User } from '../user/user';
+import { User } from '../user/user.entity';
 import { Comment } from '../comment/comment.entity';
 import { Rating } from '../rating/rating.entity';
 
@@ -31,9 +31,6 @@ export class Article {
 
   @CreateDateColumn()
   createdAt?: Date;
-
-  @Column()
-  userId: string;
 
   @Column('simple-array')
   type: string[];

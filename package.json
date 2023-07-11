@@ -1,0 +1,11 @@
+{
+  "name": "study-app",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "concurrently \"cd client && npm run start\" \"cd server && npm run start:dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

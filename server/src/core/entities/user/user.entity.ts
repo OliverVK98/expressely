@@ -12,7 +12,7 @@ import { Profile } from '../profile/profile.entity';
 import { Rating } from '../rating/rating.entity';
 
 export interface JsonSettings {
-  theme: string;
+  theme?: string;
   isArticlesPageWasOpened: boolean;
 }
 
@@ -24,7 +24,7 @@ export interface Features {
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id?: number;
+  id: number;
 
   @Column()
   username: string;
@@ -44,7 +44,7 @@ export class User {
   @Column({ type: 'json' })
   jsonSettings: JsonSettings;
 
-  @Column()
+  @Column({ nullable: true })
   avatar: string;
 
   @OneToMany(() => Article, (article) => article.user)

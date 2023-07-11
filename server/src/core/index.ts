@@ -4,7 +4,7 @@ import { UserModule } from './modules/user/user.module';
 import { NotificationModule } from './modules/notification/notification.module';
 import { Article } from './entities/article/article.entity';
 import { Rating } from './entities/rating/rating.entity';
-import { User } from './entities/user/user';
+import { User } from './entities/user/user.entity';
 import { Profile } from './entities/profile/profile.entity';
 import { Notification } from './entities/notification/notification.entity';
 import { ProfileModule } from './modules/profile/profile.module';

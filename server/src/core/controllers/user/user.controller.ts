@@ -1,19 +1,32 @@
-import { Body, Controller, Get, Param, Post, Session } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Session,
+  UseGuards,
+} from '@nestjs/common';
 import { UserService } from '../../services/user/user.service';
-import { testUser } from '../../entities/test';
 import { SignupUserDto } from '../../entities/user/dtos/signupUser.dto';
 import { SessionData } from 'express-session';
 import { AuthService } from '../../services/auth/auth.service';
 import { SigninUserDto } from '../../entities/user/dtos/signinUser.dto';
+import { ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '../../guards/auth.guard';
+import { Serialize } from '../../interceptors/serialize';
+import { UserDto } from '../../entities/user/dtos/user.dto';
 
 @Controller('user')
+@ApiTags('user')
+@Serialize(UserDto)
 export class UserController {
   constructor(
     private userService: UserService,
     private authService: AuthService,
   ) {}
 
-  @Get('/id')
+  @Get('/:id')
   async getUser(@Param('id') id: string) {
     const user = await this.userService.findOneById(+id);
     return user;
@@ -33,8 +46,9 @@ export class UserController {
     return user;
   }
 
-  @Get('create')
-  async create() {
-    return await this.userService.create(testUser);
+  @Get('auth/signout')
+  @UseGuards(AuthGuard)
+  async signout(@Session() session: SessionData) {
+    session.userId = undefined;
   }
 }

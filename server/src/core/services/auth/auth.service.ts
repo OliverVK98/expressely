@@ -3,6 +3,7 @@ import { SignupUserDto } from '../../entities/user/dtos/signupUser.dto';
 import { UserService } from '../user/user.service';
 import * as bcrypt from 'bcrypt';
 import { SigninUserDto } from '../../entities/user/dtos/signinUser.dto';
+import { defaultFeatures, defaultJsonSettings } from './const/const';
 
 @Injectable()
 export class AuthService {
@@ -19,6 +20,8 @@ export class AuthService {
 
     return await this.userService.create({
       ...userData,
+      jsonSettings: userData.jsonSettings ?? defaultJsonSettings,
+      features: userData.features ?? defaultFeatures,
       password: hashedPass,
     });
   }
@@ -26,7 +29,7 @@ export class AuthService {
   async signin(userData: SigninUserDto) {
     const user = await this.userService.findOneByEmail(userData.email);
 
-    if (user) {
+    if (!user) {
       throw new BadRequestException('Incorrect email or password');
     }
 
