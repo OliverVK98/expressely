@@ -1,6 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
-import { Article, ArticleType } from '@/entities/Article';
+import {
+    ArticleType,
+    ArticlesExpandedUserServerResponse,
+} from '@/entities/Article';
 import { addQueryParams } from '@/shared/lib/url/addQueryParams/addQueryParams';
 import {
     getArticlesPageLimit,
@@ -16,7 +19,7 @@ interface FetchArticlesListProps {
 }
 
 export const fetchArticlesList = createAsyncThunk<
-    Article[],
+    ArticlesExpandedUserServerResponse,
     FetchArticlesListProps,
     ThunkConfig<string>
 >('articlesPage/fetchArticlesList', async (props, thunkAPI) => {
@@ -35,17 +38,21 @@ export const fetchArticlesList = createAsyncThunk<
             search,
             type,
         });
-        const response = await extra.api.get<Article[]>('/articles', {
-            params: {
-                _expand: 'user',
-                _limit: limit,
-                _page: page,
-                _sort: sort,
-                _order: order,
-                q: search,
-                type: type === ArticleType.All ? undefined : type,
-            },
-        });
+        const response =
+            await extra.api.get<ArticlesExpandedUserServerResponse>(
+                '/articles',
+                {
+                    params: {
+                        expand: 'user',
+                        limit,
+                        page,
+                        sort,
+                        order,
+                        search,
+                        type: type === ArticleType.All ? undefined : type,
+                    },
+                },
+            );
 
         if (!response.data) {
             throw new Error();

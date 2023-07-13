@@ -17,7 +17,7 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch
 
 interface ArticleDetailsCommentsProps {
     className?: string;
-    id: string;
+    id: number;
 }
 
 export const ArticleDetailsComments = memo(

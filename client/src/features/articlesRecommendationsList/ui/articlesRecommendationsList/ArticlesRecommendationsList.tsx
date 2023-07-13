@@ -3,14 +3,14 @@ import { useTranslation } from 'react-i18next';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './ArticlesRecommendationsList.module.scss';
 import { Text } from '@/shared/ui/Text';
-import { Article, ArticleShortList } from '@/entities/Article';
+import { ArticleExpandedUser, ArticleShortList } from '@/entities/Article';
 import { Card } from '@/shared/ui/Card';
 import { VStack } from '@/shared/ui/Stack';
 import { ArticlesRecommendationsListSkeleton } from './ArticlesRecommendationsListSkeleton';
 
 interface ArticlesRecommendationsListProps {
     className?: string;
-    articles?: Article[];
+    articles?: ArticleExpandedUser[];
     isLoading?: boolean;
 }
 

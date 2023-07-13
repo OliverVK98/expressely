@@ -5,7 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 import { StateSchema } from '@/app/providers/StoreProvider';
 import {
-    Article,
+    ArticleExpandedUser,
     ArticleSortField,
     ArticleType,
     ArticleView,
@@ -15,7 +15,7 @@ import { SortOrder } from '@/shared/types/sort';
 import { fetchArticlesList } from '../services/fetchArticlesList/fetchArticlesList';
 import { ArticlesPageSchema } from '../../model/types/articlesPageSchema';
 
-const articlesAdapter = createEntityAdapter<Article>({
+const articlesAdapter = createEntityAdapter<ArticleExpandedUser>({
     selectId: (article) => article.id,
 });
 
@@ -81,12 +81,12 @@ const articlesPageSlice = createSlice({
             })
             .addCase(fetchArticlesList.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.hasMore = action.payload.length >= state.limit;
+                state.hasMore = action.payload.meta.hasNextPage;
 
                 if (action.meta.arg.replace) {
-                    articlesAdapter.setAll(state, action.payload);
+                    articlesAdapter.setAll(state, action.payload.data);
                 } else {
-                    articlesAdapter.addMany(state, action.payload);
+                    articlesAdapter.addMany(state, action.payload.data);
                 }
             })
             .addCase(fetchArticlesList.rejected, (state, action) => {

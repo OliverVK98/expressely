@@ -29,8 +29,31 @@ export type ArticleBlock =
     | ArticleTextBlock
     | ArticleImageBlock;
 
+interface MetaData {
+    meta: {
+        hasNextPage: boolean;
+        hasPreviousPage: boolean;
+        itemCount: number;
+        limit: number;
+        page: number;
+        pageCount: number;
+    };
+}
+
 export interface Article {
-    id: string;
+    id: number;
+    userId: number;
+    title: string;
+    subtitle?: string | null;
+    img: string;
+    views: number;
+    createdAt: string;
+    type: ArticleType[];
+    blocks: ArticleBlock[];
+}
+
+export interface ArticleExpandedUser {
+    id: number;
     user: User;
     title: string;
     subtitle?: string;
@@ -39,4 +62,12 @@ export interface Article {
     createdAt: string;
     type: ArticleType[];
     blocks: ArticleBlock[];
+}
+
+export interface ArticlesServerResponse extends MetaData {
+    data: Article[];
+}
+
+export interface ArticlesExpandedUserServerResponse extends MetaData {
+    data: ArticleExpandedUser[];
 }

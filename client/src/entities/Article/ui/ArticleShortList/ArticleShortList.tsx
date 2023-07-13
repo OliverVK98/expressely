@@ -2,7 +2,7 @@ import { HTMLAttributeAnchorTarget, memo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './ArticleShortList.module.scss';
 import { HStack, VStack } from '@/shared/ui/Stack';
-import { Article } from '../../model/types/article';
+import { ArticleExpandedUser } from '../../model/types/article';
 import { AppLink } from '@/shared/ui/AppLink';
 import { Icon } from '@/shared/ui/Icon';
 import EyeIcon from '@/shared/assets/icons/eye.svg';
@@ -11,7 +11,7 @@ import { Card } from '@/shared/ui/Card';
 
 interface ArticleShortListProps {
     className?: string;
-    article: Article;
+    article: ArticleExpandedUser;
     target: HTMLAttributeAnchorTarget;
 }
 

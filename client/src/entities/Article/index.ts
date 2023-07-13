@@ -12,6 +12,9 @@ import {
     ArticleCodeBlock,
     ArticleImageBlock,
     ArticleTextBlock,
+    ArticlesServerResponse,
+    ArticleExpandedUser,
+    ArticlesExpandedUserServerResponse,
 } from './model/types/article';
 import { ArticleDetailsSchema } from './model/types/articleDetailsSchema';
 import { getArticleDetailsData } from './model/selectors/getArticleDetails';
@@ -31,6 +34,9 @@ export {
     type Article,
     type ArticleDetailsSchema,
     type ArticleBlock,
+    type ArticlesServerResponse,
+    type ArticleExpandedUser,
+    type ArticlesExpandedUserServerResponse,
     ArticleBlockType,
     ArticleView,
     ArticleSortField,

@@ -11,14 +11,17 @@ import { Text } from '@/shared/ui/Text';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import EyeIcon from '@/shared/assets/icons/eye.svg';
 import { ArticleBlockType, ArticleView } from '../../model/consts/consts';
-import { ArticleTextBlock, Article } from '../../model/types/article';
+import {
+    ArticleTextBlock,
+    ArticleExpandedUser,
+} from '../../model/types/article';
 import cls from './ArticleListItem.module.scss';
 import { getRouteArticleDetails } from '@/shared/const/router';
 import { HStack, VStack } from '@/shared/ui/Stack';
 
 interface ArticleListItemProps {
     className?: string;
-    article: Article;
+    article: ArticleExpandedUser;
     view: ArticleView;
     target?: HTMLAttributeAnchorTarget;
 }

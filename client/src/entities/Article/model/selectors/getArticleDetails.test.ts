@@ -8,7 +8,7 @@ import {
 describe('getArticleDetails.test', () => {
     test('should return data', () => {
         const data = {
-            id: '1',
+            id: 1,
             title: 'subtitle',
         };
 

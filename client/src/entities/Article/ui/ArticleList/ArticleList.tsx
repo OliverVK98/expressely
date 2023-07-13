@@ -3,7 +3,7 @@ import { HTMLAttributeAnchorTarget, memo } from 'react';
 import { Text } from '@/shared/ui/Text';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ArticleView } from '../../model/consts/consts';
-import { Article } from '../../model/types/article';
+import { ArticleExpandedUser } from '../../model/types/article';
 import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
 import { ArticleListItemSkeleton } from '../ArticleListItem/ArticleListItemSkeleton';
 import cls from './ArticleList.module.scss';
@@ -11,7 +11,7 @@ import { HStack } from '@/shared/ui/Stack';
 
 interface ArticleListProps {
     className?: string;
-    articles?: Article[];
+    articles?: ArticleExpandedUser[];
     isLoading?: boolean;
     view?: ArticleView;
     target?: HTMLAttributeAnchorTarget;
@@ -38,7 +38,7 @@ export const ArticleList = memo((props: ArticleListProps) => {
     } = props;
     const { t } = useTranslation();
 
-    const renderArticle = (article: Article) => (
+    const renderArticle = (article: ArticleExpandedUser) => (
         <ArticleListItem
             article={article}
             view={view}
