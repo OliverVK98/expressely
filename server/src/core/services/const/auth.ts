@@ -1,10 +1,10 @@
-import { Features, JsonSettings } from '../../entities/user.entity';
+import { FeaturesDto, JsonSettingsDto } from '../../entities/user.entity';
 
-export const defaultFeatures: Features = {
+export const defaultFeatures: FeaturesDto = {
   isAppRedesigned: true,
   isArticleRatingEnabled: true,
 };
 
-export const defaultJsonSettings: JsonSettings = {
+export const defaultJsonSettings: JsonSettingsDto = {
   isArticlesPageWasOpened: false,
 };

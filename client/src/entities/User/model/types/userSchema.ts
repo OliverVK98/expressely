@@ -3,12 +3,12 @@ import { FeatureFlags } from '@/shared/types/featureFlags';
 import { JsonSettings } from './jsonSettings';
 
 export interface User {
-    id: string;
+    id: number;
     username: string;
-    avatar?: string;
-    roles?: UserRole[];
-    features?: FeatureFlags;
-    jsonSettings?: JsonSettings;
+    avatar: string | null;
+    roles: UserRole[];
+    features: FeatureFlags;
+    jsonSettings: JsonSettings;
 }
 
 export interface UserSchema {

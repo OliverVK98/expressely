@@ -8,7 +8,7 @@ import { Skeleton } from '../../Skeleton';
 
 interface AvatarProps {
     className?: string;
-    src?: string;
+    src?: string | null;
     size?: number;
     alt?: string;
 }
@@ -31,7 +31,7 @@ export const Avatar = (props: AvatarProps) => {
         <AppImage
             fallback={fallback}
             errorFallback={errorFallback}
-            src={src}
+            src={src === null ? '' : src}
             style={styles}
             alt={alt}
             className={classNames(cls.Avatar, {}, [className])}

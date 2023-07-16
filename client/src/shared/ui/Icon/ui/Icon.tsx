@@ -3,10 +3,12 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './Icon.module.scss';
 
 type SvgProps = Omit<React.SVGProps<SVGSVGElement>, 'onClick'>;
+type FillProps = 'fill' | 'noFill';
 
 interface IconBaseProps extends SvgProps {
     className?: string;
     Svg: React.VFC<React.SVGProps<SVGSVGElement>>;
+    fill?: FillProps;
 }
 
 interface NonClickableIconProps extends IconBaseProps {
@@ -27,13 +29,16 @@ export const Icon = memo((props: IconProps) => {
         width = 32,
         height = 32,
         clickable,
+        fill = 'fill',
         ...otherProps
     } = props;
 
     const icon = (
         <Svg
             className={
-                clickable ? cls.Icon : classNames(cls.Icon, {}, [className])
+                clickable
+                    ? classNames(cls.Icon, {}, [cls[fill]])
+                    : classNames(cls.Icon, {}, [className, cls[fill]])
             }
             width={width}
             height={height}
@@ -46,7 +51,7 @@ export const Icon = memo((props: IconProps) => {
         return (
             <button
                 type="button"
-                className={classNames(cls.button, {}, [className])}
+                className={classNames(cls.button, {}, [className, cls[fill]])}
                 onClick={props.onClick}
                 style={{ height, width }}
             >

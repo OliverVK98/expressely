@@ -1,12 +1,16 @@
 import {
-  ArrayNotEmpty,
+  IsArray,
   IsEmail,
-  IsJSON,
   IsNotEmpty,
+  IsNotEmptyObject,
+  IsObject,
   IsOptional,
   IsString,
+  ValidateNested,
 } from 'class-validator';
-import { Features, JsonSettings } from '../../entities/user.entity';
+import { FeaturesDto, JsonSettingsDto } from '../../entities/user.entity';
+import { UserRole } from '../../types/user';
+import { Type } from 'class-transformer';
 
 export class SignupUserDto {
   @IsEmail()
@@ -21,19 +25,26 @@ export class SignupUserDto {
   @IsNotEmpty()
   username: string;
 
-  @ArrayNotEmpty()
+  @IsArray()
+  @IsOptional()
   @IsString({ each: true })
-  roles: string[];
+  roles?: UserRole[] = [UserRole.USER];
 
   @IsString()
   @IsOptional()
   avatar?: string;
 
-  @IsJSON()
   @IsOptional()
-  features?: Features;
+  @IsNotEmptyObject()
+  @IsObject()
+  @ValidateNested()
+  @Type(() => FeaturesDto)
+  features?: FeaturesDto;
 
-  @IsJSON()
   @IsOptional()
-  jsonSettings?: JsonSettings;
+  @IsNotEmptyObject()
+  @IsObject()
+  @ValidateNested()
+  @Type(() => JsonSettingsDto)
+  jsonSettings?: JsonSettingsDto;
 }

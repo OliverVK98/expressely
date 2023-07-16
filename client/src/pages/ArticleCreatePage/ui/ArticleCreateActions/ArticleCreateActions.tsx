@@ -28,13 +28,9 @@ export const ArticleCreateActions = memo((props: ArticleCreateActionsProps) => {
     const onSendHandler = useCallback(() => {
         dispatch(
             addNewArticle({
-                id: '10',
                 title: state!.title,
                 subtitle: state?.subtitle,
                 img: state!.img,
-                views: 333,
-                createdAt: '',
-                userId: userData!.id,
                 type: state!.type,
                 blocks: state!.blocks,
             }),

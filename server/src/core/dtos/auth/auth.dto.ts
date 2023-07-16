@@ -1,7 +1,7 @@
 import { Expose } from 'class-transformer';
 import { FeaturesDto, JsonSettingsDto } from '../../entities/user.entity';
 
-export class UserDto {
+export class AuthDto {
   @Expose()
   id: number;
 
@@ -19,4 +19,10 @@ export class UserDto {
 
   @Expose()
   jsonSettings: JsonSettingsDto;
+
+  @Expose()
+  accessToken: string;
+
+  @Expose()
+  refreshToken: string;
 }

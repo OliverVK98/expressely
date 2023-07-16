@@ -14,7 +14,7 @@ export const ArticlesRecommendationsListContainer = memo(
 
         return (
             <ArticlesRecommendationsList
-                articles={data}
+                articles={data?.data}
                 isLoading={isLoading}
                 className={classNames(className, {}, [className])}
             />

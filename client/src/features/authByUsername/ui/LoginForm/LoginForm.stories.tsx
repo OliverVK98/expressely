@@ -22,7 +22,7 @@ Primary.args = {};
 Primary.decorators = [
     StoreDecorator({
         loginForm: {
-            username: '123',
+            email: '123',
             password: 'asd',
         },
     }),
@@ -33,7 +33,7 @@ withError.args = {};
 withError.decorators = [
     StoreDecorator({
         loginForm: {
-            username: '123',
+            email: '123',
             password: 'asd',
             error: 'ERROR',
         },

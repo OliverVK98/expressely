@@ -5,14 +5,24 @@ import { Comment } from './comment.entity';
 import { Profile } from './profile.entity';
 import { Rating } from './rating.entity';
 import { AbstractEntity } from './abstract.entity';
+import { UserRole } from '../types/user';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { Token } from './token.entity';
 
-export interface JsonSettings {
+export class JsonSettingsDto {
+  @IsString()
+  @IsOptional()
   theme?: string;
+
+  @IsBoolean()
   isArticlesPageWasOpened: boolean;
 }
 
-export interface Features {
+export class FeaturesDto {
+  @IsBoolean()
   isArticleRatingEnabled: boolean;
+
+  @IsBoolean()
   isAppRedesigned: boolean;
 }
 
@@ -28,13 +38,13 @@ export class User extends AbstractEntity {
   email: string;
 
   @Column('simple-array')
-  roles: string[];
+  roles: UserRole[];
 
   @Column({ type: 'json' })
-  features: Features;
+  features: FeaturesDto;
 
   @Column({ type: 'json' })
-  jsonSettings: JsonSettings;
+  jsonSettings: JsonSettingsDto;
 
   @Column({ nullable: true })
   avatar: string;
@@ -48,9 +58,12 @@ export class User extends AbstractEntity {
   @OneToMany(() => Comment, (comment) => comment.user)
   comments: Comment[];
 
+  @OneToOne(() => Token, (token) => token.user)
+  token: Token;
+
   @OneToOne(() => Profile, (profile) => profile.user)
   profile: Profile;
 
-  @OneToOne(() => Rating, (rating) => rating.user)
-  rating: Rating[];
+  @OneToMany(() => Rating, (rating) => rating.user)
+  ratings: Rating[];
 }

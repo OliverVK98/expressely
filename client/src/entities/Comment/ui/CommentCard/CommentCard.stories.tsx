@@ -2,6 +2,8 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { CommentCard } from './CommentCard';
+import { UserRole } from '@/entities/User';
+import { Theme } from '@/shared/const/theme';
 
 export default {
     title: 'entities/Comment/CommentCard',
@@ -23,8 +25,18 @@ Normal.args = {
         id: '1',
         text: 'hello world',
         user: {
-            id: '1',
+            id: 1,
             username: 'Test User',
+            avatar: '',
+            roles: [UserRole.USER],
+            features: {
+                isAppRedesigned: true,
+                isArticleRatingEnabled: true,
+            },
+            jsonSettings: {
+                isArticlesPageWasOpened: true,
+                theme: Theme.LIGHT,
+            },
         },
     },
 };
@@ -35,8 +47,18 @@ Loading.args = {
         id: '1',
         text: 'hello world',
         user: {
-            id: '1',
+            id: 1,
             username: 'Test User',
+            avatar: '',
+            roles: [UserRole.USER],
+            features: {
+                isAppRedesigned: true,
+                isArticleRatingEnabled: true,
+            },
+            jsonSettings: {
+                isArticlesPageWasOpened: true,
+                theme: Theme.LIGHT,
+            },
         },
     },
     isLoading: true,

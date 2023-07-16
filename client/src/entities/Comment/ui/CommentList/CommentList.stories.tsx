@@ -1,7 +1,9 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { CommentList } from './CommentList';
+import { UserRole } from '@/entities/User';
+import { Theme } from '@/shared/const/theme';
 
 export default {
     title: 'entities/Comment/CommentList',
@@ -24,16 +26,36 @@ Normal.args = {
             id: '1',
             text: 'hello world',
             user: {
-                id: '1',
+                id: 1,
                 username: 'Test User',
+                avatar: '',
+                roles: [UserRole.USER],
+                features: {
+                    isAppRedesigned: true,
+                    isArticleRatingEnabled: true,
+                },
+                jsonSettings: {
+                    isArticlesPageWasOpened: true,
+                    theme: Theme.LIGHT,
+                },
             },
         },
         {
             id: '2',
             text: 'hello world',
             user: {
-                id: '1',
+                id: 1,
                 username: 'Test User',
+                avatar: '',
+                roles: [UserRole.USER],
+                features: {
+                    isAppRedesigned: true,
+                    isArticleRatingEnabled: true,
+                },
+                jsonSettings: {
+                    isArticlesPageWasOpened: true,
+                    theme: Theme.LIGHT,
+                },
             },
         },
     ],

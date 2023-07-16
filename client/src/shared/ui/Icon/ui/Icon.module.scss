@@ -1,6 +1,13 @@
 .Icon {
     color: var(--icon-redesigned);
-    fill: var(--icon-redesigned)
+}
+
+.fill {
+    fill: var(--icon-redesigned);
+}
+
+.noFill {
+    fill: none;
 }
 
 .button {

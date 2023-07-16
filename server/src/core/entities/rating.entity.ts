@@ -8,10 +8,10 @@ export class Rating extends AbstractEntity {
   @Column()
   rate: number;
 
-  @Column()
-  feedback: string;
+  @Column({ nullable: true })
+  feedback?: string;
 
-  @ManyToOne(() => User, (user) => user.rating)
+  @ManyToOne(() => User, (user) => user.ratings)
   user: User;
 
   @ManyToOne(() => Article, (article) => article.ratings)

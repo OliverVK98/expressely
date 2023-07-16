@@ -9,16 +9,16 @@ import { getUserAuthData } from '@/entities/User';
 
 export interface ArticleRatingProps {
     className?: string;
-    articleId: string;
+    articleId: number;
 }
 
 const ArticleRating = memo((props: ArticleRatingProps) => {
     const { className, articleId } = props;
     const { t } = useTranslation();
     const userData = useSelector(getUserAuthData);
-    const { data, isLoading } = useGetArticleRating({
+    const { data: rating, isLoading } = useGetArticleRating({
         articleId,
-        userId: userData?.id ?? '',
+        userId: userData?.id ?? 1,
     });
     const [rateArticleMutation] = useRateArticle();
 
@@ -26,7 +26,6 @@ const ArticleRating = memo((props: ArticleRatingProps) => {
         (starsCount: number, feedback?: string) => {
             try {
                 rateArticleMutation({
-                    userId: userData?.id ?? '',
                     articleId,
                     rate: starsCount,
                     feedback,
@@ -35,7 +34,7 @@ const ArticleRating = memo((props: ArticleRatingProps) => {
                 console.log(e);
             }
         },
-        [articleId, rateArticleMutation, userData?.id],
+        [articleId, rateArticleMutation],
     );
 
     const onAccept = useCallback(
@@ -54,8 +53,6 @@ const ArticleRating = memo((props: ArticleRatingProps) => {
     if (isLoading) {
         return <Skeleton width="100%" height={120} />;
     }
-
-    const rating = data?.[0];
 
     // TODO: fix hover over stars
 

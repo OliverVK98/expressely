@@ -7,7 +7,7 @@ import { setJsonSettingsMutation } from '../../api/userApi';
 
 export const saveJsonSettings = createAsyncThunk<
     JsonSettings,
-    JsonSettings,
+    Partial<JsonSettings>,
     ThunkConfig<string>
 >('user/jsonSettings', async (newJsonSettings, thunkAPI) => {
     const { extra, rejectWithValue, getState, dispatch } = thunkAPI;
@@ -21,11 +21,8 @@ export const saveJsonSettings = createAsyncThunk<
     try {
         const response = await dispatch(
             setJsonSettingsMutation({
-                userId: userData.id,
-                jsonSettings: {
-                    ...currentSettings,
-                    ...newJsonSettings,
-                },
+                ...currentSettings,
+                ...newJsonSettings,
             }),
         ).unwrap();
 

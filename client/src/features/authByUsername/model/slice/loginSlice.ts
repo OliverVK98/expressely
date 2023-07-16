@@ -1,21 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LoginSchema } from '../types/loginSchema';
-import {
-    loginByUsername,
-} from '../services/loginByUsername/loginByUsername';
+import { loginByUsername } from '../services/loginByUsername/loginByUsername';
 
+// TODO: remove initial state
 const initialState: LoginSchema = {
     isLoading: false,
-    password: '',
-    username: '',
+    password: '123',
+    email: 'test@mail.com',
 };
 
 export const loginSlice = createSlice({
     name: 'login',
     initialState,
     reducers: {
-        setUsername: (state, action: PayloadAction<string>) => {
-            state.username = action.payload;
+        setEmail: (state, action: PayloadAction<string>) => {
+            state.email = action.payload;
         },
         setPassword: (state, action: PayloadAction<string>) => {
             state.password = action.payload;

@@ -71,3 +71,12 @@ export interface ArticlesServerResponse extends MetaData {
 export interface ArticlesExpandedUserServerResponse extends MetaData {
     data: ArticleExpandedUser[];
 }
+
+export interface ArticleCreateDto {
+    title: string;
+    subtitle?: string;
+    views?: number;
+    img: string;
+    type: ArticleType[];
+    blocks: ArticleBlock[];
+}

@@ -12,12 +12,12 @@ interface MainPageArticlesProps {
 export const MainPageArticles = memo((props: MainPageArticlesProps) => {
     const { className } = props;
     const { t } = useTranslation();
-    const { data: articles, isLoading, error } = useArticleRecommendations(20);
+    const { data, isLoading, error } = useArticleRecommendations(20);
 
     return (
         <div className={classNames(cls.MainPageArticles, {}, [className])}>
             <ArticleList
-                articles={articles}
+                articles={data?.data}
                 isLoading={isLoading}
                 view={ArticleView.BIG}
             />

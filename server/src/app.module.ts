@@ -14,6 +14,8 @@ import {
   ProfileModule,
   Rating,
   RatingModule,
+  Token,
+  TokenModule,
   User,
   UserModule,
 } from './core';
@@ -32,7 +34,7 @@ import { APP_PIPE } from '@nestjs/core';
       username: 'OliverVK98',
       password: 'A6Hh2oabJwxz',
       database: 'main_db',
-      entities: [Article, User, Notification, Comment, Profile, Rating],
+      entities: [Article, User, Notification, Comment, Profile, Rating, Token],
       synchronize: true,
       ssl: {
         rejectUnauthorized: false,
@@ -44,6 +46,7 @@ import { APP_PIPE } from '@nestjs/core';
     CommentModule,
     ProfileModule,
     RatingModule,
+    TokenModule,
   ],
   controllers: [],
   providers: [

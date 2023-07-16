@@ -8,13 +8,12 @@ import {
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Page } from '@/widgets/Page';
-import { ArticleDetailsComments } from '../ArticleDetailsComments/ArticleDetailsComments';
-import { ArticleRating } from '@/features/articleRating';
 import { articleDetailsPageReducer } from '../../model/slices';
 import cls from './ArticleDetailsPage.module.scss';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { AdditionalInfoContainer } from '../AdditionalInfoContainer/AdditionalInfoContainer';
 import { DetailsContainer } from '../DetailsContainer/DetailsContainer';
+import { ArticleRating } from '@/features/articleRating';
 
 interface ArticleDetailsPageProps {
     className?: string;
@@ -34,8 +33,8 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
         <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
             <VStack gap="16" max>
                 <DetailsContainer />
-                <ArticleRating articleId={id!} />
-                <ArticleDetailsComments id={+id!} />
+                <ArticleRating articleId={+id!} />
+                {/* <ArticleDetailsComments id={+id!} /> */}
             </VStack>
         </Page>
     );

@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
-import { ArticleServerSchema } from '../../types/articleCreatePageSchema';
+import { ArticleCreateDto } from '@/entities/Article';
 
 export const addNewArticle = createAsyncThunk<
     void,
-    ArticleServerSchema,
+    ArticleCreateDto,
     ThunkConfig<string>
 >('ArticleCreatePage/addNewArticle', async (article, thunkAPI) => {
     const { extra, rejectWithValue } = thunkAPI;
@@ -13,11 +13,9 @@ export const addNewArticle = createAsyncThunk<
         return rejectWithValue('no data');
     }
 
+    // TODO: fix response
     try {
-        const response = await extra.api.post<ArticleServerSchema>(
-            '/articles',
-            article,
-        );
+        const response = await extra.api.post<null>('/articles', article);
 
         if (!response.data) {
             throw new Error();

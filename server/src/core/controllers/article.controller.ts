@@ -16,48 +16,29 @@ import { AuthGuard } from '../guards/auth.guard';
 import { Serialize } from '../interceptors/serialize';
 import { ArticleDto } from '../dtos/article/article.dto';
 import { PageOptionsDto } from '../dtos/page/pageOptions.dto';
-import { plainToClass } from 'class-transformer';
-import { ArticleExpandedUserDto } from '../dtos/article/articleExpandedUser.dto';
+import { ArticleSerializer } from '../serializers/article/article.serializer';
 
 @Controller('articles')
 @ApiTags('articles')
 export class ArticleController {
-  constructor(private articlesService: ArticleService) {}
+  constructor(
+    private articlesService: ArticleService,
+    private articleSerializer: ArticleSerializer,
+  ) {}
 
   @Get('/:id')
-  @Serialize(ArticleDto)
-  async getArticle(@Param('id') id: string) {
+  async getArticle(@Param('id') id: string, @Query('expand') expand: string) {
     const article = await this.articlesService.findOne(+id);
-    return article;
+    return this.articleSerializer.serialize(article, expand);
   }
-
-  // @Get()
-  // async getArticles(
-  //   @Query('sort') sort: ArticleSortType,
-  //   @Query('order') order: ArticleOrderType,
-  //   @Query('search') search: string,
-  //   @Query('type') type: ArticleType,
-  // ) {
-  //   return await this.articlesService.findMany(sort, order, search, type);
-  // }
 
   @Get()
   async getNewArticles(@Query() pageOptions: PageOptionsDto) {
     const entities = await this.articlesService.getArticles(pageOptions);
-    let serializedData;
-
-    if (pageOptions.expand === 'user') {
-      serializedData = entities.data.map((article) =>
-        plainToClass(ArticleExpandedUserDto, article, {
-          excludeExtraneousValues: true,
-        }),
-      );
-    } else {
-      serializedData = entities.data.map((article) =>
-        plainToClass(ArticleDto, article, { excludeExtraneousValues: true }),
-      );
-    }
-
+    const serializedData = this.articleSerializer.serializeMany(
+      entities.data,
+      pageOptions.expand,
+    );
     return {
       data: serializedData,
       meta: entities.meta,

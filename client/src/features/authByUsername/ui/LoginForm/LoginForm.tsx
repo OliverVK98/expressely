@@ -12,7 +12,7 @@ import {
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { loginActions, loginReducer } from '../../model/slice/loginSlice';
-import { getLoginUsername } from '../../model/selectors/getLoginUsername/getLoginUsername';
+import { getLoginEmail } from '../../model/selectors/getLoginUsername/getLoginEmail';
 import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
 import { getLoginPassword } from '../../model/selectors/getLoginPassword/getLoginPassword';
 import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
@@ -32,14 +32,14 @@ const initialReducers: ReducersList = {
 const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
-    const username = useSelector(getLoginUsername);
+    const email = useSelector(getLoginEmail);
     const isLoading = useSelector(getLoginIsLoading);
     const password = useSelector(getLoginPassword);
     const error = useSelector(getLoginError);
 
-    const onChangeUsername = useCallback(
+    const onChangeEmail = useCallback(
         (value: string) => {
-            dispatch(loginActions.setUsername(value));
+            dispatch(loginActions.setEmail(value));
         },
         [dispatch],
     );
@@ -54,14 +54,14 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
     const onLoginClick = useCallback(async () => {
         const result = await dispatch(
             loginByUsername({
-                username,
+                email,
                 password,
             }),
         );
         if (result.meta.requestStatus === 'fulfilled') {
             onSuccess();
         }
-    }, [onSuccess, dispatch, password, username]);
+    }, [onSuccess, dispatch, password, email]);
 
     return (
         <DynamicModuleLoader removerAfterUnmount reducers={initialReducers}>
@@ -79,10 +79,10 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
                 <Input
                     autofocus
                     className={cls.input}
-                    placeholder={t('Username')}
+                    placeholder={t('Email')}
                     type="text"
-                    onChange={onChangeUsername}
-                    value={username}
+                    onChange={onChangeEmail}
+                    value={email}
                 />
                 <Input
                     className={cls.input}

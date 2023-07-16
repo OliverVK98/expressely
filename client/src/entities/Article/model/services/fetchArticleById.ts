@@ -14,7 +14,7 @@ export const fetchArticleById = createAsyncThunk<
             `/articles/${articleId}`,
             {
                 params: {
-                    _expand: 'user',
+                    expand: 'user',
                 },
             },
         );
