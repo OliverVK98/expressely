@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { USER_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
-import { User, UserSchema } from '../types/userSchema';
+import { LoginUserResponse, UserSchema } from '../types/userSchema';
 import { setFeatureFlags } from '@/shared/lib/features';
 import { saveJsonSettings } from '../services/saveJsonSettings';
 import { JsonSettings } from '../types/jsonSettings';
@@ -14,7 +14,7 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setAuthData: (state, action: PayloadAction<User>) => {
+        setAuthData: (state, action: PayloadAction<LoginUserResponse>) => {
             state.authData = action.payload;
             setFeatureFlags(action.payload.features);
             localStorage.setItem(
@@ -39,7 +39,7 @@ export const userSlice = createSlice({
         builder
             .addCase(
                 initAuthData.fulfilled,
-                (state, action: PayloadAction<User>) => {
+                (state, action: PayloadAction<LoginUserResponse>) => {
                     state.authData = action.payload;
                     setFeatureFlags(action.payload.features);
                     state._init = true;

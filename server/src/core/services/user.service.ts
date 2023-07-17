@@ -18,6 +18,14 @@ export class UserService {
     return this.repo.findOneBy({ id });
   }
 
+  async findOneByIdWithToken(id: number) {
+    return await this.repo
+      .createQueryBuilder('user')
+      .where('user.id = :id', { id })
+      .leftJoinAndSelect('user.token', 'token')
+      .getOne();
+  }
+
   findOneByEmail(email: string) {
     return this.repo.findOneBy({ email });
   }

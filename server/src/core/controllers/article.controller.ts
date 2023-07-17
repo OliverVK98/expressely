@@ -9,14 +9,14 @@ import {
 } from '@nestjs/common';
 import { ArticleService } from '../services/article.service';
 import { CreateArticleDto } from '../dtos/article/createArticle.dto';
-import { CurrentUser } from '../decorators/currentUser';
-import { User } from '../entities/user.entity';
+import { CurrentUser } from '../decorators/currentUser.decorator';
 import { ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from '../guards/auth.guard';
 import { Serialize } from '../interceptors/serialize';
 import { ArticleDto } from '../dtos/article/article.dto';
 import { PageOptionsDto } from '../dtos/page/pageOptions.dto';
 import { ArticleSerializer } from '../serializers/article/article.serializer';
+import { AccessTokenGuard } from '../guards';
+import { UserService } from '../services/user.service';
 
 @Controller('articles')
 @ApiTags('articles')
@@ -24,6 +24,7 @@ export class ArticleController {
   constructor(
     private articlesService: ArticleService,
     private articleSerializer: ArticleSerializer,
+    private userService: UserService,
   ) {}
 
   @Get('/:id')
@@ -33,6 +34,7 @@ export class ArticleController {
   }
 
   @Get()
+  @UseGuards(AccessTokenGuard)
   async getNewArticles(@Query() pageOptions: PageOptionsDto) {
     const entities = await this.articlesService.getArticles(pageOptions);
     const serializedData = this.articleSerializer.serializeMany(
@@ -46,9 +48,13 @@ export class ArticleController {
   }
 
   @Post('/create')
-  @UseGuards(AuthGuard)
+  @UseGuards(AccessTokenGuard)
   @Serialize(ArticleDto)
-  async saveArticle(@Body() body: CreateArticleDto, @CurrentUser() user: User) {
+  async saveArticle(
+    @Body() body: CreateArticleDto,
+    @CurrentUser('userId') userId: number,
+  ) {
+    const user = await this.userService.findOneById(userId);
     return await this.articlesService.create(body, user);
   }
 }

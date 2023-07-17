@@ -15,7 +15,7 @@ import {
   Rating,
   RatingModule,
   Token,
-  TokenModule,
+  AuthModule,
   User,
   UserModule,
 } from './core';
@@ -46,7 +46,7 @@ import { APP_PIPE } from '@nestjs/core';
     CommentModule,
     ProfileModule,
     RatingModule,
-    TokenModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [

@@ -22,7 +22,4 @@ export class AuthDto {
 
   @Expose()
   accessToken: string;
-
-  @Expose()
-  refreshToken: string;
 }

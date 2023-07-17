@@ -1,5 +1,8 @@
 import {
-    AnyAction, combineReducers, Reducer, ReducersMapObject,
+    AnyAction,
+    combineReducers,
+    Reducer,
+    ReducersMapObject,
 } from '@reduxjs/toolkit';
 import { StateSchema } from '@/app/providers/StoreProvider';
 import {
@@ -25,9 +28,9 @@ export function createReducerManager(
             if (keysToRemove.length > 0) {
                 // eslint-disable-next-line no-param-reassign
                 state = { ...state };
-                keysToRemove.forEach(((key) => {
+                keysToRemove.forEach((key) => {
                     delete state[key];
-                }));
+                });
                 keysToRemove = [];
             }
 

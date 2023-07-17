@@ -1,32 +1,31 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { getUserDataByIdQuery } from '../../api/userApi';
-import { User } from '../../model/types/userSchema';
-import { USER_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
+import { LoginUserResponse } from '../../model/types/userSchema';
+import { getUserAuthData } from '../../model/selectors/getUserAuthData/getUserAuthData';
 
-export const initAuthData = createAsyncThunk<User, void, ThunkConfig<string>>(
-    'user/initAuthData',
-    async (_, thunkAPI) => {
-        const { rejectWithValue, dispatch } = thunkAPI;
+export const initAuthData = createAsyncThunk<
+    LoginUserResponse,
+    void,
+    ThunkConfig<string>
+>('user/initAuthData', async (_, thunkAPI) => {
+    const { rejectWithValue, dispatch, getState } = thunkAPI;
 
-        const userId = localStorage.getItem(USER_LOCALSTORAGE_KEY);
+    const userId = getUserAuthData(getState())?.id;
 
-        if (!userId) {
+    if (!userId) {
+        return rejectWithValue('');
+    }
+
+    try {
+        const response = await dispatch(getUserDataByIdQuery(userId)).unwrap();
+
+        if (!response.jsonSettings) {
             return rejectWithValue('');
         }
 
-        try {
-            const response = await dispatch(
-                getUserDataByIdQuery(userId),
-            ).unwrap();
-
-            if (!response.jsonSettings) {
-                return rejectWithValue('');
-            }
-
-            return response;
-        } catch (e) {
-            return rejectWithValue('error');
-        }
-    },
-);
+        return response;
+    } catch (e) {
+        return rejectWithValue('error');
+    }
+});

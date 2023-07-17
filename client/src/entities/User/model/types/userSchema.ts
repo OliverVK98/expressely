@@ -11,7 +11,11 @@ export interface User {
     jsonSettings: JsonSettings;
 }
 
+export interface LoginUserResponse extends User {
+    accessToken: string;
+}
+
 export interface UserSchema {
-    authData?: User;
+    authData?: LoginUserResponse;
     _init: boolean;
 }

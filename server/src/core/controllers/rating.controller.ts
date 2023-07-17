@@ -4,7 +4,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { RatingOptionsDto } from '../dtos/rating/ratingOptions.dto';
 import { CreateRatingDto } from '../dtos/rating/createRating.dto';
 import { AuthGuard } from '../guards/auth.guard';
-import { CurrentUser } from '../decorators/currentUser';
+import { CurrentUser } from '../decorators/currentUser.decorator';
 import { User } from '../entities/user.entity';
 import { ArticleService } from '../services/article.service';
 import { Serialize } from '../interceptors/serialize';

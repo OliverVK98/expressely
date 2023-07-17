@@ -3,8 +3,8 @@ import { UserService } from '../services/user.service';
 import { ApiTags } from '@nestjs/swagger';
 import { Serialize } from '../interceptors/serialize';
 import { UserDto } from '../dtos/user/user.dto';
-import { JsonSettingsDto, User } from '../entities/user.entity';
-import { CurrentUser } from '../decorators/currentUser';
+import { JsonSettingsDto } from '../entities/user.entity';
+import { CurrentUser } from '../decorators/currentUser.decorator';
 
 @Controller('users')
 @ApiTags('user')
@@ -20,9 +20,9 @@ export class UserController {
   // TODO: add that can update only own settings
   @Patch('/set-json')
   async setJsonSettings(
-    @CurrentUser() user: User,
+    @CurrentUser('userId') userId: number,
     @Body() body: JsonSettingsDto,
   ) {
-    return await this.userService.setJsonSettings(user.id, body);
+    return await this.userService.setJsonSettings(userId, body);
   }
 }
