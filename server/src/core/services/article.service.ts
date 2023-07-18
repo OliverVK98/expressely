@@ -35,7 +35,10 @@ export class ArticleService {
 
     queryBuilder
       .leftJoinAndSelect('article.user', 'user')
-      .orderBy(`article.${pageOptions.sort}`, pageOptions.order)
+      .orderBy(
+        `article.${pageOptions.sort}`,
+        pageOptions.order.toUpperCase() as 'ASC' | 'DESC',
+      )
       .skip(pageOptions.skip)
       .take(pageOptions.limit)
       .where(`article.title ILIKE :search`, {

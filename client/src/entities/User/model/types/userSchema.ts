@@ -16,6 +16,6 @@ export interface LoginUserResponse extends User {
 }
 
 export interface UserSchema {
-    authData?: LoginUserResponse;
+    authData?: User;
     _init: boolean;
 }

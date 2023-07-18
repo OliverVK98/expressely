@@ -14,6 +14,7 @@ import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { AdditionalInfoContainer } from '../AdditionalInfoContainer/AdditionalInfoContainer';
 import { DetailsContainer } from '../DetailsContainer/DetailsContainer';
 import { ArticleRating } from '@/features/articleRating';
+import { ArticleDetailsComments } from '../ArticleDetailsComments/ArticleDetailsComments';
 
 interface ArticleDetailsPageProps {
     className?: string;
@@ -34,7 +35,7 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
             <VStack gap="16" max>
                 <DetailsContainer />
                 <ArticleRating articleId={+id!} />
-                {/* <ArticleDetailsComments id={+id!} /> */}
+                <ArticleDetailsComments id={+id!} />
             </VStack>
         </Page>
     );

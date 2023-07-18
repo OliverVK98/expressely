@@ -23,11 +23,11 @@ export const ArticleSortSelector = memo((props: ArticleSortSelectorProps) => {
     const orderOptions = useMemo<SelectOption<SortOrder>[]>(
         () => [
             {
-                value: 'ASC',
+                value: 'asc',
                 content: t('Ascending'),
             },
             {
-                value: 'DESC',
+                value: 'desc',
                 content: t('Descending'),
             },
         ],

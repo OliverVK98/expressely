@@ -1,5 +1,5 @@
 import { rtkApi } from '@/shared/api/rtkApi';
-import { LoginUserResponse, User } from '../model/types/userSchema';
+import { User } from '../model/types/userSchema';
 import { JsonSettings } from '../model/types/jsonSettings';
 
 const userApi = rtkApi.injectEndpoints({
@@ -11,8 +11,7 @@ const userApi = rtkApi.injectEndpoints({
                 body: jsonSettings,
             }),
         }),
-        // TODO: TYPE IS INCORRECT, SHOULD BE JUST USER
-        getUserDataById: build.mutation<LoginUserResponse, number>({
+        getUserDataById: build.query<User, number>({
             query: (userId) => ({
                 url: `/users/${userId}`,
                 method: 'GET',

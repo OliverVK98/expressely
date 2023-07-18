@@ -6,7 +6,7 @@ import { ArticleType } from '../../types/article';
 export class PageOptionsDto {
   @IsEnum(PageOrder)
   @IsOptional()
-  readonly order?: PageOrder = PageOrder.ASC;
+  readonly order?: PageOrder = PageOrder.asc;
 
   @IsEnum(PageSort)
   @IsOptional()

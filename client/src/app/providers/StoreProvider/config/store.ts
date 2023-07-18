@@ -4,6 +4,7 @@ import {
     ReducersMapObject,
 } from '@reduxjs/toolkit';
 import { Reducer } from 'redux';
+import { persistStore } from 'redux-persist';
 import { userReducer } from '@/entities/User';
 import { createReducerManager } from '@/app/providers/StoreProvider/config/createReducerManager';
 import { $api } from '@/shared/api/api';
@@ -37,11 +38,16 @@ export function createReduxStore(
                 thunk: {
                     extraArgument: extraArg,
                 },
+                serializableCheck: false,
             }).concat(rtkApi.middleware),
     });
 
     // @ts-ignore
     store.reducerManager = reducerManager;
+
+    const pStore = persistStore(store);
+    // @ts-ignore
+    store.persistor = pStore;
 
     return store;
 }

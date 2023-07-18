@@ -2,6 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Comment } from '../entities/comment.entity';
+import { Article } from '../entities/article.entity';
+import { User } from '../entities/user.entity';
+import { CreateCommentDto } from '../dtos/comment/createComment.dto';
 
 @Injectable()
 export class CommentService {
@@ -9,14 +12,20 @@ export class CommentService {
     @InjectRepository(Comment)
     private repo: Repository<Comment>,
   ) {}
+  async createComment(comment: CreateCommentDto, article: Article, user: User) {
+    const newComment = await this.repo.create(comment);
+    newComment.user = user;
+    newComment.article = article;
 
-  create(comment: Comment) {
-    const newComment = this.repo.create(comment);
-
-    return this.repo.save(newComment);
+    return await this.repo.save(newComment);
   }
 
-  findOne(id: number) {
-    return this.repo.findOneBy({ id });
+  async getCommentsByArticleId(articleId: number) {
+    return await this.repo
+      .createQueryBuilder('comment')
+      .where('comment.articleId = :articleId', { articleId })
+      .leftJoinAndSelect('comment.user', 'user')
+      .orderBy('comment.createdAt', 'DESC')
+      .getMany();
   }
 }

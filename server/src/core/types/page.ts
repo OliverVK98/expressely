@@ -1,6 +1,6 @@
 export enum PageOrder {
-  ASC = 'ASC',
-  DESC = 'DESC',
+  asc = 'asc',
+  desc = 'desc',
 }
 
 export enum PageSort {
