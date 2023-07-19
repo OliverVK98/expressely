@@ -1,19 +1,11 @@
-// @ts-nocheck
-import { useTranslation } from 'react-i18next';
-import { Input } from '@/shared/ui/Input';
-import { HStack, VStack } from '@/shared/ui/Stack';
-import { Text } from '@/shared/ui/Text';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { Currency, CurrencySelect } from '@/entities/Currency';
-import { Country, CountrySelect } from '@/entities/Country';
+import { Currency } from '@/entities/Currency';
+import { Country } from '@/entities/Country';
 import {
     EditableProfileFields,
     PublicProfile,
 } from '../../model/types/profileSchema';
-import cls from './ProfileCard.module.scss';
-import { Card } from '@/shared/ui/Card';
-import { Avatar } from '@/shared/ui/Avatar';
-import { Skeleton } from '@/shared/ui/Skeleton';
+import { AuthProfileCard } from '../AuthProfileCard/AuthProfileCard';
+import { PublicProfileCard } from '../PublicProfileCard/PublicProfileCard';
 
 interface ProfileCardProps {
     className?: string;
@@ -49,138 +41,45 @@ export const ProfileCard = (props: ProfileCardProps) => {
         onChangeCurrency,
         isAuthUserProfile,
     } = props;
-    const { t } = useTranslation();
 
-    if (isLoading) {
+    function isAuthProfile(
+        data: EditableProfileFields | PublicProfile | undefined,
+    ): data is EditableProfileFields {
         return (
-            <Card padding="24" max border="default">
-                <VStack gap="32">
-                    <HStack max justify="center">
-                        <Skeleton border="100%" width={128} height={128} />
-                    </HStack>
-                    <HStack gap="32" max>
-                        <VStack gap="16" max>
-                            <Skeleton width="100%" height={38} />
-                            <Skeleton width="100%" height={38} />
-                            <Skeleton width="100%" height={38} />
-                            <Skeleton width="100%" height={38} />
-                        </VStack>
-                        <VStack gap="16" max>
-                            <Skeleton width="100%" height={38} />
-                            <Skeleton width="100%" height={38} />
-                            <Skeleton width="100%" height={38} />
-                            <Skeleton width="100%" height={38} />
-                        </VStack>
-                    </HStack>
-                </VStack>
-            </Card>
+            data !== undefined &&
+            (data as EditableProfileFields).city !== undefined
         );
     }
 
-    if (error) {
+    if (isAuthUserProfile && isAuthProfile(data)) {
         return (
-            <HStack
-                max
-                justify="center"
-                className={classNames(cls.ProfileCard, {}, [
-                    className,
-                    cls.error,
-                ])}
-            >
-                <Text
-                    variant="error"
-                    title={t('Error occurred while loading profile')}
-                    text={t('Try refreshing the page')}
-                    align="center"
-                />
-            </HStack>
+            <AuthProfileCard
+                data={data}
+                className={className}
+                isLoading={isLoading}
+                error={error}
+                onChangeFirstName={onChangeFirstName}
+                onChangeLastName={onChangeLastName}
+                readonly={readonly}
+                onChangeAge={onChangeAge}
+                onChangeCity={onChangeCity}
+                onChangeAvatar={onChangeAvatar}
+                onChangeUsername={onChangeUsername}
+                onChangeCurrency={onChangeCurrency}
+                onChangeCountry={onChangeCountry}
+            />
         );
     }
-
-    // @ts-ignore
-    // @ts-ignore
     return (
-        <Card
-            border="default"
-            max
-            padding="24"
-            className={classNames(cls.ProfileCard, {}, [className])}
-        >
-            <VStack gap="32">
-                {data?.avatar && (
-                    <HStack max justify="center" className={cls.avatarWrapper}>
-                        <Avatar size={128} src={data?.avatar} />
-                    </HStack>
-                )}
-                <HStack gap="24" max>
-                    <VStack gap="16" max>
-                        <Input
-                            value={data?.firstname}
-                            label={t('Name')}
-                            className={cls.input}
-                            onChange={onChangeFirstName}
-                            readonly={readonly}
-                            data-testid="ProfileCard.firstname"
-                        />
-                        <Input
-                            value={data?.lastname}
-                            label={t('Last Name')}
-                            className={cls.input}
-                            onChange={onChangeLastName}
-                            readonly={readonly}
-                            data-testid="ProfileCard.lastname"
-                        />
-                        <Input
-                            value={data?.age}
-                            label={t('Age')}
-                            className={cls.input}
-                            onChange={onChangeAge}
-                            readonly={readonly}
-                        />
-                        {isAuthUserProfile && (
-                            <Input
-                                value={data?.city}
-                                label={t('City')}
-                                className={cls.input}
-                                onChange={onChangeCity}
-                                readonly={readonly}
-                            />
-                        )}
-                    </VStack>
-                    <VStack gap="24" max>
-                        <Input
-                            value={data?.username}
-                            label={t('Username')}
-                            className={cls.input}
-                            onChange={onChangeUsername}
-                            readonly={readonly}
-                        />
-                        <Input
-                            value={data?.avatar}
-                            label={t('Avatar URL link')}
-                            className={cls.input}
-                            onChange={onChangeAvatar}
-                            readonly={readonly}
-                        />
-                        {isAuthUserProfile && (
-                            <CurrencySelect
-                                className={cls.input}
-                                onChange={onChangeCurrency}
-                                value={data?.currency}
-                                readonly={readonly}
-                            />
-                        )}
-                        {isAuthUserProfile && (
-                            <CountrySelect
-                                className={cls.input}
-                                onChange={onChangeCountry}
-                                value={data?.country}
-                                readonly={readonly}
-                            />
-                        )}
-                    </VStack>
-                </HStack>
-            </VStack>
-        </Card>
+        <PublicProfileCard
+            data={data}
+            className={className}
+            isLoading={isLoading}
+            error={error}
+            onChangeFirstName={onChangeFirstName}
+            onChangeLastName={onChangeLastName}
+            onChangeAge={onChangeAge}
+            onChangeUsername={onChangeUsername}
+        />
     );
 };

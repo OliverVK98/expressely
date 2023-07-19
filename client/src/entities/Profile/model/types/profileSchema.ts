@@ -18,7 +18,7 @@ export interface PublicProfile {
     lastname: string;
     age: number;
     username: string;
-    avatar: string;
+    avatar: string | null;
 }
 
 export type EditableProfileFields = Omit<Profile, 'userId'>;
