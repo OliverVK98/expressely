@@ -14,23 +14,10 @@ interface PublicProfileCardProps {
     data?: PublicProfile;
     error?: string;
     isLoading?: boolean;
-    onChangeLastName?: (value?: string) => void;
-    onChangeFirstName?: (value?: string) => void;
-    onChangeAge?: (value?: string) => void;
-    onChangeUsername?: (value?: string) => void;
 }
 
 export const PublicProfileCard = (props: PublicProfileCardProps) => {
-    const {
-        data,
-        error,
-        isLoading,
-        className,
-        onChangeLastName,
-        onChangeFirstName,
-        onChangeAge,
-        onChangeUsername,
-    } = props;
+    const { data, error, isLoading, className } = props;
     const { t } = useTranslation();
 
     if (isLoading) {
@@ -94,7 +81,6 @@ export const PublicProfileCard = (props: PublicProfileCardProps) => {
                             value={data?.firstname}
                             label={t('Name')}
                             className={cls.input}
-                            onChange={onChangeFirstName}
                             readonly
                             data-testid="ProfileCard.firstname"
                         />
@@ -102,7 +88,6 @@ export const PublicProfileCard = (props: PublicProfileCardProps) => {
                             value={data?.lastname}
                             label={t('Last Name')}
                             className={cls.input}
-                            onChange={onChangeLastName}
                             readonly
                             data-testid="ProfileCard.lastname"
                         />
@@ -112,14 +97,12 @@ export const PublicProfileCard = (props: PublicProfileCardProps) => {
                             value={data?.username}
                             label={t('Username')}
                             className={cls.input}
-                            onChange={onChangeUsername}
                             readonly
                         />
                         <Input
                             value={data?.age}
                             label={t('Age')}
                             className={cls.input}
-                            onChange={onChangeAge}
                             readonly
                         />
                     </VStack>

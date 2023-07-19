@@ -12,7 +12,7 @@ import {
     getRouteArticleCreate,
     getRouteArticles,
     getRouteMain,
-    getRouteProfile,
+    getRouteUserProfile,
 } from '@/shared/const/router';
 
 export const getSidebarItems = createSelector(getUserAuthData, (userData) => {
@@ -37,7 +37,7 @@ export const getSidebarItems = createSelector(getUserAuthData, (userData) => {
     if (userData) {
         sidebarItemsList.push(
             {
-                path: getRouteProfile(userData.id),
+                path: getRouteUserProfile(),
                 Icon: ProfileIcon,
                 text: 'Profile Page',
                 authOnly: true,

@@ -76,10 +76,6 @@ export const ProfileCard = (props: ProfileCardProps) => {
             className={className}
             isLoading={isLoading}
             error={error}
-            onChangeFirstName={onChangeFirstName}
-            onChangeLastName={onChangeLastName}
-            onChangeAge={onChangeAge}
-            onChangeUsername={onChangeUsername}
         />
     );
 };
