@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { VStack } from '@/shared/ui/Stack';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Page } from '@/widgets/Page';
@@ -10,13 +9,19 @@ import {
 
 interface ProfilePageProps {
     className?: string;
+    isAuthUserProfile: boolean;
 }
 
-const ProfilePage = ({ className }: ProfilePageProps) => {
+const ProfilePage = ({ className, isAuthUserProfile }: ProfilePageProps) => {
+    // TODO: test if id is string "asdasdasd"
     const { id } = useParams<{
         id: string;
     }>();
-    const { t } = useTranslation();
+
+    // TODO: COME BACK TO THIS CHECK
+    // if (isNaN(Number(id))) {
+    //     throw new Error();
+    // }
 
     return (
         <Page
@@ -25,7 +30,10 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
         >
             <VStack max gap="16">
                 <EditableProfileCardHeader />
-                <EditableProfileCard id={id!} />
+                <EditableProfileCard
+                    isAuthUserProfile={isAuthUserProfile}
+                    id={Number(id!)}
+                />
             </VStack>
         </Page>
     );

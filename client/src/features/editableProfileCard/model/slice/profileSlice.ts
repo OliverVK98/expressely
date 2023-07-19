@@ -1,11 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ProfileSchema } from '../../model/types/editableProfileCardSchema';
-import { Profile } from '@/entities/Profile';
-import { fetchProfileData } from '../services/fetchProfileData/fetchProfileData';
+import {
+    EditableProfileFields,
+    Profile,
+    PublicProfile,
+    UpdateProfileDto,
+} from '@/entities/Profile';
+import { fetchAuthProfileData } from '../services/fetchAuthProfileData/fetchAuthProfileData';
 import { updateProfileData } from '../services/updateProfileData/updateProfileData';
+import { fetchProfileData } from '../services/fetchProfileData/fetchProfileData';
 
 const initialState: ProfileSchema = {
-    data: undefined,
+    data: {} as Profile,
+    form: {} as EditableProfileFields,
+    publicData: {} as PublicProfile,
     error: undefined,
     isLoading: false,
     readonly: true,
@@ -23,7 +31,7 @@ export const profileSlice = createSlice({
             state.validateErrors = undefined;
             state.form = state.data;
         },
-        updateProfile: (state, action: PayloadAction<Profile>) => {
+        updateProfile: (state, action: PayloadAction<UpdateProfileDto>) => {
             state.form = {
                 ...state.form,
                 ...action.payload,
@@ -32,16 +40,31 @@ export const profileSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            .addCase(fetchAuthProfileData.pending, (state) => {
+                state.error = undefined;
+                state.isLoading = true;
+            })
+            .addCase(
+                fetchAuthProfileData.fulfilled,
+                (state, action: PayloadAction<Profile>) => {
+                    state.isLoading = false;
+                    state.data = action.payload;
+                    state.form = action.payload;
+                },
+            )
+            .addCase(fetchAuthProfileData.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            })
             .addCase(fetchProfileData.pending, (state) => {
                 state.error = undefined;
                 state.isLoading = true;
             })
             .addCase(
                 fetchProfileData.fulfilled,
-                (state, action: PayloadAction<Profile>) => {
+                (state, action: PayloadAction<PublicProfile>) => {
                     state.isLoading = false;
-                    state.data = action.payload;
-                    state.form = action.payload;
+                    state.publicData = action.payload;
                 },
             )
             .addCase(fetchProfileData.rejected, (state, action) => {

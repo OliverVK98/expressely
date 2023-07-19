@@ -1,18 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
-import { PublicProfile } from '../../../../../entities/Profile';
+import { Profile } from '../../../../../entities/Profile';
 
-export const fetchProfileData = createAsyncThunk<
-    PublicProfile,
-    number,
+export const fetchAuthProfileData = createAsyncThunk<
+    Profile,
+    void,
     ThunkConfig<string>
->('profile/fetchProfileData', async (userId, thunkAPI) => {
+>('profile/fetchAuthProfileData', async (profileId, thunkAPI) => {
     const { extra, rejectWithValue } = thunkAPI;
 
     try {
-        const response = await extra.api.get<PublicProfile>(
-            `/profiles/${userId}`,
-        );
+        const response = await extra.api.get<Profile>(`/profiles`);
 
         if (!response.data) {
             throw new Error();

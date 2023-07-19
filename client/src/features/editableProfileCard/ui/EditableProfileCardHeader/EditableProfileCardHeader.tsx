@@ -23,7 +23,7 @@ export const EditableProfileCardHeader = memo(
         const { t } = useTranslation();
         const authData = useSelector(getUserAuthData);
         const profileData = useSelector(getProfileData);
-        const canEdit = authData?.id === profileData?.id;
+        const canEdit = authData?.id === profileData?.userId;
         const readonly = useSelector(getProfileReadonly);
 
         const dispatch = useAppDispatch();

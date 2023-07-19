@@ -5,7 +5,10 @@ import { Text } from '@/shared/ui/Text';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Currency, CurrencySelect } from '@/entities/Currency';
 import { Country, CountrySelect } from '@/entities/Country';
-import { Profile } from '../../model/types/profileSchema';
+import {
+    EditableProfileFields,
+    PublicProfile,
+} from '../../model/types/profileSchema';
 import cls from './ProfileCard.module.scss';
 import { Card } from '@/shared/ui/Card';
 import { Avatar } from '@/shared/ui/Avatar';
@@ -13,7 +16,7 @@ import { Skeleton } from '@/shared/ui/Skeleton';
 
 interface ProfileCardProps {
     className?: string;
-    data?: Profile;
+    data?: EditableProfileFields | PublicProfile;
     error?: string;
     isLoading?: boolean;
     onChangeLastName?: (value?: string) => void;
@@ -25,6 +28,7 @@ interface ProfileCardProps {
     onChangeCurrency?: (value?: Currency) => void;
     onChangeCountry?: (country?: Country) => void;
     readonly?: boolean;
+    isAuthUserProfile: boolean;
 }
 
 export const ProfileCard = (props: ProfileCardProps) => {
@@ -42,6 +46,7 @@ export const ProfileCard = (props: ProfileCardProps) => {
         onChangeUsername,
         onChangeCountry,
         onChangeCurrency,
+        isAuthUserProfile,
     } = props;
     const { t } = useTranslation();
 
@@ -129,13 +134,16 @@ export const ProfileCard = (props: ProfileCardProps) => {
                             onChange={onChangeAge}
                             readonly={readonly}
                         />
-                        <Input
-                            value={data?.city}
-                            label={t('City')}
-                            className={cls.input}
-                            onChange={onChangeCity}
-                            readonly={readonly}
-                        />
+                        {/* TODO: FIX THIS TS */}
+                        {isAuthUserProfile && 'city' in data! && (
+                            <Input
+                                value={data?.city}
+                                label={t('City')}
+                                className={cls.input}
+                                onChange={onChangeCity}
+                                readonly={readonly}
+                            />
+                        )}
                     </VStack>
                     <VStack gap="16" max>
                         <Input
@@ -152,18 +160,24 @@ export const ProfileCard = (props: ProfileCardProps) => {
                             onChange={onChangeAvatar}
                             readonly={readonly}
                         />
-                        <CurrencySelect
-                            className={cls.input}
-                            onChange={onChangeCurrency}
-                            value={data?.currency}
-                            readonly={readonly}
-                        />
-                        <CountrySelect
-                            className={cls.input}
-                            onChange={onChangeCountry}
-                            value={data?.country}
-                            readonly={readonly}
-                        />
+                        {/* TODO: FIX THIS TS */}
+                        {isAuthUserProfile && 'currency' in data! && (
+                            <CurrencySelect
+                                className={cls.input}
+                                onChange={onChangeCurrency}
+                                value={data?.currency}
+                                readonly={readonly}
+                            />
+                        )}
+                        {/* TODO: FIX THIS TS */}
+                        {isAuthUserProfile && 'country' in data! && (
+                            <CountrySelect
+                                className={cls.input}
+                                onChange={onChangeCountry}
+                                value={data?.country}
+                                readonly={readonly}
+                            />
+                        )}
                     </VStack>
                 </HStack>
             </VStack>

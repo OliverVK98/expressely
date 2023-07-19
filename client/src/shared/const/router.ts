@@ -1,7 +1,8 @@
 export enum AppRoutes {
     MAIN = 'main',
     ABOUT = 'about',
-    PROFILE = 'profile',
+    USER_PROFILE = 'profile',
+    PROFILE = 'profiles',
     ARTICLES = 'articles',
     ARTICLE_DETAILS = 'article_details',
     ARTICLE_CREATE = 'article_create',
@@ -13,7 +14,8 @@ export enum AppRoutes {
 
 export const getRouteMain = () => '/';
 export const getRouteAbout = () => '/about';
-export const getRouteProfile = (id: string | number) => `/profile/${id}`;
+export const getRouteUserProfile = () => `/profile`;
+export const getRouteProfile = (id: string | number) => `/profiles/${id}`;
 export const getRouteArticles = () => '/articles';
 export const getRouteArticleDetails = (id: string | number) =>
     `/articles/${id}`;
@@ -26,6 +28,7 @@ export const getRouteForbidden = () => `/forbidden`;
 export const AppRouteByPathPattern: Record<string, AppRoutes> = {
     [getRouteMain()]: AppRoutes.MAIN,
     [getRouteAbout()]: AppRoutes.ABOUT,
+    [getRouteUserProfile()]: AppRoutes.USER_PROFILE,
     [getRouteProfile(':id')]: AppRoutes.PROFILE,
     [getRouteArticles()]: AppRoutes.ARTICLES,
     [getRouteArticleDetails(':id')]: AppRoutes.ARTICLE_DETAILS,

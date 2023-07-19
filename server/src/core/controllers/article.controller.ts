@@ -10,7 +10,6 @@ import {
 import { ArticleService } from '../services/article.service';
 import { CreateArticleDto } from '../dtos/article/createArticle.dto';
 import { CurrentUser } from '../decorators/currentUser.decorator';
-import { ApiTags } from '@nestjs/swagger';
 import { Serialize } from '../interceptors/serialize';
 import { ArticleDto } from '../dtos/article/article.dto';
 import { PageOptionsDto } from '../dtos/page/pageOptions.dto';
@@ -19,7 +18,6 @@ import { AccessTokenGuard } from '../guards';
 import { UserService } from '../services/user.service';
 
 @Controller('articles')
-@ApiTags('articles')
 export class ArticleController {
   constructor(
     private articlesService: ArticleService,

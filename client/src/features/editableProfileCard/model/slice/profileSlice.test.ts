@@ -4,8 +4,9 @@ import { ProfileSchema } from '../../model/types/editableProfileCardSchema';
 import { ValidateProfileError } from '../../model/consts/consts';
 import { profileActions, profileReducer } from './profileSlice';
 import { updateProfileData } from '../services/updateProfileData/updateProfileData';
+import { Profile } from '@/entities/Profile';
 
-const data = {
+const data: Profile = {
     age: 22,
     country: Country.USA,
     firstname: 'Oliver',
@@ -14,6 +15,7 @@ const data = {
     avatar: 'https://cdn0.iconfinder.com/data/icons/business-and-it-person/512/person7-512.png',
     username: 'admin',
     city: 'Miami',
+    userId: 1,
 };
 
 describe('profileSlice.test', () => {

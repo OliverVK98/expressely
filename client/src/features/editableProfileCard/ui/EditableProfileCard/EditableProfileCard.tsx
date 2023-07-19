@@ -8,7 +8,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { Currency } from '@/entities/Currency';
 import { Country } from '@/entities/Country';
-import { fetchProfileData } from '../../model/services/fetchProfileData/fetchProfileData';
+import { fetchAuthProfileData } from '../../model/services/fetchAuthProfileData/fetchAuthProfileData';
 import { getProfileForm } from '../../model/selectors/getProfileForm/getProfileForm';
 import { getProfileError } from '../../model/selectors/getProfileError/getProfileError';
 import { getProfileIsLoading } from '../../model/selectors/getProfileIsLoading/getProfileIsLoading';
@@ -22,10 +22,13 @@ import {
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { getProfileValidateErrors } from '../../model/selectors/getProfileValidateErrors/getProfileValidateErrors';
 import cls from './EditableProfileCard.module.scss';
+import { fetchProfileData } from '../../model/services/fetchProfileData/fetchProfileData';
+import { getProfilePublicData } from '../../model/selectors/getProfilePublicData/getProfilePublicData';
 
 interface EditableProfileCardProps {
     className?: string;
-    id: string;
+    id: number;
+    isAuthUserProfile: boolean;
 }
 
 const reducers: ReducersList = {
@@ -33,7 +36,7 @@ const reducers: ReducersList = {
 };
 
 export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
-    const { className, id } = props;
+    const { className, id, isAuthUserProfile } = props;
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
     const formData = useSelector(getProfileForm);
@@ -41,9 +44,13 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
     const isLoading = useSelector(getProfileIsLoading);
     const readonly = useSelector(getProfileReadonly);
     const validateErrors = useSelector(getProfileValidateErrors);
+    const publicData = useSelector(getProfilePublicData);
+    console.log(formData);
 
     useInitialEffect(() => {
-        if (id) {
+        if (isAuthUserProfile) {
+            dispatch(fetchAuthProfileData());
+        } else {
             dispatch(fetchProfileData(id));
         }
     });
@@ -163,8 +170,9 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
                         />
                     ))}
                 <ProfileCard
-                    data={formData}
+                    data={isAuthUserProfile ? formData : publicData}
                     isLoading={isLoading}
+                    isAuthUserProfile={isAuthUserProfile}
                     error={error}
                     onChangeFirstName={onChangeFirstName}
                     onChangeLastName={onChangeLastName}

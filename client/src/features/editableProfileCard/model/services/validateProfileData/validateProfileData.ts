@@ -1,7 +1,7 @@
 import { ValidateProfileError } from '../../../model/consts/consts';
-import { Profile } from '../../../../../entities/Profile';
+import { EditableProfileFields } from '../../../../../entities/Profile';
 
-export const validateProfileData = (profile?: Profile) => {
+export const validateProfileData = (profile?: EditableProfileFields) => {
     if (!profile) {
         return [ValidateProfileError.NO_DATA];
     }

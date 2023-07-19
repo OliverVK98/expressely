@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { RatingService } from '../services/rating.service';
-import { ApiTags } from '@nestjs/swagger';
 import { RatingOptionsDto } from '../dtos/rating/ratingOptions.dto';
 import { CreateRatingDto } from '../dtos/rating/createRating.dto';
 import { CurrentUser } from '../decorators/currentUser.decorator';
@@ -11,7 +10,6 @@ import { AccessTokenGuard } from '../guards';
 import { UserService } from '../services/user.service';
 
 @Controller('article-ratings')
-@ApiTags('rating')
 export class RatingController {
   constructor(
     private ratingService: RatingService,

@@ -1,7 +1,6 @@
 import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { CommentService } from '../services/comment.service';
-import { ApiTags } from '@nestjs/swagger';
-import { RefreshTokenGuard } from '../guards';
+import { AccessTokenGuard } from '../guards';
 import { CurrentUser } from '../decorators/currentUser.decorator';
 import { UserService } from '../services/user.service';
 import { ArticleService } from '../services/article.service';
@@ -10,7 +9,6 @@ import { GetCommentDto } from '../dtos/comment/getComment.dto';
 import { CommentSerializer } from '../serializers/comment/comment.serializer';
 
 @Controller('comments')
-@ApiTags('comments')
 export class CommentController {
   constructor(
     private commentService: CommentService,
@@ -29,7 +27,7 @@ export class CommentController {
   }
 
   @Post('/create')
-  @UseGuards(RefreshTokenGuard)
+  @UseGuards(AccessTokenGuard)
   async createComment(
     @CurrentUser('userId') userId: number,
     @Query() { articleId }: GetCommentDto,

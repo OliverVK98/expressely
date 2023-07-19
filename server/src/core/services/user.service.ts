@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JsonSettingsDto, User } from '../entities/user.entity';
 import { SignupUserDto } from '../dtos/user/signupUser.dto';
+import { UpdateUserDto } from '../dtos/user/updateUser.dto';
 
 @Injectable()
 export class UserService {
@@ -16,6 +17,15 @@ export class UserService {
 
   findOneById(id: number) {
     return this.repo.findOneBy({ id });
+  }
+
+  async updateUser(id: number, updateFields: UpdateUserDto) {
+    const user = await this.repo
+      .createQueryBuilder('user')
+      .where('user.id = :id', { id })
+      .getOne();
+
+    return this.repo.save({ ...user, ...updateFields });
   }
 
   async findOneByIdWithToken(id: number) {

@@ -1,4 +1,4 @@
-import { Column, Entity, OneToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 import { User } from './user.entity';
 import { AbstractEntity } from './abstract.entity';
 
@@ -25,9 +25,10 @@ export class Profile extends AbstractEntity {
   @Column()
   username: string;
 
-  @Column()
-  avatar: string;
+  @Column({ nullable: true })
+  avatar: string | null;
 
   @OneToOne(() => User, (user) => user.profile)
+  @JoinColumn()
   user: User;
 }

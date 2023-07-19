@@ -20,7 +20,7 @@ type InputSize = 's' | 'm' | 'l';
 
 interface InputProps extends HTMLInputProps {
     className?: string;
-    value?: string | number;
+    value?: string | number | null;
     label?: string;
     onChange?: (value: string) => void;
     autofocus?: boolean;
@@ -85,7 +85,7 @@ export const Input = memo((props: InputProps) => {
             <div className={cls.addonLeft}>{addonLeft}</div>
             <input
                 ref={ref}
-                value={value}
+                value={value === null ? '' : value}
                 type={type}
                 onChange={onChangeHandler}
                 className={cls.input}
