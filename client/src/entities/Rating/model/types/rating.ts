@@ -1,7 +1,7 @@
 export interface Rating {
     rate: number;
     feedback: string | null;
-    createdAt: Date;
+    createdAt: string;
     userId: number;
     articleId: number;
 }

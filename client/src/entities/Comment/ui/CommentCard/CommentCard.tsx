@@ -19,6 +19,8 @@ interface CommentCardProps {
 export const CommentCard = memo((props: CommentCardProps) => {
     const { className, comment, isLoading } = props;
 
+    console.log(comment);
+
     if (isLoading) {
         return (
             <VStack

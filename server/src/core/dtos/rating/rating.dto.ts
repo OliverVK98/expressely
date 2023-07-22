@@ -1,4 +1,5 @@
 import { Expose, Transform } from 'class-transformer';
+import { format } from 'date-fns';
 
 export class RatingDto {
   @Expose()
@@ -11,7 +12,8 @@ export class RatingDto {
   feedback: string;
 
   @Expose()
-  createdAt: Date;
+  @Transform(({ obj }) => format(obj.createdAt, 'MM/dd/yyyy'))
+  createdAt: string;
 
   @Expose()
   @Transform(({ obj }) => obj.user.id)

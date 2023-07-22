@@ -11,6 +11,7 @@ import cls from './Button.module.scss';
 export type ButtonVariant = 'clear' | 'outline' | 'filled' | 'highlighted';
 export type ButtonColor = 'normal' | 'success' | 'error';
 export type ButtonSize = 'm' | 'l' | 'xl';
+export type ButtonType = 'button' | 'submit' | 'reset';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     className?: string;
@@ -25,6 +26,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     addonRight?: ReactNode;
     color?: ButtonColor;
     styles?: CSSProperties;
+    type?: ButtonType;
 }
 
 export const Button = forwardRef(
@@ -42,6 +44,7 @@ export const Button = forwardRef(
             addonRight,
             color = 'normal',
             styles,
+            type = 'button',
             ...otherProps
         } = props;
 
@@ -54,8 +57,7 @@ export const Button = forwardRef(
 
         return (
             <button
-                {...otherProps}
-                type="button"
+                type={type}
                 className={classNames(cls.Button, mods, [
                     className,
                     cls[variant],
@@ -66,6 +68,7 @@ export const Button = forwardRef(
                 data-testid={dataTestId}
                 ref={ref}
                 style={styles}
+                {...otherProps}
             >
                 <div className={cls.addonLeft}>{addonLeft}</div>
                 {children}

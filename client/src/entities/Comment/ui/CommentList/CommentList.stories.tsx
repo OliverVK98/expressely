@@ -21,24 +21,24 @@ export const Normal = Template.bind({});
 Normal.args = {
     comments: [
         {
-            id: '1',
+            id: 1,
             text: 'hello world',
             user: {
                 id: 1,
                 username: 'Test User',
                 avatar: '',
             },
-            createdAt: new Date(),
+            createdAt: 'new Date()',
         },
         {
-            id: '2',
+            id: 2,
             text: 'hello world',
             user: {
                 id: 1,
                 username: 'Test User',
                 avatar: '',
             },
-            createdAt: new Date(),
+            createdAt: 'new Date()',
         },
     ],
 };

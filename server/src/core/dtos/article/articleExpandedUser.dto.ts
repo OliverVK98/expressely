@@ -1,4 +1,5 @@
 import { Expose, Transform } from 'class-transformer';
+import { format } from 'date-fns';
 
 export interface ExpandedUser {
   id: number;
@@ -23,7 +24,8 @@ export class ArticleExpandedUserDto {
   views: number;
 
   @Expose()
-  createdAt: Date;
+  @Transform(({ obj }) => format(obj.createdAt, 'MM/dd/yyyy'))
+  createdAt: string;
 
   @Expose()
   @Transform(({ obj }) => ({

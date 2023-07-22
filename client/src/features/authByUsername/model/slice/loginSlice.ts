@@ -5,8 +5,8 @@ import { loginByUsername } from '../services/loginByUsername/loginByUsername';
 // TODO: remove initial state
 const initialState: LoginSchema = {
     isLoading: false,
-    password: '123',
-    email: 'test@mail.com',
+    password: '',
+    email: '',
 };
 
 export const loginSlice = createSlice({

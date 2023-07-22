@@ -58,9 +58,9 @@ export const ProfileCard = (props: ProfileCardProps) => {
                 className={className}
                 isLoading={isLoading}
                 error={error}
+                readonly={readonly}
                 onChangeFirstName={onChangeFirstName}
                 onChangeLastName={onChangeLastName}
-                readonly={readonly}
                 onChangeAge={onChangeAge}
                 onChangeCity={onChangeCity}
                 onChangeAvatar={onChangeAvatar}

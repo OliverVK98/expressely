@@ -28,6 +28,7 @@ interface InputProps extends HTMLInputProps {
     addonLeft?: ReactNode;
     addonRight?: ReactNode;
     size?: InputSize;
+    registerName?: string;
 }
 
 export const Input = memo((props: InputProps) => {
@@ -43,11 +44,16 @@ export const Input = memo((props: InputProps) => {
         addonLeft,
         addonRight,
         size = 'm',
+        registerName,
         ...otherProps
     } = props;
 
     const ref = useRef<HTMLInputElement>(null);
     const [isFocused, setIsFocused] = useState(false);
+    // const {
+    //     register,
+    //     formState: { errors },
+    // } = useFormContext();
 
     useEffect(() => {
         if (autofocus) {
@@ -75,6 +81,10 @@ export const Input = memo((props: InputProps) => {
         [cls.withAddonRight]: Boolean(addonRight),
     };
 
+    // const isReactHookFormProps = registerName
+    //     ? { ...register(registerName) }
+    //     : { ref, onChange: onChangeHandler };
+
     const input = (
         <div
             className={classNames(cls.InputWrapper, mods, [
@@ -84,17 +94,21 @@ export const Input = memo((props: InputProps) => {
         >
             <div className={cls.addonLeft}>{addonLeft}</div>
             <input
-                ref={ref}
                 value={value === null ? '' : value}
                 type={type}
-                onChange={onChangeHandler}
+                ref={ref}
                 className={cls.input}
-                onFocus={onFocus}
-                onBlur={onBlur}
                 placeholder={placeholder}
                 readOnly={readonly}
+                onBlur={onBlur}
+                onFocus={onFocus}
+                onChange={onChangeHandler}
                 {...otherProps}
             />
+            {/* {errors.firstName?.message && */}
+            {/*     typeof errors.firstName.message === 'string' && ( */}
+            {/*         <Text text={errors.firstName?.message} variant="error" /> */}
+            {/*     )} */}
             <div className={cls.addonRight}>{addonRight}</div>
         </div>
     );

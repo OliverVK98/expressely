@@ -1,0 +1,42 @@
+.InputWrapper {
+    border-radius: 48px;
+    padding: 8px 16px;
+    border: 2px solid var(--icon-redesigned);
+    width: 100%;
+}
+
+.readOnly {
+    opacity: 0.7;
+}
+
+.input {
+    border: none;
+    outline: none;
+    width: 100%;
+    color: var(--text-redesigned);
+    background: none;
+
+    &::placeholder {
+        color: var(--hint-redesigned);
+    }
+}
+
+.focused {
+    border: 2px solid var(--accent-redesigned);
+}
+
+.s {
+    height: 32px;
+}
+
+.m {
+    height: 38px;
+}
+
+.l {
+    height: 44px;
+}
+
+.text {
+    padding-left: 16px;
+}
