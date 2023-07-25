@@ -68,5 +68,21 @@
     "Last Name": "Last Name",
     "Name": "Name",
     "Age": "Age",
-  "Most Reading": "Most Reading"
+  "Most Reading": "Most Reading",
+  "Create Account": "Create Account",
+    "Email": "Email",
+    "Sign In ": "Sign In ",
+    "Invalid credentials": "Invalid credentials",
+  "Confirm Password": "Confirm Password",
+    "First Name": "First Name",
+    "Country": "Country",
+    "Currency": "Currency",
+    "Avatar": "Avatar",
+  "Sign Up": "Sign Up",
+  "Something went wrong": {
+    " Please try again": {
+      "": "Something went wrong. Please try again."
+    }
+  },
+  "Avatar (URL)": "Avatar (URL)"
 }

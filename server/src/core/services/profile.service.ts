@@ -24,9 +24,11 @@ export class ProfileService {
       throw new BadRequestException('Profile for that user already exists');
     }
 
-    const profile = await this.repo.create(profileDto);
-    profile.user = user;
+    return this.repo.create(profileDto);
+  }
 
+  async saveProfile(profile: Profile, user: User) {
+    profile.user = user;
     return this.repo.save(profile);
   }
 

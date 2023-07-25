@@ -13,6 +13,10 @@ export interface Profile {
     userId: number;
 }
 
+export interface CreateProfileDto extends Omit<Profile, 'avatar' | 'userId'> {
+    avatar?: string;
+}
+
 export interface PublicProfile {
     firstname: string;
     lastname: string;

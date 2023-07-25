@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { memo, useCallback } from 'react';
+import { useCallback } from 'react';
 import { ListBox } from '@/shared/ui/Popups';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Country } from '../../model/consts/consts';
@@ -26,7 +26,7 @@ const options = [
     },
 ];
 
-export const CountrySelect = memo((props: CountrySelectProps) => {
+export const CountrySelect = (props: CountrySelectProps) => {
     const { className, value, onChange, readonly } = props;
     const { t } = useTranslation();
 
@@ -45,7 +45,7 @@ export const CountrySelect = memo((props: CountrySelectProps) => {
             items={options}
             className={classNames('', {}, [className])}
             readonly={readonly}
-            direction="topRight"
+            direction="bottomRight"
         />
     );
-});
+};

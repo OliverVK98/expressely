@@ -1,6 +1,8 @@
 import {
   IsArray,
   IsEmail,
+  IsEnum,
+  IsInt,
   IsNotEmpty,
   IsNotEmptyObject,
   IsObject,
@@ -11,6 +13,7 @@ import {
 import { FeaturesDto, JsonSettingsDto } from '../../entities/user.entity';
 import { UserRole } from '../../types/user';
 import { Type } from 'class-transformer';
+import { Country, Currency } from '../../types/profile';
 
 export class SignupUserDto {
   @IsEmail()
@@ -47,4 +50,29 @@ export class SignupUserDto {
   @ValidateNested()
   @Type(() => JsonSettingsDto)
   jsonSettings?: JsonSettingsDto;
+
+  @IsNotEmpty()
+  @IsString()
+  readonly firstname: string;
+
+  @IsNotEmpty()
+  @IsString()
+  readonly lastname: string;
+
+  @IsNotEmpty()
+  @Type(() => Number)
+  @IsInt()
+  readonly age: number;
+
+  @IsNotEmpty()
+  @IsEnum(Country)
+  country: Country;
+
+  @IsNotEmpty()
+  @IsEnum(Currency)
+  currency: Currency;
+
+  @IsNotEmpty()
+  @IsString()
+  city: string;
 }

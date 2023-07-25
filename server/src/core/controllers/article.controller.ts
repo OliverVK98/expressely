@@ -32,8 +32,7 @@ export class ArticleController {
   }
 
   @Get()
-  @UseGuards(AccessTokenGuard)
-  async getNewArticles(@Query() pageOptions: PageOptionsDto) {
+  async getArticles(@Query() pageOptions: PageOptionsDto) {
     const entities = await this.articlesService.getArticles(pageOptions);
     const serializedData = this.articleSerializer.serializeMany(
       entities.data,

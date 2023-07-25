@@ -1,6 +1,8 @@
 import { UserRole } from '../consts/consts';
 import { FeatureFlags } from '@/shared/types/featureFlags';
 import { JsonSettings } from './jsonSettings';
+import { Country } from '@/entities/Country';
+import { Currency } from '@/entities/Currency';
 
 export interface User {
     id: number;
@@ -11,7 +13,20 @@ export interface User {
     jsonSettings: JsonSettings;
 }
 
-export interface LoginUserResponse extends User {
+export interface CreateUserDto {
+    email: string;
+    password: string;
+    username: string;
+    avatar?: string;
+    firstname: string;
+    lastname: string;
+    age: number;
+    country: Country;
+    currency: Currency;
+    city: string;
+}
+
+export interface ServerUserResponse extends User {
     accessToken: string;
 }
 

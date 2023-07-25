@@ -74,6 +74,7 @@ export const MainPageHeader = memo((props: MainPageHeaderProps) => {
                                     : 'clear'
                             }
                             styles={buttonStyles}
+                            key={button.text}
                             onClick={() => onClickButton(button.type)}
                         >
                             <Text text={button.text} />

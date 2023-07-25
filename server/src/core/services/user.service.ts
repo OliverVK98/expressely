@@ -1,18 +1,27 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JsonSettingsDto, User } from '../entities/user.entity';
-import { SignupUserDto } from '../dtos/user/signupUser.dto';
 import { UpdateUserDto } from '../dtos/user/updateUser.dto';
+import { CreateUserDto } from '../dtos/user/createUser.dto';
+import { Profile } from '../entities/profile.entity';
 
 @Injectable()
 export class UserService {
   constructor(@InjectRepository(User) private repo: Repository<User>) {}
 
-  create(user: SignupUserDto) {
-    const newUser = this.repo.create(user);
+  async createUser(user: CreateUserDto) {
+    const userExist = await this.findOneByEmail(user.email);
+    if (userExist) {
+      throw new BadRequestException('Email already in use');
+    }
 
-    return this.repo.save(newUser);
+    return this.repo.create(user);
+  }
+
+  saveUser(user: User, profile: Profile) {
+    user.profile = profile;
+    return this.repo.save(user);
   }
 
   findOneById(id: number) {

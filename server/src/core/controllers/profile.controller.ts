@@ -27,7 +27,6 @@ export class ProfileController {
   ) {}
 
   @Post('/create')
-  @UseGuards(AccessTokenGuard)
   async createProfile(
     @CurrentUser('userId') userId: number,
     @Body() body: CreateProfileDto,

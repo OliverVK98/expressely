@@ -13,7 +13,6 @@ import { ArticleDetailsPageSchema } from '@/pages/ArticleDetailsPage';
 import { AddCommentFormSchema } from '@/features/addCommentForm';
 import { ArticlesPageSchema } from '@/pages/ArticlesPage';
 import { ScrollSaveSchema } from '@/features/scrollSave';
-import { LoginSchema } from '@/features/authByUsername';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { ProfileSchema } from '@/features/editableProfileCard';
 import { ArticleCreatePageSchema } from '@/pages/ArticleCreatePage';
@@ -24,7 +23,6 @@ export interface StateSchema {
     scrollSave: ScrollSaveSchema;
     [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
     mainPage?: MainPageSchema;
-    loginForm?: LoginSchema;
     profile?: ProfileSchema;
     articleDetails?: ArticleDetailsSchema;
     addCommentForm?: AddCommentFormSchema;

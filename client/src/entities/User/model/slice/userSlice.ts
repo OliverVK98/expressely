@@ -3,7 +3,7 @@ import {
     TOKEN_LOCALSTORAGE_KEY,
     USER_LOCALSTORAGE_KEY,
 } from '@/shared/const/localStorage';
-import { LoginUserResponse, User, UserSchema } from '../types/userSchema';
+import { ServerUserResponse, User, UserSchema } from '../types/userSchema';
 import { setFeatureFlags } from '@/shared/lib/features';
 import { saveJsonSettings } from '../services/saveJsonSettings';
 import { JsonSettings } from '../types/jsonSettings';
@@ -17,7 +17,7 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setAuthData: (state, action: PayloadAction<LoginUserResponse>) => {
+        setAuthData: (state, action: PayloadAction<ServerUserResponse>) => {
             state.authData = action.payload;
             setFeatureFlags(action.payload.features);
             localStorage.setItem(

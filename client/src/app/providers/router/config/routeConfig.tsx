@@ -33,7 +33,6 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         path: getRouteAbout(),
         element: <AboutPage />,
     },
-
     [AppRoutes.ARTICLES]: {
         path: getRouteArticles(),
         element: <ArticlesPage />,

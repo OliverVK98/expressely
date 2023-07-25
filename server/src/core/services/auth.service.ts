@@ -14,6 +14,7 @@ import { Token } from '../entities/token.entity';
 import { User } from '../entities/user.entity';
 import { UserTokenDto, userTokenDtoMapper } from '../dtos/user/userToken.dto';
 import { JwtService } from '@nestjs/jwt';
+import { ProfileService } from './profile.service';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 
@@ -67,19 +68,49 @@ export class AuthService {
     return await this.repo.save(newToken);
   }
 
-  async signUp(userData: SignupUserDto) {
-    const userExist = await this.userService.findOneByEmail(userData.email);
+  async signUp(userData: SignupUserDto, profileService: ProfileService) {
+    const {
+      jsonSettings,
+      password,
+      age,
+      features,
+      avatar,
+      city,
+      firstname,
+      lastname,
+      country,
+      username,
+      currency,
+      roles,
+      email,
+    } = userData;
 
-    if (userExist) {
-      throw new BadRequestException('Email already in use');
-    }
-
-    const user = await this.userService.create({
-      ...userData,
-      jsonSettings: userData.jsonSettings ?? defaultJsonSettings,
-      features: userData.features ?? defaultFeatures,
-      password: await this.hashString(userData.password),
+    const user = await this.userService.createUser({
+      email,
+      password: await this.hashString(password),
+      username,
+      avatar,
+      roles,
+      jsonSettings: jsonSettings ?? defaultJsonSettings,
+      features: features ?? defaultFeatures,
     });
+
+    const profile = await profileService.createProfile(
+      {
+        age,
+        avatar,
+        city,
+        firstname,
+        lastname,
+        country,
+        username,
+        currency,
+      },
+      user,
+    );
+
+    await this.userService.saveUser(user, profile);
+    await profileService.saveProfile(profile, user);
 
     const { refreshToken, accessToken } = await this.generateTokens(
       userTokenDtoMapper(user),

@@ -20,6 +20,7 @@ import { Response } from 'express';
 import { AccessTokenGuard, RefreshTokenGuard } from '../guards';
 import { CurrentUser } from '../decorators/currentUser.decorator';
 import { setRefreshTokenCookie } from '../../config/jwt';
+import { ProfileService } from '../services/profile.service';
 
 @Controller('auth')
 @Serialize(AuthDto)
@@ -27,6 +28,7 @@ export class AuthController {
   constructor(
     private userService: UserService,
     private authService: AuthService,
+    private profileService: ProfileService,
   ) {}
 
   @Post('/sign-up')
@@ -38,6 +40,7 @@ export class AuthController {
   ) {
     const { accessToken, user, refreshToken } = await this.authService.signUp(
       body,
+      this.profileService,
     );
     setRefreshTokenCookie(res, refreshToken);
     return { ...user, accessToken };

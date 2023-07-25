@@ -5,7 +5,12 @@ import {
 } from './model/selectors/getUserRoles/roleSelector';
 import { UserRole } from './model/consts/consts';
 import { userReducer, userActions } from './model/slice/userSlice';
-import { UserSchema, User, LoginUserResponse } from './model/types/userSchema';
+import {
+    UserSchema,
+    User,
+    ServerUserResponse,
+    CreateUserDto,
+} from './model/types/userSchema';
 import { getUserAuthData } from './model/selectors/getUserAuthData/getUserAuthData';
 import { getUserInit } from './model/selectors/getUserInit/getUserInit';
 import { useJsonSettings } from './model/selectors/getUserJsonSettings/getUserJsonSettings';
@@ -17,7 +22,8 @@ export {
     userReducer,
     type User,
     type UserSchema,
-    type LoginUserResponse,
+    type ServerUserResponse,
+    type CreateUserDto,
     getUserAuthData,
     getUserInit,
     isUserManager,

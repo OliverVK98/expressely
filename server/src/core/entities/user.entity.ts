@@ -37,6 +37,9 @@ export class User extends AbstractEntity {
   @Column()
   email: string;
 
+  @Column({ nullable: true })
+  avatar: string;
+
   @Column('simple-array')
   roles: UserRole[];
 
@@ -45,9 +48,6 @@ export class User extends AbstractEntity {
 
   @Column({ type: 'json' })
   jsonSettings: JsonSettingsDto;
-
-  @Column({ nullable: true })
-  avatar: string;
 
   @OneToMany(() => Article, (article) => article.user)
   articles: Article[];
