@@ -31,10 +31,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
 
     useEffect(() => {
         if (data) {
-            localStorage.setItem(
-                TOKEN_LOCALSTORAGE_KEY,
-                JSON.stringify(data.accessToken),
-            );
+            localStorage.setItem(TOKEN_LOCALSTORAGE_KEY, data.accessToken);
             dispatch(userActions.setAuthData(data));
             onSuccess();
         }

@@ -16,10 +16,7 @@ export const login = (
             },
         })
         .then(({ body }) => {
-            window.localStorage.setItem(
-                TOKEN_LOCALSTORAGE_KEY,
-                JSON.stringify(body),
-            );
+            window.localStorage.setItem(TOKEN_LOCALSTORAGE_KEY, body);
             return body;
         });
 

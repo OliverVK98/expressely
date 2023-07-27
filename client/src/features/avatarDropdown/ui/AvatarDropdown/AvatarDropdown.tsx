@@ -11,7 +11,7 @@ import {
     userActions,
 } from '@/entities/User';
 import cls from './AvatarDropdown.module.scss';
-import { getRouteAdmin, getRouteProfile } from '@/shared/const/router';
+import { getRouteAdmin, getRouteUserProfile } from '@/shared/const/router';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 
 interface AvatarDropdownProps {
@@ -47,7 +47,7 @@ export const AvatarDropdown = memo((props: AvatarDropdownProps) => {
             : []),
         {
             content: t('Profile'),
-            href: getRouteProfile(authData.id),
+            href: getRouteUserProfile(),
         },
         {
             content: t('Logout'),

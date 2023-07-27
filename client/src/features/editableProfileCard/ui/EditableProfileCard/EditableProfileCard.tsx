@@ -45,7 +45,6 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
     const readonly = useSelector(getProfileReadonly);
     const validateErrors = useSelector(getProfileValidateErrors);
     const publicData = useSelector(getProfilePublicData);
-    console.log(formData);
 
     useInitialEffect(() => {
         if (isAuthUserProfile) {

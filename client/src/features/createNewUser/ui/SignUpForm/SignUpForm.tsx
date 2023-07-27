@@ -54,18 +54,16 @@ const SignUpForm = memo((props: SignUpFormProps) => {
         });
     };
 
+    // TODO: handle email is taken error
+
     useEffect(() => {
         if (data) {
-            localStorage.setItem(
-                TOKEN_LOCALSTORAGE_KEY,
-                JSON.stringify(data.accessToken),
-            );
+            localStorage.setItem(TOKEN_LOCALSTORAGE_KEY, data.accessToken);
             dispatch(userActions.setAuthData(data));
             onSuccess();
         }
     }, [data, dispatch, onSuccess]);
 
-    // TODO: on server only create if both are successful (profile + user)
     return (
         <VStack
             gap="24"

@@ -1,7 +1,7 @@
 import {
   BadRequestException,
-  ForbiddenException,
   Injectable,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { SignupUserDto } from '../dtos/user/signupUser.dto';
 import { UserService } from './user.service';
@@ -37,7 +37,7 @@ export class AuthService {
   async generateTokens(payload: UserTokenDto) {
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(payload, {
-        expiresIn: 60 * 15,
+        expiresIn: 5,
         secret: process.env.JWT_ACCESS_TOKEN_SECRET,
       }),
       this.jwtService.signAsync(payload, {
@@ -154,14 +154,14 @@ export class AuthService {
   }
 
   async refreshTokens(userId: number, oldRefreshToken: string) {
-    if (!oldRefreshToken) throw new ForbiddenException(`Access denied`);
+    if (!oldRefreshToken) throw new UnauthorizedException(`Access denied`);
     const user = await this.userService.findOneByIdWithToken(userId);
-    if (!user || user.token.refreshToken !== oldRefreshToken)
-      throw new ForbiddenException(`Access denied`);
-    const { refreshToken } = await this.generateTokens(
+    if (!user || user.token?.refreshToken !== oldRefreshToken)
+      throw new UnauthorizedException(`Access denied`);
+    const { refreshToken, accessToken } = await this.generateTokens(
       userTokenDtoMapper(user),
     );
     await this.saveRefreshToken(user, refreshToken);
-    return refreshToken;
+    return { accessToken, refreshToken };
   }
 }

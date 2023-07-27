@@ -77,13 +77,14 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   async refreshTokens(
     @CurrentUser('userId') userId: number,
-    @CurrentUser('refreshToken') refreshToken: string,
+    @CurrentUser('refreshToken') oldRefreshToken: string,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const newRefreshToken = await this.authService.refreshTokens(
+    const { refreshToken, accessToken } = await this.authService.refreshTokens(
       userId,
-      refreshToken,
+      oldRefreshToken,
     );
-    setRefreshTokenCookie(res, newRefreshToken);
+    setRefreshTokenCookie(res, refreshToken);
+    return { accessToken };
   }
 }

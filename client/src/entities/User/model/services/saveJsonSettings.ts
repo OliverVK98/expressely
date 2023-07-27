@@ -3,7 +3,7 @@ import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { JsonSettings } from '../types/jsonSettings';
 import { getUserAuthData } from '../../model/selectors/getUserAuthData/getUserAuthData';
 import { getJsonSettings } from '../selectors/getUserJsonSettings/getUserJsonSettings';
-import { setJsonSettingsMutation } from '../../api/userApi';
+import { User } from '../..';
 
 export const saveJsonSettings = createAsyncThunk<
     JsonSettings,
@@ -19,12 +19,20 @@ export const saveJsonSettings = createAsyncThunk<
     }
 
     try {
-        const response = await dispatch(
-            setJsonSettingsMutation({
+        const { data: response } = await extra.api.patch<User>(
+            '/users/set-json',
+            {
                 ...currentSettings,
                 ...newJsonSettings,
-            }),
-        ).unwrap();
+            },
+        );
+
+        // const response = await dispatch(
+        //     setJsonSettingsMutation({
+        //         ...currentSettings,
+        //         ...newJsonSettings,
+        //     }),
+        // ).unwrap();
 
         if (!response.jsonSettings) {
             return rejectWithValue('');

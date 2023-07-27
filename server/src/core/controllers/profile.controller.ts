@@ -5,7 +5,6 @@ import {
   HttpCode,
   HttpStatus,
   Param,
-  Post,
   Put,
   UseGuards,
 } from '@nestjs/common';
@@ -13,7 +12,6 @@ import { ProfileService } from '../services/profile.service';
 import { AccessTokenGuard } from '../guards';
 import { CurrentUser } from '../decorators/currentUser.decorator';
 import { UserService } from '../services/user.service';
-import { CreateProfileDto } from '../dtos/profile/createProfile.dto';
 import { UpdateProfileDto } from '../dtos/profile/updateProfile.dto';
 import { ProfileSerializer } from '../serializers/profile/profile.serializer';
 import { GetPublicProfileDto } from '../dtos/profile/getPublicProfile.dto';
@@ -25,16 +23,6 @@ export class ProfileController {
     private userService: UserService,
     private profileSerializer: ProfileSerializer,
   ) {}
-
-  @Post('/create')
-  async createProfile(
-    @CurrentUser('userId') userId: number,
-    @Body() body: CreateProfileDto,
-  ) {
-    const user = await this.userService.findOneById(userId);
-    const profile = await this.profileService.createProfile(body, user);
-    return this.profileSerializer.serializeAuth(profile);
-  }
 
   @Get('/:id')
   async getUserProfile(@Param() { id }: GetPublicProfileDto) {
