@@ -6,7 +6,7 @@ import { Card } from '@/shared/ui/Card';
 import { Text } from '@/shared/ui/Text';
 import { AppImage } from '@/shared/ui/AppImage';
 import { Skeleton } from '@/shared/ui/Skeleton';
-import cls from './ArticlePreviewModal.module.scss';
+import cls from './ArticlePreview.module.scss';
 import {
     useArticleCreatePageBlocks,
     useArticleCreatePageImg,
@@ -17,11 +17,11 @@ import {
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { articleCreatePageActions } from '../../model/slices/articleCreatePageSlice';
 
-interface ArticlePreviewModalProps {
+interface ArticlePreviewProps {
     className?: string;
 }
 
-export const ArticlePreviewModal = (props: ArticlePreviewModalProps) => {
+export const ArticlePreview = (props: ArticlePreviewProps) => {
     const { className } = props;
     const dispatch = useAppDispatch();
     const isModalOpen = useArticleCreatePageIsModalOpen();

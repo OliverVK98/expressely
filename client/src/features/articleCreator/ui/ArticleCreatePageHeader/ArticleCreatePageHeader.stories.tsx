@@ -1,18 +1,18 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { ArticleCreatePageHeader } from './ArticleCreatePageHeader';
+import { ArticleCreateHeader } from './ArticleCreateHeader';
 
 export default {
-    title: 'shared/ArticleCreatePageHeader',
-    component: ArticleCreatePageHeader,
+    title: 'shared/ArticleCreateHeader',
+    component: ArticleCreateHeader,
     argTypes: {
         backgroundColor: { control: 'color' },
     },
-} as ComponentMeta<typeof ArticleCreatePageHeader>;
+} as ComponentMeta<typeof ArticleCreateHeader>;
 
-const Template: ComponentStory<typeof ArticleCreatePageHeader> = (args) => (
-    <ArticleCreatePageHeader {...args} />
+const Template: ComponentStory<typeof ArticleCreateHeader> = (args) => (
+    <ArticleCreateHeader {...args} />
 );
 
 export const Normal = Template.bind({});
