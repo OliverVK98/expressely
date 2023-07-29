@@ -14,6 +14,7 @@ import { addCommentForArticle } from '../../model/services/addCommentForArticle/
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { fetchCommentsByArticleId } from '../../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { getUserAuthData } from '@/entities/User';
 
 interface ArticleDetailsCommentsProps {
     className?: string;
@@ -27,6 +28,7 @@ export const ArticleDetailsComments = memo(
         const dispatch = useAppDispatch();
         const comments = useSelector(getArticleComments.selectAll);
         const commentsIsLoading = useSelector(getArticleCommentsIsLoading);
+        const authData = useSelector(getUserAuthData);
 
         const onSendComment = useCallback(
             (text: string) => {
@@ -46,9 +48,11 @@ export const ArticleDetailsComments = memo(
                     className={cls.commentTitle}
                     title={t('Comments')}
                 />
-                <Suspense fallback={<Loader />}>
-                    <AddCommentForm onSendComment={onSendComment} />
-                </Suspense>
+                {authData && (
+                    <Suspense fallback={<Loader />}>
+                        <AddCommentForm onSendComment={onSendComment} />
+                    </Suspense>
+                )}
                 <CommentList
                     isLoading={commentsIsLoading}
                     comments={comments}

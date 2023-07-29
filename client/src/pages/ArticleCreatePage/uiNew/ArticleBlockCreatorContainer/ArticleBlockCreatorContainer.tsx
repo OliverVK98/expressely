@@ -1,5 +1,9 @@
+import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { memo, useCallback, useMemo, useState } from 'react';
+import { ArticleBlockCreator } from '@/features/articleCreator';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useArticleCreatePageBlocks } from '../../model/selectors/articleCreatePageSelectors';
+import { TabItem } from '@/shared/ui/Tabs';
 import {
     ArticleBlock,
     ArticleBlockType,
@@ -7,28 +11,43 @@ import {
     ArticleImageBlock,
     ArticleTextBlock,
 } from '@/entities/Article';
-import { TabItem } from '@/shared/ui/Tabs';
-import {
-    ArticleCodeContentAdd,
-    ArticleImageContentAdd,
-    ArticleTextContentAdd,
-} from '@/features/articleContentAdd';
-import { VStack } from '@/shared/ui/Stack';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { useArticleCreatePageBlocks } from '../../model/selectors/articleCreatePageSelectors';
 import { articleCreatePageActions } from '../../model/slices/articleCreatePageSlice';
-import { ArticleBlocksReadonly } from '../ArticleBlocksReadonly/ArticleBlocksReadonly';
 
-interface ArticleBlockCreatorProps {
+interface ArticleBlockCreatorContainerProps {
     className?: string;
 }
 
-export const ArticleBlockCreator = memo((props: ArticleBlockCreatorProps) => {
+export const ArticleBlockCreatorContainer = (
+    props: ArticleBlockCreatorContainerProps,
+) => {
     const { className } = props;
     const { t } = useTranslation();
     const [tab, setTab] = useState<ArticleBlockType>(ArticleBlockType.TEXT);
     const dispatch = useAppDispatch();
     const blocks = useArticleCreatePageBlocks();
+
+    const onRemoveClick = useCallback(
+        (index: number) => {
+            if (blocks) {
+                dispatch(articleCreatePageActions.removeBlockById(index));
+            }
+        },
+        [blocks, dispatch],
+    );
+
+    const moveBlockUp = useCallback(
+        (index: number) => {
+            dispatch(articleCreatePageActions.moveBlockUp(index));
+        },
+        [dispatch],
+    );
+
+    const moveBlockDown = useCallback(
+        (index: number) => {
+            dispatch(articleCreatePageActions.moveBlockDown(index));
+        },
+        [dispatch],
+    );
 
     const onTabClick = useCallback((tab: TabItem) => {
         setTab(tab.value as ArticleBlockType);
@@ -90,28 +109,16 @@ export const ArticleBlockCreator = memo((props: ArticleBlockCreatorProps) => {
     );
 
     return (
-        <VStack gap="8" max className={className}>
-            <VStack gap="16" max>
-                <ArticleBlocksReadonly />
-            </VStack>
-            <ArticleTextContentAdd
-                typeTabs={typeTabs}
-                onTabClick={onTabClick}
-                currentTab={tab}
-                onAddClick={onAddClick}
-            />
-            <ArticleImageContentAdd
-                typeTabs={typeTabs}
-                onTabClick={onTabClick}
-                currentTab={tab}
-                onAddClick={onAddClick}
-            />
-            <ArticleCodeContentAdd
-                typeTabs={typeTabs}
-                onTabClick={onTabClick}
-                currentTab={tab}
-                onAddClick={onAddClick}
-            />
-        </VStack>
+        <ArticleBlockCreator
+            blocks={blocks}
+            moveBlockUp={moveBlockUp}
+            moveBlockDown={moveBlockDown}
+            onRemoveClick={onRemoveClick}
+            onTabClick={onTabClick}
+            tab={tab}
+            onAddClick={onAddClick}
+            typeTabs={typeTabs}
+            className={className}
+        />
     );
-});
+};

@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { ArticlesRecommendationsListContainer } from '@/features/articlesRecommendationsList';
 import { VStack } from '@/shared/ui/Stack';
 import {
@@ -15,6 +16,7 @@ import { AdditionalInfoContainer } from '../AdditionalInfoContainer/AdditionalIn
 import { DetailsContainer } from '../DetailsContainer/DetailsContainer';
 import { ArticleRating } from '@/features/articleRating';
 import { ArticleDetailsComments } from '../ArticleDetailsComments/ArticleDetailsComments';
+import { getUserAuthData } from '@/entities/User';
 
 interface ArticleDetailsPageProps {
     className?: string;
@@ -29,12 +31,13 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
     const { id } = useParams<{
         id: string;
     }>();
+    const authData = useSelector(getUserAuthData);
 
     const content = (
         <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
             <VStack gap="16" max>
                 <DetailsContainer />
-                <ArticleRating articleId={+id!} />
+                {authData && <ArticleRating articleId={+id!} />}
                 <ArticleDetailsComments id={+id!} />
             </VStack>
         </Page>

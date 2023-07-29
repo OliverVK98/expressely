@@ -27,10 +27,10 @@ export function buildPlugins({
             __API__: JSON.stringify(apiUrl),
             __PROJECT__: JSON.stringify(project),
         }),
-        new CircularDependencyPlugin({
-            exclude: /node_modules/,
-            failOnError: true
-        }),
+        // new CircularDependencyPlugin({
+        //     exclude: /node_modules/,
+        //     failOnError: true
+        // }),
         new ForkTsCheckerWebpackPlugin({
             typescript: {
                 diagnosticOptions: {

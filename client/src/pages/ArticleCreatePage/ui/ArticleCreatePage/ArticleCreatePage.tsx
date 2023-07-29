@@ -1,17 +1,17 @@
 import { memo } from 'react';
-import { ArticleBlockCreator } from '../ArticleBlockCreator/ArticleBlockCreator';
 import { VStack } from '@/shared/ui/Stack';
 import { Page } from '@/widgets/Page';
-import { ArticleCreatePageHeader } from '../ArticleCreatePageHeader/ArticleCreatePageHeader';
 import {
     DynamicModuleLoader,
     ReducersList,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { articleCreatePageReducer } from '../..';
 import { ArticlePreviewModal } from '../ArticlePreviewModal/ArticlePreviewModal';
-import { ArticleCreateActions } from '../ArticleCreateActions/ArticleCreateActions';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { ArticleCreatePageSidebar } from '../ArticleCreatePageSidebar/ArticleCreatePageSidebar';
+import { ArticleCreateHeaderContainer } from '../../uiNew/ArticleCreateHeaderContainer/ArticleCreateHeaderContainer';
+import { ArticleBlockCreatorContainer } from '../../uiNew/ArticleBlockCreatorContainer/ArticleBlockCreatorContainer';
+import { ArticleCreateActionsContainer } from '../../uiNew/ArticleCreateActionsContainer/ArticleCreateActionsContainer';
 
 interface ArticleCreatePageProps {
     className?: string;
@@ -27,9 +27,9 @@ const ArticleCreatePage = memo((props: ArticleCreatePageProps) => {
     const content = (
         <Page className={className}>
             <VStack gap="16">
-                <ArticleCreatePageHeader />
-                <ArticleBlockCreator />
-                <ArticleCreateActions />
+                <ArticleCreateHeaderContainer />
+                <ArticleBlockCreatorContainer />
+                <ArticleCreateActionsContainer />
             </VStack>
             <ArticlePreviewModal />
         </Page>

@@ -64,6 +64,28 @@ const articleCreatePageSlice = createSlice({
         closeModal: (state) => {
             state.isModalOpen = false;
         },
+        moveBlockUp: (state, action: PayloadAction<number>) => {
+            const index = action.payload;
+            if (index > 0 && index < state.blocks.length) {
+                const updatedBlocks = [...state.blocks];
+                [updatedBlocks[index], updatedBlocks[index - 1]] = [
+                    updatedBlocks[index - 1],
+                    updatedBlocks[index],
+                ];
+                state.blocks = updatedBlocks;
+            }
+        },
+        moveBlockDown: (state, action: PayloadAction<number>) => {
+            const index = action.payload;
+            if (index >= 0 && index < state.blocks.length - 1) {
+                const updatedBlocks = [...state.blocks];
+                [updatedBlocks[index], updatedBlocks[index + 1]] = [
+                    updatedBlocks[index + 1],
+                    updatedBlocks[index],
+                ];
+                state.blocks = updatedBlocks;
+            }
+        },
     },
     extraReducers: (builder) => {
         builder

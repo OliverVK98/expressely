@@ -56,7 +56,7 @@ export const ArticleCreatePageHeader = memo(
         return (
             <Card
                 padding="16"
-                border="partial"
+                border="default"
                 className={classNames(cls.ArticleCreatePageHeader, {}, [
                     className,
                 ])}

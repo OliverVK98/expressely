@@ -1,46 +1,19 @@
-import { useTranslation } from 'react-i18next';
 import React, { memo, useCallback } from 'react';
 import { ArticleBlock, ArticleBlockType } from '@/entities/Article';
-import { articleCreatePageActions } from '../../model/slices/articleCreatePageSlice';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { useArticleCreatePageBlocks } from '../../model/selectors/articleCreatePageSelectors';
 import { ArticleCodeBlockReadonly } from './ArticleCodeBlockReadonly';
 import { ArticleTextBlockReadonly } from './ArticleTextBlockReadonly';
 import { ArticleImageBlockReadonly } from './ArticleImageBlockReadonly';
 
 interface ArticleBlocksReadonlyProps {
-    className?: string;
+    moveBlockUp: (index: number) => void;
+    moveBlockDown: (index: number) => void;
+    onRemoveClick: (index: number) => void;
+    blocks: ArticleBlock[];
 }
 
 export const ArticleBlocksReadonly = memo(
     (props: ArticleBlocksReadonlyProps) => {
-        const { className } = props;
-        const { t } = useTranslation();
-        const dispatch = useAppDispatch();
-        const blocks = useArticleCreatePageBlocks();
-
-        const onRemoveClick = useCallback(
-            (index: number) => {
-                if (blocks) {
-                    dispatch(articleCreatePageActions.removeBlockById(index));
-                }
-            },
-            [blocks, dispatch],
-        );
-
-        const moveBlockUp = useCallback(
-            (index: number) => {
-                dispatch(articleCreatePageActions.moveBlockUp(index));
-            },
-            [dispatch],
-        );
-
-        const moveBlockDown = useCallback(
-            (index: number) => {
-                dispatch(articleCreatePageActions.moveBlockDown(index));
-            },
-            [dispatch],
-        );
+        const { moveBlockUp, moveBlockDown, onRemoveClick, blocks } = props;
 
         const renderBlock = useCallback(
             (block: ArticleBlock, index: number) => {

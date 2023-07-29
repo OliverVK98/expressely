@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { LoginModal } from '@/features/authByEmail';
@@ -20,10 +20,6 @@ const Navbar = memo(({ className }: NavbarProps) => {
     const [isAuthModal, setIsAuthModal] = useState(false);
     const [isSignUpModal, setIsSignUpModal] = useState(false);
     const authData = useSelector(getUserAuthData);
-
-    useEffect(() => {
-        console.log('here?');
-    }, [authData]);
 
     const onToggleAuthModal = useCallback(() => {
         setIsAuthModal((prev) => !prev);
