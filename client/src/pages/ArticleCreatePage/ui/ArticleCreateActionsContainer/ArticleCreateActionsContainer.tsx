@@ -1,45 +1,49 @@
-import { useSelector } from 'react-redux';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ArticleCreateActions } from '@/features/articleCreator';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useArticleCreatePageState } from '../../model/selectors/articleCreatePageSelectors';
-import { getUserAuthData } from '@/entities/User';
-import { articleCreatePageActions } from '../../model/slices/articleCreatePageSlice';
-import { addNewArticle } from '../../model/services/addNewArticle/addNewArticle';
+import { VStack } from '@/shared/ui/Stack';
+import { Text } from '@/shared/ui/Text';
 
 interface ArticleCreateActionsContainerProps {
     className?: string;
+    onPreviewButtonClick: () => void;
+    onPublishHandler: () => void;
 }
 
 export const ArticleCreateActionsContainer = (
     props: ArticleCreateActionsContainerProps,
 ) => {
-    const { className } = props;
-    const dispatch = useAppDispatch();
+    const { className, onPreviewButtonClick, onPublishHandler } = props;
     const state = useArticleCreatePageState();
-    const userData = useSelector(getUserAuthData);
+    const { t } = useTranslation();
+    const [error, setError] = useState(false);
 
     const onPreviewHandler = useCallback(() => {
-        dispatch(articleCreatePageActions.openModal());
-    }, [dispatch]);
-
-    const onPublishHandler = useCallback(() => {
-        dispatch(
-            addNewArticle({
-                title: state!.title,
-                subtitle: state?.subtitle,
-                img: state!.img,
-                type: state!.type,
-                blocks: state!.blocks,
-            }),
-        );
-    }, [dispatch, state, userData]);
+        setError(false);
+        if (!state?.img || !state?.title) {
+            setError(true);
+        } else {
+            onPreviewButtonClick();
+        }
+    }, [state?.img, state?.title, onPreviewButtonClick]);
 
     return (
-        <ArticleCreateActions
-            onPreviewHandler={onPreviewHandler}
-            onPublishHandler={onPublishHandler}
-            className={className}
-        />
+        <VStack max align="end" gap="8">
+            {error && (
+                <Text
+                    text={t('Title or Front Image cannot be empty')}
+                    variant="error"
+                    bold
+                />
+            )}
+            <ArticleCreateActions
+                firstActionButtonText={t('Preview Article')}
+                onFirstActionButtonClick={onPreviewHandler}
+                secondActionButtonText={t('Publish Article')}
+                onSecondActionButtonClick={onPublishHandler}
+                className={className}
+            />
+        </VStack>
     );
 };

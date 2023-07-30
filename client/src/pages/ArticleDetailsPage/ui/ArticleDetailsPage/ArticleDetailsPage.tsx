@@ -51,7 +51,7 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
     );
 
     return (
-        <DynamicModuleLoader reducers={reducers} removerAfterUnmount>
+        <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
             <StickyContentLayout content={content} right={rightBarContent} />
         </DynamicModuleLoader>
     );

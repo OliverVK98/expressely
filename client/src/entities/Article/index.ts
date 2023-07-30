@@ -18,7 +18,11 @@ import {
     ArticleCreateDto,
 } from './model/types/article';
 import { ArticleDetailsSchema } from './model/types/articleDetailsSchema';
-import { getArticleDetailsData } from './model/selectors/getArticleDetails';
+import {
+    getArticleDetailsData,
+    getArticleDetailsError,
+    getArticleDetailsIsLoading,
+} from './model/selectors/getArticleDetails';
 import { ArticleList } from './ui/ArticleList/ArticleList';
 import { articleDetailsReducer } from './model/slice/articleDetailsSlice';
 import { ArticleShortList } from './ui/ArticleShortList/ArticleShortList';
@@ -27,6 +31,7 @@ import { ArticleCodeBlockComponent } from './ui/ArticleCodeBlockComponent/Articl
 import { ArticleTextBlockComponent } from './ui/ArticleTextBlockComponent/ArticleTextBlockComponent';
 import { ArticleImageBlockComponent } from './ui/ArticleImageBlockComponent/ArticleImageBlockComponent';
 import { ArticleTypeSelect } from './ui/ArticleTypeSelect/ArticleTypeSelect';
+import { fetchArticleById } from './model/services/fetchArticleById';
 
 export {
     type ArticleCodeBlock,
@@ -46,6 +51,9 @@ export {
     ArticleFeedType,
     articleDetailsReducer,
     getArticleDetailsData,
+    getArticleDetailsError,
+    getArticleDetailsIsLoading,
+    fetchArticleById,
     ArticleList,
     ArticleDetails,
     ArticleShortList,

@@ -52,7 +52,7 @@ const ArticlesPage = (props: ArticlesPageProps) => {
     );
 
     return (
-        <DynamicModuleLoader reducers={reducers} removerAfterUnmount={false}>
+        <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
             <StickyContentLayout
                 left={<ViewSelectorContainer />}
                 right={<FiltersContainer />}

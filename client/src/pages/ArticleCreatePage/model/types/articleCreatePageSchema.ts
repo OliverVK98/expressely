@@ -6,7 +6,6 @@ export interface ArticleCreatePageSchema {
     img: string;
     type: ArticleType[];
     blocks: ArticleBlock[];
-    isModalOpen: boolean;
     isLoading?: boolean;
     error?: string;
 }

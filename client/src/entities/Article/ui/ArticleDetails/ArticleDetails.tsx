@@ -1,30 +1,28 @@
 import { useTranslation } from 'react-i18next';
 import React, { memo } from 'react';
-import { useSelector } from 'react-redux';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { VStack } from '@/shared/ui/Stack';
 import { Text } from '@/shared/ui/Text';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import {
     ReducersList,
     DynamicModuleLoader,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
-import { fetchArticleById } from '../../model/services/fetchArticleById';
 import { articleDetailsReducer } from '../../model/slice/articleDetailsSlice';
-import {
-    getArticleDetailsData,
-    getArticleDetailsError,
-    getArticleDetailsIsLoading,
-} from '../../model/selectors/getArticleDetails';
+
 import cls from './ArticleDetails.module.scss';
 import { AppImage } from '@/shared/ui/AppImage';
 import { ArticleBlocksRenderer } from '../../ui/ArticleBlocksRenderer/ArticleBlocksRenderer';
+import { ArticleBlock } from '../..';
 
 interface ArticleDetailsProps {
     className?: string;
-    id: string;
+    isLoading?: boolean;
+    error?: string | undefined;
+    title?: string;
+    subtitle?: string;
+    img?: string;
+    blocks?: ArticleBlock[];
 }
 
 const reducers: ReducersList = {
@@ -32,16 +30,8 @@ const reducers: ReducersList = {
 };
 
 export const ArticleDetails = memo((props: ArticleDetailsProps) => {
-    const { className, id } = props;
+    const { className, isLoading, error, img, blocks, subtitle, title } = props;
     const { t } = useTranslation();
-    const dispatch = useAppDispatch();
-    const isLoading = useSelector(getArticleDetailsIsLoading);
-    const article = useSelector(getArticleDetailsData);
-    const error = useSelector(getArticleDetailsError);
-
-    useInitialEffect(() => {
-        dispatch(fetchArticleById(id));
-    });
 
     let content;
 
@@ -71,16 +61,16 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
     } else {
         content = (
             <>
-                <Text title={article?.title} size="l" bold />
-                <Text title={article?.subtitle} />
+                <Text title={title} size="l" bold />
+                <Text title={subtitle} />
                 <AppImage
                     className={cls.img}
                     fallback={
                         <Skeleton width="100%" height={420} border="16px" />
                     }
-                    src={article?.img}
+                    src={img}
                 />
-                <ArticleBlocksRenderer blocks={article?.blocks} />
+                <ArticleBlocksRenderer blocks={blocks} />
             </>
         );
     }

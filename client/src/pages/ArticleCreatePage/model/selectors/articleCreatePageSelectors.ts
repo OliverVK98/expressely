@@ -20,10 +20,6 @@ export const [useArticleCreatePageBlocks] = buildSelector(
     (state) => state.articleCreatePage?.blocks || [],
 );
 
-export const [useArticleCreatePageIsModalOpen] = buildSelector(
-    (state) => state.articleCreatePage?.isModalOpen || false,
-);
-
 export const [useArticleCreatePageState] = buildSelector(
     (state) => state.articleCreatePage,
 );

@@ -1,13 +1,15 @@
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import { TOKEN_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
-import { ServerUserResponse, userActions } from '@/entities/User';
-import { store } from '@/app/providers/StoreProvider/ui/StoreProvider';
+import { ServerUserResponse } from '@/entities/User';
+
+interface CustomAxiosInstance extends AxiosInstance {
+    logout: () => void;
+}
 
 export const $api = axios.create({
     baseURL: __API__,
     withCredentials: true,
-    // validateStatus: (status) => status === 401 || status === 200,
-});
+}) as CustomAxiosInstance;
 
 $api.interceptors.request.use((config) => {
     if (config.headers) {
@@ -42,7 +44,8 @@ $api.interceptors.response.use(
                 console.log('User not authed', err);
             }
         }
-        store.dispatch(userActions.logout());
+        $api.logout();
+
         throw error;
     },
 );

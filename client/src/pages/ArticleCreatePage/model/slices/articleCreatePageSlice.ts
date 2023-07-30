@@ -15,7 +15,6 @@ const initialState: ArticleCreatePageSchema = {
     img: '',
     type: [ArticleType.All],
     blocks: [],
-    isModalOpen: false,
 };
 
 const articleCreatePageSlice = createSlice({
@@ -57,12 +56,6 @@ const articleCreatePageSlice = createSlice({
             const newBlocks = [...state.blocks];
             newBlocks.splice(action.payload, 1);
             state.blocks = newBlocks;
-        },
-        openModal: (state) => {
-            state.isModalOpen = true;
-        },
-        closeModal: (state) => {
-            state.isModalOpen = false;
         },
         moveBlockUp: (state, action: PayloadAction<number>) => {
             const index = action.payload;

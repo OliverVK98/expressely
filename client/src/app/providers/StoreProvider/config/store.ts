@@ -7,10 +7,10 @@ import { Reducer } from 'redux';
 
 import { userReducer } from '@/entities/User';
 import { createReducerManager } from '@/app/providers/StoreProvider/config/createReducerManager';
-import { $api } from '@/shared/api/api';
 import { scrollSaveReducer } from '@/features/scrollSave';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { StateSchema, ThunkExtraArg } from './StateSchema';
+import { $api } from '@/shared/api/api';
 
 export function createReduxStore(
     initialState?: StateSchema,

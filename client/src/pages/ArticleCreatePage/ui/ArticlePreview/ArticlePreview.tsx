@@ -1,60 +1,46 @@
-import React, { useCallback } from 'react';
-import { Modal } from '@/shared/ui/Modal';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import { ArticleBlocksRenderer } from '@/entities/Article';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { ArticleDetails } from '@/entities/Article';
 import { Card } from '@/shared/ui/Card';
-import { Text } from '@/shared/ui/Text';
-import { AppImage } from '@/shared/ui/AppImage';
-import { Skeleton } from '@/shared/ui/Skeleton';
-import cls from './ArticlePreview.module.scss';
 import {
     useArticleCreatePageBlocks,
     useArticleCreatePageImg,
-    useArticleCreatePageIsModalOpen,
     useArticleCreatePageSubtitle,
     useArticleCreatePageTitle,
 } from '../../model/selectors/articleCreatePageSelectors';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { articleCreatePageActions } from '../../model/slices/articleCreatePageSlice';
+import { VStack } from '@/shared/ui/Stack';
+import { ArticleCreateActions } from '@/features/articleCreator';
 
 interface ArticlePreviewProps {
     className?: string;
+    onPreviewButtonClick: () => void;
+    onPublishHandler: () => void;
 }
 
 export const ArticlePreview = (props: ArticlePreviewProps) => {
-    const { className } = props;
-    const dispatch = useAppDispatch();
-    const isModalOpen = useArticleCreatePageIsModalOpen();
+    const { className, onPreviewButtonClick, onPublishHandler } = props;
     const blocks = useArticleCreatePageBlocks();
     const imgSrc = useArticleCreatePageImg();
     const title = useArticleCreatePageTitle();
     const subtitle = useArticleCreatePageSubtitle();
-
-    const onCloseHandler = useCallback(() => {
-        dispatch(articleCreatePageActions.closeModal());
-    }, [dispatch]);
-
-    if (!isModalOpen) return null;
+    const { t } = useTranslation();
 
     return (
-        <Modal
-            isOpen={isModalOpen}
-            onClose={onCloseHandler}
-            className={classNames('', {}, [className])}
-            lazy
-        >
-            <Card max padding="16">
-                <Text title={title} size="l" bold />
-                <Text title={subtitle} />
-                <AppImage
-                    className={cls.img}
-                    fallback={
-                        <Skeleton width="100%" height={420} border="16px" />
-                    }
-                    src={imgSrc}
+        <VStack max gap="16">
+            <Card max className={className} border="default" padding="24">
+                <ArticleDetails
+                    blocks={blocks}
+                    title={title}
+                    subtitle={subtitle}
+                    img={imgSrc}
                 />
-                <ArticleBlocksRenderer blocks={blocks} />
             </Card>
-        </Modal>
+            <ArticleCreateActions
+                firstActionButtonText={t('Back to Editing')}
+                onFirstActionButtonClick={onPreviewButtonClick}
+                secondActionButtonText={t('Publish Article')}
+                onSecondActionButtonClick={onPublishHandler}
+            />
+        </VStack>
     );
 };

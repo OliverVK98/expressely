@@ -51,7 +51,7 @@ const AddCommentForm = (props: AddCommentFormProps) => {
 
     return (
         <DynamicModuleLoader reducers={reducers}>
-            <Card padding="24" border="round" max>
+            <Card padding="24" border="default" max>
                 <HStack
                     data-testid="AddCommentForm"
                     justify="between"
