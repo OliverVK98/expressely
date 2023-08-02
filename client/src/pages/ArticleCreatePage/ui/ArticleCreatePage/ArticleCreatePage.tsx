@@ -9,7 +9,7 @@ import { ArticlePreview } from '../ArticlePreview/ArticlePreview';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { ArticleCreatePageSidebar } from '../ArticleCreatePageSidebar/ArticleCreatePageSidebar';
 import { ArticleCreate } from '../ArticleCreate/ArticleCreate';
-import { addNewArticle } from '../../model/services/addNewArticle/addNewArticle';
+import { addNewArticle } from '../../model/services/addNewArticle';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useArticleCreatePageState } from '../../model/selectors/articleCreatePageSelectors';
 

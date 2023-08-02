@@ -15,11 +15,12 @@ import { Card } from '@/shared/ui/Card';
 
 interface EditableProfileCardHeaderProps {
     className?: string;
+    isAuthUserProfile: boolean;
 }
 
 export const EditableProfileCardHeader = memo(
     (props: EditableProfileCardHeaderProps) => {
-        const { className } = props;
+        const { className, isAuthUserProfile } = props;
         const { t } = useTranslation();
         const authData = useSelector(getUserAuthData);
         const profileData = useSelector(getProfileData);
@@ -44,7 +45,11 @@ export const EditableProfileCardHeader = memo(
                     justify="between"
                     className={classNames('', {}, [className])}
                 >
-                    <Text title={t('User Profile')} />
+                    <Text
+                        title={t(
+                            isAuthUserProfile ? 'Your Profile' : 'User Profile',
+                        )}
+                    />
 
                     {canEdit && (
                         <div>

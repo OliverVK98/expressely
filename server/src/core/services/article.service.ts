@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Article } from '../entities/article.entity';
@@ -7,6 +7,7 @@ import { User } from '../entities/user.entity';
 import { PageOptionsDto } from '../dtos/page/pageOptions.dto';
 import { PageMetaDto } from '../dtos/page/pageMeta.dto';
 import { PageDto } from '../dtos/page/page.dto';
+import { UpdateArticleDto } from '../dtos/article/updateArticle.dto';
 
 @Injectable()
 export class ArticleService {
@@ -20,14 +21,11 @@ export class ArticleService {
   }
 
   async findOne(id: number) {
-    return await this.repo.findOne({
-      relations: {
-        user: true,
-      },
-      where: {
-        id,
-      },
-    });
+    return await this.repo
+      .createQueryBuilder('article')
+      .where('article.id = :id', { id })
+      .leftJoinAndSelect('article.user', 'user')
+      .getOne();
   }
 
   async getArticles(pageOptions: PageOptionsDto) {
@@ -57,5 +55,14 @@ export class ArticleService {
     const pageMeta = new PageMetaDto({ pageOptions, itemCount });
 
     return new PageDto(entities, pageMeta);
+  }
+  async updateArticle(updateArgs: UpdateArticleDto, userId: number) {
+    const article = await this.findOne(updateArgs.id);
+    const articleUserId = article.user.id;
+    if (articleUserId !== userId) {
+      throw new UnauthorizedException();
+    }
+    const updatedArticle = { ...article, ...updateArgs };
+    return await this.repo.save(updatedArticle);
   }
 }

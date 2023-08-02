@@ -15,7 +15,7 @@ export const PublicationRules = memo((props: PublicationRulesProps) => {
     const { t } = useTranslation();
 
     return (
-        <Card padding="24" className={className} border="partial">
+        <Card padding="24" className={className} border="default">
             <VStack max gap="8">
                 <Text
                     align="center"

@@ -16,6 +16,7 @@ import {
     ArticleExpandedUser,
     ArticlesExpandedUserServerResponse,
     ArticleCreateDto,
+    ArticleEditDto,
 } from './model/types/article';
 import { ArticleDetailsSchema } from './model/types/articleDetailsSchema';
 import {
@@ -44,6 +45,7 @@ export {
     type ArticleExpandedUser,
     type ArticlesExpandedUserServerResponse,
     type ArticleCreateDto,
+    type ArticleEditDto,
     ArticleBlockType,
     ArticleView,
     ArticleSortField,

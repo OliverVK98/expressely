@@ -12,8 +12,6 @@ export const fetchAuthProfileData = createAsyncThunk<
     try {
         const response = await extra.api.get<Profile>(`/profiles`);
 
-        console.log(response);
-
         // @ts-ignore
         if (response.data?.message === 'Unauthorized') {
             throw new Error();

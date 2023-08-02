@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
     ArticleTextBlock,
@@ -6,10 +6,10 @@ import {
 } from '@/entities/Article';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { Card } from '@/shared/ui/Card';
-import { Text } from '@/shared/ui/Text';
 import { Button } from '@/shared/ui/Button';
 import cls from './ArticleBlocksReadonly.module.scss';
 import { BlockPositionSwitchers } from '@/features/blockPositionSwitchers';
+import { ArticleTextContentEdit } from '@/features/articleContentEdit';
 
 interface ArticleTextBlockReadonlyProps {
     className?: string;
@@ -18,6 +18,7 @@ interface ArticleTextBlockReadonlyProps {
     moveBlockDown: (index: number) => void;
     onRemoveClick: (index: number) => void;
     block: ArticleTextBlock;
+    updateBlockContent: (block: ArticleTextBlock) => void;
 }
 
 export const ArticleTextBlockReadonly = memo(
@@ -29,8 +30,31 @@ export const ArticleTextBlockReadonly = memo(
             index,
             onRemoveClick,
             block,
+            updateBlockContent,
         } = props;
         const { t } = useTranslation();
+        const [editMode, setEditMode] = useState(false);
+
+        // TODO: move up!
+        const onSaveButtonClick = useCallback(
+            (block: ArticleTextBlock) => {
+                updateBlockContent(block);
+                setEditMode(false);
+            },
+            [updateBlockContent],
+        );
+
+        const onEditButtonClick = useCallback(() => {
+            setEditMode(true);
+        }, []);
+
+        if (editMode)
+            return (
+                <ArticleTextContentEdit
+                    block={block}
+                    onSaveClick={onSaveButtonClick}
+                />
+            );
 
         return (
             <HStack max>
@@ -38,18 +62,24 @@ export const ArticleTextBlockReadonly = memo(
                     onClickUp={() => moveBlockUp(index)}
                     onClickDown={() => moveBlockDown(index)}
                 />
-
                 <Card className={className} max padding="16">
                     <VStack gap="4" max>
                         <ArticleTextBlockComponent block={block} />
-                        <HStack max justify="end">
+                        <HStack max justify="end" gap="8">
+                            <Button
+                                className={cls.btn}
+                                variant="outline"
+                                onClick={onEditButtonClick}
+                            >
+                                {t('Edit')}
+                            </Button>
                             <Button
                                 className={cls.btn}
                                 color="error"
                                 variant="outline"
                                 onClick={() => onRemoveClick(index)}
                             >
-                                <Text text={t('Remove Block')} />
+                                {t('Remove Block')}
                             </Button>
                         </HStack>
                     </VStack>

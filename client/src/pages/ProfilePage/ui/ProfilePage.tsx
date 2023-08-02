@@ -29,7 +29,9 @@ const ProfilePage = ({ className, isAuthUserProfile }: ProfilePageProps) => {
             className={classNames('', {}, [className])}
         >
             <VStack max gap="16">
-                <EditableProfileCardHeader />
+                <EditableProfileCardHeader
+                    isAuthUserProfile={isAuthUserProfile}
+                />
                 <EditableProfileCard
                     isAuthUserProfile={isAuthUserProfile}
                     id={Number(id!)}

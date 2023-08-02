@@ -1,5 +1,11 @@
 import { memo } from 'react';
-import { ArticleBlock, ArticleBlockType } from '@/entities/Article';
+import {
+    ArticleBlock,
+    ArticleBlockType,
+    ArticleCodeBlock,
+    ArticleImageBlock,
+    ArticleTextBlock,
+} from '@/entities/Article';
 import { TabItem } from '@/shared/ui/Tabs';
 import {
     ArticleCodeContentAdd,
@@ -8,6 +14,7 @@ import {
 } from '@/features/articleContentAdd';
 import { VStack } from '@/shared/ui/Stack';
 import { ArticleBlocksReadonly } from '../ArticleBlocksReadonly/ArticleBlocksReadonly';
+import { Skeleton } from '@/shared/ui/Skeleton';
 
 interface ArticleBlockCreatorProps {
     className?: string;
@@ -18,7 +25,11 @@ interface ArticleBlockCreatorProps {
     moveBlockUp: (index: number) => void;
     moveBlockDown: (index: number) => void;
     onRemoveClick: (index: number) => void;
-    blocks: ArticleBlock[];
+    blocks?: ArticleBlock[];
+    updateBlockContent: (
+        block: ArticleTextBlock | ArticleImageBlock | ArticleCodeBlock,
+    ) => void;
+    isLoading?: boolean;
 }
 
 export const ArticleBlockCreator = memo((props: ArticleBlockCreatorProps) => {
@@ -32,7 +43,11 @@ export const ArticleBlockCreator = memo((props: ArticleBlockCreatorProps) => {
         blocks,
         moveBlockUp,
         moveBlockDown,
+        isLoading,
+        updateBlockContent,
     } = props;
+
+    if (isLoading) return <Skeleton height={300} width="max" />;
 
     return (
         <VStack gap="8" max className={className}>
@@ -42,6 +57,7 @@ export const ArticleBlockCreator = memo((props: ArticleBlockCreatorProps) => {
                     moveBlockDown={moveBlockDown}
                     blocks={blocks}
                     onRemoveClick={onRemoveClick}
+                    updateBlockContent={updateBlockContent}
                 />
             </VStack>
             <ArticleTextContentAdd

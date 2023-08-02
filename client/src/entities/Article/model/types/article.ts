@@ -2,7 +2,7 @@ import { User } from '@/entities/User';
 import { ArticleBlockType, ArticleType } from '../consts/consts';
 
 export interface ArticleBlockBase {
-    id: string;
+    id: number;
     type: ArticleBlockType;
 }
 
@@ -80,3 +80,7 @@ export interface ArticleCreateDto {
     type: ArticleType[];
     blocks: ArticleBlock[];
 }
+
+export type ArticleEditDto = Partial<ArticleCreateDto> & {
+    id: number;
+};

@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Param,
+  Patch,
   Post,
   Query,
   UseGuards,
@@ -16,6 +17,7 @@ import { PageOptionsDto } from '../dtos/page/pageOptions.dto';
 import { ArticleSerializer } from '../serializers/article/article.serializer';
 import { AccessTokenGuard } from '../guards';
 import { UserService } from '../services/user.service';
+import { UpdateArticleDto } from '../dtos/article/updateArticle.dto';
 
 @Controller('articles')
 export class ArticleController {
@@ -53,5 +55,15 @@ export class ArticleController {
   ) {
     const user = await this.userService.findOneById(userId);
     return await this.articlesService.create(body, user);
+  }
+
+  @Patch('/update')
+  @UseGuards(AccessTokenGuard)
+  @Serialize(ArticleDto)
+  async updateArticle(
+    @Body() body: UpdateArticleDto,
+    @CurrentUser('userId') userId: number,
+  ) {
+    return await this.articlesService.updateArticle(body, userId);
   }
 }

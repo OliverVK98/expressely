@@ -21,7 +21,7 @@ export const getRouteArticleDetails = (id: string | number) =>
     `/articles/${id}`;
 export const getRouteArticleCreate = () => '/new-article';
 export const getRouteArticleEdit = (id: string | number) =>
-    `/articles/${id}/edit`;
+    `/edit-article/${id}`;
 export const getRouteAdmin = () => `/admin`;
 export const getRouteForbidden = () => `/forbidden`;
 

@@ -36,7 +36,7 @@ export const ArticleTypeSelect = memo((props: ArticleTypeSelectProps) => {
             items={options}
             className={classNames('', {}, [className])}
             readonly={readonly}
-            direction="topRight"
+            direction="bottomRight"
         />
     );
 });

@@ -13,7 +13,7 @@ interface ArticleTypeDropdownProps {
     className?: string;
     onTypeAddClick: () => void;
     onChangeType: (newType: ArticleType, index: number) => void;
-    types: ArticleType[];
+    types?: ArticleType[];
 }
 
 export const ArticleTypeDropdown = memo((props: ArticleTypeDropdownProps) => {
@@ -22,7 +22,7 @@ export const ArticleTypeDropdown = memo((props: ArticleTypeDropdownProps) => {
 
     return (
         <HStack max gap="8">
-            {types.map((type, index) => (
+            {types?.map((type, index) => (
                 <ArticleTypeSelect
                     key={index}
                     className={classNames(cls.ArticleTypeDropdown, {}, [
@@ -33,7 +33,7 @@ export const ArticleTypeDropdown = memo((props: ArticleTypeDropdownProps) => {
                     label={index === 0 ? t('Select Article Types') : ''}
                 />
             ))}
-            {types.length < 3 && (
+            {types && types.length < 3 && (
                 <Button
                     onClick={onTypeAddClick}
                     addonLeft={

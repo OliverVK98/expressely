@@ -56,9 +56,7 @@ export const ArticleBlockCreatorContainer = (
     const onAddClick = useCallback(
         (args: Omit<ArticleBlock, 'id'>) => {
             const id =
-                blocks.length > 0
-                    ? String(+blocks[blocks.length - 1].id + 1)
-                    : '1';
+                blocks.length > 0 ? +blocks[blocks.length - 1].id + 1 : 1;
 
             if (tab === ArticleBlockType.CODE) {
                 dispatch(
@@ -108,6 +106,13 @@ export const ArticleBlockCreatorContainer = (
         [t],
     );
 
+    const updateBlockContent = useCallback(
+        (block: ArticleBlock) => {
+            dispatch(articleCreatePageActions.updateBlockContent(block));
+        },
+        [dispatch],
+    );
+
     return (
         <ArticleBlockCreator
             blocks={blocks}
@@ -119,6 +124,7 @@ export const ArticleBlockCreatorContainer = (
             onAddClick={onAddClick}
             typeTabs={typeTabs}
             className={className}
+            updateBlockContent={updateBlockContent}
         />
     );
 };

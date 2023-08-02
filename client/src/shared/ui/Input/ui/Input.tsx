@@ -50,10 +50,6 @@ export const Input = memo((props: InputProps) => {
 
     const ref = useRef<HTMLInputElement>(null);
     const [isFocused, setIsFocused] = useState(false);
-    // const {
-    //     register,
-    //     formState: { errors },
-    // } = useFormContext();
 
     useEffect(() => {
         if (autofocus) {
@@ -81,10 +77,6 @@ export const Input = memo((props: InputProps) => {
         [cls.withAddonRight]: Boolean(addonRight),
     };
 
-    // const isReactHookFormProps = registerName
-    //     ? { ...register(registerName) }
-    //     : { ref, onChange: onChangeHandler };
-
     const input = (
         <div
             className={classNames(cls.InputWrapper, mods, [
@@ -105,10 +97,6 @@ export const Input = memo((props: InputProps) => {
                 onChange={onChangeHandler}
                 {...otherProps}
             />
-            {/* {errors.firstName?.message && */}
-            {/*     typeof errors.firstName.message === 'string' && ( */}
-            {/*         <Text text={errors.firstName?.message} variant="error" /> */}
-            {/*     )} */}
             <div className={cls.addonRight}>{addonRight}</div>
         </div>
     );

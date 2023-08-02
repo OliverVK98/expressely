@@ -31,7 +31,6 @@ export const userSlice = createSlice({
         },
         logout: (state) => {
             state.authData = undefined;
-            console.log('logout fired');
             localStorage.removeItem(TOKEN_LOCALSTORAGE_KEY);
             localStorage.removeItem(USER_LOCALSTORAGE_KEY);
         },

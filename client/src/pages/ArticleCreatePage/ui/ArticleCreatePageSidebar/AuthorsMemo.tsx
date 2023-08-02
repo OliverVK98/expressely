@@ -16,7 +16,7 @@ export const AuthorsMemo = memo((props: AuthorsMemoProps) => {
     const { t } = useTranslation();
 
     return (
-        <Card padding="24" className={className} border="partial">
+        <Card padding="24" className={className} border="default">
             <VStack max gap="16">
                 <Text
                     align="center"

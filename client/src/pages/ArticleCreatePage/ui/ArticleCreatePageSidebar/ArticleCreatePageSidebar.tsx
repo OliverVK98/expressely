@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
 import { VStack } from '@/shared/ui/Stack';
 import { AuthorsMemo } from './AuthorsMemo';
@@ -13,7 +12,6 @@ interface ArticleCreatePageSidebarProps {
 export const ArticleCreatePageSidebar = memo(
     (props: ArticleCreatePageSidebarProps) => {
         const { className } = props;
-        const { t } = useTranslation();
 
         return (
             <VStack

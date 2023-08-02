@@ -10,19 +10,21 @@ import { Card } from '@/shared/ui/Card';
 import { User } from '@/entities/User';
 import { ArticleTypeDropdown } from '../ArticleTypeDropdown/ArticleTypeDropdown';
 import { ArticleType } from '@/entities/Article';
+import { Skeleton } from '@/shared/ui/Skeleton';
 
 interface ArticleCreateHeaderProps {
     className?: string;
-    userData: User | undefined;
-    imgSrc: string;
-    title: string;
-    subtitle: string;
+    userData?: User;
+    imgSrc?: string;
+    title?: string;
+    subtitle?: string;
     onChangeTitle: (title: string) => void;
     onChangeSubtitle: (subtitle: string) => void;
     onChangeUrl: (img: string) => void;
     onTypeAddClick: () => void;
     onChangeType: (newType: ArticleType, index: number) => void;
-    types: ArticleType[];
+    types?: ArticleType[];
+    isLoading?: boolean;
 }
 
 export const ArticleCreateHeader = memo((props: ArticleCreateHeaderProps) => {
@@ -38,8 +40,35 @@ export const ArticleCreateHeader = memo((props: ArticleCreateHeaderProps) => {
         onTypeAddClick,
         types,
         onChangeType,
+        isLoading,
     } = props;
     const { t } = useTranslation();
+
+    if (isLoading)
+        return (
+            <Card
+                padding="16"
+                border="default"
+                className={classNames(cls.ArticleCreatePageHeader, {}, [
+                    className,
+                ])}
+                max
+            >
+                <VStack gap="8">
+                    <HStack gap="4" justify="between" max>
+                        <Text text={t('Editing article...')} bold size="l" />
+                        <HStack gap="4">
+                            <Skeleton border="round" height={32} width={32} />
+                            <Skeleton height={32} width={40} />
+                        </HStack>
+                    </HStack>
+                    <Skeleton height={50} width="max" />
+                    <Skeleton height={50} width="max" />
+                    <Skeleton height={50} width="max" />
+                    <Skeleton height={50} width="max" />
+                </VStack>
+            </Card>
+        );
 
     return (
         <Card
@@ -50,10 +79,10 @@ export const ArticleCreateHeader = memo((props: ArticleCreateHeaderProps) => {
         >
             <VStack gap="8">
                 <HStack gap="4" justify="between" max>
-                    <Text text={t('Tell your story...')} bold size="l" />
+                    <Text text={t('Editing article...')} bold size="l" />
                     <HStack gap="4">
-                        <Avatar size={32} src={userData!.avatar} />
-                        <Text bold text={userData!.username} />
+                        <Avatar size={32} src={userData?.avatar} />
+                        <Text bold text={userData?.username} />
                     </HStack>
                 </HStack>
                 <Input label="Title: " value={title} onChange={onChangeTitle} />

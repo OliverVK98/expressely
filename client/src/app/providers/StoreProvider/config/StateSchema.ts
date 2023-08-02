@@ -17,6 +17,7 @@ import { rtkApi } from '@/shared/api/rtkApi';
 import { ProfileSchema } from '@/features/editableProfileCard';
 import { ArticleCreatePageSchema } from '@/pages/ArticleCreatePage';
 import { MainPageSchema } from '@/pages/MainPage';
+import { ArticleEditPageSchema } from '@/pages/ArticleEditPage';
 
 export interface StateSchema {
     user: UserSchema;
@@ -29,6 +30,7 @@ export interface StateSchema {
     articlesPage?: ArticlesPageSchema;
     articlesDetailsPage?: ArticleDetailsPageSchema;
     articleCreatePage?: ArticleCreatePageSchema;
+    articleEditPage?: ArticleEditPageSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;

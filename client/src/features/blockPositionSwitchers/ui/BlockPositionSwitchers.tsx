@@ -20,21 +20,23 @@ export const BlockPositionSwitchers = memo(
                 className={classNames(cls.BlockPositionSwitchers, {}, [
                     className,
                 ])}
-                gap="16"
+                max
+                gap="32"
             >
                 <Icon
                     Svg={CircleIcon}
                     clickable
                     onClick={onClickUp}
-                    width={32}
-                    height={32}
+                    width={25}
+                    height={25}
+                    className={cls.scrollUp}
                 />
                 <Icon
                     Svg={CircleIcon}
                     clickable
                     onClick={onClickDown}
-                    width={32}
-                    height={32}
+                    width={25}
+                    height={25}
                     className={cls.scrollDown}
                 />
             </VStack>

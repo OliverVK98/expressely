@@ -25,11 +25,9 @@ const baseQueryWithReauth: BaseQueryFn<
     FetchBaseQueryError
 > = async (args, api, extraOptions) => {
     let result = await baseQuery(args, api, extraOptions);
-    console.log('Result 1:', result); // Debug line
 
     if (result.error && result.error.status === 401) {
         const response = await baseQuery('/auth/refresh', api, extraOptions);
-        console.log('Response:', response); // Debug line
 
         if (response.data) {
             localStorage.setItem(
@@ -39,13 +37,10 @@ const baseQueryWithReauth: BaseQueryFn<
             );
             result = await baseQuery(args, api, extraOptions);
 
-            console.log('Result 2:', result); // Debug line
-
             if (result.error && result.error.status === 401) {
                 // ...
             }
         } else {
-            console.log('dispatched?');
             api.dispatch(userActions.logout());
         }
     }

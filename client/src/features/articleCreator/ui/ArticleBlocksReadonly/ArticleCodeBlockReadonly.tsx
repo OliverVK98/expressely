@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
     ArticleCodeBlock,
@@ -6,10 +6,10 @@ import {
 } from '@/entities/Article';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { Card } from '@/shared/ui/Card';
-import { Text } from '@/shared/ui/Text';
 import { Button } from '@/shared/ui/Button';
 import cls from './ArticleBlocksReadonly.module.scss';
 import { BlockPositionSwitchers } from '@/features/blockPositionSwitchers';
+import { ArticleCodeContentEdit } from '@/features/articleContentEdit';
 
 interface ArticleCodeBlockReadonlyProps {
     className?: string;
@@ -18,6 +18,7 @@ interface ArticleCodeBlockReadonlyProps {
     moveBlockDown: (index: number) => void;
     onRemoveClick: (index: number) => void;
     block: ArticleCodeBlock;
+    updateBlockContent: (block: ArticleCodeBlock) => void;
 }
 
 export const ArticleCodeBlockReadonly = memo(
@@ -29,8 +30,31 @@ export const ArticleCodeBlockReadonly = memo(
             index,
             onRemoveClick,
             block,
+            updateBlockContent,
         } = props;
         const { t } = useTranslation();
+        const [editMode, setEditMode] = useState(false);
+
+        // TODO: move up!
+        const onSaveButtonClick = useCallback(
+            (block: ArticleCodeBlock) => {
+                updateBlockContent(block);
+                setEditMode(false);
+            },
+            [updateBlockContent],
+        );
+
+        const onEditButtonClick = useCallback(() => {
+            setEditMode(true);
+        }, []);
+
+        if (editMode)
+            return (
+                <ArticleCodeContentEdit
+                    block={block}
+                    onSaveClick={onSaveButtonClick}
+                />
+            );
 
         return (
             <HStack max>
@@ -44,11 +68,18 @@ export const ArticleCodeBlockReadonly = memo(
                         <HStack max justify="end">
                             <Button
                                 className={cls.btn}
+                                variant="outline"
+                                onClick={onEditButtonClick}
+                            >
+                                {t('Edit')}
+                            </Button>
+                            <Button
+                                className={cls.btn}
                                 color="error"
                                 variant="outline"
                                 onClick={() => onRemoveClick(index)}
                             >
-                                <Text text={t('Remove Block')} />
+                                {t('Remove Block')}
                             </Button>
                         </HStack>
                     </VStack>

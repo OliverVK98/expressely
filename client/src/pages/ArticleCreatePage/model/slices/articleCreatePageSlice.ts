@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ArticleCreatePageSchema } from '../types/articleCreatePageSchema';
 import {
+    ArticleBlock,
     ArticleCodeBlock,
     ArticleImageBlock,
     ArticleTextBlock,
     ArticleType,
 } from '@/entities/Article';
 
-import { addNewArticle } from '../services/addNewArticle/addNewArticle';
+import { addNewArticle } from '../services/addNewArticle';
 
 const initialState: ArticleCreatePageSchema = {
     title: '',
@@ -77,6 +78,17 @@ const articleCreatePageSlice = createSlice({
                     updatedBlocks[index],
                 ];
                 state.blocks = updatedBlocks;
+            }
+        },
+        updateBlockContent: (state, action: PayloadAction<ArticleBlock>) => {
+            const blockIndex = state.blocks.findIndex(
+                (block) => block.id === action.payload.id,
+            );
+            if (blockIndex !== -1) {
+                state.blocks[blockIndex] = {
+                    ...state.blocks[blockIndex],
+                    ...action.payload,
+                };
             }
         },
     },
