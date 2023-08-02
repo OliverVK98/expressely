@@ -8,7 +8,15 @@ const notificationAPI = rtkApi.injectEndpoints({
                 url: '/notifications',
             }),
         }),
+        setViewed: build.mutation<Notification[], { id: number }>({
+            query: ({ id }) => ({
+                url: '/notifications',
+                method: 'PATCH',
+                body: { id },
+            }),
+        }),
     }),
 });
 
-export const useNotifications = notificationAPI.useGetNotificationsQuery;
+export const useGetNotifications = notificationAPI.useGetNotificationsQuery;
+export const useSetViewedNotification = notificationAPI.useSetViewedMutation;

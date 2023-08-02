@@ -4,14 +4,14 @@ import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { Article, ArticleEditDto } from '@/entities/Article';
 import { getRouteArticleDetails } from '@/shared/const/router';
 
-interface updateArticleArgs {
+interface UpdateArticleArgs {
     article: ArticleEditDto;
     navigate: NavigateFunction;
 }
 
 export const updateArticle = createAsyncThunk<
     void,
-    updateArticleArgs,
+    UpdateArticleArgs,
     ThunkConfig<string>
 >('ArticleEditPage/updateArticle', async ({ article, navigate }, thunkAPI) => {
     const { extra, rejectWithValue } = thunkAPI;

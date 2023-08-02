@@ -63,6 +63,7 @@ export const ArticleCreateHeaderContainer = (
             onChangeTitle={onChangeTitle}
             className={className}
             isLoading={isLoading}
+            isEditMode
         />
     );
 };

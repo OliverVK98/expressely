@@ -18,6 +18,7 @@ import { ArticleSerializer } from '../serializers/article/article.serializer';
 import { AccessTokenGuard } from '../guards';
 import { UserService } from '../services/user.service';
 import { UpdateArticleDto } from '../dtos/article/updateArticle.dto';
+import { NotificationService } from '../services/notification.service';
 
 @Controller('articles')
 export class ArticleController {
@@ -25,6 +26,7 @@ export class ArticleController {
     private articlesService: ArticleService,
     private articleSerializer: ArticleSerializer,
     private userService: UserService,
+    private notificationService: NotificationService,
   ) {}
 
   @Get('/:id')
@@ -54,7 +56,16 @@ export class ArticleController {
     @CurrentUser('userId') userId: number,
   ) {
     const user = await this.userService.findOneById(userId);
-    return await this.articlesService.create(body, user);
+    const article = await this.articlesService.create(body, user);
+    this.notificationService.createNotification(
+      {
+        title: `New Article Published`,
+        description: `Article: ${article.title} was successfully created`,
+        href: `/articles/${article.id}`,
+      },
+      user,
+    );
+    return article;
   }
 
   @Patch('/update')

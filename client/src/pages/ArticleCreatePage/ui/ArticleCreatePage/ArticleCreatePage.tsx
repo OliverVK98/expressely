@@ -1,4 +1,5 @@
 import { memo, useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Page } from '@/widgets/Page';
 import {
     DynamicModuleLoader,
@@ -25,6 +26,7 @@ const ArticleCreatePage = memo((props: ArticleCreatePageProps) => {
     const { className } = props;
     const [isPreview, setIsPreview] = useState(false);
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const state = useArticleCreatePageState();
 
     const onPreviewButtonClick = () => {
@@ -34,14 +36,17 @@ const ArticleCreatePage = memo((props: ArticleCreatePageProps) => {
     const onPublishHandler = useCallback(() => {
         dispatch(
             addNewArticle({
-                title: state!.title,
-                subtitle: state?.subtitle,
-                img: state!.img,
-                type: state!.type,
-                blocks: state!.blocks,
+                article: {
+                    title: state!.title,
+                    subtitle: state?.subtitle,
+                    img: state!.img,
+                    type: state!.type,
+                    blocks: state!.blocks,
+                },
+                navigate,
             }),
         );
-    }, [dispatch, state]);
+    }, [navigate, dispatch, state]);
 
     const content = (
         <Page className={className}>

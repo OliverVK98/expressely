@@ -10,6 +10,12 @@ export class Notification extends AbstractEntity {
   @Column()
   description: string;
 
+  @Column({ nullable: true })
+  href?: string;
+
+  @Column()
+  viewed: boolean;
+
   @ManyToOne(() => User, (user) => user.notifications)
   user: User;
 }

@@ -14,7 +14,7 @@ export const ArticleCreate = (props: ArticleCreateProps) => {
 
     return (
         <VStack gap="16" className={className}>
-            <ArticleCreateHeaderContainer />
+            <ArticleCreateHeaderContainer isEditMode={false} />
             <ArticleBlockCreatorContainer />
             <ArticleCreateActionsContainer
                 onPublishHandler={onPublishHandler}

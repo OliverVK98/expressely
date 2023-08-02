@@ -25,6 +25,7 @@ interface ArticleCreateHeaderProps {
     onChangeType: (newType: ArticleType, index: number) => void;
     types?: ArticleType[];
     isLoading?: boolean;
+    isEditMode: boolean;
 }
 
 export const ArticleCreateHeader = memo((props: ArticleCreateHeaderProps) => {
@@ -41,6 +42,7 @@ export const ArticleCreateHeader = memo((props: ArticleCreateHeaderProps) => {
         types,
         onChangeType,
         isLoading,
+        isEditMode,
     } = props;
     const { t } = useTranslation();
 
@@ -56,7 +58,15 @@ export const ArticleCreateHeader = memo((props: ArticleCreateHeaderProps) => {
             >
                 <VStack gap="8">
                     <HStack gap="4" justify="between" max>
-                        <Text text={t('Editing article...')} bold size="l" />
+                        <Text
+                            text={t(
+                                isEditMode
+                                    ? 'Editing article...'
+                                    : 'Tell your story...',
+                            )}
+                            bold
+                            size="l"
+                        />
                         <HStack gap="4">
                             <Skeleton border="round" height={32} width={32} />
                             <Skeleton height={32} width={40} />
@@ -79,7 +89,15 @@ export const ArticleCreateHeader = memo((props: ArticleCreateHeaderProps) => {
         >
             <VStack gap="8">
                 <HStack gap="4" justify="between" max>
-                    <Text text={t('Editing article...')} bold size="l" />
+                    <Text
+                        text={t(
+                            isEditMode
+                                ? 'Editing article...'
+                                : 'Tell your story...',
+                        )}
+                        bold
+                        size="l"
+                    />
                     <HStack gap="4">
                         <Avatar size={32} src={userData?.avatar} />
                         <Text bold text={userData?.username} />

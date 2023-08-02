@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useCallback } from 'react';
 import { ArticleCreateHeader } from '@/features/articleCreator';
@@ -15,13 +14,13 @@ import { ArticleType } from '@/entities/Article';
 
 interface ArticleCreateHeaderContainerProps {
     className?: string;
+    isEditMode: boolean;
 }
 
 export const ArticleCreateHeaderContainer = (
     props: ArticleCreateHeaderContainerProps,
 ) => {
-    const { className } = props;
-    const { t } = useTranslation();
+    const { className, isEditMode } = props;
     const dispatch = useAppDispatch();
     const imgSrc = useArticleCreatePageImg();
     const title = useArticleCreatePageTitle();
@@ -74,6 +73,7 @@ export const ArticleCreateHeaderContainer = (
             onChangeType={onChangeType}
             onChangeTitle={onChangeTitle}
             className={className}
+            isEditMode={isEditMode}
         />
     );
 };

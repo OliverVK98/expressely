@@ -3,9 +3,10 @@ import { memo } from 'react';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { VStack } from '@/shared/ui/Stack';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { useNotifications } from '../../api/notificationApi';
+import { useGetNotifications } from '../../api/notificationApi';
 import { NotificationItem } from '../NotificationItem/NotificationItem';
 import cls from './NotificationList.module.scss';
+import { Text } from '@/shared/ui/Text';
 
 interface NotificationListProps {
     className?: string;
@@ -14,7 +15,7 @@ interface NotificationListProps {
 export const NotificationList = memo((props: NotificationListProps) => {
     const { className } = props;
     const { t } = useTranslation();
-    const { data, isLoading } = useNotifications(null, {
+    const { data, isLoading, refetch } = useGetNotifications(null, {
         pollingInterval: 10000,
     });
 
@@ -32,6 +33,19 @@ export const NotificationList = memo((props: NotificationListProps) => {
         );
     }
 
+    if (data?.length === 0)
+        return (
+            <VStack
+                gap="16"
+                max
+                className={classNames(cls.NotificationList, {}, [className])}
+                align="center"
+                justify="center"
+            >
+                <Text text={t(`You don't have any notifications`)} size="l" />
+            </VStack>
+        );
+
     return (
         <VStack
             gap="16"
@@ -39,7 +53,7 @@ export const NotificationList = memo((props: NotificationListProps) => {
             className={classNames(cls.NotificationList, {}, [className])}
         >
             {data?.map((item) => (
-                <NotificationItem key={item.id} item={item} />
+                <NotificationItem key={item.id} item={item} refetch={refetch} />
             ))}
         </VStack>
     );

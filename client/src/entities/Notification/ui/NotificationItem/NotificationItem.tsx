@@ -1,30 +1,65 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { Card } from '@/shared/ui/Card';
 import { AppLink } from '@/shared/ui/AppLink';
 import { Text } from '@/shared/ui/Text';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Notification } from '../../model/types/notification';
 import cls from './NotificationItem.module.scss';
+import CloseIcon from '@/shared/assets/icons/close.svg';
+import { Icon } from '@/shared/ui/Icon';
+import { useSetViewedNotification } from '../../api/notificationApi';
 
 interface NotificationItemProps {
     className?: string;
     item: Notification;
+    refetch: () => void;
 }
 
 export const NotificationItem = memo((props: NotificationItemProps) => {
-    const { className, item } = props;
+    const { className, item, refetch } = props;
+    const [setViewed] = useSetViewedNotification();
+    const handleViewed = useCallback(() => {
+        setViewed({ id: item.id });
+        refetch();
+    }, [refetch, item.id, setViewed]);
 
     const content = (
-        <Card className={classNames(cls.NotificationItem, {}, [className])}>
-            <Text title={item.title} text={item.description} />
+        <Card
+            className={classNames(cls.NotificationItem, {}, [className])}
+            variant="light"
+        >
+            <Icon
+                Svg={CloseIcon}
+                height={26}
+                width={26}
+                className={cls.closeIcon}
+                clickable
+                onClick={handleViewed}
+            />
+            <Text title={item.title} size="s" />
+            <Text title={item.description} size="s" />
         </Card>
     );
 
     if (item.href) {
         return (
-            <AppLink className={cls.link} to={item.href}>
-                {content}
-            </AppLink>
+            <Card
+                className={classNames(cls.NotificationItem, {}, [className])}
+                variant="light"
+            >
+                <Icon
+                    Svg={CloseIcon}
+                    height={26}
+                    width={26}
+                    className={cls.closeIcon}
+                    clickable
+                    onClick={handleViewed}
+                />
+                <AppLink className={cls.link} to={item.href}>
+                    <Text title={item.title} size="s" />
+                    <Text title={item.description} size="s" />
+                </AppLink>
+            </Card>
         );
     }
 

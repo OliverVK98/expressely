@@ -1,12 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import React, { memo, useCallback, useState } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import cls from '../sharedStyles/sharedStyles.module.scss';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { Input } from '@/shared/ui/Input';
 import { Button } from '@/shared/ui/Button';
-import { Icon } from '@/shared/ui/Icon';
-import AddIcon from '@/shared/assets/icons/add.svg';
 import { Text } from '@/shared/ui/Text';
 import { TabItem, Tabs } from '@/shared/ui/Tabs';
 import { Card } from '@/shared/ui/Card';
@@ -108,24 +105,14 @@ export const ArticleTextContentAdd = memo((props: ArticleContentAddProps) => {
                 )}
                 <HStack justify="between" max>
                     <HStack gap="4">
-                        <Button
-                            addonLeft={
-                                <Icon Svg={AddIcon} className={cls.icon} />
-                            }
-                            size="m"
-                        >
+                        <Button size="m" color="success">
                             <Text
                                 text={t('Add Paragraph')}
                                 onClick={onAddParagraph}
                             />
                         </Button>
                         {paragraphs.length > 1 && (
-                            <Button
-                                addonLeft={
-                                    <Icon Svg={AddIcon} className={cls.icon} />
-                                }
-                                size="m"
-                            >
+                            <Button size="m" color="error">
                                 <Text
                                     text={t('Remove Paragraph')}
                                     onClick={onRemoveParagraph}
@@ -141,7 +128,6 @@ export const ArticleTextContentAdd = memo((props: ArticleContentAddProps) => {
                         />
                     </HStack>
                     <Button
-                        className={cls.btn}
                         color="success"
                         variant="outline"
                         onClick={handleSubmit}

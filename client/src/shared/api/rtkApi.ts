@@ -36,11 +36,7 @@ const baseQueryWithReauth: BaseQueryFn<
                 response.data.accessToken,
             );
             result = await baseQuery(args, api, extraOptions);
-
-            if (result.error && result.error.status === 401) {
-                // ...
-            }
-        } else {
+        } else if (response.error && response.error.status === 401) {
             api.dispatch(userActions.logout());
         }
     }
