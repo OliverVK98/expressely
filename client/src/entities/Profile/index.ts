@@ -5,7 +5,6 @@ import {
     PublicProfile,
     CreateProfileDto,
 } from './model/types/profileSchema';
-import { ProfileCard } from './ui/ProfileCard/ProfileCard';
 
 export {
     type Profile,
@@ -13,5 +12,4 @@ export {
     type EditableProfileFields,
     type UpdateProfileDto,
     type CreateProfileDto,
-    ProfileCard,
 };

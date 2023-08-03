@@ -32,7 +32,8 @@ import { ArticleCodeBlockComponent } from './ui/ArticleCodeBlockComponent/Articl
 import { ArticleTextBlockComponent } from './ui/ArticleTextBlockComponent/ArticleTextBlockComponent';
 import { ArticleImageBlockComponent } from './ui/ArticleImageBlockComponent/ArticleImageBlockComponent';
 import { ArticleTypeSelect } from './ui/ArticleTypeSelect/ArticleTypeSelect';
-import { fetchArticleById } from './model/services/fetchArticleById';
+import { fetchArticleById } from './model/services/fetchArticleById/fetchArticleById';
+import { incrementArticleViews } from './model/services/incrementArticleViews/incrementArticleViews';
 
 export {
     type ArticleCodeBlock,
@@ -56,6 +57,7 @@ export {
     getArticleDetailsError,
     getArticleDetailsIsLoading,
     fetchArticleById,
+    incrementArticleViews,
     ArticleList,
     ArticleDetails,
     ArticleShortList,

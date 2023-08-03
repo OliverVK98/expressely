@@ -25,6 +25,7 @@ export interface PublicProfile {
     avatar: string | null;
 }
 
+// TODO: delete and move to page level
 export type EditableProfileFields = Omit<Profile, 'userId'>;
 
 export type UpdateProfileDto = Partial<EditableProfileFields>;

@@ -4,7 +4,7 @@ import { ReducersList } from '@/shared/lib/components/DynamicModuleLoader/Dynami
 import { articleDetailsReducer } from '@/entities/Article';
 import { addCommentFormReducer } from '@/features/addCommentForm';
 import { articleDetailsPageReducer } from '@/pages/ArticleDetailsPage';
-import { profileReducer } from '@/features/editableProfileCard';
+import { profileReducer } from '@/pages/ProfilePage';
 
 const defaultAsyncReducers: ReducersList = {
     profile: profileReducer,

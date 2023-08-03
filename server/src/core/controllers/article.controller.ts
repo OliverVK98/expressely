@@ -2,6 +2,8 @@ import {
   Body,
   Controller,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   Patch,
   Post,
@@ -19,6 +21,7 @@ import { AccessTokenGuard } from '../guards';
 import { UserService } from '../services/user.service';
 import { UpdateArticleDto } from '../dtos/article/updateArticle.dto';
 import { NotificationService } from '../services/notification.service';
+import { ArticleIncrementViewDto } from '../dtos/article/articleIncrementView.dto';
 
 @Controller('articles')
 export class ArticleController {
@@ -76,5 +79,11 @@ export class ArticleController {
     @CurrentUser('userId') userId: number,
   ) {
     return await this.articlesService.updateArticle(body, userId);
+  }
+
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @Get('/view-increment/:id')
+  incrementViewCounter(@Param() { id }: ArticleIncrementViewDto) {
+    this.articlesService.incrementViewCounter(id);
   }
 }

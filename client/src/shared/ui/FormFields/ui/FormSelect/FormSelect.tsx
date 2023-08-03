@@ -11,7 +11,7 @@ interface FormSelectProps {
     className?: string;
     SelectComponent: (props: any) => JSX.Element;
     registerName: string;
-    defaultValue: Country | Currency;
+    defaultValue?: Country | Currency;
 }
 
 export const FormSelect = memo((props: FormSelectProps) => {

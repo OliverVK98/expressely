@@ -17,7 +17,7 @@ export const ArticleCreate = (props: ArticleCreateProps) => {
             <ArticleCreateHeaderContainer isEditMode={false} />
             <ArticleBlockCreatorContainer />
             <ArticleCreateActionsContainer
-                onPublishHandler={onPublishHandler}
+                onPublishButtonClick={onPublishHandler}
                 onPreviewButtonClick={onPreviewButtonClick}
             />
         </VStack>

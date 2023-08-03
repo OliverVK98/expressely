@@ -90,5 +90,8 @@
   "Publish Article": "Publish Article",
   "Preview Article": "Preview Article",
   "Title or Front Image cannot be empty": "Title or Front Image cannot be empty",
-  "Your Profile": "Your Profile"
+  "Your Profile": "Your Profile",
+  "Article title or Front Image cannot be empty": "Article title or Front Image cannot be empty",
+  "Article should have at least one content block": "Article should have at least one content block",
+  "Article Title or Front Image cannot be empty": "Article Title or Front Image cannot be empty"
 }

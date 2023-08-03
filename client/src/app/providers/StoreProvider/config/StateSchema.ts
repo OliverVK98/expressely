@@ -14,10 +14,10 @@ import { AddCommentFormSchema } from '@/features/addCommentForm';
 import { ArticlesPageSchema } from '@/pages/ArticlesPage';
 import { ScrollSaveSchema } from '@/features/scrollSave';
 import { rtkApi } from '@/shared/api/rtkApi';
-import { ProfileSchema } from '@/features/editableProfileCard';
 import { ArticleCreatePageSchema } from '@/pages/ArticleCreatePage';
 import { MainPageSchema } from '@/pages/MainPage';
 import { ArticleEditPageSchema } from '@/pages/ArticleEditPage';
+import { ProfileSchema } from '@/pages/ProfilePage';
 
 export interface StateSchema {
     user: UserSchema;

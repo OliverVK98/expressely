@@ -8,31 +8,54 @@ import { Text } from '@/shared/ui/Text';
 interface ArticleCreateActionsContainerProps {
     className?: string;
     onPreviewButtonClick: () => void;
-    onPublishHandler: () => void;
+    onPublishButtonClick: () => void;
 }
 
 export const ArticleCreateActionsContainer = (
     props: ArticleCreateActionsContainerProps,
 ) => {
-    const { className, onPreviewButtonClick, onPublishHandler } = props;
+    const { className, onPreviewButtonClick, onPublishButtonClick } = props;
     const state = useArticleCreatePageState();
     const { t } = useTranslation();
-    const [error, setError] = useState(false);
+    const [headerError, setHeaderError] = useState(false);
+    const [blockError, setBlockError] = useState(false);
 
     const onPreviewHandler = useCallback(() => {
-        setError(false);
+        setHeaderError(false);
+        setBlockError(false);
         if (!state?.img || !state?.title) {
-            setError(true);
+            setHeaderError(true);
+        } else if (!state?.blocks.length) {
+            setBlockError(true);
         } else {
             onPreviewButtonClick();
         }
-    }, [state?.img, state?.title, onPreviewButtonClick]);
+    }, [onPreviewButtonClick, state?.blocks, state?.img, state?.title]);
+
+    const onPublishHandler = useCallback(() => {
+        setHeaderError(false);
+        setBlockError(false);
+        if (!state?.img || !state?.title) {
+            setHeaderError(true);
+        } else if (!state?.blocks.length) {
+            setBlockError(true);
+        } else {
+            onPublishButtonClick();
+        }
+    }, [onPublishButtonClick, state?.blocks.length, state?.img, state?.title]);
 
     return (
         <VStack max align="end" gap="8">
-            {error && (
+            {headerError && (
                 <Text
-                    text={t('Title or Front Image cannot be empty')}
+                    text={t('Article Title or Front Image cannot be empty')}
+                    variant="error"
+                    bold
+                />
+            )}
+            {blockError && (
+                <Text
+                    text={t('Article should have at least one content block')}
                     variant="error"
                     bold
                 />

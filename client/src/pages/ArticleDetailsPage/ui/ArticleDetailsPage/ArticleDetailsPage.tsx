@@ -17,6 +17,9 @@ import { DetailsContainer } from '../DetailsContainer/DetailsContainer';
 import { ArticleRating } from '@/features/articleRating';
 import { ArticleDetailsComments } from '../ArticleDetailsComments/ArticleDetailsComments';
 import { getUserAuthData } from '@/entities/User';
+import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { incrementArticleViews } from '@/entities/Article';
 
 interface ArticleDetailsPageProps {
     className?: string;
@@ -32,6 +35,11 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
         id: string;
     }>();
     const authData = useSelector(getUserAuthData);
+    const dispatch = useAppDispatch();
+
+    useInitialEffect(() => {
+        dispatch(incrementArticleViews({ id: +id! }));
+    });
 
     const content = (
         <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>

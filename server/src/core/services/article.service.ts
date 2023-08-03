@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Article } from '../entities/article.entity';
@@ -64,5 +68,14 @@ export class ArticleService {
     }
     const updatedArticle = { ...article, ...updateArgs };
     return await this.repo.save(updatedArticle);
+  }
+
+  async incrementViewCounter(id: number) {
+    const article = await this.findOne(id);
+    if (!article) {
+      throw new NotFoundException(`Article #${id} not found`);
+    }
+    article.views += 1;
+    await this.repo.save(article);
   }
 }

@@ -34,7 +34,7 @@ export const ArticleEdit = (props: ArticleEditProps) => {
                 isLoading={isLoading}
             />
             <ArticleCreateActionsContainer
-                onPublishHandler={onPublishHandler}
+                onPublishButtonClick={onPublishHandler}
                 onPreviewButtonClick={onPreviewButtonClick}
             />
         </VStack>
