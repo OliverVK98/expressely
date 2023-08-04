@@ -5,6 +5,9 @@ import { JsonSettingsDto, User } from '../entities/user.entity';
 import { UpdateUserDto } from '../dtos/user/updateUser.dto';
 import { CreateUserDto } from '../dtos/user/createUser.dto';
 import { Profile } from '../entities/profile.entity';
+import { Article } from '../entities/article.entity';
+import { ViewedArticleService } from './viewedArticle.service';
+import { ArticleService } from './article.service';
 
 @Injectable()
 export class UserService {
@@ -57,5 +60,57 @@ export class UserService {
     user.jsonSettings = jsonSettings;
 
     return this.repo.save(user);
+  }
+
+  async updateUserHistory(
+    id: number,
+    article: Article,
+    viewedArticleService: ViewedArticleService,
+  ) {
+    const user = await this.findOneById(id);
+
+    if (!user) {
+      throw new BadRequestException(`User with id ${id} not found`);
+    }
+
+    let viewedArticle = await viewedArticleService.findOne(user.id, article.id);
+
+    if (viewedArticle) {
+      viewedArticle.timestamp = new Date();
+    } else {
+      viewedArticle = await viewedArticleService.create(user, article);
+    }
+
+    await viewedArticleService.save(viewedArticle);
+  }
+
+  async getUserHistory(id: number) {
+    const user = await this.repo
+      .createQueryBuilder('user')
+      .where('user.id = :id', { id })
+      .leftJoinAndSelect('user.viewedArticles', 'viewedArticles')
+      .leftJoinAndSelect('viewedArticles.article', 'article')
+      .orderBy('viewedArticles.timestamp', 'DESC')
+      .getOne();
+
+    if (!user) {
+      throw new BadRequestException(`User with id ${id} not found`);
+    }
+
+    return user.viewedArticles.map((viewedArticle) => viewedArticle.article);
+  }
+
+  async getCustomFeed(id: number, articleService: ArticleService) {
+    const user = await this.findOneById(id);
+
+    if (!user) {
+      throw new BadRequestException(`User with id ${id} not found`);
+    }
+
+    if (user.preferences && user.preferences.length > 0) {
+      return await articleService.getArticlesByPreference(user.preferences);
+    } else {
+      throw new BadRequestException(`User with id ${id} has no preferences`);
+    }
   }
 }

@@ -18,6 +18,8 @@ import {
   AuthModule,
   User,
   UserModule,
+  ViewedArticle,
+  ViewedArticleModule,
 } from './core';
 import { APP_PIPE } from '@nestjs/core';
 
@@ -34,7 +36,17 @@ import { APP_PIPE } from '@nestjs/core';
       username: 'OliverVK98',
       password: 'A6Hh2oabJwxz',
       database: 'main_db',
-      entities: [Article, User, Notification, Comment, Profile, Rating, Token],
+      entities: [
+        Article,
+        User,
+        Notification,
+        Comment,
+        Profile,
+        Rating,
+        Token,
+        ViewedArticle,
+      ],
+      // TODO: change to false
       synchronize: true,
       ssl: {
         rejectUnauthorized: false,
@@ -47,6 +59,7 @@ import { APP_PIPE } from '@nestjs/core';
     ProfileModule,
     RatingModule,
     AuthModule,
+    ViewedArticleModule,
   ],
   controllers: [],
   providers: [

@@ -13,6 +13,8 @@ import { Comment } from './entities/comment.entity';
 import { CurrentUserMiddleware } from './middlewares/currentUser';
 import { Token } from './entities/token.entity';
 import { AuthModule } from './modules/auth.module';
+import { ViewedArticle } from './entities/viewedArticle.entity';
+import { ViewedArticleModule } from './modules/viewedArticle.module';
 
 export {
   ArticleModule,
@@ -30,4 +32,6 @@ export {
   CurrentUserMiddleware,
   Token,
   AuthModule,
+  ViewedArticle,
+  ViewedArticleModule,
 };

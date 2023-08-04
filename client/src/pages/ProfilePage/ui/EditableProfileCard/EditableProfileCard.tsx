@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { VStack } from '@/shared/ui/Stack';
@@ -21,7 +20,6 @@ interface EditableProfileCardProps {
 
 export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
     const { className, isAuthUserProfile, authData, publicData } = props;
-    const { t } = useTranslation();
     const error = useSelector(getProfileError);
     const isLoading = useSelector(getProfileIsLoading);
     const readonly = useSelector(getProfileReadonly);

@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, OneToOne } from 'typeorm';
+import { Column, Entity, OneToMany, OneToOne, JoinTable } from 'typeorm';
 import { Article } from './article.entity';
 import { Notification } from './notification.entity';
 import { Comment } from './comment.entity';
@@ -8,6 +8,7 @@ import { AbstractEntity } from './abstract.entity';
 import { UserRole } from '../types/user';
 import { IsBoolean, IsOptional, IsString } from 'class-validator';
 import { Token } from './token.entity';
+import { ViewedArticle } from './viewedArticle.entity';
 
 export class JsonSettingsDto {
   @IsString()
@@ -48,6 +49,13 @@ export class User extends AbstractEntity {
 
   @Column({ type: 'json' })
   jsonSettings: JsonSettingsDto;
+
+  @Column('text', { array: true, nullable: true })
+  preferences: string[];
+
+  @OneToMany(() => ViewedArticle, (viewedArticle) => viewedArticle.user)
+  @JoinTable()
+  viewedArticles: ViewedArticle[];
 
   @OneToMany(() => Article, (article) => article.user)
   articles: Article[];

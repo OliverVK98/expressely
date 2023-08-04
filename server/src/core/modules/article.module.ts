@@ -8,15 +8,20 @@ import { User } from '../entities/user.entity';
 import { UserService } from '../services/user.service';
 import { NotificationService } from '../services/notification.service';
 import { Notification } from '../entities/notification.entity';
+import { ViewedArticle } from '../entities/viewedArticle.entity';
+import { ViewedArticleService } from '../services/viewedArticle.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Article, User, Notification])],
+  imports: [
+    TypeOrmModule.forFeature([Article, User, Notification, ViewedArticle]),
+  ],
   controllers: [ArticleController],
   providers: [
     ArticleService,
     ArticleSerializer,
     UserService,
     NotificationService,
+    ViewedArticleService,
   ],
 })
 export class ArticleModule {}

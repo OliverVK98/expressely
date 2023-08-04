@@ -27,7 +27,7 @@ export enum ArticleType {
 }
 
 export enum ArticleFeedType {
-    ALL = 'Articles',
+    RECENT = 'Recent',
     DISCOVER = 'Discover',
     HISTORY = 'History',
     MY_ARTICLES = 'My Articles',

@@ -1,30 +1,23 @@
 import { Body, Controller, Get, Param, Patch, UseGuards } from '@nestjs/common';
 import { UserService } from '../services/user.service';
-import { Serialize } from '../interceptors/serialize';
-import { AuthUserDto } from '../dtos/user/authUser.dto';
 import { JsonSettingsDto } from '../entities/user.entity';
 import { CurrentUser } from '../decorators/currentUser.decorator';
 import { AccessTokenGuard } from '../guards';
 import { UserSerializer } from '../serializers/user/user.serializer';
+import { ArticleService } from '../services/article.service';
 
 @Controller('users')
-@Serialize(AuthUserDto)
 export class UserController {
   constructor(
     private userService: UserService,
     private userSerializer: UserSerializer,
+    private articleService: ArticleService,
   ) {}
-
-  @Get('/:id')
-  async getUser(@Param('id') id: string) {
-    const user = await this.userService.findOneById(+id);
-    return this.userSerializer.serializePublic(user);
-  }
 
   @UseGuards(AccessTokenGuard)
   @Get()
-  async getSelf(@CurrentUser('userId') userId) {
-    const user = await this.userService.findOneById(+userId);
+  async getSelf(@CurrentUser('userId') userId: number) {
+    const user = await this.userService.findOneById(userId);
     return this.userSerializer.serializeAuth(user);
   }
 
@@ -37,5 +30,11 @@ export class UserController {
   ) {
     const user = await this.userService.setJsonSettings(userId, body);
     return this.userSerializer.serializeAuth(user);
+  }
+
+  @Get('/:id')
+  async getUser(@Param('id') id: string) {
+    const user = await this.userService.findOneById(+id);
+    return this.userSerializer.serializePublic(user);
   }
 }

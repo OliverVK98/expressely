@@ -22,25 +22,22 @@ import { UserService } from '../services/user.service';
 import { UpdateArticleDto } from '../dtos/article/updateArticle.dto';
 import { NotificationService } from '../services/notification.service';
 import { ArticleIncrementViewDto } from '../dtos/article/articleIncrementView.dto';
+import { UpdateUserHistoryDto } from '../dtos/user/updateUserHistory.dto';
+import { ViewedArticleService } from '../services/viewedArticle.service';
 
 @Controller('articles')
 export class ArticleController {
   constructor(
-    private articlesService: ArticleService,
+    private articleService: ArticleService,
     private articleSerializer: ArticleSerializer,
     private userService: UserService,
     private notificationService: NotificationService,
+    private viewedArticleService: ViewedArticleService,
   ) {}
 
-  @Get('/:id')
-  async getArticle(@Param('id') id: string, @Query('expand') expand: string) {
-    const article = await this.articlesService.findOne(+id);
-    return this.articleSerializer.serialize(article, expand);
-  }
-
   @Get()
-  async getArticles(@Query() pageOptions: PageOptionsDto) {
-    const entities = await this.articlesService.getArticles(pageOptions);
+  async getMostReading(@Query() pageOptions: PageOptionsDto) {
+    const entities = await this.articleService.getArticles(pageOptions);
     const serializedData = this.articleSerializer.serializeMany(
       entities.data,
       pageOptions.expand,
@@ -59,7 +56,7 @@ export class ArticleController {
     @CurrentUser('userId') userId: number,
   ) {
     const user = await this.userService.findOneById(userId);
-    const article = await this.articlesService.create(body, user);
+    const article = await this.articleService.create(body, user);
     this.notificationService.createNotification(
       {
         title: `New Article Published`,
@@ -78,12 +75,45 @@ export class ArticleController {
     @Body() body: UpdateArticleDto,
     @CurrentUser('userId') userId: number,
   ) {
-    return await this.articlesService.updateArticle(body, userId);
+    return await this.articleService.updateArticle(body, userId);
+  }
+
+  @UseGuards(AccessTokenGuard)
+  @Patch('/history')
+  async updateUserHistory(
+    @CurrentUser('userId') userId: number,
+    @Body() { articleId }: UpdateUserHistoryDto,
+  ) {
+    const article = await this.articleService.findOne(articleId);
+
+    this.userService.updateUserHistory(
+      userId,
+      article,
+      this.viewedArticleService,
+    );
+  }
+
+  @UseGuards(AccessTokenGuard)
+  @Get('/history')
+  async getUserHistory(@CurrentUser('userId') userId: number) {
+    return await this.userService.getUserHistory(userId);
+  }
+
+  @UseGuards(AccessTokenGuard)
+  @Get('/custom-feed')
+  async getCustomFeed(@CurrentUser('userId') userId: number) {
+    return await this.userService.getUserHistory(userId);
   }
 
   @HttpCode(HttpStatus.NO_CONTENT)
   @Get('/view-increment/:id')
   incrementViewCounter(@Param() { id }: ArticleIncrementViewDto) {
-    this.articlesService.incrementViewCounter(id);
+    this.articleService.incrementViewCounter(id);
+  }
+
+  @Get('/:id')
+  async getArticle(@Param('id') id: string, @Query('expand') expand: string) {
+    const article = await this.articleService.findOne(+id);
+    return this.articleSerializer.serialize(article, expand);
   }
 }

@@ -60,6 +60,7 @@ export class ArticleService {
 
     return new PageDto(entities, pageMeta);
   }
+
   async updateArticle(updateArgs: UpdateArticleDto, userId: number) {
     const article = await this.findOne(updateArgs.id);
     const articleUserId = article.user.id;
@@ -77,5 +78,14 @@ export class ArticleService {
     }
     article.views += 1;
     await this.repo.save(article);
+  }
+
+  async getArticlesByPreference(preferences: string[]) {
+    return await this.repo
+      .createQueryBuilder('article')
+      .distinct(true)
+      .where(':preferences @> article.type', { preferences })
+      .orderBy('RANDOM()')
+      .getMany();
   }
 }

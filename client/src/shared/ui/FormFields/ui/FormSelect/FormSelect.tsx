@@ -9,13 +9,17 @@ import { Currency } from '@/entities/Currency';
 
 interface FormSelectProps {
     className?: string;
-    SelectComponent: (props: any) => JSX.Element;
+    SelectComponent: (props: any, ref?: any) => JSX.Element;
     registerName: string;
     defaultValue?: Country | Currency;
+    readonly?: boolean;
 }
 
 export const FormSelect = memo((props: FormSelectProps) => {
-    const { className, SelectComponent, registerName, defaultValue } = props;
+    const { className, SelectComponent, registerName, defaultValue, readonly } =
+        props;
+
+    console.log(defaultValue);
 
     const { error, onChange, value, onBlur } = useField(
         registerName,
@@ -33,9 +37,10 @@ export const FormSelect = memo((props: FormSelectProps) => {
         <VStack className={className} max gap="4">
             <div className={classNames(cls.FormSelect, {}, [className])}>
                 <SelectComponent
-                    onChange={onChangeHandler}
+                    onChange={onChange}
                     onBlur={onBlur}
                     value={value}
+                    readonly={readonly}
                 />
             </div>
             {error && (

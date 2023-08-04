@@ -90,7 +90,7 @@ module.exports = {
         'react/no-array-index-key': 'off',
         'consistent-return': 'warn',
         'no-unsafe-optional-chaining': 'off',
-        'react/jsx-max-props-per-line': ['error', { maximum: 3 }],
+        'react/jsx-max-props-per-line': ['error', { maximum: 4 }],
         'ulbi-tv-plugin/path-checker': ['error', { alias: '@' }],
         'ulbi-tv-plugin/public-api-imports': [
             'error',

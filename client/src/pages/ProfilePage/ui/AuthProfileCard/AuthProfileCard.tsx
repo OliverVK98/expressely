@@ -25,6 +25,7 @@ export const AuthProfileCard = (props: AuthProfileCardProps) => {
     const { t } = useTranslation();
     const { reset } = useFormContext<ProfileFormValues>();
 
+    // TODO: Select not resetting
     useEffect(() => {
         if (authData) {
             reset({
@@ -136,11 +137,13 @@ export const AuthProfileCard = (props: AuthProfileCardProps) => {
                             placeholder={t('Avatar URL link')}
                         />
                         <FormSelect
+                            readonly={readonly}
                             SelectComponent={CountrySelect}
                             registerName="country"
                             defaultValue={authData?.country}
                         />
                         <FormSelect
+                            readonly={readonly}
                             SelectComponent={CurrencySelect}
                             registerName="currency"
                             defaultValue={authData?.currency}

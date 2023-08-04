@@ -28,8 +28,8 @@ export const MainPageHeader = memo((props: MainPageHeaderProps) => {
     const buttonTypes = useMemo(
         () => [
             {
-                type: ArticleFeedType.ALL,
-                text: t('Articles'),
+                type: ArticleFeedType.RECENT,
+                text: t('Recent'),
             },
             {
                 type: ArticleFeedType.DISCOVER,

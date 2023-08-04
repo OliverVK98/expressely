@@ -6,7 +6,7 @@ import { ArticleFeedType } from '@/entities/Article';
 const initialState: MainPageSchema = {
     isLoading: false,
     error: undefined,
-    feedType: ArticleFeedType.ALL,
+    feedType: ArticleFeedType.RECENT,
 };
 
 const mainPageSlice = createSlice({

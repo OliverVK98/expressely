@@ -6,12 +6,9 @@ import {
   HttpStatus,
   Post,
   Res,
-  Session,
   UseGuards,
 } from '@nestjs/common';
-import { UserService } from '../services/user.service';
 import { SignupUserDto } from '../dtos/user/signupUser.dto';
-import { SessionData } from 'express-session';
 import { AuthService } from '../services/auth.service';
 import { SigninUserDto } from '../dtos/user/signinUser.dto';
 import { Serialize } from '../interceptors/serialize';
@@ -26,7 +23,6 @@ import { ProfileService } from '../services/profile.service';
 @Serialize(AuthDto)
 export class AuthController {
   constructor(
-    private userService: UserService,
     private authService: AuthService,
     private profileService: ProfileService,
   ) {}
@@ -35,7 +31,6 @@ export class AuthController {
   @HttpCode(HttpStatus.CREATED)
   async signUp(
     @Body() body: SignupUserDto,
-    @Session() session: SessionData,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { accessToken, user, refreshToken } = await this.authService.signUp(
@@ -50,7 +45,6 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   async signIn(
     @Body() body: SigninUserDto,
-    @Session() session: SessionData,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { user, refreshToken, accessToken } = await this.authService.signIn(
@@ -64,7 +58,6 @@ export class AuthController {
   @Get('/sign-out')
   @HttpCode(HttpStatus.OK)
   async signOut(
-    @Session() session: SessionData,
     @CurrentUser('userId') userId: number,
     @Res({ passthrough: true }) res: Response,
   ) {
