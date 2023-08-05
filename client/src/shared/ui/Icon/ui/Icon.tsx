@@ -1,14 +1,17 @@
 import React, { memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
+import { classNames, Mods } from '@/shared/lib/classNames/classNames';
 import cls from './Icon.module.scss';
 
 type SvgProps = Omit<React.SVGProps<SVGSVGElement>, 'onClick'>;
 type FillProps = 'fill' | 'noFill';
+type ColorProps = 'color' | 'noColor';
 
 interface IconBaseProps extends SvgProps {
     className?: string;
     Svg: React.VFC<React.SVGProps<SVGSVGElement>>;
     fill?: FillProps;
+    color?: ColorProps;
+    isGreen?: boolean;
 }
 
 interface NonClickableIconProps extends IconBaseProps {
@@ -30,15 +33,25 @@ export const Icon = memo((props: IconProps) => {
         height = 32,
         clickable,
         fill = 'fill',
+        color = 'color',
+        isGreen = false,
         ...otherProps
     } = props;
+
+    const mods: Mods = {
+        [cls.isGreen]: isGreen,
+    };
 
     const icon = (
         <Svg
             className={
                 clickable
-                    ? classNames(cls.Icon, {}, [cls[fill]])
-                    : classNames(cls.Icon, {}, [className, cls[fill]])
+                    ? classNames(cls.Icon, {}, [cls[fill], cls[color]])
+                    : classNames(cls.Icon, {}, [
+                          className,
+                          cls[fill],
+                          cls[color],
+                      ])
             }
             width={width}
             height={height}
@@ -51,7 +64,11 @@ export const Icon = memo((props: IconProps) => {
         return (
             <button
                 type="button"
-                className={classNames(cls.button, {}, [className, cls[fill]])}
+                className={classNames(cls.button, mods, [
+                    className,
+                    cls[fill],
+                    cls[color],
+                ])}
                 onClick={props.onClick}
                 style={{ height, width }}
             >

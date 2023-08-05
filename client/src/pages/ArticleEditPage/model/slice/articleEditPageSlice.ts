@@ -31,7 +31,7 @@ const articleEditPageSlice = createSlice({
             state.article.img = action.payload;
         },
         addType: (state) => {
-            state.article.type = [...state.article.type, ArticleType.All];
+            state.article.type = [...state.article.type, ArticleType.ALL];
         },
         updateType: (
             state,

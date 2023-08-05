@@ -6,7 +6,7 @@ import { ArticleDto } from '../../dtos/article/article.dto';
 
 @Injectable()
 export class ArticleSerializer {
-  serialize(article: Article, expand: string) {
+  serialize(article: Article, expand?: string) {
     if (expand === 'user') {
       return plainToClass(ArticleExpandedUserDto, article, {
         excludeExtraneousValues: true,
@@ -18,7 +18,7 @@ export class ArticleSerializer {
     }
   }
 
-  serializeMany(articles: Article[], expand: string) {
+  serializeMany(articles: Article[], expand?: string) {
     return articles.map((article) => this.serialize(article, expand));
   }
 }

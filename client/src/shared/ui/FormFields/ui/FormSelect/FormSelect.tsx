@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './FormSelect.module.scss';
 import { useField } from '@/shared/lib/hooks/useField/useField';
@@ -19,18 +19,9 @@ export const FormSelect = memo((props: FormSelectProps) => {
     const { className, SelectComponent, registerName, defaultValue, readonly } =
         props;
 
-    console.log(defaultValue);
-
     const { error, onChange, value, onBlur } = useField(
         registerName,
         defaultValue,
-    );
-
-    const onChangeHandler = useCallback(
-        (value: string) => {
-            onChange(value);
-        },
-        [onChange],
     );
 
     return (

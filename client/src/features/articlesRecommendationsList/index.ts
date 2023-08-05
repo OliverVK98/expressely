@@ -1,4 +1,4 @@
 import { ArticlesRecommendationsListContainer } from './ui/ArticlesRecommendationsListContainer/ArticlesRecommendationsListContainer';
-import { useArticleRecommendations } from './api/articlesRecommendationsListApi';
+import { useArticleList } from './api/articlesListApi';
 
-export { ArticlesRecommendationsListContainer, useArticleRecommendations };
+export { ArticlesRecommendationsListContainer, useArticleList };

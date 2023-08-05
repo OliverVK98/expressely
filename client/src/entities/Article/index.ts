@@ -4,6 +4,7 @@ import {
     ArticleBlockType,
     ArticleType,
     ArticleFeedType,
+    articleFeedTypeDescription,
 } from './model/consts/consts';
 import { ArticleDetails } from './ui/ArticleDetails/ArticleDetails';
 import {
@@ -53,6 +54,7 @@ export {
     ArticleType,
     ArticleFeedType,
     articleDetailsReducer,
+    articleFeedTypeDescription,
     getArticleDetailsData,
     getArticleDetailsError,
     getArticleDetailsIsLoading,

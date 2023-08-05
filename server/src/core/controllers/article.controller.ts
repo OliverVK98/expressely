@@ -96,7 +96,9 @@ export class ArticleController {
   @UseGuards(AccessTokenGuard)
   @Get('/history')
   async getUserHistory(@CurrentUser('userId') userId: number) {
-    return await this.userService.getUserHistory(userId);
+    const articles = await this.userService.getUserHistory(userId);
+
+    return this.articleSerializer.serializeMany(articles, 'user');
   }
 
   @UseGuards(AccessTokenGuard)

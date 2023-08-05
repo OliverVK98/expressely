@@ -10,6 +10,7 @@ import { Profile, PublicProfile } from '@/entities/Profile';
 import cls from './EditableProfileCard.module.scss';
 import { AuthProfileCard } from '../AuthProfileCard/AuthProfileCard';
 import { PublicProfileCard } from '../PublicProfileCard/PublicProfileCard';
+import { ProfileFeedSettings } from '../ProfileFeedSettings/ProfileFeedSettings';
 
 interface EditableProfileCardProps {
     className?: string;
@@ -31,13 +32,15 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
             className={classNames(cls.EditableProfileCard, {}, [className])}
         >
             {isAuthUserProfile ? (
-                <AuthProfileCard
-                    authData={authData}
-                    className={className}
-                    isLoading={isLoading}
-                    error={error}
-                    readonly={readonly}
-                />
+                <VStack max gap="16" className={className}>
+                    <AuthProfileCard
+                        authData={authData}
+                        isLoading={isLoading}
+                        error={error}
+                        readonly={readonly}
+                    />
+                    <ProfileFeedSettings />
+                </VStack>
             ) : (
                 <PublicProfileCard
                     data={publicData}

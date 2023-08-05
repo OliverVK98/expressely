@@ -75,14 +75,6 @@ const ProfilePage = ({ className, isAuthUserProfile }: ProfilePageProps) => {
                     validationSchema={profileFormValidationSchema}
                     onSubmit={onFormSubmitHandler}
                     max
-                    // defaultValues={{
-                    //     firstname: authData?.firstname,
-                    //     lastname: authData?.lastname,
-                    //     age: authData?.age,
-                    //     city: authData?.city,
-                    //     username: authData?.username,
-                    //     avatar: authData?.avatar,
-                    // }}
                 >
                     <VStack max gap="16">
                         <EditableProfileCardHeader

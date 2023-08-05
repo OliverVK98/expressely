@@ -21,7 +21,7 @@ interface AuthProfileCardProps {
 }
 
 export const AuthProfileCard = (props: AuthProfileCardProps) => {
-    const { className, readonly, authData, error, isLoading } = props;
+    const { className, readonly, error, isLoading, authData } = props;
     const { t } = useTranslation();
     const { reset } = useFormContext<ProfileFormValues>();
 
@@ -35,8 +35,8 @@ export const AuthProfileCard = (props: AuthProfileCardProps) => {
                 city: authData?.city,
                 username: authData?.username,
                 avatar: authData?.avatar,
-                currency: authData.currency,
-                country: authData.country,
+                currency: authData?.currency,
+                country: authData?.country,
             });
         }
     }, [authData, reset]);

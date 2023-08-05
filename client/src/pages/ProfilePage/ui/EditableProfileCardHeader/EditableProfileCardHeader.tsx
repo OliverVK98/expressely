@@ -44,16 +44,7 @@ export const EditableProfileCardHeader = memo(
                 currency: authData?.currency,
                 country: authData?.country,
             });
-        }, [
-            authData?.age,
-            authData?.avatar,
-            authData?.city,
-            authData?.firstname,
-            authData?.lastname,
-            authData?.username,
-            dispatch,
-            reset,
-        ]);
+        }, [authData, dispatch, reset]);
 
         return (
             <Card border="default" padding="16" max>

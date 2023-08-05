@@ -16,6 +16,7 @@ import { getUserInit } from './model/selectors/getUserInit/getUserInit';
 import { useJsonSettings } from './model/selectors/getUserJsonSettings/getUserJsonSettings';
 import { saveJsonSettings } from './model/services/saveJsonSettings';
 import { initAuthData } from './model/services/initAuthData';
+import { updateUserPreferences } from './model/services/updateUserPreferences';
 
 export {
     userActions,
@@ -33,4 +34,5 @@ export {
     useJsonSettings,
     saveJsonSettings,
     initAuthData,
+    updateUserPreferences,
 };

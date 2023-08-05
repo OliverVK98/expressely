@@ -8,6 +8,7 @@ import { Profile } from '../entities/profile.entity';
 import { Article } from '../entities/article.entity';
 import { ViewedArticleService } from './viewedArticle.service';
 import { ArticleService } from './article.service';
+import { UserPreference, UserPreferenceAction } from '../types/user';
 
 @Injectable()
 export class UserService {
@@ -86,10 +87,11 @@ export class UserService {
 
   async getUserHistory(id: number) {
     const user = await this.repo
-      .createQueryBuilder('user')
-      .where('user.id = :id', { id })
-      .leftJoinAndSelect('user.viewedArticles', 'viewedArticles')
+      .createQueryBuilder('uniqueUser')
+      .where('uniqueUser.id = :id', { id })
+      .leftJoinAndSelect('uniqueUser.viewedArticles', 'viewedArticles')
       .leftJoinAndSelect('viewedArticles.article', 'article')
+      .leftJoinAndSelect('article.user', 'user')
       .orderBy('viewedArticles.timestamp', 'DESC')
       .getOne();
 
@@ -112,5 +114,41 @@ export class UserService {
     } else {
       throw new BadRequestException(`User with id ${id} has no preferences`);
     }
+  }
+
+  async updateUserPreferences(
+    userId: number,
+    preference: UserPreference,
+    action: UserPreferenceAction,
+  ) {
+    const user = await this.findOneById(userId);
+
+    if (!user) {
+      throw new BadRequestException(`User with id ${userId} not found`);
+    }
+
+    if (!user.preferences) {
+      user.preferences = [];
+    }
+
+    const index = user.preferences.indexOf(preference);
+
+    if (action === UserPreferenceAction.ADD) {
+      if (index !== -1) {
+        // User already has this preference
+        return;
+      }
+      user.preferences.push(preference);
+    } else {
+      if (index === -1) {
+        throw new BadRequestException(
+          `User doesn't have preference ${preference}`,
+        );
+      }
+
+      user.preferences.splice(index, 1);
+    }
+
+    return this.repo.save(user);
   }
 }

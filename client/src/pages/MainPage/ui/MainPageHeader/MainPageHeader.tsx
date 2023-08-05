@@ -12,9 +12,11 @@ import { useMainPageFeedType } from '../../model/selectors/mainPageSelectors';
 import { ArticleFeedType } from '@/entities/Article';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { mainPageActions } from '../../model/slices/mainPageSlice';
+import { User } from '@/entities/User';
 
 interface MainPageHeaderProps {
     className?: string;
+    authData?: User;
 }
 
 const buttonStyles: CSSProperties = { padding: '0', paddingBottom: '8px' };
@@ -30,18 +32,22 @@ export const MainPageHeader = memo((props: MainPageHeaderProps) => {
             {
                 type: ArticleFeedType.RECENT,
                 text: t('Recent'),
+                auth: false,
             },
             {
                 type: ArticleFeedType.DISCOVER,
                 text: t('Discover'),
+                auth: true,
             },
             {
                 type: ArticleFeedType.HISTORY,
                 text: t('History'),
+                auth: true,
             },
             {
                 type: ArticleFeedType.MY_ARTICLES,
                 text: t('My Articles'),
+                auth: true,
             },
         ],
         [t],
@@ -66,20 +72,22 @@ export const MainPageHeader = memo((props: MainPageHeaderProps) => {
                     <Icon height={24} width={24} Svg={SettingsIcon} />
                 </HStack>
                 <HStack max gap="16">
-                    {buttonTypes.map((button) => (
-                        <Button
-                            variant={
-                                feedType === button.type
-                                    ? 'highlighted'
-                                    : 'clear'
-                            }
-                            styles={buttonStyles}
-                            key={button.text}
-                            onClick={() => onClickButton(button.type)}
-                        >
-                            <Text text={button.text} />
-                        </Button>
-                    ))}
+                    {buttonTypes.map((button) =>
+                        !button.auth || props.authData ? (
+                            <Button
+                                variant={
+                                    feedType === button.type
+                                        ? 'highlighted'
+                                        : 'clear'
+                                }
+                                styles={buttonStyles}
+                                key={button.text}
+                                onClick={() => onClickButton(button.type)}
+                            >
+                                <Text text={button.text} />
+                            </Button>
+                        ) : null,
+                    )}
                 </HStack>
             </VStack>
         </Card>

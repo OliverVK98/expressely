@@ -12,6 +12,7 @@ import { PageOptionsDto } from '../dtos/page/pageOptions.dto';
 import { PageMetaDto } from '../dtos/page/pageMeta.dto';
 import { PageDto } from '../dtos/page/page.dto';
 import { UpdateArticleDto } from '../dtos/article/updateArticle.dto';
+import { ArticleType } from '../types/article';
 
 @Injectable()
 export class ArticleService {
@@ -47,7 +48,7 @@ export class ArticleService {
         search: `%${pageOptions.search}%`,
       });
 
-    if (pageOptions.type !== 'All') {
+    if (pageOptions.type !== ArticleType.ALL) {
       queryBuilder.andWhere('article.type @> ARRAY[:type]', {
         type: pageOptions.type,
       });

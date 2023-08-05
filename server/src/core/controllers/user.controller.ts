@@ -4,14 +4,13 @@ import { JsonSettingsDto } from '../entities/user.entity';
 import { CurrentUser } from '../decorators/currentUser.decorator';
 import { AccessTokenGuard } from '../guards';
 import { UserSerializer } from '../serializers/user/user.serializer';
-import { ArticleService } from '../services/article.service';
+import { UpdateUserPreferencesDto } from '../dtos/user/updateUserPreferences.dto';
 
 @Controller('users')
 export class UserController {
   constructor(
     private userService: UserService,
     private userSerializer: UserSerializer,
-    private articleService: ArticleService,
   ) {}
 
   @UseGuards(AccessTokenGuard)
@@ -29,6 +28,21 @@ export class UserController {
     @Body() body: JsonSettingsDto,
   ) {
     const user = await this.userService.setJsonSettings(userId, body);
+    return this.userSerializer.serializeAuth(user);
+  }
+
+  @UseGuards(AccessTokenGuard)
+  @Patch('/preferences')
+  async updateUserPreferences(
+    @CurrentUser('userId') userId: number,
+    @Body() { action, preference }: UpdateUserPreferencesDto,
+  ) {
+    const user = await this.userService.updateUserPreferences(
+      userId,
+      preference,
+      action,
+    );
+
     return this.userSerializer.serializeAuth(user);
   }
 

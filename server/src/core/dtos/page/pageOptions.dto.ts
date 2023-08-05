@@ -18,7 +18,7 @@ export class PageOptionsDto {
 
   @IsEnum(ArticleType)
   @IsOptional()
-  readonly type?: ArticleType = ArticleType.All;
+  readonly type?: ArticleType = ArticleType.ALL;
 
   @IsString()
   @IsOptional()

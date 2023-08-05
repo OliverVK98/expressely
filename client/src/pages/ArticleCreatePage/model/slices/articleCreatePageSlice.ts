@@ -14,7 +14,7 @@ const initialState: ArticleCreatePageSchema = {
     title: '',
     subtitle: '',
     img: '',
-    type: [ArticleType.All],
+    type: [ArticleType.ALL],
     blocks: [],
 };
 
@@ -32,7 +32,7 @@ const articleCreatePageSlice = createSlice({
             state.img = action.payload;
         },
         addType: (state) => {
-            state.type = [...state.type, ArticleType.All];
+            state.type = [...state.type, ArticleType.ALL];
         },
         updateType: (
             state,

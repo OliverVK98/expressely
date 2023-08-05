@@ -62,10 +62,10 @@ export const ArticleList = memo((props: ArticleListProps) => {
             data-testid="ArticleList"
             className={classNames('', {}, [className, cls[view]])}
         >
+            {isLoading && getSkeletons(view)}
             {articles?.length && articles?.length > 0
                 ? articles?.map(renderArticle)
                 : null}
-            {isLoading && getSkeletons(view)}
         </HStack>
     );
 });

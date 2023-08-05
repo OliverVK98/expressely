@@ -15,9 +15,9 @@ interface ArticlesRecommendationsListOptions {
     limit?: number;
 }
 
-const articlesRecommendationsListApi = rtkApi.injectEndpoints({
+const articlesListApi = rtkApi.injectEndpoints({
     endpoints: (build) => ({
-        getArticlesRecommendationsList: build.query<
+        getArticlesList: build.query<
             ArticlesExpandedUserServerResponse,
             ArticlesRecommendationsListOptions
         >({
@@ -36,5 +36,4 @@ const articlesRecommendationsListApi = rtkApi.injectEndpoints({
     }),
 });
 
-export const useArticleRecommendations =
-    articlesRecommendationsListApi.useGetArticlesRecommendationsListQuery;
+export const useArticleList = articlesListApi.useGetArticlesListQuery;

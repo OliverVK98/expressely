@@ -12,6 +12,9 @@ export class AuthDto {
   avatar: string | null;
 
   @Expose()
+  preferences: string[];
+
+  @Expose()
   roles: string[];
 
   @Expose()

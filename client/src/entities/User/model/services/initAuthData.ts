@@ -17,7 +17,7 @@ export const initAuthData = createAsyncThunk<User, void, ThunkConfig<string>>(
         try {
             const response = await extra.api.get<User>(`/users`);
 
-            if (!response.data.jsonSettings) {
+            if (!response.data) {
                 return rejectWithValue('');
             }
 

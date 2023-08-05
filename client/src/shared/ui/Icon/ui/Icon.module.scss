@@ -1,5 +1,8 @@
-.Icon {
+.color {
     color: var(--icon-redesigned);
+}
+
+.noColor {
 }
 
 .fill {
@@ -21,4 +24,9 @@
 
 .button:hover .Icon {
     color: var(--accent-redesigned);
+}
+
+.isGreen .Icon {
+    color: var(--save-redesigned);
+    fill: var(--save-redesigned);
 }
