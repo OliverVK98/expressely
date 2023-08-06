@@ -8,12 +8,17 @@ interface RecentArticlesProps {
 
 export const RecentArticles = memo((props: RecentArticlesProps) => {
     const { className } = props;
-    const { data, isLoading, error } = useArticleList({
-        limit: 20,
-        order: 'desc',
-        sort: ArticleSortField.CREATED,
-        expand: 'user',
-    });
+    const { data, isLoading, error } = useArticleList(
+        {
+            limit: 20,
+            order: 'desc',
+            sort: ArticleSortField.CREATED,
+            expand: 'user',
+        },
+        {
+            pollingInterval: 300000,
+        },
+    );
 
     return (
         <div className={className}>

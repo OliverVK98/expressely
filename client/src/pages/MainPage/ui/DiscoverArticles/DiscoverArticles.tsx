@@ -1,8 +1,8 @@
 import { memo } from 'react';
-import { ArticleList, ArticleSortField, ArticleView } from '@/entities/Article';
-import { useArticleList } from '@/features/articlesRecommendationsList';
+import { ArticleList, ArticleView } from '@/entities/Article';
 import { User } from '@/entities/User';
 import { DiscoverArticleEmpty } from './DiscoverArticleEmpty';
+import { useGetUserCustomFeedArticles } from '../../model/api/mainPageArticles';
 
 interface DiscoverArticlesProps {
     className?: string;
@@ -11,12 +11,7 @@ interface DiscoverArticlesProps {
 
 export const DiscoverArticles = memo((props: DiscoverArticlesProps) => {
     const { className, authData } = props;
-    const { data, isLoading, error } = useArticleList({
-        limit: 20,
-        order: 'desc',
-        sort: ArticleSortField.CREATED,
-        expand: 'user',
-    });
+    const { data, isLoading, error } = useGetUserCustomFeedArticles();
 
     if (authData?.preferences && authData?.preferences?.length < 1) {
         return <DiscoverArticleEmpty />;
@@ -25,7 +20,7 @@ export const DiscoverArticles = memo((props: DiscoverArticlesProps) => {
     return (
         <div className={className}>
             <ArticleList
-                articles={data?.data}
+                articles={data}
                 isLoading={isLoading}
                 view={ArticleView.BIG}
             />

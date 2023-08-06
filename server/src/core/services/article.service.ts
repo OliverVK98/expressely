@@ -18,6 +18,14 @@ import { ArticleType } from '../types/article';
 export class ArticleService {
   constructor(@InjectRepository(Article) private repo: Repository<Article>) {}
 
+  shuffleArray(array: Article[]) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
   async create(newArticle: CreateArticleDto, user: User) {
     const article = await this.repo.create(newArticle);
     article.user = user;
@@ -82,11 +90,32 @@ export class ArticleService {
   }
 
   async getArticlesByPreference(preferences: string[]) {
+    const suggestedArticlesArrays = await Promise.all(
+      preferences.map((preference) => {
+        return this.repo
+          .createQueryBuilder('article')
+          .where(':preference = ANY(article.type)', { preference })
+          .orderBy('RANDOM()')
+          .leftJoinAndSelect('article.user', 'user')
+          .getMany();
+      }),
+    );
+
+    const uniqueArticlesArray = [
+      ...new Set(suggestedArticlesArrays.flat().map((article) => article.id)),
+    ].map((id) =>
+      suggestedArticlesArrays.flat().find((article) => article.id === id),
+    );
+
+    return this.shuffleArray(uniqueArticlesArray);
+  }
+
+  async getUserArticles(userId: number) {
     return await this.repo
       .createQueryBuilder('article')
-      .distinct(true)
-      .where(':preferences @> article.type', { preferences })
-      .orderBy('RANDOM()')
+      .where('article.userId = :userId', { userId })
+      .leftJoinAndSelect('article.user', 'user')
+      .orderBy('article.createdAt', 'DESC')
       .getMany();
   }
 }

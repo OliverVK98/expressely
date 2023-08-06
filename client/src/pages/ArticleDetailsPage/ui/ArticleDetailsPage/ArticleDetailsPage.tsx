@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ArticlesRecommendationsListContainer } from '@/features/articlesRecommendationsList';
@@ -19,7 +19,7 @@ import { ArticleDetailsComments } from '../ArticleDetailsComments/ArticleDetails
 import { getUserAuthData } from '@/entities/User';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { incrementArticleViews } from '@/entities/Article';
+import { incrementArticleViews, addArticleToHistory } from '@/entities/Article';
 
 interface ArticleDetailsPageProps {
     className?: string;
@@ -40,6 +40,12 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
     useInitialEffect(() => {
         dispatch(incrementArticleViews({ id: +id! }));
     });
+
+    useEffect(() => {
+        if (authData) {
+            dispatch(addArticleToHistory(+id!));
+        }
+    }, []);
 
     const content = (
         <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>

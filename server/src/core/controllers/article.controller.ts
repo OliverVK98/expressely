@@ -104,12 +104,23 @@ export class ArticleController {
   @UseGuards(AccessTokenGuard)
   @Get('/custom-feed')
   async getCustomFeed(@CurrentUser('userId') userId: number) {
-    return await this.userService.getUserHistory(userId);
+    const customFeed = await this.userService.getCustomFeed(
+      userId,
+      this.articleService,
+    );
+    return this.articleSerializer.serializeMany(customFeed, 'user');
+  }
+
+  @UseGuards(AccessTokenGuard)
+  @Get('/user')
+  async getUserArticles(@CurrentUser('userId') userId: number) {
+    const articles = await this.articleService.getUserArticles(userId);
+    return this.articleSerializer.serializeMany(articles, 'user');
   }
 
   @HttpCode(HttpStatus.NO_CONTENT)
   @Get('/view-increment/:id')
-  incrementViewCounter(@Param() { id }: ArticleIncrementViewDto) {
+  async incrementViewCounter(@Param() { id }: ArticleIncrementViewDto) {
     this.articleService.incrementViewCounter(id);
   }
 

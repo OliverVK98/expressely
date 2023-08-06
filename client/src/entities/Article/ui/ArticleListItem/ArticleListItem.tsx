@@ -16,7 +16,7 @@ import {
     ArticleExpandedUser,
 } from '../../model/types/article';
 import cls from './ArticleListItem.module.scss';
-import { getRouteArticleDetails } from '@/shared/const/router';
+import { getRouteArticleDetails, getRouteProfile } from '@/shared/const/router';
 import { HStack, VStack } from '@/shared/ui/Stack';
 
 interface ArticleListItemProps {
@@ -31,8 +31,8 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
     const { t } = useTranslation();
 
     const userInfo = (
-        <>
-            <HStack gap="4">
+        <AppLink to={getRouteProfile(article.user.id)}>
+            <HStack gap="4" max>
                 <Avatar
                     size={32}
                     src={article.user.avatar}
@@ -40,8 +40,7 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
                 />
                 <Text bold text={article.user.username} />
             </HStack>
-            <Text text={article.type.slice(0, 2).join(', ')} bold />
-        </>
+        </AppLink>
     );
     const views = (
         <HStack gap="8">
@@ -63,10 +62,23 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
                 className={classNames(cls.card, {}, [className, cls[view]])}
             >
                 <VStack max gap="16">
-                    <HStack gap="8">
-                        <Avatar size={32} src={article.user.avatar} />
-                        <Text bold text={article.user.username} />
-                        <Text text={article.createdAt} className={cls.date} />
+                    <HStack max justify="between">
+                        <AppLink to={getRouteProfile(article.user.id)}>
+                            <HStack gap="8">
+                                <Avatar size={32} src={article.user.avatar} />
+                                <Text bold text={article.user.username} />
+                                <Text
+                                    text={article.createdAt}
+                                    className={cls.date}
+                                />
+                            </HStack>
+                        </AppLink>
+                        <Text
+                            text={`Tags: ${article.type
+                                .slice(0, 3)
+                                .join(', ')}`}
+                            bold
+                        />
                     </HStack>
                     <Text title={article.title} bold className={cls.title} />
                     <Text

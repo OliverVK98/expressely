@@ -1,11 +1,13 @@
 import {
   ArrayNotEmpty,
   IsArray,
+  IsEnum,
   IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
 } from 'class-validator';
+import { ArticleType } from '../../types/article';
 
 export class CreateArticleDto {
   @IsString()
@@ -25,9 +27,9 @@ export class CreateArticleDto {
   img: string;
 
   @IsArray()
-  @IsNotEmpty()
-  @IsString({ each: true })
-  type: string[];
+  @ArrayNotEmpty()
+  @IsEnum(ArticleType, { each: true })
+  type: ArticleType[];
 
   @ArrayNotEmpty()
   blocks: string[];

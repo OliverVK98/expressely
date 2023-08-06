@@ -35,6 +35,7 @@ import { ArticleImageBlockComponent } from './ui/ArticleImageBlockComponent/Arti
 import { ArticleTypeSelect } from './ui/ArticleTypeSelect/ArticleTypeSelect';
 import { fetchArticleById } from './model/services/fetchArticleById/fetchArticleById';
 import { incrementArticleViews } from './model/services/incrementArticleViews/incrementArticleViews';
+import { addArticleToHistory } from './model/services/addArticleToHistory/addArticleToHistory';
 
 export {
     type ArticleCodeBlock,
@@ -60,6 +61,7 @@ export {
     getArticleDetailsIsLoading,
     fetchArticleById,
     incrementArticleViews,
+    addArticleToHistory,
     ArticleList,
     ArticleDetails,
     ArticleShortList,

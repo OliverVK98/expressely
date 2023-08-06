@@ -1,6 +1,6 @@
 import { memo } from 'react';
-import { ArticleList, ArticleSortField, ArticleView } from '@/entities/Article';
-import { useArticleList } from '@/features/articlesRecommendationsList';
+import { ArticleList, ArticleView } from '@/entities/Article';
+import { userGetUserArticles } from '../../model/api/mainPageArticles';
 
 interface UserArticlesProps {
     className?: string;
@@ -8,17 +8,12 @@ interface UserArticlesProps {
 
 export const UserArticles = memo((props: UserArticlesProps) => {
     const { className } = props;
-    const { data, isLoading, error } = useArticleList({
-        limit: 20,
-        order: 'desc',
-        sort: ArticleSortField.CREATED,
-        expand: 'user',
-    });
+    const { data, isLoading, error } = userGetUserArticles();
 
     return (
         <div className={className}>
             <ArticleList
-                articles={data?.data}
+                articles={data}
                 isLoading={isLoading}
                 view={ArticleView.BIG}
             />
