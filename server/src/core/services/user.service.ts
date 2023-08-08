@@ -8,7 +8,7 @@ import { Profile } from '../entities/profile.entity';
 import { Article } from '../entities/article.entity';
 import { ViewedArticleService } from './viewedArticle.service';
 import { ArticleService } from './article.service';
-import { UserPreference, UserPreferenceAction } from '../types/user';
+import { UserPreference, UserPreferenceAction, UserRole } from '../types/user';
 
 @Injectable()
 export class UserService {
@@ -30,6 +30,12 @@ export class UserService {
 
   findOneById(id: number) {
     return this.repo.findOneBy({ id });
+  }
+
+  async isUserAdmin(id: number) {
+    const user = await this.findOneById(id);
+
+    return user.roles.includes(UserRole.ADMIN);
   }
 
   async updateUser(id: number, updateFields: UpdateUserDto) {

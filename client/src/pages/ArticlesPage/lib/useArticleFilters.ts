@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { ArticleSortField, ArticleType, ArticleView } from '@/entities/Article';
+import { ArticleSortField, ArticleView, ArticleType } from '@/entities/Article';
 import { articlesPageActions } from '../model/slices/articlesPageSlice';
 import { SortOrder } from '@/shared/types/sort';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';

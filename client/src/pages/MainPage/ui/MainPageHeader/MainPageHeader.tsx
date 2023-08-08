@@ -5,8 +5,6 @@ import cls from './MainPageHeader.module.scss';
 import { Card } from '@/shared/ui/Card';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { Text } from '@/shared/ui/Text';
-import SettingsIcon from '@/shared/assets/icons/settings.svg';
-import { Icon } from '@/shared/ui/Icon';
 import { Button } from '@/shared/ui/Button';
 import { useMainPageFeedType } from '../../model/selectors/mainPageSelectors';
 import { ArticleFeedType } from '@/entities/Article';
@@ -53,6 +51,28 @@ export const MainPageHeader = memo((props: MainPageHeaderProps) => {
         [t],
     );
 
+    const titleTypes = useMemo(
+        () => [
+            {
+                feedType: ArticleFeedType.RECENT,
+                text: t('Most recent articles published by our users'),
+            },
+            {
+                feedType: ArticleFeedType.DISCOVER,
+                text: t('Personalized feed based on your preferences'),
+            },
+            {
+                feedType: ArticleFeedType.HISTORY,
+                text: t('Articles you viewed'),
+            },
+            {
+                feedType: ArticleFeedType.MY_ARTICLES,
+                text: t('Articles you published'),
+            },
+        ],
+        [t],
+    );
+
     const onClickButton = useCallback(
         (type: ArticleFeedType) => {
             dispatch(mainPageActions.setFeedType(type));
@@ -67,10 +87,13 @@ export const MainPageHeader = memo((props: MainPageHeaderProps) => {
             max
         >
             <VStack max gap="16">
-                <HStack max justify="between">
-                    <Text text={t('My feed')} size="l" />
-                    <Icon height={24} width={24} Svg={SettingsIcon} />
-                </HStack>
+                <Text
+                    text={
+                        titleTypes.find((type) => type.feedType === feedType)
+                            ?.text || ''
+                    }
+                    size="l"
+                />
                 <HStack max gap="16">
                     {buttonTypes.map((button) =>
                         !button.auth || props.authData ? (

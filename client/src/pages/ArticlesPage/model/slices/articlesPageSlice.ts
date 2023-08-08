@@ -7,8 +7,8 @@ import { StateSchema } from '@/app/providers/StoreProvider';
 import {
     ArticleExpandedUser,
     ArticleSortField,
-    ArticleType,
     ArticleView,
+    ArticleType,
 } from '@/entities/Article';
 import { ARTICLE_VIEW_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
 import { SortOrder } from '@/shared/types/sort';
@@ -65,7 +65,7 @@ const articlesPageSlice = createSlice({
                 ARTICLE_VIEW_LOCALSTORAGE_KEY,
             ) as ArticleView;
             state.view = view;
-            state.limit = view === ArticleView.BIG ? 4 : 9;
+            state.limit = 15;
             state._inited = true;
         },
     },

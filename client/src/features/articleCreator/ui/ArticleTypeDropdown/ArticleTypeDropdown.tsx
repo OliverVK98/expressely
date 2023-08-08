@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import React, { memo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './ArticleTypeDropdown.module.scss';
-import { ArticleType, ArticleTypeSelect } from '@/entities/Article';
+import { UserArticleType, ArticleTypeSelect } from '@/entities/Article';
 import { HStack } from '@/shared/ui/Stack';
 import { Icon } from '@/shared/ui/Icon';
 import AddIcon from '@/shared/assets/icons/add.svg';
@@ -12,8 +12,8 @@ import { Button } from '@/shared/ui/Button';
 interface ArticleTypeDropdownProps {
     className?: string;
     onTypeAddClick: () => void;
-    onChangeType: (newType: ArticleType, index: number) => void;
-    types?: ArticleType[];
+    onChangeType: (newType: UserArticleType, index: number) => void;
+    types?: UserArticleType[];
 }
 
 export const ArticleTypeDropdown = memo((props: ArticleTypeDropdownProps) => {

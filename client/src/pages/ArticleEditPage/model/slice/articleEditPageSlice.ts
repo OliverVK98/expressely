@@ -7,7 +7,7 @@ import {
     ArticleExpandedUser,
     ArticleImageBlock,
     ArticleTextBlock,
-    ArticleType,
+    UserArticleType,
     fetchArticleById,
 } from '@/entities/Article';
 
@@ -31,13 +31,16 @@ const articleEditPageSlice = createSlice({
             state.article.img = action.payload;
         },
         addType: (state) => {
-            state.article.type = [...state.article.type, ArticleType.ALL];
+            state.article.type = [
+                ...state.article.type,
+                UserArticleType.Programming,
+            ];
         },
         updateType: (
             state,
             {
                 payload: { newType, index },
-            }: PayloadAction<{ newType: ArticleType; index: number }>,
+            }: PayloadAction<{ newType: UserArticleType; index: number }>,
         ) => {
             const updatedTypes = [...state.article.type];
             updatedTypes[index] = newType;

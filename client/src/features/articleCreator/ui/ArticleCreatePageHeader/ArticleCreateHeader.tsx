@@ -9,7 +9,7 @@ import { Input } from '@/shared/ui/Input';
 import { Card } from '@/shared/ui/Card';
 import { User } from '@/entities/User';
 import { ArticleTypeDropdown } from '../ArticleTypeDropdown/ArticleTypeDropdown';
-import { ArticleType } from '@/entities/Article';
+import { UserArticleType } from '@/entities/Article';
 import { Skeleton } from '@/shared/ui/Skeleton';
 
 interface ArticleCreateHeaderProps {
@@ -22,8 +22,8 @@ interface ArticleCreateHeaderProps {
     onChangeSubtitle: (subtitle: string) => void;
     onChangeUrl: (img: string) => void;
     onTypeAddClick: () => void;
-    onChangeType: (newType: ArticleType, index: number) => void;
-    types?: ArticleType[];
+    onChangeType: (newType: UserArticleType, index: number) => void;
+    types?: UserArticleType[];
     isLoading?: boolean;
     isEditMode: boolean;
 }

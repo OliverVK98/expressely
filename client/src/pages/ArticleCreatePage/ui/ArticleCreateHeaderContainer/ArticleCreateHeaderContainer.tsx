@@ -10,7 +10,7 @@ import {
 } from '../../model/selectors/articleCreatePageSelectors';
 import { getUserAuthData } from '@/entities/User';
 import { articleCreatePageActions } from '../../model/slices/articleCreatePageSlice';
-import { ArticleType } from '@/entities/Article';
+import { UserArticleType } from '@/entities/Article';
 
 interface ArticleCreateHeaderContainerProps {
     className?: string;
@@ -33,7 +33,7 @@ export const ArticleCreateHeaderContainer = (
     }, [dispatch]);
 
     const onChangeType = useCallback(
-        (newType: ArticleType, index: number) => {
+        (newType: UserArticleType, index: number) => {
             dispatch(articleCreatePageActions.updateType({ newType, index }));
         },
         [dispatch],

@@ -3,29 +3,29 @@ import ProgrammingIcon from '@/shared/assets/icons/programming.svg';
 import JavascriptIcon from '@/shared/assets/icons/js.svg';
 import MathIcon from '@/shared/assets/icons/math.svg';
 import { getRouteArticles } from '@/shared/const/router';
-import { ArticleType } from '@/entities/Article';
+import { UserArticleType } from '@/entities/Article';
 import { SidebarItemType } from '../types/sidebar';
 
-const articlesPath = (type: ArticleType) =>
+const articlesPath = (type: UserArticleType) =>
     `${getRouteArticles()}?sort=createdAt&order=asc&search=&type=${type}`;
 export const getSidebarTypesRecommendations = (): SidebarItemType[] => [
     {
-        path: articlesPath(ArticleType.Programming),
+        path: articlesPath(UserArticleType.Programming),
         Icon: ProgrammingIcon,
         text: 'Programming',
     },
     {
-        path: articlesPath(ArticleType.Javascript),
+        path: articlesPath(UserArticleType.Javascript),
         Icon: JavascriptIcon,
         text: 'Javascript',
     },
     {
-        path: articlesPath(ArticleType.React),
+        path: articlesPath(UserArticleType.React),
         Icon: ReactIcon,
         text: 'React',
     },
     {
-        path: articlesPath(ArticleType.Math),
+        path: articlesPath(UserArticleType.Math),
         Icon: MathIcon,
         text: 'Math',
     },

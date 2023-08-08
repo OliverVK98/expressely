@@ -2,19 +2,19 @@ import { useTranslation } from 'react-i18next';
 import { memo, useCallback } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ListBox } from '@/shared/ui/Popups';
-import { ArticleType } from '../../model/consts/consts';
+import { UserArticleType } from '../../model/consts/consts';
 
 interface ArticleTypeSelectProps {
     className?: string;
-    value?: ArticleType;
-    onChange?: (value: ArticleType) => void;
+    value?: UserArticleType;
+    onChange?: (value: UserArticleType) => void;
     readonly?: boolean;
     label?: string;
 }
 
-const options = Object.keys(ArticleType).map((key) => ({
-    value: ArticleType[key as keyof typeof ArticleType],
-    content: ArticleType[key as keyof typeof ArticleType],
+const options = Object.keys(UserArticleType).map((key) => ({
+    value: UserArticleType[key as keyof typeof UserArticleType],
+    content: UserArticleType[key as keyof typeof UserArticleType],
 }));
 
 export const ArticleTypeSelect = memo((props: ArticleTypeSelectProps) => {
@@ -23,7 +23,7 @@ export const ArticleTypeSelect = memo((props: ArticleTypeSelectProps) => {
 
     const onChangeHandler = useCallback(
         (value: string) => {
-            onChange?.(value as ArticleType);
+            onChange?.(value as UserArticleType);
         },
         [onChange],
     );

@@ -21,6 +21,9 @@ export class Article extends AbstractEntity {
   @Column()
   views: number;
 
+  @Column()
+  approved: boolean;
+
   @Column('text', { array: true })
   type: string[];
 

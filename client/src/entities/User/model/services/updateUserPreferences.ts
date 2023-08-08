@@ -2,10 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { getUserAuthData } from '../../model/selectors/getUserAuthData/getUserAuthData';
 import { User } from '../..';
-import { ArticleType } from '@/entities/Article';
+import { UserArticleType } from '@/entities/Article';
 
 interface PreferenceArg {
-    preference: ArticleType;
+    preference: UserArticleType;
     action: 'add' | 'delete';
 }
 

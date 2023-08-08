@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { VStack } from '@/shared/ui/Stack';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Page } from '@/widgets/Page';
@@ -23,6 +23,9 @@ import {
 import { profileReducer } from '../..';
 import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData';
 import { profileActions } from '../../model/slice/profileSlice';
+import { ArticlesRecommendationsListContainer } from '@/features/articlesRecommendationsList';
+import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
+import cls from './ProfilePage.module.scss';
 
 interface ProfilePageProps {
     className?: string;
@@ -65,30 +68,42 @@ const ProfilePage = ({ className, isAuthUserProfile }: ProfilePageProps) => {
         [dispatch],
     );
 
+    const content = (
+        <Page
+            data-testid="ProfilePage"
+            className={classNames('', {}, [className])}
+        >
+            <Form<ProfileFormValues>
+                validationSchema={profileFormValidationSchema}
+                onSubmit={onFormSubmitHandler}
+                max
+            >
+                <VStack max gap="16">
+                    <EditableProfileCardHeader
+                        authData={authData}
+                        isAuthUserProfile={isAuthUserProfile}
+                    />
+                    <EditableProfileCard
+                        isAuthUserProfile={isAuthUserProfile}
+                        publicData={publicData}
+                        authData={authData}
+                        id={+id!}
+                    />
+                </VStack>
+            </Form>
+        </Page>
+    );
+
     return (
         <DynamicModuleLoader reducers={reducers}>
-            <Page
-                data-testid="ProfilePage"
-                className={classNames('', {}, [className])}
-            >
-                <Form<ProfileFormValues>
-                    validationSchema={profileFormValidationSchema}
-                    onSubmit={onFormSubmitHandler}
-                    max
-                >
-                    <VStack max gap="16">
-                        <EditableProfileCardHeader
-                            authData={authData}
-                            isAuthUserProfile={isAuthUserProfile}
-                        />
-                        <EditableProfileCard
-                            isAuthUserProfile={isAuthUserProfile}
-                            publicData={publicData}
-                            authData={authData}
-                        />
-                    </VStack>
-                </Form>
-            </Page>
+            <StickyContentLayout
+                content={content}
+                right={
+                    <ArticlesRecommendationsListContainer
+                        className={cls.rightbar}
+                    />
+                }
+            />
         </DynamicModuleLoader>
     );
 };

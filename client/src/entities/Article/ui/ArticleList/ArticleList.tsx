@@ -15,10 +15,21 @@ interface ArticleListProps {
     isLoading?: boolean;
     view?: ArticleView;
     target?: HTMLAttributeAnchorTarget;
+    isAdmin?: false;
+}
+
+interface ArticleAdminListProps {
+    className?: string;
+    articles?: ArticleExpandedUser[];
+    isLoading?: boolean;
+    view?: ArticleView;
+    target?: HTMLAttributeAnchorTarget;
+    isAdmin: true;
+    onApproveClick: (id: number) => void;
 }
 
 const getSkeletons = (view: ArticleView) =>
-    new Array(view === ArticleView.SMALL ? 9 : 3)
+    new Array(view === ArticleView.SMALL ? 12 : 3)
         .fill(0)
         .map((item, index) => (
             <ArticleListItemSkeleton
@@ -28,44 +39,61 @@ const getSkeletons = (view: ArticleView) =>
             />
         ));
 
-export const ArticleList = memo((props: ArticleListProps) => {
-    const {
-        className,
-        articles,
-        view = ArticleView.SMALL,
-        isLoading,
-        target,
-    } = props;
-    const { t } = useTranslation();
+export const ArticleList = memo(
+    (props: ArticleListProps | ArticleAdminListProps) => {
+        const {
+            className,
+            articles,
+            view = ArticleView.SMALL,
+            isLoading,
+            target,
+            isAdmin = false,
+        } = props;
+        const { t } = useTranslation();
 
-    const renderArticle = (article: ArticleExpandedUser) => (
-        <ArticleListItem
-            article={article}
-            view={view}
-            key={article.id}
-            target={target}
-        />
-    );
+        const renderArticle = (article: ArticleExpandedUser) => {
+            if ('isAdmin' in props && props.isAdmin)
+                return (
+                    <ArticleListItem
+                        article={article}
+                        view={view}
+                        key={article.id}
+                        target={target}
+                        isAdmin
+                        onApproveClick={props.onApproveClick}
+                    />
+                );
+            return (
+                <ArticleListItem
+                    article={article}
+                    view={view}
+                    key={article.id}
+                    target={target}
+                />
+            );
+        };
 
-    if (!isLoading && !articles?.length) {
+        if (!isLoading && !articles?.length) {
+            return (
+                <div className={classNames('', {}, [className, cls[view]])}>
+                    <Text size="l" title={t('No articles found')} />
+                </div>
+            );
+        }
+
         return (
-            <div className={classNames('', {}, [className, cls[view]])}>
-                <Text size="l" title={t('No articles found')} />
-            </div>
+            <HStack
+                wrap="wrap"
+                gap="16"
+                data-testid="ArticleList"
+                className={classNames('', {}, [className, cls[view]])}
+                max
+            >
+                {isLoading && getSkeletons(view)}
+                {articles?.length && articles?.length > 0
+                    ? articles?.map(renderArticle)
+                    : null}
+            </HStack>
         );
-    }
-
-    return (
-        <HStack
-            wrap="wrap"
-            gap="16"
-            data-testid="ArticleList"
-            className={classNames('', {}, [className, cls[view]])}
-        >
-            {isLoading && getSkeletons(view)}
-            {articles?.length && articles?.length > 0
-                ? articles?.map(renderArticle)
-                : null}
-        </HStack>
-    );
-});
+    },
+);

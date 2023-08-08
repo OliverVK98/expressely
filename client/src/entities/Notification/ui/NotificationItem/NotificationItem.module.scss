@@ -1,5 +1,6 @@
 .NotificationItem {
     position: relative;
+    white-space: break-spaces;
 }
 
 .closeIcon {
@@ -11,5 +12,5 @@
 
 .NotificationItem,
 .link {
-    width: 100%;
+    width: 98%;
 }

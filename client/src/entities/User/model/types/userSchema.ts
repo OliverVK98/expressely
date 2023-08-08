@@ -3,7 +3,7 @@ import { FeatureFlags } from '@/shared/types/featureFlags';
 import { JsonSettings } from './jsonSettings';
 import { Country } from '@/entities/Country';
 import { Currency } from '@/entities/Currency';
-import { ArticleType } from '@/entities/Article';
+import { UserArticleType } from '@/entities/Article';
 
 export interface User {
     id: number;
@@ -12,7 +12,7 @@ export interface User {
     roles: UserRole[];
     features: FeatureFlags;
     jsonSettings: JsonSettings;
-    preferences: ArticleType[] | null;
+    preferences: UserArticleType[] | null;
 }
 
 export interface CreateUserDto {

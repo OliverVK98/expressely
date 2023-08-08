@@ -39,6 +39,18 @@ export enum ArticleType {
     Go = 'Go',
 }
 
+export enum UserArticleType {
+    Programming = 'Programming',
+    React = 'React',
+    Javascript = 'Javascript',
+    Math = 'Math',
+    Python = 'Python',
+    Crypto = 'Crypto',
+    Java = 'Java',
+    MachineLearning = 'Machine Learning',
+    Go = 'Go',
+}
+
 export enum ArticleFeedType {
     RECENT = 'Recent',
     DISCOVER = 'Discover',
@@ -47,51 +59,51 @@ export enum ArticleFeedType {
 }
 
 export const articleFeedTypeDescription: {
-    title: ArticleType;
+    title: UserArticleType;
     description: string;
     icon: VFC<SVGProps<SVGSVGElement>>;
 }[] = [
     {
-        title: ArticleType.Go,
+        title: UserArticleType.Go,
         description: 'Compiled, multithreaded programming language',
         icon: GoIcon,
     },
     {
-        title: ArticleType.Javascript,
+        title: UserArticleType.Javascript,
         description:
             'High-level, interpreted programming language. It is a language which is also ' +
             'characterized as dynamic, weakly typed, prototype-based and multi-paradigm',
         icon: JavascriptIcon,
     },
     {
-        title: ArticleType.Programming,
+        title: UserArticleType.Programming,
         description: 'The art of creating computer programs',
         icon: ProgrammingIcon,
     },
     {
-        title: ArticleType.React,
+        title: UserArticleType.React,
         description:
             'An open-source JavaScript framework and library developed by Facebook',
         icon: ReactIcon,
     },
     {
-        title: ArticleType.Python,
+        title: UserArticleType.Python,
         description:
             'Interpreted high-level programming language for general-purpose programming',
         icon: PythonIcon,
     },
     {
-        title: ArticleType.Math,
+        title: UserArticleType.Math,
         description: 'Mother of all sciences',
         icon: MathIcon,
     },
     {
-        title: ArticleType.Crypto,
+        title: UserArticleType.Crypto,
         description: 'Everything cryptocurrency',
         icon: CryptoIcon,
     },
     {
-        title: ArticleType.Java,
+        title: UserArticleType.Java,
         description:
             'General-purpose computer-programming language that is concurrent, ' +
             'class-based, object-oriented, and specifically designed to have as ' +
@@ -99,7 +111,7 @@ export const articleFeedTypeDescription: {
         icon: JavaIcon,
     },
     {
-        title: ArticleType.MachineLearning,
+        title: UserArticleType.MachineLearning,
         description: 'The basis of artificial intelligence',
         icon: MLIcon,
     },

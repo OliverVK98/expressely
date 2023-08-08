@@ -5,7 +5,7 @@ import {
     ArticleCodeBlock,
     ArticleImageBlock,
     ArticleTextBlock,
-    ArticleType,
+    UserArticleType,
 } from '@/entities/Article';
 
 import { addNewArticle } from '../services/addNewArticle';
@@ -14,7 +14,7 @@ const initialState: ArticleCreatePageSchema = {
     title: '',
     subtitle: '',
     img: '',
-    type: [ArticleType.ALL],
+    type: [UserArticleType.Programming],
     blocks: [],
 };
 
@@ -32,13 +32,13 @@ const articleCreatePageSlice = createSlice({
             state.img = action.payload;
         },
         addType: (state) => {
-            state.type = [...state.type, ArticleType.ALL];
+            state.type = [...state.type, UserArticleType.Programming];
         },
         updateType: (
             state,
             {
                 payload: { newType, index },
-            }: PayloadAction<{ newType: ArticleType; index: number }>,
+            }: PayloadAction<{ newType: UserArticleType; index: number }>,
         ) => {
             const updatedTypes = [...state.type];
             updatedTypes[index] = newType;

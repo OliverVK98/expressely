@@ -8,12 +8,12 @@ import cls from './FeedArticleTypeTabCard.module.scss';
 import { Text } from '@/shared/ui/Text';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { updateUserPreferences, User } from '@/entities/User';
-import { ArticleType } from '@/entities/Article';
+import { UserArticleType } from '@/entities/Article';
 
 // TODO: remove optional
 interface FeedArticleTypeTabCardProps {
     className?: string;
-    title: ArticleType;
+    title: UserArticleType;
     text: string;
     Svg: React.VFC<React.SVGProps<SVGSVGElement>>;
     userAuthData?: User;

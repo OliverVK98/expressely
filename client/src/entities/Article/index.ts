@@ -2,9 +2,10 @@ import {
     ArticleSortField,
     ArticleView,
     ArticleBlockType,
-    ArticleType,
+    UserArticleType,
     ArticleFeedType,
     articleFeedTypeDescription,
+    ArticleType,
 } from './model/consts/consts';
 import { ArticleDetails } from './ui/ArticleDetails/ArticleDetails';
 import {
@@ -36,6 +37,7 @@ import { ArticleTypeSelect } from './ui/ArticleTypeSelect/ArticleTypeSelect';
 import { fetchArticleById } from './model/services/fetchArticleById/fetchArticleById';
 import { incrementArticleViews } from './model/services/incrementArticleViews/incrementArticleViews';
 import { addArticleToHistory } from './model/services/addArticleToHistory/addArticleToHistory';
+import { useGetArticlesByUserId } from './model/api/fetchArticlesByUserId';
 
 export {
     type ArticleCodeBlock,
@@ -52,10 +54,12 @@ export {
     ArticleBlockType,
     ArticleView,
     ArticleSortField,
-    ArticleType,
+    UserArticleType,
     ArticleFeedType,
     articleDetailsReducer,
     articleFeedTypeDescription,
+    ArticleType,
+    useGetArticlesByUserId,
     getArticleDetailsData,
     getArticleDetailsError,
     getArticleDetailsIsLoading,

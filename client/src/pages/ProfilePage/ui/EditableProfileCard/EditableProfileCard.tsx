@@ -11,16 +11,18 @@ import cls from './EditableProfileCard.module.scss';
 import { AuthProfileCard } from '../AuthProfileCard/AuthProfileCard';
 import { PublicProfileCard } from '../PublicProfileCard/PublicProfileCard';
 import { ProfileFeedSettings } from '../ProfileFeedSettings/ProfileFeedSettings';
+import { UserPublishedArticles } from '../UserPublishedArticles/UserPublishedArticles';
 
 interface EditableProfileCardProps {
     className?: string;
     isAuthUserProfile: boolean;
     authData?: Profile;
     publicData?: PublicProfile;
+    id: number;
 }
 
 export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
-    const { className, isAuthUserProfile, authData, publicData } = props;
+    const { className, isAuthUserProfile, authData, publicData, id } = props;
     const error = useSelector(getProfileError);
     const isLoading = useSelector(getProfileIsLoading);
     const readonly = useSelector(getProfileReadonly);
@@ -42,12 +44,14 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
                     <ProfileFeedSettings />
                 </VStack>
             ) : (
-                <PublicProfileCard
-                    data={publicData}
-                    className={className}
-                    isLoading={isLoading}
-                    error={error}
-                />
+                <VStack max gap="16" className={className}>
+                    <PublicProfileCard
+                        data={publicData}
+                        isLoading={isLoading}
+                        error={error}
+                    />
+                    <UserPublishedArticles authData={authData} id={id} />
+                </VStack>
             )}
         </VStack>
     );

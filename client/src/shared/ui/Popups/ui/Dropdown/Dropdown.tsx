@@ -47,7 +47,7 @@ export const Dropdown = memo((props: DropdownProps) => {
                             type="button"
                             onClick={item.onClick}
                             className={classNames(cls.item, {
-                                [popupCls.active]: active,
+                                [cls.active]: active,
                             })}
                             disabled={item.disabled}
                         >

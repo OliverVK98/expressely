@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { ArticleCreateHeader } from '@/features/articleCreator';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 
-import { ArticleExpandedUser, ArticleType } from '@/entities/Article';
+import { ArticleExpandedUser, UserArticleType } from '@/entities/Article';
 import { articleEditPageActions } from '../../model/slice/articleEditPageSlice';
 
 interface ArticleCreateHeaderContainerProps {
@@ -22,7 +22,7 @@ export const ArticleCreateHeaderContainer = (
     }, [dispatch]);
 
     const onChangeType = useCallback(
-        (newType: ArticleType, index: number) => {
+        (newType: UserArticleType, index: number) => {
             dispatch(articleEditPageActions.updateType({ newType, index }));
         },
         [dispatch],

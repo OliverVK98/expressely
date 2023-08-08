@@ -2,7 +2,7 @@ import { rtkApi } from '@/shared/api/rtkApi';
 import {
     ArticlesExpandedUserServerResponse,
     ArticleSortField,
-    ArticleType,
+    UserArticleType,
 } from '@/entities/Article';
 import { SortOrder } from '@/shared/types/sort';
 
@@ -10,7 +10,7 @@ interface ArticlesRecommendationsListOptions {
     order?: SortOrder;
     sort?: ArticleSortField;
     search?: 'string';
-    type?: ArticleType;
+    type?: UserArticleType;
     expand?: 'user';
     limit?: number;
 }

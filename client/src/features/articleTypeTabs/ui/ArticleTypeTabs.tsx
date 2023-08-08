@@ -20,18 +20,12 @@ export const ArticleTypeTabs = memo((props: ArticleTypeTabsProps) => {
                 value: ArticleType.ALL,
                 content: t('All Articles'),
             },
-            {
-                value: ArticleType.Javascript,
-                content: ArticleType.Javascript,
-            },
-            {
-                value: ArticleType.React,
-                content: ArticleType.React,
-            },
-            {
-                value: ArticleType.Programming,
-                content: ArticleType.Programming,
-            },
+            ...Object.values(ArticleType)
+                .filter((type) => type !== ArticleType.ALL)
+                .map((type) => ({
+                    value: type,
+                    content: type,
+                })),
         ],
         [t],
     );

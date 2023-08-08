@@ -27,21 +27,42 @@ export class ArticleService {
   }
 
   async create(newArticle: CreateArticleDto, user: User) {
-    const article = await this.repo.create(newArticle);
+    newArticle.type = [...new Set(newArticle.type)];
+    const article = this.repo.create({ ...newArticle, approved: false });
     article.user = user;
 
     return await this.repo.save(article);
   }
 
-  async findOne(id: number) {
+  async findOne(id: number, approved: boolean) {
     return await this.repo
       .createQueryBuilder('article')
       .where('article.id = :id', { id })
+      .andWhere('article.approved = :approved', { approved })
       .leftJoinAndSelect('article.user', 'user')
       .getOne();
   }
 
-  async getArticles(pageOptions: PageOptionsDto) {
+  async approveArticle(id: number) {
+    const article = await this.findOne(id, false);
+
+    if (!article) {
+      throw new Error('Article not found');
+    }
+
+    article.approved = true;
+    return await this.repo.save(article);
+  }
+
+  getAdminArticles() {
+    return this.repo
+      .createQueryBuilder('article')
+      .where('article.approved = :approved', { approved: false })
+      .leftJoinAndSelect('article.user', 'user')
+      .getMany();
+  }
+
+  async getArticles(pageOptions: PageOptionsDto, approved: boolean) {
     const queryBuilder = this.repo.createQueryBuilder('article');
 
     queryBuilder
@@ -50,11 +71,12 @@ export class ArticleService {
         `article.${pageOptions.sort}`,
         pageOptions.order.toUpperCase() as 'ASC' | 'DESC',
       )
-      .skip(pageOptions.skip)
+      .skip((pageOptions.page - 1) * pageOptions.limit)
       .take(pageOptions.limit)
       .where(`article.title ILIKE :search`, {
         search: `%${pageOptions.search}%`,
-      });
+      })
+      .andWhere('article.approved = :approved', { approved });
 
     if (pageOptions.type !== ArticleType.ALL) {
       queryBuilder.andWhere('article.type @> ARRAY[:type]', {
@@ -71,7 +93,7 @@ export class ArticleService {
   }
 
   async updateArticle(updateArgs: UpdateArticleDto, userId: number) {
-    const article = await this.findOne(updateArgs.id);
+    const article = await this.findOne(updateArgs.id, true);
     const articleUserId = article.user.id;
     if (articleUserId !== userId) {
       throw new UnauthorizedException();
@@ -81,7 +103,7 @@ export class ArticleService {
   }
 
   async incrementViewCounter(id: number) {
-    const article = await this.findOne(id);
+    const article = await this.findOne(id, true);
     if (!article) {
       throw new NotFoundException(`Article #${id} not found`);
     }
@@ -95,6 +117,7 @@ export class ArticleService {
         return this.repo
           .createQueryBuilder('article')
           .where(':preference = ANY(article.type)', { preference })
+          .andWhere('article.approved = :approved', { approved: true })
           .orderBy('RANDOM()')
           .leftJoinAndSelect('article.user', 'user')
           .getMany();
@@ -110,12 +133,22 @@ export class ArticleService {
     return this.shuffleArray(uniqueArticlesArray);
   }
 
-  async getUserArticles(userId: number) {
-    return await this.repo
+  async getUserArticles(userId: number, isNotSelf?: boolean) {
+    const queryBuilder = this.repo
       .createQueryBuilder('article')
       .where('article.userId = :userId', { userId })
-      .leftJoinAndSelect('article.user', 'user')
-      .orderBy('article.createdAt', 'DESC')
-      .getMany();
+      .andWhere('article.approved = :approved', { approved: true })
+      .leftJoinAndSelect('article.user', 'user');
+
+    if (isNotSelf) {
+      queryBuilder
+        .orderBy('article.views', 'DESC')
+        .addOrderBy('article.createdAt', 'DESC')
+        .limit(4);
+    } else {
+      queryBuilder.orderBy('article.createdAt', 'DESC');
+    }
+
+    return await queryBuilder.getMany();
   }
 }
