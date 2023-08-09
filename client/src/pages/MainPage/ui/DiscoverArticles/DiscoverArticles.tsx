@@ -18,12 +18,11 @@ export const DiscoverArticles = memo((props: DiscoverArticlesProps) => {
     }
 
     return (
-        <div className={className}>
-            <ArticleList
-                articles={data}
-                isLoading={isLoading}
-                view={ArticleView.BIG}
-            />
-        </div>
+        <ArticleList
+            articles={data}
+            isLoading={isLoading}
+            view={ArticleView.BIG}
+            className={className}
+        />
     );
 });

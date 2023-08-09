@@ -9,21 +9,20 @@ import { ArticleListItemSkeleton } from '../ArticleListItem/ArticleListItemSkele
 import cls from './ArticleList.module.scss';
 import { HStack } from '@/shared/ui/Stack';
 
-interface ArticleListProps {
+interface ArticleListBaseProps {
     className?: string;
     articles?: ArticleExpandedUser[];
     isLoading?: boolean;
     view?: ArticleView;
     target?: HTMLAttributeAnchorTarget;
+    isPendingArticles?: boolean;
+}
+
+interface ArticleListProps extends ArticleListBaseProps {
     isAdmin?: false;
 }
 
-interface ArticleAdminListProps {
-    className?: string;
-    articles?: ArticleExpandedUser[];
-    isLoading?: boolean;
-    view?: ArticleView;
-    target?: HTMLAttributeAnchorTarget;
+interface ArticleAdminListProps extends ArticleListBaseProps {
     isAdmin: true;
     onApproveClick: (id: number) => void;
 }
@@ -47,6 +46,7 @@ export const ArticleList = memo(
             view = ArticleView.SMALL,
             isLoading,
             target,
+            isPendingArticles = false,
             isAdmin = false,
         } = props;
         const { t } = useTranslation();
@@ -61,6 +61,7 @@ export const ArticleList = memo(
                         target={target}
                         isAdmin
                         onApproveClick={props.onApproveClick}
+                        isPendingArticles={isPendingArticles}
                     />
                 );
             return (
@@ -69,6 +70,7 @@ export const ArticleList = memo(
                     view={view}
                     key={article.id}
                     target={target}
+                    isPendingArticles={isPendingArticles}
                 />
             );
         };

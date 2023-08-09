@@ -15,9 +15,11 @@ const userHistoryArticlesApi = rtkApi.injectEndpoints({
             }),
             keepUnusedDataFor: 0,
         }),
-        getUserArticles: build.query<ArticleExpandedUser[], void>({
-            query: () => ({
-                url: '/articles/user',
+        getUserArticles: build.query<ArticleExpandedUser[], boolean>({
+            query: (approvedArticles) => ({
+                url: approvedArticles
+                    ? '/articles/user'
+                    : '/articles/user/pending',
             }),
             keepUnusedDataFor: 0,
         }),

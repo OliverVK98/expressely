@@ -5,13 +5,13 @@ const userHistoryArticlesApi = rtkApi.injectEndpoints({
     endpoints: (build) => ({
         getAdminPageArticles: build.query<ArticleExpandedUser[], void>({
             query: () => ({
-                url: '/articles/admin',
+                url: '/admin/get-pending-articles',
             }),
             keepUnusedDataFor: 0,
         }),
         updateApprovalStatus: build.mutation<ArticleExpandedUser[], number>({
             query: (articleId) => ({
-                url: '/articles/approve',
+                url: '/admin/approve-article',
                 method: 'PATCH',
                 body: {
                     articleId,

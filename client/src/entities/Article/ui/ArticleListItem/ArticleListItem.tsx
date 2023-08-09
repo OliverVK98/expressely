@@ -19,26 +19,32 @@ import cls from './ArticleListItem.module.scss';
 import { getRouteArticleDetails, getRouteProfile } from '@/shared/const/router';
 import { HStack, VStack } from '@/shared/ui/Stack';
 
-interface ArticleListItemProps {
+interface ArticleListItemBaseProps {
     className?: string;
     article: ArticleExpandedUser;
     view: ArticleView;
     target?: HTMLAttributeAnchorTarget;
+    isPendingArticles?: boolean;
+}
+interface ArticleListItemProps extends ArticleListItemBaseProps {
     isAdmin?: false;
 }
 
-interface ArticleAdminListItemProps {
-    className?: string;
-    article: ArticleExpandedUser;
-    view: ArticleView;
-    target?: HTMLAttributeAnchorTarget;
+interface ArticleAdminListItemProps extends ArticleListItemBaseProps {
     isAdmin: true;
     onApproveClick: (id: number) => void;
 }
 
 export const ArticleListItem = memo(
     (props: ArticleListItemProps | ArticleAdminListItemProps) => {
-        const { className, article, view, target, isAdmin } = props;
+        const {
+            className,
+            article,
+            view,
+            target,
+            isAdmin,
+            isPendingArticles = false,
+        } = props;
         const { t } = useTranslation();
 
         const userInfo = (
@@ -118,14 +124,16 @@ export const ArticleListItem = memo(
                             />
                         )}
                         <HStack max justify="between">
-                            <AppLink
-                                target={target}
-                                to={getRouteArticleDetails(article.id)}
-                            >
-                                <Button variant="outline">
-                                    {t('Continue reading...')}
-                                </Button>
-                            </AppLink>
+                            {!isPendingArticles && (
+                                <AppLink
+                                    target={target}
+                                    to={getRouteArticleDetails(article.id)}
+                                >
+                                    <Button variant="outline">
+                                        {t('Continue reading...')}
+                                    </Button>
+                                </AppLink>
+                            )}
                             {isAdmin && (
                                 <Button
                                     variant="outline"
@@ -137,7 +145,7 @@ export const ArticleListItem = memo(
                                     {t('Approve')}
                                 </Button>
                             )}
-                            {!isAdmin && views}
+                            {!isAdmin && !isPendingArticles && views}
                         </HStack>
                     </VStack>
                 </Card>

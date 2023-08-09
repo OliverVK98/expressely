@@ -8,7 +8,6 @@ import {
   Patch,
   Post,
   Query,
-  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
 import { ArticleService } from '../services/article.service';
@@ -26,7 +25,6 @@ import { ArticleIncrementViewDto } from '../dtos/article/articleIncrementView.dt
 import { UpdateUserHistoryDto } from '../dtos/user/updateUserHistory.dto';
 import { ViewedArticleService } from '../services/viewedArticle.service';
 import { GetUserArticleDto } from '../dtos/article/getUserArticle.dto';
-import { ApproveArticleDto } from '../dtos/article/approveArticle.dto';
 
 @Controller('articles')
 export class ArticleController {
@@ -60,7 +58,7 @@ export class ArticleController {
   ) {
     const user = await this.userService.findOneById(userId);
     const article = await this.articleService.create(body, user);
-    this.notificationService.createNotification(
+    await this.notificationService.createNotification(
       {
         title: `New Article Published`,
         description: `Article: ${article.title} was successfully created`,
@@ -89,7 +87,7 @@ export class ArticleController {
   ) {
     const article = await this.articleService.findOne(articleId, true);
 
-    this.userService.updateUserHistory(
+    await this.userService.updateUserHistory(
       userId,
       article,
       this.viewedArticleService,
@@ -116,36 +114,17 @@ export class ArticleController {
 
   @UseGuards(AccessTokenGuard)
   @Get('/user')
-  async getUserSelfArticles(@CurrentUser('userId') userId: number) {
+  async getUserSelfApprovedArticles(@CurrentUser('userId') userId: number) {
     const articles = await this.articleService.getUserArticles(userId);
     return this.articleSerializer.serializeMany(articles, 'user');
   }
 
   @UseGuards(AccessTokenGuard)
-  @Get('/admin')
-  async getAdminArticles(@CurrentUser('userId') userId: number) {
-    const isAdmin = await this.userService.isUserAdmin(userId);
-    if (!isAdmin) {
-      throw new UnauthorizedException();
-    }
-    const articles = await this.articleService.getAdminArticles();
+  @Get('/user/pending')
+  async getUserSelfArticles(@CurrentUser('userId') userId: number) {
+    const articles = await this.articleService.getUserPendingArticles(userId);
     return this.articleSerializer.serializeMany(articles, 'user');
   }
-
-  @UseGuards(AccessTokenGuard)
-  @Patch('/approve')
-  async approveArticle(
-    @Body() { articleId }: ApproveArticleDto,
-    @CurrentUser('userId') userId: number,
-  ) {
-    const isAdmin = await this.userService.isUserAdmin(userId);
-    if (!isAdmin) {
-      throw new UnauthorizedException();
-    }
-    const article = await this.articleService.approveArticle(articleId);
-    return this.articleSerializer.serialize(article, 'user');
-  }
-
   @Get('/user/:id')
   async getUserArticle(@Param() { id }: GetUserArticleDto) {
     const articles = await this.articleService.getUserArticles(id, true);
@@ -155,7 +134,7 @@ export class ArticleController {
   @HttpCode(HttpStatus.NO_CONTENT)
   @Get('/view-increment/:id')
   async incrementViewCounter(@Param() { id }: ArticleIncrementViewDto) {
-    this.articleService.incrementViewCounter(id);
+    await this.articleService.incrementViewCounter(id);
   }
 
   @Get('/:id')

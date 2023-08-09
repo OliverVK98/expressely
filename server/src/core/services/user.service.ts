@@ -80,6 +80,10 @@ export class UserService {
       throw new BadRequestException(`User with id ${id} not found`);
     }
 
+    if (!article) {
+      throw new BadRequestException(`Article not found`);
+    }
+
     let viewedArticle = await viewedArticleService.findOne(user.id, article.id);
 
     if (viewedArticle) {

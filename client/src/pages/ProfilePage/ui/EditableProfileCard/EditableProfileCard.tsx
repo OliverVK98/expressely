@@ -50,7 +50,7 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
                         isLoading={isLoading}
                         error={error}
                     />
-                    <UserPublishedArticles authData={authData} id={id} />
+                    <UserPublishedArticles id={id} />
                 </VStack>
             )}
         </VStack>

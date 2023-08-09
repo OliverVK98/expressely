@@ -10,17 +10,15 @@ import {
     useGetArticlesByUserId,
 } from '@/entities/Article';
 import { VStack } from '@/shared/ui/Stack';
-import { Profile } from '@/entities/Profile';
 
 interface UserPublishedArticlesProps {
     className?: string;
     id: number;
-    authData?: Profile;
 }
 
 export const UserPublishedArticles = memo(
     (props: UserPublishedArticlesProps) => {
-        const { className, id, authData } = props;
+        const { className, id } = props;
         const { t } = useTranslation();
         const { data, error, isLoading } = useGetArticlesByUserId(id);
 

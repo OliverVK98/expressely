@@ -15,6 +15,7 @@ import { Token } from './entities/token.entity';
 import { AuthModule } from './modules/auth.module';
 import { ViewedArticle } from './entities/viewedArticle.entity';
 import { ViewedArticleModule } from './modules/viewedArticle.module';
+import { AdminModule } from './modules/admin.module';
 
 export {
   ArticleModule,
@@ -34,4 +35,5 @@ export {
   AuthModule,
   ViewedArticle,
   ViewedArticleModule,
+  AdminModule,
 };

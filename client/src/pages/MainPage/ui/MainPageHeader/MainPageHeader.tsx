@@ -107,7 +107,7 @@ export const MainPageHeader = memo((props: MainPageHeaderProps) => {
                                 key={button.text}
                                 onClick={() => onClickButton(button.type)}
                             >
-                                <Text text={button.text} />
+                                {button.text}
                             </Button>
                         ) : null,
                     )}

@@ -1,6 +1,6 @@
 import {
+  BadRequestException,
   Injectable,
-  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { Repository } from 'typeorm';
@@ -105,7 +105,7 @@ export class ArticleService {
   async incrementViewCounter(id: number) {
     const article = await this.findOne(id, true);
     if (!article) {
-      throw new NotFoundException(`Article #${id} not found`);
+      throw new BadRequestException(`Article not found`);
     }
     article.views += 1;
     await this.repo.save(article);
@@ -148,6 +148,17 @@ export class ArticleService {
     } else {
       queryBuilder.orderBy('article.createdAt', 'DESC');
     }
+
+    return await queryBuilder.getMany();
+  }
+
+  async getUserPendingArticles(userId: number) {
+    const queryBuilder = this.repo
+      .createQueryBuilder('article')
+      .where('article.userId = :userId', { userId })
+      .andWhere('article.approved = :approved', { approved: false })
+      .leftJoinAndSelect('article.user', 'user')
+      .orderBy('article.createdAt', 'DESC');
 
     return await queryBuilder.getMany();
   }

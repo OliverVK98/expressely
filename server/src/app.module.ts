@@ -20,6 +20,7 @@ import {
   UserModule,
   ViewedArticle,
   ViewedArticleModule,
+  AdminModule,
 } from './core';
 import { APP_PIPE } from '@nestjs/core';
 
@@ -60,6 +61,7 @@ import { APP_PIPE } from '@nestjs/core';
     RatingModule,
     AuthModule,
     ViewedArticleModule,
+    AdminModule,
   ],
   controllers: [],
   providers: [

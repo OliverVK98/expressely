@@ -9,6 +9,8 @@ import {
 } from '../model/api/adminPageArticles';
 import { ArticleList, ArticleView } from '@/entities/Article';
 import { VStack } from '@/shared/ui/Stack';
+import { ArticleAnalytics } from '@/features/analytics';
+import cls from './AdminPanelPage.module.scss';
 
 const AdminPanelPage = () => {
     const { t } = useTranslation();
@@ -26,6 +28,15 @@ const AdminPanelPage = () => {
     return (
         <Page data-testid="AdminPanelPage">
             <VStack gap="16">
+                <Card max padding="16">
+                    <Text text={t('Website Analytics')} align="center" bold />
+                </Card>
+                <div className={cls.chartGrid}>
+                    <ArticleAnalytics />
+                    <ArticleAnalytics />
+                    <ArticleAnalytics />
+                    <ArticleAnalytics />
+                </div>
                 <Card max padding="16">
                     <Text
                         text={t('New user articles pending approval')}
