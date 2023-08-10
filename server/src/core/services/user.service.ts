@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JsonSettingsDto, User } from '../entities/user.entity';
 import { UpdateUserDto } from '../dtos/user/updateUser.dto';
@@ -9,6 +9,8 @@ import { Article } from '../entities/article.entity';
 import { ViewedArticleService } from './viewedArticle.service';
 import { ArticleService } from './article.service';
 import { UserPreference, UserPreferenceAction, UserRole } from '../types/user';
+import { generateFakeAnalyticsData } from '../lib/generateFakeAnalytics';
+import { calculateCountsByMonth } from '../lib/createCounts';
 
 @Injectable()
 export class UserService {
@@ -160,5 +162,26 @@ export class UserService {
     }
 
     return this.repo.save(user);
+  }
+
+  async getUserCountsByMonth(year: number) {
+    if (year === 2022) {
+      return generateFakeAnalyticsData(2022);
+    }
+
+    const startDate = new Date(year, 0, 1);
+    const endDate = new Date(year, 11, 31, 23, 59, 59);
+
+    const users = await this.repo.find({
+      where: {
+        createdAt: Between(startDate, endDate),
+      },
+    });
+
+    return calculateCountsByMonth({
+      countEntity: users,
+      year,
+      mockedData: generateFakeAnalyticsData(2023),
+    });
   }
 }

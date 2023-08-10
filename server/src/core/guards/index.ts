@@ -1,4 +1,4 @@
-import { AccessTokenGuard } from './jwtAuthGuard';
-import { RefreshTokenGuard } from './jwtAuthGuard';
+import { AccessTokenGuard, RefreshTokenGuard } from './jwtAuth.guard';
+import { AdminGuard } from './admin.guard';
 
-export { AccessTokenGuard, RefreshTokenGuard };
+export { AccessTokenGuard, RefreshTokenGuard, AdminGuard };

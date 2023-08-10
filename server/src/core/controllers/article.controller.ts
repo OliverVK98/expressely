@@ -60,9 +60,8 @@ export class ArticleController {
     const article = await this.articleService.create(body, user);
     await this.notificationService.createNotification(
       {
-        title: `New Article Published`,
-        description: `Article: ${article.title} was successfully created`,
-        href: `/articles/${article.id}`,
+        title: `Article ${article.title} Created`,
+        description: `The article is currently under review. You will get a notification once it's approved`,
       },
       user,
     );

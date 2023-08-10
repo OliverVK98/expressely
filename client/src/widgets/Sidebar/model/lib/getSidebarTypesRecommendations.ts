@@ -1,9 +1,9 @@
-import ReactIcon from '@/shared/assets/icons/react.svg';
-import ProgrammingIcon from '@/shared/assets/icons/programming.svg';
-import JavascriptIcon from '@/shared/assets/icons/js.svg';
-import MathIcon from '@/shared/assets/icons/math.svg';
 import { getRouteArticles } from '@/shared/const/router';
-import { UserArticleType } from '@/entities/Article';
+import {
+    getIconForType,
+    getTitleForType,
+    UserArticleType,
+} from '@/entities/Article';
 import { SidebarItemType } from '../types/sidebar';
 
 const articlesPath = (type: UserArticleType) =>
@@ -11,22 +11,27 @@ const articlesPath = (type: UserArticleType) =>
 export const getSidebarTypesRecommendations = (): SidebarItemType[] => [
     {
         path: articlesPath(UserArticleType.Programming),
-        Icon: ProgrammingIcon,
-        text: 'Programming',
+        Icon: getIconForType(UserArticleType.Programming),
+        text: getTitleForType(UserArticleType.Programming),
     },
     {
         path: articlesPath(UserArticleType.Javascript),
-        Icon: JavascriptIcon,
-        text: 'Javascript',
+        Icon: getIconForType(UserArticleType.Javascript),
+        text: getTitleForType(UserArticleType.Javascript),
     },
     {
-        path: articlesPath(UserArticleType.React),
-        Icon: ReactIcon,
-        text: 'React',
+        path: articlesPath(UserArticleType.Java),
+        Icon: getIconForType(UserArticleType.Java),
+        text: getTitleForType(UserArticleType.Java),
     },
     {
-        path: articlesPath(UserArticleType.Math),
-        Icon: MathIcon,
-        text: 'Math',
+        path: articlesPath(UserArticleType.Go),
+        Icon: getIconForType(UserArticleType.Go),
+        text: getTitleForType(UserArticleType.Go),
+    },
+    {
+        path: articlesPath(UserArticleType.Python),
+        Icon: getIconForType(UserArticleType.Python),
+        text: getTitleForType(UserArticleType.Python),
     },
 ];

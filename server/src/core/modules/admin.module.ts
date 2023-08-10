@@ -10,9 +10,19 @@ import { NotificationService } from '../services/notification.service';
 import { Comment } from '../entities/comment.entity';
 import { AdminController } from '../controllers/admin.controller';
 import { ArticleSerializer } from '../serializers/article/article.serializer';
+import { ViewedArticle } from '../entities/viewedArticle.entity';
+import { ViewedArticleService } from '../services/viewedArticle.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Comment, User, Article, Notification])],
+  imports: [
+    TypeOrmModule.forFeature([
+      Comment,
+      User,
+      Article,
+      Notification,
+      ViewedArticle,
+    ]),
+  ],
   controllers: [AdminController],
   providers: [
     CommentService,
@@ -20,6 +30,7 @@ import { ArticleSerializer } from '../serializers/article/article.serializer';
     ArticleService,
     NotificationService,
     ArticleSerializer,
+    ViewedArticleService,
   ],
 })
 export class AdminModule {}

@@ -3,7 +3,7 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Article } from '../entities/article.entity';
 import { CreateArticleDto } from '../dtos/article/createArticle.dto';
@@ -13,6 +13,8 @@ import { PageMetaDto } from '../dtos/page/pageMeta.dto';
 import { PageDto } from '../dtos/page/page.dto';
 import { UpdateArticleDto } from '../dtos/article/updateArticle.dto';
 import { ArticleType } from '../types/article';
+import { calculateCountsByMonth } from '../lib/createCounts';
+import { generateFakeAnalyticsData } from '../lib/generateFakeAnalytics';
 
 @Injectable()
 export class ArticleService {
@@ -44,7 +46,12 @@ export class ArticleService {
   }
 
   async approveArticle(id: number) {
-    const article = await this.findOne(id, false);
+    const article = await this.repo
+      .createQueryBuilder('article')
+      .where('article.id = :id', { id })
+      .andWhere('article.approved = :approved', { approved: false })
+      .leftJoinAndSelect('article.user', 'user')
+      .getOne();
 
     if (!article) {
       throw new Error('Article not found');
@@ -161,5 +168,26 @@ export class ArticleService {
       .orderBy('article.createdAt', 'DESC');
 
     return await queryBuilder.getMany();
+  }
+
+  async getArticleCountsByMonth(year: number) {
+    if (year === 2022) {
+      return generateFakeAnalyticsData(2022);
+    }
+
+    const startDate = new Date(year, 0, 1);
+    const endDate = new Date(year, 11, 31, 23, 59, 59);
+
+    const articles = await this.repo.find({
+      where: {
+        createdAt: Between(startDate, endDate),
+      },
+    });
+
+    return calculateCountsByMonth({
+      countEntity: articles,
+      year,
+      mockedData: generateFakeAnalyticsData(2023),
+    });
   }
 }

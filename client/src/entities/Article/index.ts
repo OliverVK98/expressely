@@ -38,6 +38,8 @@ import { fetchArticleById } from './model/services/fetchArticleById/fetchArticle
 import { incrementArticleViews } from './model/services/incrementArticleViews/incrementArticleViews';
 import { addArticleToHistory } from './model/services/addArticleToHistory/addArticleToHistory';
 import { useGetArticlesByUserId } from './model/api/fetchArticlesByUserId';
+import { getIconForType } from './model/lib/getIconForType';
+import { getTitleForType } from './model/lib/getTitleForType';
 
 export {
     type ArticleCodeBlock,
@@ -66,6 +68,8 @@ export {
     fetchArticleById,
     incrementArticleViews,
     addArticleToHistory,
+    getIconForType,
+    getTitleForType,
     ArticleList,
     ArticleDetails,
     ArticleShortList,

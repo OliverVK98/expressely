@@ -12,7 +12,6 @@ import { LangSwitcher } from '@/features/langSwitcher';
 import { getSidebarTypesRecommendations } from '../../model/lib/getSidebarTypesRecommendations';
 import { SidebarType } from '../SidebarType/SidebarType';
 import { Text } from '@/shared/ui/Text';
-import { getUserAuthData } from '@/entities/User';
 
 interface SidebarProps {
     className?: string;
@@ -22,7 +21,6 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
     const [collapsed, setCollapsed] = useState(true);
     const sidebarItemsList = useSelector(getSidebarItems);
     const { t } = useTranslation();
-    const authData = useSelector(getUserAuthData);
 
     const itemsList = useMemo(
         () =>
@@ -33,7 +31,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
                     key={item.path}
                 />
             )),
-        [collapsed, sidebarItemsList, authData],
+        [collapsed, sidebarItemsList],
     );
 
     const typesList = useMemo(

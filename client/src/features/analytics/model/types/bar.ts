@@ -18,4 +18,14 @@ export type BarChartOptionsType = _DeepPartialObject<
         ScaleChartOptions<'bar'>
 >;
 
+export type LineChartOptionsType = _DeepPartialObject<
+    CoreChartOptions<'line'> &
+        ElementChartOptions<'line'> &
+        PluginChartOptions<'line'> &
+        BarControllerChartOptions &
+        DatasetChartOptions<'line'> &
+        ScaleChartOptions<'line'>
+>;
+
 export type BarChartData = ChartData<'bar'>;
+export type LineChartData = ChartData<'line'>;

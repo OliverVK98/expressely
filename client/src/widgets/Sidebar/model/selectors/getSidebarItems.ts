@@ -45,7 +45,7 @@ export const getSidebarItems = createSelector(getUserAuthData, (userData) => {
             {
                 path: getRouteArticleCreate(),
                 Icon: AddIcon,
-                text: 'Create New Article',
+                text: 'Publish Article',
                 authOnly: true,
             },
         );

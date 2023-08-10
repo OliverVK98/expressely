@@ -5,3 +5,17 @@
     width: 100%;
     gap: 20px;
 }
+
+.button {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.cardWrapper {
+    width: 30%;
+}
+
+.buttonsContainer {
+    justify-content: space-around;
+}
