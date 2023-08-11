@@ -37,6 +37,10 @@ export const ArticleDetailsComments = memo(
             [dispatch],
         );
 
+        const onRefetchComments = useCallback(() => {
+            dispatch(fetchCommentsByArticleId(id));
+        }, [dispatch, id]);
+
         useInitialEffect(() => {
             dispatch(fetchCommentsByArticleId(id));
         });
@@ -56,6 +60,7 @@ export const ArticleDetailsComments = memo(
                 <CommentList
                     isLoading={commentsIsLoading}
                     comments={comments}
+                    onRefetchComments={onRefetchComments}
                 />
             </VStack>
         );

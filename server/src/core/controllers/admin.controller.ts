@@ -1,13 +1,25 @@
-import { Body, Controller, Get, Param, Patch, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  UseGuards,
+} from '@nestjs/common';
 import { ArticleService } from '../services/article.service';
 import { ArticleSerializer } from '../serializers/article/article.serializer';
 import { UserService } from '../services/user.service';
 import { NotificationService } from '../services/notification.service';
 import { CommentService } from '../services/comment.service';
 import { AccessTokenGuard, AdminGuard } from '../guards';
-import { ApproveArticleDto } from '../dtos/article/approveArticle.dto';
+import { ApproveArticleDto } from '../dtos/admin/approveArticle.dto';
 import { ViewedArticleService } from '../services/viewedArticle.service';
 import { GetAnalyticsDto } from '../dtos/admin/getAnalyticsDto';
+import { DeleteCommentDto } from '../dtos/admin/deleteComment.dto';
+import { CurrentUser } from '../decorators/currentUser.decorator';
+import { UserSerializer } from '../serializers/user/user.serializer';
+import { UpdateUserRoleDto } from '../dtos/admin/updateUserRole.dto';
 
 @Controller('admin')
 @UseGuards(AccessTokenGuard)
@@ -20,11 +32,24 @@ export class AdminController {
     private notificationService: NotificationService,
     private commentService: CommentService,
     private viewedArticleService: ViewedArticleService,
+    private userSerializer: UserSerializer,
   ) {}
   @Get('/get-pending-articles')
   async getAdminArticles() {
     const articles = await this.articleService.getAdminArticles();
     return this.articleSerializer.serializeMany(articles, 'user');
+  }
+
+  @Get('/userlist')
+  async getAdminUserList(@CurrentUser('userId') userId: number) {
+    const userList = await this.userService.getAdminUserList(userId);
+    return this.userSerializer.serializeAuthMany(userList);
+  }
+
+  @Patch('/update-user-role')
+  async updateUserRole(@Body() { userId, role }: UpdateUserRoleDto) {
+    const updatedUser = await this.userService.updateUserRole(userId, role);
+    return this.userSerializer.serializeAuth(updatedUser);
   }
 
   @Patch('/approve-article')
@@ -39,6 +64,11 @@ export class AdminController {
       article.user,
     );
     return this.articleSerializer.serialize(article, 'user');
+  }
+
+  @Delete('/delete-comment')
+  async deleteUserComment(@Body() { commentId }: DeleteCommentDto) {
+    return await this.commentService.deleteCommentWithId(commentId);
   }
 
   @Get('/analytics/articles/:year')

@@ -1,5 +1,4 @@
 import {
-    isUserManager,
     isUserAdmin,
     getUserRoles,
 } from './model/selectors/getUserRoles/roleSelector';
@@ -10,6 +9,7 @@ import {
     User,
     ServerUserResponse,
     CreateUserDto,
+    UserListBoxItem,
 } from './model/types/userSchema';
 import { getUserAuthData } from './model/selectors/getUserAuthData/getUserAuthData';
 import { getUserInit } from './model/selectors/getUserInit/getUserInit';
@@ -17,6 +17,7 @@ import { useJsonSettings } from './model/selectors/getUserJsonSettings/getUserJs
 import { saveJsonSettings } from './model/services/saveJsonSettings';
 import { initAuthData } from './model/services/initAuthData';
 import { updateUserPreferences } from './model/services/updateUserPreferences';
+import { UserRoleController } from './ui/UserRoleController/UserRoleController';
 
 export {
     userActions,
@@ -25,9 +26,9 @@ export {
     type UserSchema,
     type ServerUserResponse,
     type CreateUserDto,
+    type UserListBoxItem,
     getUserAuthData,
     getUserInit,
-    isUserManager,
     isUserAdmin,
     UserRole,
     getUserRoles,
@@ -35,4 +36,5 @@ export {
     saveJsonSettings,
     initAuthData,
     updateUserPreferences,
+    UserRoleController,
 };

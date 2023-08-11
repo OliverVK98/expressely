@@ -36,3 +36,8 @@ export interface UserSchema {
     authData?: User;
     _init: boolean;
 }
+
+export interface UserListBoxItem {
+    value: UserRole;
+    content: UserRole;
+}

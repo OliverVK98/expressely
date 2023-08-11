@@ -35,6 +35,7 @@ export class NotificationService {
         userId,
         viewed: false,
       })
+      .orderBy('notification.createdAt', 'DESC')
       .getMany();
   }
 

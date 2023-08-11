@@ -16,4 +16,8 @@ export class UserSerializer {
       excludeExtraneousValues: true,
     });
   }
+
+  serializeAuthMany(users: AuthUserDto[]) {
+    return users.map((user) => this.serializeAuth(user));
+  }
 }

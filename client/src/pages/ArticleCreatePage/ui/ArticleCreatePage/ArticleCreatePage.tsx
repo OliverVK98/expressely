@@ -5,7 +5,7 @@ import {
     DynamicModuleLoader,
     ReducersList,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { articleCreatePageReducer } from '../..';
+import { articleCreatePageReducer } from '../../model/slices/articleCreatePageSlice';
 import { ArticlePreview } from '../ArticlePreview/ArticlePreview';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { ArticleCreatePageSidebar } from '../ArticleCreatePageSidebar/ArticleCreatePageSidebar';

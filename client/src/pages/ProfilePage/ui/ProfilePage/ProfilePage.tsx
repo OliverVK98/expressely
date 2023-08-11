@@ -20,9 +20,8 @@ import {
     DynamicModuleLoader,
     ReducersList,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { profileReducer } from '../..';
+import { profileReducer, profileActions } from '../../model/slice/profileSlice';
 import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData';
-import { profileActions } from '../../model/slice/profileSlice';
 import { ArticlesRecommendationsListContainer } from '@/features/articlesRecommendationsList';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import cls from './ProfilePage.module.scss';

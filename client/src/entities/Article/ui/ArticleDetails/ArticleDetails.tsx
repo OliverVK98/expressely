@@ -13,7 +13,7 @@ import { articleDetailsReducer } from '../../model/slice/articleDetailsSlice';
 import cls from './ArticleDetails.module.scss';
 import { AppImage } from '@/shared/ui/AppImage';
 import { ArticleBlocksRenderer } from '../../ui/ArticleBlocksRenderer/ArticleBlocksRenderer';
-import { ArticleBlock } from '../..';
+import { ArticleBlock } from '../../model/types/article';
 
 interface ArticleDetailsProps {
     className?: string;

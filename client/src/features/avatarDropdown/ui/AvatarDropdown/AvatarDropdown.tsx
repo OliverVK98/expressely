@@ -4,12 +4,7 @@ import { useSelector } from 'react-redux';
 import { Avatar } from '@/shared/ui/Avatar';
 import { Dropdown } from '@/shared/ui/Popups';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import {
-    getUserAuthData,
-    isUserAdmin,
-    isUserManager,
-    userActions,
-} from '@/entities/User';
+import { getUserAuthData, isUserAdmin, userActions } from '@/entities/User';
 import cls from './AvatarDropdown.module.scss';
 import { getRouteAdmin, getRouteUserProfile } from '@/shared/const/router';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
@@ -23,21 +18,18 @@ export const AvatarDropdown = memo((props: AvatarDropdownProps) => {
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
     const isAdmin = useSelector(isUserAdmin);
-    const isManager = useSelector(isUserManager);
     const authData = useSelector(getUserAuthData);
 
     const onLogout = useCallback(() => {
         dispatch(userActions.logout());
     }, [dispatch]);
 
-    const isAdminPanelAvailable = isAdmin || isManager;
-
     if (!authData) {
         return null;
     }
 
     const items = [
-        ...(isAdminPanelAvailable
+        ...(isAdmin
             ? [
                   {
                       content: t('Admin Panel'),

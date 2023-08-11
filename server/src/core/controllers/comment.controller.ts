@@ -7,6 +7,7 @@ import { ArticleService } from '../services/article.service';
 import { CreateCommentDto } from '../dtos/comment/createComment.dto';
 import { GetCommentDto } from '../dtos/comment/getComment.dto';
 import { CommentSerializer } from '../serializers/comment/comment.serializer';
+import { NotificationService } from '../services/notification.service';
 
 @Controller('comments')
 export class CommentController {
@@ -15,6 +16,7 @@ export class CommentController {
     private userService: UserService,
     private articleService: ArticleService,
     private commentSerializer: CommentSerializer,
+    private notificationService: NotificationService,
   ) {}
 
   @Get()
@@ -39,6 +41,15 @@ export class CommentController {
       body,
       article,
       user,
+    );
+    const articleUser = await this.userService.findOneById(article.user.id);
+    await this.notificationService.createNotification(
+      {
+        title: `New comment`,
+        description: `${user.username} left a comment under your article: ${article.title}`,
+        href: `/articles/${article.id}`,
+      },
+      articleUser,
     );
 
     return this.commentSerializer.serialize(comment);

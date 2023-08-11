@@ -1,5 +1,5 @@
 import { rtkApi } from '@/shared/api/rtkApi';
-import { ArticleExpandedUser } from '../..';
+import { ArticleExpandedUser } from '../../model/types/article';
 
 const fetchArticlesByUserIdApi = rtkApi.injectEndpoints({
     endpoints: (build) => ({

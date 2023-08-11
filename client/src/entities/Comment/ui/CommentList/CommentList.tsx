@@ -10,18 +10,19 @@ interface CommentListProps {
     className?: string;
     comments?: Comment[];
     isLoading?: boolean;
+    onRefetchComments: () => void;
 }
 
 export const CommentList = memo((props: CommentListProps) => {
-    const { className, comments, isLoading } = props;
+    const { className, comments, isLoading, onRefetchComments } = props;
     const { t } = useTranslation();
 
     if (isLoading) {
         return (
             <VStack max gap="16" className={classNames('', {}, [className])}>
-                <CommentCard isLoading />
-                <CommentCard isLoading />
-                <CommentCard isLoading />
+                <CommentCard onRefetchComments={onRefetchComments} isLoading />
+                <CommentCard onRefetchComments={onRefetchComments} isLoading />
+                <CommentCard onRefetchComments={onRefetchComments} isLoading />
             </VStack>
         );
     }
@@ -30,7 +31,11 @@ export const CommentList = memo((props: CommentListProps) => {
         <VStack max gap="16" className={classNames('', {}, [className])}>
             {comments?.length ? (
                 comments.map((comment) => (
-                    <CommentCard comment={comment} key={comment.id} />
+                    <CommentCard
+                        comment={comment}
+                        key={comment.id}
+                        onRefetchComments={onRefetchComments}
+                    />
                 ))
             ) : (
                 <Text text={t('No comments')} />

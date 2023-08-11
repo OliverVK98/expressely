@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { Between, Repository } from 'typeorm';
+import { Between, Equal, Not, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JsonSettingsDto, User } from '../entities/user.entity';
 import { UpdateUserDto } from '../dtos/user/updateUser.dto';
@@ -183,5 +183,35 @@ export class UserService {
       year,
       mockedData: generateFakeAnalyticsData(2023),
     });
+  }
+
+  async getAdminUserList(id: number) {
+    return await this.repo.find({
+      where: {
+        id: Not(Equal(id)),
+      },
+    });
+  }
+
+  async updateUserRole(userId: number, role: UserRole) {
+    const user = await this.findOneById(userId);
+
+    if (!user) {
+      throw new BadRequestException(`User with id ${userId} not found`);
+    }
+
+    if (role === UserRole.ADMIN) {
+      if (user.roles.includes(role)) return user;
+      if (!user.roles.includes(UserRole.ADMIN)) {
+        user.roles.push(UserRole.ADMIN);
+      }
+    } else if (role === UserRole.USER) {
+      const index = user.roles.indexOf(UserRole.ADMIN);
+      if (index !== -1) {
+        user.roles.splice(index, 1);
+      }
+    }
+
+    return await this.repo.save(user);
   }
 }

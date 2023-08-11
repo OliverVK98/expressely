@@ -5,7 +5,6 @@ import { ProfilePage } from '@/pages/ProfilePage';
 import { ArticlesPage } from '@/pages/ArticlesPage';
 import { ArticleDetailsPage } from '@/pages/ArticleDetailsPage';
 import { ArticleEditPage } from '@/pages/ArticleEditPage';
-import { AdminPanelPage } from '@/pages/AdminPanelPage';
 import { UserRole } from '@/entities/User';
 import { ForbiddenPage } from '@/pages/ForbiddenPage';
 import { AppRoutesProps } from '@/shared/types/router';
@@ -23,6 +22,7 @@ import {
     getRouteUserProfile,
 } from '@/shared/const/router';
 import { ArticleCreatePage } from '@/pages/ArticleCreatePage';
+import { AdminPage } from '@/pages/AdminPage';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.MAIN]: {
@@ -62,9 +62,9 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     },
     [AppRoutes.ADMIN_PANEL]: {
         path: getRouteAdmin(),
-        element: <AdminPanelPage />,
+        element: <AdminPage />,
         authOnly: true,
-        roles: [UserRole.MANAGER, UserRole.ADMIN],
+        roles: [UserRole.ADMIN],
     },
     [AppRoutes.FORBIDDEN_PAGE]: {
         path: getRouteForbidden(),

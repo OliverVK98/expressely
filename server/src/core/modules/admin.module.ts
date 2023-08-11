@@ -12,6 +12,7 @@ import { AdminController } from '../controllers/admin.controller';
 import { ArticleSerializer } from '../serializers/article/article.serializer';
 import { ViewedArticle } from '../entities/viewedArticle.entity';
 import { ViewedArticleService } from '../services/viewedArticle.service';
+import { UserSerializer } from '../serializers/user/user.serializer';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { ViewedArticleService } from '../services/viewedArticle.service';
     NotificationService,
     ArticleSerializer,
     ViewedArticleService,
+    UserSerializer,
   ],
 })
 export class AdminModule {}

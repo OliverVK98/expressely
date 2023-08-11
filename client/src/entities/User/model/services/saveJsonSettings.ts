@@ -3,7 +3,7 @@ import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { JsonSettings } from '../types/jsonSettings';
 import { getUserAuthData } from '../../model/selectors/getUserAuthData/getUserAuthData';
 import { getJsonSettings } from '../selectors/getUserJsonSettings/getUserJsonSettings';
-import { User } from '../..';
+import { User } from '../../model/types/userSchema';
 
 export const saveJsonSettings = createAsyncThunk<
     JsonSettings,

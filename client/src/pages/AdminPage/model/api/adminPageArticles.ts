@@ -1,5 +1,11 @@
 import { rtkApi } from '@/shared/api/rtkApi';
 import { ArticleExpandedUser } from '@/entities/Article';
+import { User, UserRole } from '@/entities/User';
+
+interface UpdateUserRoleArgs {
+    userId: number;
+    role: UserRole;
+}
 
 const userHistoryArticlesApi = rtkApi.injectEndpoints({
     endpoints: (build) => ({
@@ -18,6 +24,22 @@ const userHistoryArticlesApi = rtkApi.injectEndpoints({
                 },
             }),
         }),
+        getUserList: build.query<User[], void>({
+            query: () => ({
+                url: '/admin/userlist',
+            }),
+            keepUnusedDataFor: 0,
+        }),
+        updateUserRole: build.mutation<User, UpdateUserRoleArgs>({
+            query: ({ userId, role }) => ({
+                url: '/admin/update-user-role',
+                method: 'PATCH',
+                body: {
+                    userId,
+                    role,
+                },
+            }),
+        }),
     }),
 });
 
@@ -26,3 +48,8 @@ export const useGetAdminPageArticles =
 
 export const useUpdateArticleApprovalStatus =
     userHistoryArticlesApi.useUpdateApprovalStatusMutation;
+
+export const useGetUserList = userHistoryArticlesApi.useGetUserListQuery;
+
+export const useUpdateUserRole =
+    userHistoryArticlesApi.useUpdateUserRoleMutation;

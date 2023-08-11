@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { getUserAuthData } from '../../model/selectors/getUserAuthData/getUserAuthData';
-import { User } from '../..';
+import { User } from '../../model/types/userSchema';
 import { UserArticleType } from '@/entities/Article';
 
 interface PreferenceArg {

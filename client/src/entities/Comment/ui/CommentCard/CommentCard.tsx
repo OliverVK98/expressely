@@ -1,4 +1,5 @@
-import { memo } from 'react';
+import React, { memo, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { AppLink } from '@/shared/ui/AppLink';
 import { HStack, VStack } from '@/shared/ui/Stack';
@@ -9,15 +10,30 @@ import { Comment } from '../../model/types/comment';
 import cls from './CommentCard.module.scss';
 import { getRouteProfile } from '@/shared/const/router';
 import { Card } from '@/shared/ui/Card';
+import { isUserAdmin } from '@/entities/User';
+import CloseIcon from '@/shared/assets/icons/close.svg';
+import { Icon } from '@/shared/ui/Icon';
+import { useDeleteCommentById } from '../../model/api/commentApi';
 
 interface CommentCardProps {
     className?: string;
     comment?: Comment;
     isLoading?: boolean;
+    onRefetchComments: () => void;
 }
 
 export const CommentCard = memo((props: CommentCardProps) => {
-    const { className, comment, isLoading } = props;
+    const { className, comment, isLoading, onRefetchComments } = props;
+    const isAdmin = useSelector(isUserAdmin);
+    const [deleteComment] = useDeleteCommentById();
+
+    const onDeleteButtonHandler = useCallback(
+        async (id: number) => {
+            await deleteComment(id);
+            onRefetchComments();
+        },
+        [deleteComment, onRefetchComments],
+    );
 
     if (isLoading) {
         return (
@@ -44,7 +60,22 @@ export const CommentCard = memo((props: CommentCardProps) => {
     if (!comment) return null;
 
     return (
-        <Card max padding="24" border="round">
+        <Card
+            max
+            padding="24"
+            border="default"
+            className={classNames(cls.CommentCard, {}, [className])}
+        >
+            {isAdmin && (
+                <Icon
+                    Svg={CloseIcon}
+                    height={26}
+                    width={26}
+                    className={cls.closeIcon}
+                    clickable
+                    onClick={() => onDeleteButtonHandler(comment.id)}
+                />
+            )}
             <VStack
                 data-testid="CommentCard.Content"
                 max

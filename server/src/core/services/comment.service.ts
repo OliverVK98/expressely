@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Between, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Comment } from '../entities/comment.entity';
@@ -15,7 +15,7 @@ export class CommentService {
     private repo: Repository<Comment>,
   ) {}
   async createComment(comment: CreateCommentDto, article: Article, user: User) {
-    const newComment = await this.repo.create(comment);
+    const newComment = this.repo.create(comment);
     newComment.user = user;
     newComment.article = article;
 
@@ -50,5 +50,17 @@ export class CommentService {
       year,
       mockedData: generateFakeAnalyticsData(2023),
     });
+  }
+
+  async deleteCommentWithId(id: number) {
+    const comment = await this.repo.find({
+      where: {
+        id,
+      },
+    });
+    if (!comment) {
+      throw new NotFoundException(`Comment with ID ${id} not found`);
+    }
+    await this.repo.remove(comment);
   }
 }
