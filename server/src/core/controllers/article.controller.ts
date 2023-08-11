@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
@@ -84,7 +85,10 @@ export class ArticleController {
     @CurrentUser('userId') userId: number,
     @Body() { articleId }: UpdateUserHistoryDto,
   ) {
-    const article = await this.articleService.findOne(articleId, true);
+    const article = await this.articleService.findOneWithApprovalStatus(
+      articleId,
+      true,
+    );
 
     await this.userService.updateUserHistory(
       userId,
@@ -138,7 +142,8 @@ export class ArticleController {
 
   @Get('/:id')
   async getArticle(@Param('id') id: string, @Query('expand') expand: string) {
-    const article = await this.articleService.findOne(+id, true);
+    const article = await this.articleService.findOne(+id);
+    if (!article.approved) throw new BadRequestException('Not approved');
     return this.articleSerializer.serialize(article, expand);
   }
 }

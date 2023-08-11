@@ -36,13 +36,28 @@ export class ArticleService {
     return await this.repo.save(article);
   }
 
-  async findOne(id: number, approved: boolean) {
-    return await this.repo
+  async findOne(id: number) {
+    const article = await this.repo
+      .createQueryBuilder('article')
+      .where('article.id = :id', { id })
+      .leftJoinAndSelect('article.user', 'user')
+      .getOne();
+
+    if (!article) throw new BadRequestException('Article Not Found');
+
+    return article;
+  }
+
+  async findOneWithApprovalStatus(id: number, approved: boolean) {
+    const article = await this.repo
       .createQueryBuilder('article')
       .where('article.id = :id', { id })
       .andWhere('article.approved = :approved', { approved })
       .leftJoinAndSelect('article.user', 'user')
       .getOne();
+    if (!article) throw new BadRequestException('Article Not Found');
+
+    return article;
   }
 
   async approveArticle(id: number) {
@@ -100,7 +115,7 @@ export class ArticleService {
   }
 
   async updateArticle(updateArgs: UpdateArticleDto, userId: number) {
-    const article = await this.findOne(updateArgs.id, true);
+    const article = await this.findOneWithApprovalStatus(updateArgs.id, true);
     const articleUserId = article.user.id;
     if (articleUserId !== userId) {
       throw new UnauthorizedException();
@@ -110,7 +125,7 @@ export class ArticleService {
   }
 
   async incrementViewCounter(id: number) {
-    const article = await this.findOne(id, true);
+    const article = await this.findOneWithApprovalStatus(id, true);
     if (!article) {
       throw new BadRequestException(`Article not found`);
     }

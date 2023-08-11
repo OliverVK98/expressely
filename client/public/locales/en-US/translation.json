@@ -98,5 +98,9 @@
   "Discover": "Discover",
   "History": "History",
   "My Articles": "My Articles",
-  "You currently have no selected preferences in your profile": "You currently have no selected preferences in your profile"
+  "You currently have no selected preferences in your profile": "You currently have no selected preferences in your profile",
+  "This article is currently being reviewed by the administrator": {
+    " ": "This article is currently being reviewed by the administrator. "
+  },
+  "Once approved you will be able to view it": "Once approved you will be able to view it"
 }

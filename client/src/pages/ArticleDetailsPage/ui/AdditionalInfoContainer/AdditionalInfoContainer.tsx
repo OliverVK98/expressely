@@ -23,11 +23,11 @@ export const AdditionalInfoContainer = memo(() => {
 
     if (!article) {
         return (
-            <Card padding="24" border="partial">
+            <Card padding="24" border="partial" className={cls.card}>
                 <VStack max gap="32">
-                    <Skeleton width={150} height={20} />
-                    <Skeleton width={150} height={20} />
-                    <Skeleton width={150} height={20} />
+                    <Skeleton width="max" height={20} />
+                    <Skeleton width="max" height={20} />
+                    <Skeleton width="max" height={20} />
                 </VStack>
             </Card>
         );

@@ -19,7 +19,11 @@ import { ArticleDetailsComments } from '../ArticleDetailsComments/ArticleDetails
 import { getUserAuthData } from '@/entities/User';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { incrementArticleViews, addArticleToHistory } from '@/entities/Article';
+import {
+    incrementArticleViews,
+    addArticleToHistory,
+    getArticleDetailsError,
+} from '@/entities/Article';
 
 interface ArticleDetailsPageProps {
     className?: string;
@@ -36,6 +40,7 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
     }>();
     const authData = useSelector(getUserAuthData);
     const dispatch = useAppDispatch();
+    const error = useSelector(getArticleDetailsError);
 
     useInitialEffect(() => {
         dispatch(incrementArticleViews({ id: +id! }));
@@ -51,8 +56,8 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
         <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
             <VStack gap="16" max>
                 <DetailsContainer />
-                {authData && <ArticleRating articleId={+id!} />}
-                <ArticleDetailsComments id={+id!} />
+                {authData && !error && <ArticleRating articleId={+id!} />}
+                {!error && <ArticleDetailsComments id={+id!} />}
             </VStack>
         </Page>
     );

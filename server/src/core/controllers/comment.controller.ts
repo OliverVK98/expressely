@@ -36,7 +36,10 @@ export class CommentController {
     @Body() body: CreateCommentDto,
   ) {
     const user = await this.userService.findOneById(userId);
-    const article = await this.articleService.findOne(articleId, true);
+    const article = await this.articleService.findOneWithApprovalStatus(
+      articleId,
+      true,
+    );
     const comment = await this.commentService.createComment(
       body,
       article,

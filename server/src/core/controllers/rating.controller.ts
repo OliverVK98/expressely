@@ -23,7 +23,10 @@ export class RatingController {
     @Body() body: CreateRatingDto,
     @CurrentUser('userId') userId,
   ) {
-    const article = await this.articleService.findOne(body.articleId, true);
+    const article = await this.articleService.findOneWithApprovalStatus(
+      body.articleId,
+      true,
+    );
     const user = await this.userService.findOneById(userId);
     return await this.ratingService.createRating(body, user, article);
   }

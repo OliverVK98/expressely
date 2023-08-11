@@ -24,7 +24,9 @@ export const fetchArticleById = createAsyncThunk<
         }
 
         return response.data;
-    } catch (e) {
+    } catch (e: any) {
+        if (e?.response?.data?.message === 'Not approved')
+            return rejectWithValue('Not approved');
         return rejectWithValue('error');
     }
 });

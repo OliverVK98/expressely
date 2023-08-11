@@ -51,13 +51,27 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
             </>
         );
     } else if (error) {
-        content = (
-            <Text
-                align="center"
-                title={t('There was an error loading an article you requested')}
-                variant="error"
-            />
-        );
+        if (error === 'Not approved') {
+            content = (
+                <Text
+                    align="center"
+                    title={t(
+                        'This article is currently being reviewed by the administrator. ' +
+                            'Once approved you will be able to view it',
+                    )}
+                />
+            );
+        } else {
+            content = (
+                <Text
+                    align="center"
+                    title={t(
+                        'There was an error loading an article you requested',
+                    )}
+                    variant="error"
+                />
+            );
+        }
     } else {
         content = (
             <>
