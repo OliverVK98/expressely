@@ -1,7 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import cls from './UserPublishedArticles.module.scss';
 import { Card } from '@/shared/ui/Card';
 import { Text } from '@/shared/ui/Text';
 import {
@@ -10,6 +8,7 @@ import {
     useGetArticlesByUserId,
 } from '@/entities/Article';
 import { VStack } from '@/shared/ui/Stack';
+import { ErrorCard } from '@/shared/ui/ErrorCard';
 
 interface UserPublishedArticlesProps {
     className?: string;
@@ -23,14 +22,8 @@ export const UserPublishedArticles = memo(
         const { data, error, isLoading } = useGetArticlesByUserId(id);
 
         return (
-            <VStack
-                className={classNames(cls.UserPublishedArticles, {}, [
-                    className,
-                ])}
-                max
-                justify="center"
-                gap="16"
-            >
+            <VStack className={className} max justify="center" gap="16">
+                {error && <ErrorCard />}
                 <Card max padding="8">
                     <Text
                         align="center"

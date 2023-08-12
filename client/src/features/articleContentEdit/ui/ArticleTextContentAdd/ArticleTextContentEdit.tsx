@@ -114,11 +114,9 @@ export const ArticleTextContentEdit = memo(
                                     <Icon Svg={AddIcon} className={cls.icon} />
                                 }
                                 size="m"
+                                onClick={onAddParagraph}
                             >
-                                <Text
-                                    text={t('Add Paragraph')}
-                                    onClick={onAddParagraph}
-                                />
+                                {t('Add Paragraph')}
                             </Button>
                             {textBlock.paragraphs.length > 1 && (
                                 <Button

@@ -2,9 +2,6 @@
     color: var(--icon-redesigned);
 }
 
-.noColor {
-}
-
 .fill {
     fill: var(--icon-redesigned);
 }
@@ -22,11 +19,11 @@
     cursor: pointer;
 }
 
-.button:hover .Icon {
-    color: var(--accent-redesigned);
-}
-
 .isGreen .Icon {
     color: var(--save-redesigned);
     fill: var(--save-redesigned);
+}
+
+.button:hover .Icon {
+    color: var(--accent-redesigned);
 }

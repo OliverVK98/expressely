@@ -2,14 +2,12 @@ import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { ArticleList } from '@/entities/Article';
-import { classNames } from '@/shared/lib/classNames/classNames';
 import { getArticles } from '../../model/slices/articlesPageSlice';
 import {
     getArticlesPageError,
     getArticlesPageIsLoading,
     getArticlesPageView,
 } from '../../model/selectors/articlesPageSelectors';
-import cls from './ArticleInfiniteList.module.scss';
 
 interface ArticleInfiniteListProps {
     className?: string;
@@ -28,13 +26,11 @@ export const ArticleInfiniteList = memo((props: ArticleInfiniteListProps) => {
     }
 
     return (
-        <div className={classNames(cls.ArticleInfiniteList, {}, [className])}>
-            <ArticleList
-                isLoading={isLoading}
-                view={view}
-                articles={articles}
-                className={cls.list}
-            />
-        </div>
+        <ArticleList
+            isLoading={isLoading}
+            view={view}
+            articles={articles}
+            className={className}
+        />
     );
 });

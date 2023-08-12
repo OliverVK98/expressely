@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import React, { memo, useEffect } from 'react';
-import i18n from 'i18next';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './SignUpForm.module.scss';
 import { useCreateUser } from '../../api/signUpForm';
@@ -16,6 +15,7 @@ import { Currency, CurrencySelect } from '@/entities/Currency';
 import { TOKEN_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
 import { userActions } from '@/entities/User';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { RTKApiError } from '@/shared/api/rtkApi';
 
 interface SignUpFormProps {
     className?: string;
@@ -54,8 +54,6 @@ const SignUpForm = memo((props: SignUpFormProps) => {
         });
     };
 
-    // TODO: handle email is taken error
-
     useEffect(() => {
         if (data) {
             localStorage.setItem(TOKEN_LOCALSTORAGE_KEY, data.accessToken);
@@ -72,7 +70,7 @@ const SignUpForm = memo((props: SignUpFormProps) => {
             <Text align="center" title={t('Create Account')} />
             {error && (
                 <Text
-                    text={i18n.t('Something went wrong. Please try again.')}
+                    text={(error as RTKApiError).data.message}
                     variant="error"
                     className={cls.error}
                 />
@@ -102,7 +100,7 @@ const SignUpForm = memo((props: SignUpFormProps) => {
                 <FormInput
                     className={cls.input}
                     placeholder={t('Password')}
-                    type="text"
+                    type="password"
                     registerName="password"
                     errorMargin={20}
                     req
@@ -110,7 +108,7 @@ const SignUpForm = memo((props: SignUpFormProps) => {
                 <FormInput
                     className={cls.input}
                     placeholder={t('Confirm Password')}
-                    type="text"
+                    type="password"
                     registerName="confirmPassword"
                     errorMargin={20}
                     req

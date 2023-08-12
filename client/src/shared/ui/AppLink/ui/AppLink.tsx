@@ -1,5 +1,5 @@
+import React, { forwardRef } from 'react';
 import { LinkProps, NavLink } from 'react-router-dom';
-import React, { memo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './AppLink.module.scss';
 
@@ -12,28 +12,31 @@ interface AppLinkProps extends LinkProps {
     activeClassName?: string;
 }
 
-export const AppLink = memo((props: AppLinkProps) => {
-    const {
-        to,
-        className,
-        children,
-        variant = 'primary',
-        activeClassName = '',
-        ...otherProps
-    } = props;
+export const AppLink = forwardRef<HTMLAnchorElement, AppLinkProps>(
+    (props, ref) => {
+        const {
+            to,
+            className,
+            children,
+            variant = 'primary',
+            activeClassName = '',
+            ...otherProps
+        } = props;
 
-    return (
-        <NavLink
-            {...otherProps}
-            to={to}
-            className={({ isActive }) =>
-                classNames(cls.AppLink, { [activeClassName]: isActive }, [
-                    className,
-                    cls[variant],
-                ])
-            }
-        >
-            {children}
-        </NavLink>
-    );
-});
+        return (
+            <NavLink
+                ref={ref} // Forward the ref here
+                {...otherProps}
+                to={to}
+                className={({ isActive }) =>
+                    classNames(cls.AppLink, { [activeClassName]: isActive }, [
+                        className,
+                        cls[variant],
+                    ])
+                }
+            >
+                {children}
+            </NavLink>
+        );
+    },
+);

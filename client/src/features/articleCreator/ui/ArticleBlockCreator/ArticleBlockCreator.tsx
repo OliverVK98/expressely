@@ -15,6 +15,7 @@ import {
 import { VStack } from '@/shared/ui/Stack';
 import { ArticleBlocksReadonly } from '../ArticleBlocksReadonly/ArticleBlocksReadonly';
 import { Skeleton } from '@/shared/ui/Skeleton';
+import { ErrorCard } from '@/shared/ui/ErrorCard';
 
 interface ArticleBlockCreatorProps {
     className?: string;
@@ -30,6 +31,7 @@ interface ArticleBlockCreatorProps {
         block: ArticleTextBlock | ArticleImageBlock | ArticleCodeBlock,
     ) => void;
     isLoading?: boolean;
+    error?: string;
 }
 
 export const ArticleBlockCreator = memo((props: ArticleBlockCreatorProps) => {
@@ -45,8 +47,10 @@ export const ArticleBlockCreator = memo((props: ArticleBlockCreatorProps) => {
         moveBlockDown,
         isLoading,
         updateBlockContent,
+        error,
     } = props;
 
+    if (error) return <ErrorCard />;
     if (isLoading) return <Skeleton height={300} width="max" />;
 
     return (

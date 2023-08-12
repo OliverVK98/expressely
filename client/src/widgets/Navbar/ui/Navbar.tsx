@@ -1,5 +1,4 @@
 import React, { memo, useCallback, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { LoginModal } from '@/features/authByEmail';
 import { HStack } from '@/shared/ui/Stack';
@@ -16,7 +15,6 @@ interface NavbarProps {
 }
 
 const Navbar = memo(({ className }: NavbarProps) => {
-    const { t } = useTranslation();
     const [isAuthModal, setIsAuthModal] = useState(false);
     const [isSignUpModal, setIsSignUpModal] = useState(false);
     const authData = useSelector(getUserAuthData);
@@ -42,23 +40,9 @@ const Navbar = memo(({ className }: NavbarProps) => {
 
     return (
         <header className={classNames(cls.Navbar, {}, [className])}>
-            {/* <Button */}
-            {/*     variant="outline" */}
-            {/*     className={cls.links} */}
-            {/*     onClick={onToggleAuthModal} */}
-            {/* > */}
-            {/*     {t('Sign In')} */}
-            {/* </Button> */}
             {isAuthModal && (
                 <LoginModal isOpen={isAuthModal} onClose={onToggleAuthModal} />
             )}
-            {/* <Button */}
-            {/*     variant="outline" */}
-            {/*     className={cls.links} */}
-            {/*     onClick={onToggleSignUpModal} */}
-            {/* > */}
-            {/*     {t('Sign Up')} */}
-            {/* </Button> */}
             <UnauthorizedDropdown
                 onToggleAuthModal={onToggleAuthModal}
                 onToggleSignUpModal={onToggleSignUpModal}

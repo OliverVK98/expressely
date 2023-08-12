@@ -10,7 +10,6 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch
 import { updateUserPreferences, User } from '@/entities/User';
 import { UserArticleType } from '@/entities/Article';
 
-// TODO: remove optional
 interface FeedArticleTypeTabCardProps {
     className?: string;
     title: UserArticleType;

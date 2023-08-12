@@ -1,7 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import cls from './ArticleCreatePageHeader.module.scss';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { Text } from '@/shared/ui/Text';
 import { Avatar } from '@/shared/ui/Avatar';
@@ -48,14 +46,7 @@ export const ArticleCreateHeader = memo((props: ArticleCreateHeaderProps) => {
 
     if (isLoading)
         return (
-            <Card
-                padding="16"
-                border="default"
-                className={classNames(cls.ArticleCreatePageHeader, {}, [
-                    className,
-                ])}
-                max
-            >
+            <Card padding="16" border="default" className={className} max>
                 <VStack gap="8">
                     <HStack gap="4" justify="between" max>
                         <Text
@@ -81,12 +72,7 @@ export const ArticleCreateHeader = memo((props: ArticleCreateHeaderProps) => {
         );
 
     return (
-        <Card
-            padding="16"
-            border="default"
-            className={classNames(cls.ArticleCreatePageHeader, {}, [className])}
-            max
-        >
+        <Card padding="16" border="default" className={className} max>
             <VStack gap="8">
                 <HStack gap="4" justify="between" max>
                     <Text

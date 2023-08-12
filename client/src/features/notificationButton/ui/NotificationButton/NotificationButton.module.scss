@@ -4,3 +4,15 @@
     width: 500px;
     overflow-y: auto;
 }
+
+.trigger {
+    position: relative;
+}
+
+.notificationCount {
+    position: absolute;
+    top: 42%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+    color: red;
+}

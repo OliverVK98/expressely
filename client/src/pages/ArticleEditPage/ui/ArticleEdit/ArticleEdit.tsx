@@ -28,10 +28,12 @@ export const ArticleEdit = (props: ArticleEditProps) => {
             <ArticleCreateHeaderContainer
                 article={article}
                 isLoading={isLoading}
+                error={error}
             />
             <ArticleBlockCreatorContainer
                 article={article}
                 isLoading={isLoading}
+                error={error}
             />
             <ArticleCreateActionsContainer
                 onPublishButtonClick={onPublishHandler}

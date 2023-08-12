@@ -17,12 +17,13 @@ interface ArticleBlockCreatorContainerProps {
     className?: string;
     article?: ArticleExpandedUser;
     isLoading?: boolean;
+    error?: string;
 }
 
 export const ArticleBlockCreatorContainer = (
     props: ArticleBlockCreatorContainerProps,
 ) => {
-    const { className, article, isLoading } = props;
+    const { className, article, isLoading, error } = props;
     const { t } = useTranslation();
     const [tab, setTab] = useState<ArticleBlockType>(ArticleBlockType.TEXT);
     const dispatch = useAppDispatch();
@@ -130,6 +131,8 @@ export const ArticleBlockCreatorContainer = (
             typeTabs={typeTabs}
             className={className}
             updateBlockContent={updateBlockContent}
+            isLoading={isLoading}
+            error={error}
         />
     );
 };

@@ -79,7 +79,7 @@ export const ArticleCodeContentAdd = memo(
                             variant="outline"
                             onClick={handleSubmit}
                         >
-                            <Text text={t('Add Code Block')} />
+                            {t('Add Code Block')}
                         </Button>
                     </HStack>
                 </VStack>

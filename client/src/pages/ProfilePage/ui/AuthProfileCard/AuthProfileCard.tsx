@@ -25,7 +25,6 @@ export const AuthProfileCard = (props: AuthProfileCardProps) => {
     const { t } = useTranslation();
     const { reset } = useFormContext<ProfileFormValues>();
 
-    // TODO: Select not resetting
     useEffect(() => {
         if (authData) {
             reset({

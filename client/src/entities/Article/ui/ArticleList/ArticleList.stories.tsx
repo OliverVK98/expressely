@@ -3,7 +3,6 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { ArticleView } from '../../model/consts/consts';
 import { ArticleList } from './ArticleList';
-import { Article } from '../../model/types/article';
 
 export default {
     title: 'entities/Article/ArticleList',
@@ -18,8 +17,6 @@ export default {
 const Template: ComponentStory<typeof ArticleList> = (args) => (
     <ArticleList {...args} />
 );
-
-const article = {} as Article;
 
 export const LoadingBig = Template.bind({});
 LoadingBig.args = {

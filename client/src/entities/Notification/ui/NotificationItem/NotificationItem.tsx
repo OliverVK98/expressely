@@ -13,15 +13,17 @@ interface NotificationItemProps {
     className?: string;
     item: Notification;
     refetch: () => void;
+    refetchNotificationCount: () => void;
 }
 
 export const NotificationItem = memo((props: NotificationItemProps) => {
-    const { className, item, refetch } = props;
+    const { className, item, refetch, refetchNotificationCount } = props;
     const [setViewed] = useSetViewedNotification();
-    const handleViewed = useCallback(() => {
-        setViewed({ id: item.id });
+    const handleViewed = useCallback(async () => {
+        await setViewed({ id: item.id });
         refetch();
-    }, [refetch, item.id, setViewed]);
+        refetchNotificationCount();
+    }, [item.id, refetch, refetchNotificationCount, setViewed]);
 
     const content = (
         <Card

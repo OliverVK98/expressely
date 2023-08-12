@@ -20,6 +20,7 @@ import {
     getAddCommentFormText,
 } from '../../model/selectors/addCommentFormSelectors';
 import { Card } from '@/shared/ui/Card';
+import { ErrorCard } from '@/shared/ui/ErrorCard';
 
 interface AddCommentFormProps {
     className?: string;
@@ -48,6 +49,10 @@ const AddCommentForm = (props: AddCommentFormProps) => {
         onSendComment(text || '');
         onCommentTextChange('');
     }, [onCommentTextChange, onSendComment, text]);
+
+    if (error) {
+        return <ErrorCard />;
+    }
 
     return (
         <DynamicModuleLoader reducers={reducers}>

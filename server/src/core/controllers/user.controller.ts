@@ -20,7 +20,6 @@ export class UserController {
     return this.userSerializer.serializeAuth(user);
   }
 
-  // TODO: add that can update only own settings
   @UseGuards(AccessTokenGuard)
   @Patch('/set-json')
   async setJsonSettings(

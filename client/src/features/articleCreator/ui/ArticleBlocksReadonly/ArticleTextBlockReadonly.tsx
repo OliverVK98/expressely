@@ -35,7 +35,6 @@ export const ArticleTextBlockReadonly = memo(
         const { t } = useTranslation();
         const [editMode, setEditMode] = useState(false);
 
-        // TODO: move up!
         const onSaveButtonClick = useCallback(
             (block: ArticleTextBlock) => {
                 updateBlockContent(block);

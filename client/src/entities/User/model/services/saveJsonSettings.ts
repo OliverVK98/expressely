@@ -10,7 +10,7 @@ export const saveJsonSettings = createAsyncThunk<
     Partial<JsonSettings>,
     ThunkConfig<string>
 >('user/jsonSettings', async (newJsonSettings, thunkAPI) => {
-    const { extra, rejectWithValue, getState, dispatch } = thunkAPI;
+    const { extra, rejectWithValue, getState } = thunkAPI;
     const userData = getUserAuthData(getState());
     const currentSettings = getJsonSettings(getState());
 
@@ -26,13 +26,6 @@ export const saveJsonSettings = createAsyncThunk<
                 ...newJsonSettings,
             },
         );
-
-        // const response = await dispatch(
-        //     setJsonSettingsMutation({
-        //         ...currentSettings,
-        //         ...newJsonSettings,
-        //     }),
-        // ).unwrap();
 
         if (!response.jsonSettings) {
             return rejectWithValue('');

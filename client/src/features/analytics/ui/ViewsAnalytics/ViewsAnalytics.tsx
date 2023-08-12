@@ -21,6 +21,7 @@ import cls from '../sharedStyles.module.scss';
 import { Card } from '@/shared/ui/Card';
 import { ChartType, ChartYear } from '../../model/types/charts';
 import { AnalyticsSkeleton } from '../AnalyticsSkeleton/AnalyticsSkeleton';
+import { ErrorCard } from '@/shared/ui/ErrorCard';
 
 interface ViewsAnalyticsProps {
     className?: string;
@@ -46,6 +47,7 @@ export const ViewsAnalytics = memo((props: ViewsAnalyticsProps) => {
         isLoading,
     } = useGetViewsAnalytics(currentYear);
 
+    if (error) return <ErrorCard />;
     if (isLoading) return <AnalyticsSkeleton />;
 
     const barChartData: BarChartData = {

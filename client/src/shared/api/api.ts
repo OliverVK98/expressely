@@ -41,7 +41,7 @@ $api.interceptors.response.use(
                 );
                 return $api.request(originalRequest);
             } catch (err) {
-                console.log('User not authed', err);
+                /* empty */
             }
         }
         if (error.response.status === 401) $api.logout();

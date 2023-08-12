@@ -74,9 +74,7 @@ export const ArticleImageContentAdd = memo(
                             onChange={onSrcInputChange}
                         />
                         <Button onClick={onPreviewClick}>
-                            <Text
-                                text={previewOpen ? t('Close') : t('Preview')}
-                            />
+                            {previewOpen ? t('Close') : t('Preview')}
                         </Button>
                     </HStack>
                     {error && (
@@ -106,7 +104,7 @@ export const ArticleImageContentAdd = memo(
                             variant="outline"
                             onClick={handleSubmit}
                         >
-                            <Text text={t('Add Image Block')} />
+                            {t('Add Image Block')}
                         </Button>
                     </HStack>
                 </VStack>

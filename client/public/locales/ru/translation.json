@@ -102,5 +102,11 @@
   "This article is currently being reviewed by the administrator": {
     " ": "This article is currently being reviewed by the administrator. "
   },
-  "Once approved you will be able to view it": "Once approved you will be able to view it"
+  "Once approved you will be able to view it": "Once approved you will be able to view it",
+  "Add Paragraph": "Add Paragraph",
+  "Remove Paragraph": "Remove Paragraph",
+  "Add Text Block": "Add Text Block",
+  "Add Code Block": "Add Code Block",
+  "Add Image Block": "Add Image Block",
+  "Preview": "Preview"
 }

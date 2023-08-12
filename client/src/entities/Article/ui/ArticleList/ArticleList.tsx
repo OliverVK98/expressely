@@ -59,7 +59,7 @@ export const ArticleList = memo(
                         view={view}
                         key={article.id}
                         target={target}
-                        isAdmin
+                        isAdmin={isAdmin}
                         onApproveClick={props.onApproveClick}
                         isPendingArticles={isPendingArticles}
                     />

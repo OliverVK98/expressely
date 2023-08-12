@@ -5,6 +5,7 @@ import {
 } from '../../model/api/adminPageArticles';
 import { VStack } from '@/shared/ui/Stack';
 import { UserListBoxItem, UserRole, UserRoleController } from '@/entities/User';
+import { ErrorCard } from '@/shared/ui/ErrorCard';
 
 interface AdminUsersControllerProps {
     className?: string;
@@ -42,6 +43,7 @@ export const AdminUsersController = memo((props: AdminUsersControllerProps) => {
 
     return (
         <VStack max gap="4" className={className}>
+            {error && <ErrorCard />}
             {data?.map((user) => (
                 <UserRoleController
                     isLoading={isLoading}

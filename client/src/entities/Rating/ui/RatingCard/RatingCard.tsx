@@ -10,8 +10,6 @@ import { BrowserView } from '@/shared/ui/BrowserView';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { MobileView } from '@/shared/ui/MobileView';
 import { Text } from '@/shared/ui/Text';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import cls from './RatingCard.module.scss';
 
 interface RatingCardProps {
     className?: string;
@@ -78,7 +76,7 @@ export const RatingCard = memo((props: RatingCardProps) => {
             max
             padding="24"
             border="default"
-            className={classNames(cls.RatingCard, {}, [className])}
+            className={className}
         >
             <VStack align="center" gap="8">
                 <Text
@@ -113,7 +111,7 @@ export const RatingCard = memo((props: RatingCardProps) => {
                     </Modal>
                 </BrowserView>
                 <MobileView>
-                    <Drawer isOpen={isModalOpen} lazy onClose={cancelHandler}>
+                    <Drawer isOpen={isModalOpen} onClose={cancelHandler}>
                         <VStack gap="32">
                             {modalContent}
                             <Button fullWidth onClick={acceptHandler}>

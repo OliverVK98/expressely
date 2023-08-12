@@ -73,7 +73,7 @@ export const ArticleBlocksReadonly = memo(
                         return null;
                 }
             },
-            [moveBlockDown, moveBlockUp, onRemoveClick],
+            [moveBlockDown, moveBlockUp, onRemoveClick, updateBlockContent],
         );
 
         if (!blocks) {

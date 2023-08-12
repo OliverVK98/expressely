@@ -3,6 +3,7 @@ import { ArticleList, ArticleView } from '@/entities/Article';
 import { User } from '@/entities/User';
 import { DiscoverArticleEmpty } from './DiscoverArticleEmpty';
 import { useGetUserCustomFeedArticles } from '../../model/api/mainPageArticles';
+import { ErrorCard } from '@/shared/ui/ErrorCard';
 
 interface DiscoverArticlesProps {
     className?: string;
@@ -18,11 +19,14 @@ export const DiscoverArticles = memo((props: DiscoverArticlesProps) => {
     }
 
     return (
-        <ArticleList
-            articles={data}
-            isLoading={isLoading}
-            view={ArticleView.BIG}
-            className={className}
-        />
+        <>
+            {error && <ErrorCard />}
+            <ArticleList
+                articles={data}
+                isLoading={isLoading}
+                view={ArticleView.BIG}
+                className={className}
+            />
+        </>
     );
 });

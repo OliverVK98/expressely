@@ -4,17 +4,19 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch
 
 import { ArticleExpandedUser, UserArticleType } from '@/entities/Article';
 import { articleEditPageActions } from '../../model/slice/articleEditPageSlice';
+import { ErrorCard } from '@/shared/ui/ErrorCard';
 
 interface ArticleCreateHeaderContainerProps {
     className?: string;
     article?: ArticleExpandedUser;
     isLoading?: boolean;
+    error?: string;
 }
 
 export const ArticleCreateHeaderContainer = (
     props: ArticleCreateHeaderContainerProps,
 ) => {
-    const { className, article, isLoading } = props;
+    const { className, article, isLoading, error } = props;
     const dispatch = useAppDispatch();
 
     const onTypeAddClick = useCallback(() => {
@@ -48,6 +50,8 @@ export const ArticleCreateHeaderContainer = (
         },
         [dispatch],
     );
+
+    if (error) return <ErrorCard />;
 
     return (
         <ArticleCreateHeader

@@ -40,7 +40,10 @@ export const Dropdown = memo((props: DropdownProps) => {
             ])}
         >
             <Menu.Button className={popupCls.trigger}>{trigger}</Menu.Button>
-            <Menu.Items className={classNames(cls.menu, {}, menuClasses)}>
+            <Menu.Items
+                as="div"
+                className={classNames(cls.menu, {}, menuClasses)}
+            >
                 {items.map((item, index) => {
                     const content = ({ active }: { active: boolean }) => (
                         <button

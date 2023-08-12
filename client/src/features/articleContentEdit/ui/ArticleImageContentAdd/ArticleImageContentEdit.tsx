@@ -50,7 +50,7 @@ export const ArticleImageContentEdit = memo(
         }, [imageBlock, onSaveClick]);
 
         return (
-            <Card max>
+            <Card max className={className}>
                 <VStack gap="8" max>
                     <Input
                         label="Image Title:"
@@ -64,9 +64,7 @@ export const ArticleImageContentEdit = memo(
                             onChange={onSrcInputChange}
                         />
                         <Button onClick={onPreviewClick}>
-                            <Text
-                                text={previewOpen ? t('Close') : t('Preview')}
-                            />
+                            {previewOpen ? t('Close') : t('Preview')}
                         </Button>
                     </HStack>
                     {error && (

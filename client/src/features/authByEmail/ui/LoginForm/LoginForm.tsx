@@ -39,13 +39,13 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
 
     return (
         <VStack gap="32" className={classNames(cls.LoginForm, {}, [className])}>
-            <Text text={t('Log In')} bold size="l" />
-
+            <Text text={t('Log In (Prefilled with Test User)')} bold size="l" />
             <Form<FormValues>
                 validationSchema={loginFormValidationSchema}
                 max
                 gap="32"
                 onSubmit={onSubmit}
+                defaultValues={{ email: 'test@mail.com', password: '123' }}
             >
                 {error && (
                     <Text
@@ -63,7 +63,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
                 />
                 <FormInput
                     className={cls.input}
-                    type="text"
+                    type="password"
                     placeholder={t('Password')}
                     registerName="password"
                     errorMargin={24}

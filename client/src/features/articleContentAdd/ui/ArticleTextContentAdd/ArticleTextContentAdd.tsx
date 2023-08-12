@@ -105,11 +105,12 @@ export const ArticleTextContentAdd = memo((props: ArticleContentAddProps) => {
                 )}
                 <HStack justify="between" max>
                     <HStack gap="4">
-                        <Button size="m" color="success">
-                            <Text
-                                text={t('Add Paragraph')}
-                                onClick={onAddParagraph}
-                            />
+                        <Button
+                            size="m"
+                            color="success"
+                            onClick={onAddParagraph}
+                        >
+                            {t('Add Paragraph')}
                         </Button>
                         {paragraphs.length > 1 && (
                             <Button size="m" color="error">
@@ -132,7 +133,7 @@ export const ArticleTextContentAdd = memo((props: ArticleContentAddProps) => {
                         variant="outline"
                         onClick={handleSubmit}
                     >
-                        <Text text={t('Add Text Block')} />
+                        {t('Add Text Block')}
                     </Button>
                 </HStack>
             </VStack>

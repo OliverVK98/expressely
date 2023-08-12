@@ -64,7 +64,7 @@ export const ArticleCodeBlockReadonly = memo(
                 <Card className={className} max padding="16">
                     <VStack gap="4" max>
                         <ArticleCodeBlockComponent block={block} />
-                        <HStack max justify="end">
+                        <HStack max justify="end" gap="8">
                             <Button
                                 className={cls.btn}
                                 variant="outline"

@@ -19,5 +19,12 @@ export const ThemeSwitcher = memo(({ className }: ThemeSwitcherProps) => {
         });
     }, [dispatch, toggleTheme]);
 
-    return <Icon Svg={ThemeIcon} clickable onClick={onToggleHandler} />;
+    return (
+        <Icon
+            className={className}
+            Svg={ThemeIcon}
+            clickable
+            onClick={onToggleHandler}
+        />
+    );
 });

@@ -19,6 +19,7 @@ import {
 } from '../../model/selectors/articleEditPageSelectors';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { updateArticle } from '../../model/services/updateArticle';
+import { ErrorCard } from '@/shared/ui/ErrorCard';
 
 interface ArticleEditPageProps {
     className?: string;
@@ -67,6 +68,7 @@ const ArticleEditPage = memo((props: ArticleEditPageProps) => {
 
     const content = (
         <Page className={className}>
+            {error && <ErrorCard />}
             {!isPreview && (
                 <ArticleEdit
                     onPublishHandler={onPublishHandler}

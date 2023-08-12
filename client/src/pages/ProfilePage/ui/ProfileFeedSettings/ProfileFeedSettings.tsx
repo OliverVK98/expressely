@@ -1,8 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
 import { useSelector } from 'react-redux';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import cls from './ProfileFeedSettings.module.scss';
 import { Card } from '@/shared/ui/Card';
 import { VStack } from '@/shared/ui/Stack';
 import { Text } from '@/shared/ui/Text';
@@ -20,11 +18,7 @@ export const ProfileFeedSettings = memo((props: ProfileFeedSettingsProps) => {
     const userAuthData = useSelector(getUserAuthData);
 
     return (
-        <Card
-            max
-            padding="24"
-            className={classNames(cls.ProfileFeedSettings, {}, [className])}
-        >
+        <Card max padding="24" className={className}>
             <VStack max gap="8">
                 <Text size="l" text={t('Feed Settings')} />
                 <VStack max gap="16">

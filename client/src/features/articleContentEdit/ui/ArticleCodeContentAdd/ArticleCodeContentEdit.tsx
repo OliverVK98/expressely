@@ -41,7 +41,7 @@ export const ArticleCodeContentEdit = memo(
         }, [codeBlock, onSaveClick]);
 
         return (
-            <Card max padding="8">
+            <Card max padding="8" className={className}>
                 <VStack gap="8" max>
                     <Code
                         text={block.code}

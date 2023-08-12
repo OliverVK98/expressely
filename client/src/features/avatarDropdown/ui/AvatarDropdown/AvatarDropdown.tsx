@@ -3,9 +3,7 @@ import React, { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { Avatar } from '@/shared/ui/Avatar';
 import { Dropdown } from '@/shared/ui/Popups';
-import { classNames } from '@/shared/lib/classNames/classNames';
 import { getUserAuthData, isUserAdmin, userActions } from '@/entities/User';
-import cls from './AvatarDropdown.module.scss';
 import { getRouteAdmin, getRouteUserProfile } from '@/shared/const/router';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 
@@ -49,7 +47,7 @@ export const AvatarDropdown = memo((props: AvatarDropdownProps) => {
 
     return (
         <Dropdown
-            className={classNames(cls.AvatarDropdown, {}, [className])}
+            className={className}
             direction="bottomLeft"
             items={items}
             trigger={<Avatar size={40} src={authData.avatar} />}

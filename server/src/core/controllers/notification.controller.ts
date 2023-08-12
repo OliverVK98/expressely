@@ -6,6 +6,7 @@ import { NotificationSerializer } from '../serializers/notification/notification
 import { SetViewedNotificationDto } from '../dtos/notification/setViewedNotification.dto';
 
 @Controller('notifications')
+@UseGuards(AccessTokenGuard)
 export class NotificationController {
   constructor(
     private notificationService: NotificationService,
@@ -13,17 +14,19 @@ export class NotificationController {
   ) {}
 
   @Get()
-  @UseGuards(AccessTokenGuard)
   async getUserNotifications(@CurrentUser('userId') userId: number) {
     const notifications = await this.notificationService.getUserNotifications(
       userId,
     );
-
     return this.notificationSerializer.serializeMany(notifications);
   }
 
+  @Get('/count')
+  async getUserNotificationsCount(@CurrentUser('userId') userId: number) {
+    return await this.notificationService.getUserNotificationsCount(userId);
+  }
+
   @Patch()
-  @UseGuards(AccessTokenGuard)
   async setViewedToTrue(@Body() { id }: SetViewedNotificationDto) {
     return this.notificationService.setViewedToTrue(id);
   }

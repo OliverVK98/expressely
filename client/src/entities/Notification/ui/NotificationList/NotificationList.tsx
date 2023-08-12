@@ -10,13 +10,14 @@ import { Text } from '@/shared/ui/Text';
 
 interface NotificationListProps {
     className?: string;
+    refetchNotificationCount: () => void;
 }
 
 export const NotificationList = memo((props: NotificationListProps) => {
-    const { className } = props;
+    const { className, refetchNotificationCount } = props;
     const { t } = useTranslation();
     const { data, isLoading, refetch } = useGetNotifications(null, {
-        pollingInterval: 10000,
+        pollingInterval: 5000,
     });
 
     if (isLoading) {
@@ -53,7 +54,12 @@ export const NotificationList = memo((props: NotificationListProps) => {
             className={classNames(cls.NotificationList, {}, [className])}
         >
             {data?.map((item) => (
-                <NotificationItem key={item.id} item={item} refetch={refetch} />
+                <NotificationItem
+                    key={item.id}
+                    item={item}
+                    refetch={refetch}
+                    refetchNotificationCount={refetchNotificationCount}
+                />
             ))}
         </VStack>
     );

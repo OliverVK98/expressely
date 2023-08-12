@@ -32,7 +32,7 @@ export const ArticlePageGreeting = memo(() => {
 
     if (isMobile) {
         return (
-            <Drawer lazy isOpen={isOpen} onClose={onClose}>
+            <Drawer isOpen={isOpen} onClose={onClose}>
                 {text}
             </Drawer>
         );

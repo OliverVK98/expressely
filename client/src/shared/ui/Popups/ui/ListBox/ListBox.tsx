@@ -27,8 +27,6 @@ interface ListBoxProps<T extends string> {
     direction?: DropdownDirection;
 }
 
-// TODO: FLOATING UI FOR DROPDOWN DIRECTION
-
 export function ListBox<T extends string>(props: ListBoxProps<T>) {
     const {
         className,

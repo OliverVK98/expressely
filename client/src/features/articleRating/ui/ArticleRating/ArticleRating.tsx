@@ -6,6 +6,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { RatingCard } from '@/entities/Rating';
 import { useGetArticleRating, useRateArticle } from '../../api/articleRating';
 import { getUserAuthData } from '@/entities/User';
+import { ErrorCard } from '@/shared/ui/ErrorCard';
 
 export interface ArticleRatingProps {
     className?: string;
@@ -16,23 +17,24 @@ const ArticleRating = memo((props: ArticleRatingProps) => {
     const { className, articleId } = props;
     const { t } = useTranslation();
     const userData = useSelector(getUserAuthData);
-    const { data: rating, isLoading } = useGetArticleRating({
+
+    const {
+        data: rating,
+        isLoading,
+        error,
+    } = useGetArticleRating({
         articleId,
         userId: userData?.id ?? 1,
     });
-    const [rateArticleMutation] = useRateArticle();
+    const [rateArticleMutation, { error: submitError }] = useRateArticle();
 
     const handleRateArticle = useCallback(
         (starsCount: number, feedback?: string) => {
-            try {
-                rateArticleMutation({
-                    articleId,
-                    rate: starsCount,
-                    feedback,
-                });
-            } catch (e) {
-                console.log(e);
-            }
+            rateArticleMutation({
+                articleId,
+                rate: starsCount,
+                feedback,
+            });
         },
         [articleId, rateArticleMutation],
     );
@@ -50,11 +52,11 @@ const ArticleRating = memo((props: ArticleRatingProps) => {
         [handleRateArticle],
     );
 
-    if (isLoading) {
-        return <Skeleton width="100%" height={120} />;
-    }
+    if (error) return <ErrorCard />;
 
-    // TODO: fix hover over stars
+    if (isLoading) return <Skeleton width="100%" height={120} />;
+
+    if (submitError) return <ErrorCard />;
 
     return (
         <RatingCard

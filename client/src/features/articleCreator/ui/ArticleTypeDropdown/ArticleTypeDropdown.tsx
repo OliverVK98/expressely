@@ -6,7 +6,6 @@ import { UserArticleType, ArticleTypeSelect } from '@/entities/Article';
 import { HStack } from '@/shared/ui/Stack';
 import { Icon } from '@/shared/ui/Icon';
 import AddIcon from '@/shared/assets/icons/add.svg';
-import { Text } from '@/shared/ui/Text';
 import { Button } from '@/shared/ui/Button';
 
 interface ArticleTypeDropdownProps {
@@ -46,7 +45,7 @@ export const ArticleTypeDropdown = memo((props: ArticleTypeDropdownProps) => {
                     }
                     size="m"
                 >
-                    <Text text={t('Add Type')} />
+                    {t('Add Type')}
                 </Button>
             )}
         </HStack>

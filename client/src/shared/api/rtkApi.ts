@@ -8,6 +8,12 @@ import {
 import { TOKEN_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
 import { userActions } from '@/entities/User';
 
+export interface RTKApiError {
+    data: {
+        message: string;
+    };
+}
+
 const baseQuery = fetchBaseQuery({
     baseUrl: __API__,
     credentials: 'include',

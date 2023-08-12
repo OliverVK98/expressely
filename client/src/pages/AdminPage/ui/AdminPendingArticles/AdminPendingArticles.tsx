@@ -1,13 +1,12 @@
-import { useTranslation } from 'react-i18next';
 import React, { memo, useCallback } from 'react';
 import { ArticleList, ArticleView } from '@/entities/Article';
 import {
     useGetAdminPageArticles,
     useUpdateArticleApprovalStatus,
 } from '../../model/api/adminPageArticles';
+import { ErrorCard } from '@/shared/ui/ErrorCard';
 
 export const AdminPendingArticles = memo(() => {
-    const { t } = useTranslation();
     const { data, isLoading, error, refetch } = useGetAdminPageArticles();
     const [approveArticleWithId] = useUpdateArticleApprovalStatus();
     const handleApproveArticle = useCallback(
@@ -17,6 +16,8 @@ export const AdminPendingArticles = memo(() => {
         },
         [approveArticleWithId, refetch],
     );
+
+    if (error) return <ErrorCard />;
 
     return (
         <ArticleList

@@ -39,7 +39,6 @@ export function createReduxStore(
                     extraArgument: extraArg,
                 },
             }).concat(rtkApi.middleware),
-        // TODO: INIT AUTH ON REDUX
     });
 
     // @ts-ignore

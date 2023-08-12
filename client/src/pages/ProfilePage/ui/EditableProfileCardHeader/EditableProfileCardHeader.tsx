@@ -58,7 +58,6 @@ export const EditableProfileCardHeader = memo(
                             isAuthUserProfile ? 'Your Profile' : 'User Profile',
                         )}
                     />
-
                     {isAuthUserProfile && (
                         <div>
                             {readonly ? (

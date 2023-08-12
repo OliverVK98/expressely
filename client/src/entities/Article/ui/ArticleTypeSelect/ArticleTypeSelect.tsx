@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import { memo, useCallback } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ListBox } from '@/shared/ui/Popups';
@@ -19,7 +18,6 @@ const options = Object.keys(UserArticleType).map((key) => ({
 
 export const ArticleTypeSelect = memo((props: ArticleTypeSelectProps) => {
     const { className, value, onChange, readonly, label } = props;
-    const { t } = useTranslation();
 
     const onChangeHandler = useCallback(
         (value: string) => {

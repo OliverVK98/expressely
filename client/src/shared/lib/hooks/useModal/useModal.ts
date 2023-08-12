@@ -9,12 +9,11 @@ import {
 interface UseModalProps {
     onClose?: () => void;
     isOpen?: boolean;
-    lazy?: boolean;
     animationDelay: number;
 }
 
 export function useModal(props: UseModalProps) {
-    const { lazy, animationDelay, isOpen, onClose } = props;
+    const { animationDelay, isOpen, onClose } = props;
 
     const [isClosing, setIsClosing] = useState(false);
     const [isMounted, setIsMounted] = useState(false);

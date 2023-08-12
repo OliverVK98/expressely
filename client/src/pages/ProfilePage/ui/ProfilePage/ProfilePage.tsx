@@ -15,7 +15,6 @@ import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitial
 import { fetchAuthProfileData } from '../../model/services/fetchAuthProfileData/fetchAuthProfileData';
 import { fetchProfileData } from '../../model/services/fetchProfileData/fetchProfileData';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { getProfileIsLoading } from '../../model/selectors/getProfileIsLoading/getProfileIsLoading';
 import {
     DynamicModuleLoader,
     ReducersList,
@@ -36,20 +35,13 @@ const reducers: ReducersList = {
 };
 
 const ProfilePage = ({ className, isAuthUserProfile }: ProfilePageProps) => {
-    // TODO: test if id is string "asdasdasd"
     const { id } = useParams<{
         id: string;
     }>();
 
-    // TODO: COME BACK TO THIS CHECK
-    // if (isNaN(Number(id))) {
-    //     throw new Error();
-    // }
-
     const dispatch = useAppDispatch();
     const authData = useSelector(getProfileData);
     const publicData = useSelector(getProfilePublicData);
-    const isLoading = useSelector(getProfileIsLoading);
 
     useInitialEffect(() => {
         if (isAuthUserProfile) {

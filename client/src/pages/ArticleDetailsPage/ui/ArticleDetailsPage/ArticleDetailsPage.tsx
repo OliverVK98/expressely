@@ -23,6 +23,7 @@ import {
     incrementArticleViews,
     addArticleToHistory,
     getArticleDetailsError,
+    getArticleDetailsIsLoading,
 } from '@/entities/Article';
 
 interface ArticleDetailsPageProps {
@@ -41,6 +42,7 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
     const authData = useSelector(getUserAuthData);
     const dispatch = useAppDispatch();
     const error = useSelector(getArticleDetailsError);
+    const isLoading = useSelector(getArticleDetailsIsLoading);
 
     useInitialEffect(() => {
         dispatch(incrementArticleViews({ id: +id! }));
@@ -50,6 +52,7 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
         if (authData) {
             dispatch(addArticleToHistory(+id!));
         }
+        // eslint-disable-next-line
     }, []);
 
     const content = (
@@ -64,7 +67,7 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
 
     const rightBarContent = (
         <VStack gap="32">
-            <AdditionalInfoContainer />
+            <AdditionalInfoContainer error={error} isLoading={isLoading} />
             <ArticlesRecommendationsListContainer />
         </VStack>
     );

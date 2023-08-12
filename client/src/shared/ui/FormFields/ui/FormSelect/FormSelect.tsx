@@ -1,6 +1,4 @@
 import React, { memo } from 'react';
-import { classNames } from '@/shared/lib/classNames/classNames';
-import cls from './FormSelect.module.scss';
 import { useField } from '@/shared/lib/hooks/useField/useField';
 import { VStack } from '../../../Stack';
 import { Text } from '../../../Text';
@@ -26,7 +24,7 @@ export const FormSelect = memo((props: FormSelectProps) => {
 
     return (
         <VStack className={className} max gap="4">
-            <div className={classNames(cls.FormSelect, {}, [className])}>
+            <div className={className}>
                 <SelectComponent
                     onChange={onChange}
                     onBlur={onBlur}
@@ -34,9 +32,7 @@ export const FormSelect = memo((props: FormSelectProps) => {
                     readonly={readonly}
                 />
             </div>
-            {error && (
-                <Text className={cls.text} text={error} variant="error" />
-            )}
+            {error && <Text text={error} variant="error" />}
         </VStack>
     );
 });

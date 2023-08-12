@@ -14,7 +14,7 @@ export const updateUserPreferences = createAsyncThunk<
     PreferenceArg,
     ThunkConfig<string>
 >('user/updateUserPreferences', async ({ preference, action }, thunkAPI) => {
-    const { extra, rejectWithValue, getState, dispatch } = thunkAPI;
+    const { extra, rejectWithValue, getState } = thunkAPI;
     const userData = getUserAuthData(getState());
 
     if (!userData) {

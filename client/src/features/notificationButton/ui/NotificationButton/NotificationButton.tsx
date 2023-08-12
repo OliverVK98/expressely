@@ -8,6 +8,8 @@ import { NotificationList } from '@/entities/Notification';
 import NotificationIcon from '@/shared/assets/icons/notification.svg';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './NotificationButton.module.scss';
+import ExclamationIcon from '@/shared/assets/icons/exclamation.svg';
+import { useGetNotificationsCount } from '../../model/api/notificationCount';
 
 interface NotificationButtonProps {
     className?: string;
@@ -16,6 +18,10 @@ interface NotificationButtonProps {
 export const NotificationButton = memo((props: NotificationButtonProps) => {
     const { className } = props;
     const [isOpen, setIsOpen] = useState(false);
+    const { data, refetch: refetchNotificationCount } =
+        useGetNotificationsCount(null, {
+            pollingInterval: 5000,
+        });
 
     const onOpenDrawer = useCallback(() => {
         setIsOpen(true);
@@ -26,7 +32,25 @@ export const NotificationButton = memo((props: NotificationButtonProps) => {
     }, []);
 
     const trigger = (
-        <Icon Svg={NotificationIcon} clickable onClick={onOpenDrawer} />
+        <>
+            {Boolean(data) && (
+                <Icon
+                    className={cls.notificationCount}
+                    Svg={ExclamationIcon}
+                    height={12}
+                    width={12}
+                    color="noColor"
+                />
+            )}
+            <Icon
+                className={cls.trigger}
+                Svg={NotificationIcon}
+                clickable
+                height={46}
+                width={46}
+                onClick={onOpenDrawer}
+            />
+        </>
     );
 
     return (
@@ -39,13 +63,18 @@ export const NotificationButton = memo((props: NotificationButtonProps) => {
                     direction="bottomLeft"
                     trigger={trigger}
                 >
-                    <NotificationList className={cls.notifications} />
+                    <NotificationList
+                        className={cls.notifications}
+                        refetchNotificationCount={refetchNotificationCount}
+                    />
                 </Popover>
             </BrowserView>
             <MobileView>
                 {trigger}
                 <Drawer isOpen={isOpen} onClose={onCloseDrawer}>
-                    <NotificationList />
+                    <NotificationList
+                        refetchNotificationCount={refetchNotificationCount}
+                    />
                 </Drawer>
             </MobileView>
         </div>

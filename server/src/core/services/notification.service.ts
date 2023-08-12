@@ -54,4 +54,15 @@ export class NotificationService {
 
     return this.repo.save(notification);
   }
+
+  async getUserNotificationsCount(id: number) {
+    return await this.repo
+      .createQueryBuilder('notification')
+      .leftJoin('notification.user', 'user')
+      .where('user.id = :id AND notification.viewed = :viewed', {
+        id,
+        viewed: false,
+      })
+      .getCount();
+  }
 }
