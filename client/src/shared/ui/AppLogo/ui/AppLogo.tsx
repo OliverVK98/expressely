@@ -1,8 +1,9 @@
-import { memo } from 'react';
+import React, { memo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import AppSvg from '@/shared/assets/icons/default-logo.svg';
+import AppSvg from '@/shared/assets/icons/applogo.svg';
 import { HStack } from '../../Stack';
 import cls from './AppLogo.module.scss';
+import { Icon } from '../../Icon';
 
 interface AppLogoProps {
     className?: string;
@@ -18,11 +19,11 @@ export const AppLogo = memo((props: AppLogoProps) => {
             justify="center"
             className={classNames(cls.appLogoWrapper, {}, [className])}
         >
-            <AppSvg
+            <Icon
+                Svg={AppSvg}
                 width={size}
                 height={size}
                 className={cls.appLogo}
-                color="black"
             />
             <div className={cls.gradientBig} />
             <div className={cls.gradientSmall} />

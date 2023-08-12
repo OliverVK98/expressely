@@ -16,8 +16,9 @@ interface NotificationListProps {
 export const NotificationList = memo((props: NotificationListProps) => {
     const { className, refetchNotificationCount } = props;
     const { t } = useTranslation();
+    // TODO: change to 5 seconds
     const { data, isLoading, refetch } = useGetNotifications(null, {
-        pollingInterval: 5000,
+        pollingInterval: 20000,
     });
 
     if (isLoading) {

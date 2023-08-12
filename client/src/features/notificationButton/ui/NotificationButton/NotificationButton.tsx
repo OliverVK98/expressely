@@ -18,9 +18,10 @@ interface NotificationButtonProps {
 export const NotificationButton = memo((props: NotificationButtonProps) => {
     const { className } = props;
     const [isOpen, setIsOpen] = useState(false);
+    // TODO: change to 5 seconds
     const { data, refetch: refetchNotificationCount } =
         useGetNotificationsCount(null, {
-            pollingInterval: 5000,
+            pollingInterval: 20000,
         });
 
     const onOpenDrawer = useCallback(() => {
@@ -33,7 +34,7 @@ export const NotificationButton = memo((props: NotificationButtonProps) => {
 
     const trigger = (
         <>
-            {Boolean(data) && (
+            {!!data && (
                 <Icon
                     className={cls.notificationCount}
                     Svg={ExclamationIcon}

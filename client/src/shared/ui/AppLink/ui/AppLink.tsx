@@ -25,7 +25,7 @@ export const AppLink = forwardRef<HTMLAnchorElement, AppLinkProps>(
 
         return (
             <NavLink
-                ref={ref} // Forward the ref here
+                ref={ref}
                 {...otherProps}
                 to={to}
                 className={({ isActive }) =>
