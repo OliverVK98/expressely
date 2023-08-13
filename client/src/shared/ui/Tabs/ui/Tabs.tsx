@@ -15,10 +15,18 @@ interface TabsProps {
     value: string;
     onTabClick: (tab: TabItem) => void;
     direction?: FlexDirection;
+    max?: boolean;
 }
 
 export const Tabs = memo((props: TabsProps) => {
-    const { className, tabs, onTabClick, value, direction = 'row' } = props;
+    const {
+        className,
+        tabs,
+        onTabClick,
+        value,
+        direction = 'row',
+        max,
+    } = props;
 
     const clickHandle = useCallback(
         (tab: TabItem) => () => {
@@ -33,6 +41,7 @@ export const Tabs = memo((props: TabsProps) => {
             gap="8"
             className={classNames(cls.Tabs, {}, [className])}
             align="start"
+            max={max}
         >
             {tabs.map((tab) => {
                 const isSelected = tab.value === value;
@@ -46,6 +55,7 @@ export const Tabs = memo((props: TabsProps) => {
                         key={tab.value}
                         onClick={clickHandle(tab)}
                         border="round"
+                        max={max}
                     >
                         {tab.content}
                     </Card>

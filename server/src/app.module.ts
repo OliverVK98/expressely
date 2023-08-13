@@ -47,8 +47,7 @@ import { APP_PIPE } from '@nestjs/core';
         Token,
         ViewedArticle,
       ],
-      // TODO: change to false
-      synchronize: true,
+      synchronize: false,
       ssl: {
         rejectUnauthorized: false,
       },

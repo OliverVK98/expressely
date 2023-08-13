@@ -60,13 +60,6 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
             )}
         >
             <AppLogo size={collapsed ? 32 : 50} className={cls.appLogo} />
-            {/* <Icon */}
-            {/*     Svg={ArrowIcon} */}
-            {/*     data-testid="sidebar-toggle" */}
-            {/*     onClick={onToggle} */}
-            {/*     className={cls.collapseBtn} */}
-            {/*     clickable */}
-            {/* /> */}
             <div className={cls.switchers}>
                 <ThemeSwitcher />
                 <LangSwitcher short={collapsed} className={cls.lang} />
