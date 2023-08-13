@@ -85,6 +85,10 @@ export const appTechStack: AppTechStackBlock[] = [
                 normal: 'Configured for optimizing, bundling, and managing assets and dependencies.',
             },
             {
+                bold: 'Storybook: ',
+                normal: 'Utilized for building UI components in isolation and documenting shared components.',
+            },
+            {
                 bold: 'Testing: ',
                 normal: 'Utilized Jest with React Testing Library (RTL) for unit testing, and Cypress for end-to-end testing.',
             },

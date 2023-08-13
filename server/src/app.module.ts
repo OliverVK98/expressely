@@ -23,6 +23,8 @@ import {
   AdminModule,
 } from './core';
 import { APP_PIPE } from '@nestjs/core';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config();
 
 @Module({
   imports: [
@@ -32,11 +34,11 @@ import { APP_PIPE } from '@nestjs/core';
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'ep-winter-shadow-942537.us-east-2.aws.neon.tech',
-      port: 5432,
-      username: 'OliverVK98',
-      password: 'A6Hh2oabJwxz',
-      database: 'main_db',
+      host: process.env.HOST,
+      port: Number(process.env.PORT),
+      username: process.env.USERNAME,
+      password: process.env.PASSWORD,
+      database: process.env.DATABASE,
       entities: [
         Article,
         User,
