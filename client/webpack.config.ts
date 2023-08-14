@@ -1,7 +1,10 @@
 import * as webpack from 'webpack';
 import * as path from 'path';
+import * as dotenv from 'dotenv';
 import { buildWebpackConfig } from './config/build/buildWebpackConfig';
 import { BuildEnv, BuildPaths } from './config/build/types/config';
+
+dotenv.config();
 
 export default (env: BuildEnv) => {
     const paths: BuildPaths = {
@@ -15,7 +18,7 @@ export default (env: BuildEnv) => {
 
     const mode = env?.mode || 'development';
     const PORT = env?.port || 3000;
-    const apiUrl = env?.apiUrl || 'http://localhost:5000';
+    const apiUrl = process.env.apiUrl || 'http://localhost:5000';
 
     const isDev = mode === 'development';
 
