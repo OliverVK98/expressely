@@ -1,7 +1,5 @@
 import { Module, ValidationPipe } from '@nestjs/common';
-import { MiddlewareConsumer } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import * as session from 'express-session';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
   Article,
@@ -21,14 +19,19 @@ import {
   ViewedArticle,
   ViewedArticleModule,
   AdminModule,
-} from './src/core';
+} from './core';
 import { APP_PIPE } from '@nestjs/core';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import * as path from 'path';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `.env`,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: path.join(__dirname, '../../..', 'client', 'build'),
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -72,17 +75,4 @@ import { APP_PIPE } from '@nestjs/core';
     },
   ],
 })
-export class AppModule {
-  constructor(private configService: ConfigService) {}
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(
-        session({
-          secret: 'your-secret-key',
-          resave: false,
-          saveUninitialized: true,
-        }),
-      )
-      .forRoutes('*');
-  }
-}
+export class AppModule {}

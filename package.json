@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "concurrently \"cd client && npm run start\" \"cd server && npm run start:dev\""
+    "start": "concurrently \"cd client && npm run start\" \"cd server && npm run start:dev\"",
+    "install": "concurrently \"cd client && npm install\" \"cd server && npm install\"",
+    "build": "concurrently \"cd client && npm run build:prod\" \"cd server && npm run build\""
   },
   "devDependencies": {
     "concurrently": "^8.2.0"
