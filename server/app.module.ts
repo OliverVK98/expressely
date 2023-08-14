@@ -21,16 +21,14 @@ import {
   ViewedArticle,
   ViewedArticleModule,
   AdminModule,
-} from './core';
+} from './src/core';
 import { APP_PIPE } from '@nestjs/core';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require('dotenv').config();
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: `.env.${process.env.NODE_ENV}`,
+      envFilePath: `.env`,
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',

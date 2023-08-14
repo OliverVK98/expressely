@@ -3,8 +3,6 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Request } from 'express';
 import { Injectable } from '@nestjs/common';
 import { UserTokenDto } from '../../core/dtos/user/userToken.dto';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require('dotenv').config();
 
 @Injectable()
 export class AccessTokenStrategy extends PassportStrategy(Strategy, 'jwt') {

@@ -15,8 +15,6 @@ import { User } from '../entities/user.entity';
 import { UserTokenDto, userTokenDtoMapper } from '../dtos/user/userToken.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ProfileService } from './profile.service';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require('dotenv').config();
 
 @Injectable()
 export class AuthService {
