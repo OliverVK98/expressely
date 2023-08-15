@@ -34,8 +34,10 @@ export const Form = <TValues extends FieldValues = FieldValues>(
         ...(validationSchema && {
             resolver: yupResolver(validationSchema),
         }),
-        mode: 'onSubmit',
+        mode: 'onBlur',
     });
+
+    console.log(formProviderProps.formState.errors);
 
     const mods: Mods = {
         [cls.max]: max,

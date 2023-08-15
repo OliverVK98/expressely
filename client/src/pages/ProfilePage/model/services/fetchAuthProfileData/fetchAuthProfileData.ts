@@ -6,7 +6,7 @@ export const fetchAuthProfileData = createAsyncThunk<
     Profile,
     void,
     ThunkConfig<string>
->('profile/fetchAuthProfileData', async (profileId, thunkAPI) => {
+>('profile/fetchAuthProfileData', async (_, thunkAPI) => {
     const { extra, rejectWithValue } = thunkAPI;
 
     try {

@@ -43,6 +43,8 @@ const ProfilePage = ({ className, isAuthUserProfile }: ProfilePageProps) => {
     const authData = useSelector(getProfileData);
     const publicData = useSelector(getProfilePublicData);
 
+    console.log(authData);
+
     useInitialEffect(() => {
         if (isAuthUserProfile) {
             dispatch(fetchAuthProfileData());

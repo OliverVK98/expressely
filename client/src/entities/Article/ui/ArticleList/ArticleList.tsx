@@ -8,6 +8,7 @@ import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
 import { ArticleListItemSkeleton } from '../ArticleListItem/ArticleListItemSkeleton';
 import cls from './ArticleList.module.scss';
 import { HStack } from '@/shared/ui/Stack';
+import { Card } from '@/shared/ui/Card';
 
 interface ArticleListBaseProps {
     className?: string;
@@ -77,9 +78,17 @@ export const ArticleList = memo(
 
         if (!isLoading && !articles?.length) {
             return (
-                <div className={classNames('', {}, [className, cls[view]])}>
-                    <Text size="l" title={t('No articles found')} />
-                </div>
+                <Card
+                    max
+                    padding="24"
+                    className={classNames('', {}, [className, cls[view]])}
+                >
+                    <Text
+                        size="l"
+                        align="center"
+                        title={t('No articles found')}
+                    />
+                </Card>
             );
         }
 

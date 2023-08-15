@@ -56,11 +56,9 @@ export const PublicProfileCard = (props: PublicProfileCardProps) => {
     return (
         <Card border="default" max padding="24" className={className}>
             <VStack gap="32">
-                {data?.avatar && (
-                    <HStack max justify="center">
-                        <Avatar size={128} src={data?.avatar} />
-                    </HStack>
-                )}
+                <HStack max justify="center">
+                    <Avatar size={128} src={data?.avatar} />
+                </HStack>
                 <HStack gap="24" max>
                     <VStack gap="16" max>
                         <Input

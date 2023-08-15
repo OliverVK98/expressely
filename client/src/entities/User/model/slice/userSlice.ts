@@ -30,6 +30,11 @@ export const userSlice = createSlice({
                 String(action.payload.id),
             );
         },
+        updateUserAvatar: (state, action: PayloadAction<string | null>) => {
+            if (state.authData) {
+                state.authData.avatar = action.payload;
+            }
+        },
         logout: (state) => {
             state.authData = undefined;
             localStorage.removeItem(TOKEN_LOCALSTORAGE_KEY);

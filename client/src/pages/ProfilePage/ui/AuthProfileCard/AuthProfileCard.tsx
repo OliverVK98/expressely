@@ -8,7 +8,7 @@ import { HStack, VStack } from '@/shared/ui/Stack';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { Text } from '@/shared/ui/Text';
 import { Avatar } from '@/shared/ui/Avatar';
-import { FormInput, FormSelect } from '@/shared/ui/FormFields';
+import { FormInput, FormSelect, ImageFormUpload } from '@/shared/ui/FormFields';
 import { Profile } from '@/entities/Profile';
 import { ProfileFormValues } from '../../model/types/profileFormValues';
 
@@ -82,11 +82,9 @@ export const AuthProfileCard = (props: AuthProfileCardProps) => {
     return (
         <Card border="default" max padding="24" className={className}>
             <VStack gap="32">
-                {authData?.avatar && (
-                    <HStack max justify="center">
-                        <Avatar size={128} src={authData?.avatar} />
-                    </HStack>
-                )}
+                <HStack max justify="center">
+                    <Avatar size={128} src={authData?.avatar} />
+                </HStack>
                 <HStack gap="24" max>
                     <VStack gap="16" max>
                         <FormInput
@@ -128,12 +126,10 @@ export const AuthProfileCard = (props: AuthProfileCardProps) => {
                             readonly={readonly}
                             placeholder={t('Username')}
                         />
-                        <FormInput
-                            errorMargin={10}
+                        <ImageFormUpload
                             registerName="avatar"
-                            label={t('Avatar URL link')}
                             readonly={readonly}
-                            placeholder={t('Avatar URL link')}
+                            maxSizeMB={4}
                         />
                         <FormSelect
                             readonly={readonly}

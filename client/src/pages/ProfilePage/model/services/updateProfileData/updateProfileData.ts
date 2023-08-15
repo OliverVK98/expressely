@@ -2,18 +2,25 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { Profile } from '../../../../../entities/Profile';
 import { ProfileFormValues } from '../../types/profileFormValues';
+import { userActions } from '@/entities/User';
 
 export const updateProfileData = createAsyncThunk<
     Profile,
     ProfileFormValues,
     ThunkConfig<string>
 >('profile/updateProfileData', async (formData, thunkAPI) => {
-    const { extra, rejectWithValue } = thunkAPI;
+    const { extra, rejectWithValue, dispatch } = thunkAPI;
 
     try {
         const response = await extra.api.put<Profile>(
             `/profiles/update`,
             formData,
+        );
+
+        dispatch(
+            userActions.updateUserAvatar(
+                formData?.avatar ? formData.avatar : null,
+            ),
         );
 
         if (!response.data) {
