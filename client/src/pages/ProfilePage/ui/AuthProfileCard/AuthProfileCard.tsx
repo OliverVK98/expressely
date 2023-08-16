@@ -153,7 +153,7 @@ export const AuthProfileCard = (props: AuthProfileCardProps) => {
                         <UserAvatarUpload
                             onUpdateAvatar={onUpdateAvatarHandler}
                             readonly={readonly}
-                            maxSizeMB={4}
+                            maxSizeMB={10}
                         />
                     </VStack>
                 </HStack>
