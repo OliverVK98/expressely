@@ -13,4 +13,5 @@ export const profileFormValidationSchema = yup.object().shape({
         .min(0.1, 'Age must be at least 1')
         .required('This field cannot be empty'),
     city: yup.string().required('This field cannot be empty'),
+    avatar: yup.string(),
 });

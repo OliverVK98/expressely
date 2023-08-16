@@ -1,14 +1,16 @@
 import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { VStack } from '@/shared/ui/Stack';
-import { getProfileError } from '../../model/selectors/getProfileError/getProfileError';
-import { getProfileIsLoading } from '../../model/selectors/getProfileIsLoading/getProfileIsLoading';
-import { getProfileReadonly } from '../../model/selectors/getProfileReadonly/getProfileReadonly';
 import { Profile, PublicProfile } from '@/entities/Profile';
 import { AuthProfileCard } from '../AuthProfileCard/AuthProfileCard';
 import { PublicProfileCard } from '../PublicProfileCard/PublicProfileCard';
 import { ProfileFeedSettings } from '../ProfileFeedSettings/ProfileFeedSettings';
 import { UserPublishedArticles } from '../UserPublishedArticles/UserPublishedArticles';
+import {
+    getProfileError,
+    getProfileIsLoading,
+    getProfileReadonly,
+} from '../../model/selectors/getProfileSelectors';
 
 interface EditableProfileCardProps {
     className?: string;

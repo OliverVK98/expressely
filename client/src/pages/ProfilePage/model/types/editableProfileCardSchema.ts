@@ -1,5 +1,4 @@
 import { Profile, PublicProfile } from '@/entities/Profile';
-import { ValidateProfileError } from '../consts/consts';
 
 export interface ProfileSchema {
     authData: Profile;
@@ -7,5 +6,5 @@ export interface ProfileSchema {
     isLoading: boolean;
     error?: string;
     readonly: boolean;
-    validateErrors?: ValidateProfileError[];
+    imageError?: string;
 }

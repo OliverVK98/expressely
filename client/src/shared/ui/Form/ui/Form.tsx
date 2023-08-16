@@ -14,7 +14,7 @@ interface FormProps<TValues extends FieldValues> {
     max?: boolean;
     gap?: FlexGap;
     validationSchema: AnyObjectSchema;
-    onSubmit(values: TValues): void;
+    onSubmit(values: TValues, isDirty: boolean): void;
 }
 
 export const Form = <TValues extends FieldValues = FieldValues>(
@@ -29,15 +29,13 @@ export const Form = <TValues extends FieldValues = FieldValues>(
         onSubmit,
         defaultValues,
     } = props;
-    const formProviderProps = useForm<TValues>({
+    const formProviderProps = useForm<any>({
         defaultValues: defaultValues as any,
         ...(validationSchema && {
             resolver: yupResolver(validationSchema),
         }),
         mode: 'onBlur',
     });
-
-    console.log(formProviderProps.formState.errors);
 
     const mods: Mods = {
         [cls.max]: max,
@@ -46,7 +44,12 @@ export const Form = <TValues extends FieldValues = FieldValues>(
     return (
         <FormProvider {...formProviderProps}>
             <form
-                onSubmit={formProviderProps.handleSubmit(onSubmit)}
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    formProviderProps.handleSubmit((data) => {
+                        onSubmit(data, formProviderProps.formState.isDirty);
+                    })(e);
+                }}
                 className={classNames(cls.Form, mods, [className])}
             >
                 <VStack gap={gap}>{children}</VStack>

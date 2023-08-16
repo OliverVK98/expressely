@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { CurrencySelect } from '@/entities/Currency';
 import { CountrySelect } from '@/entities/Country';
@@ -8,9 +8,13 @@ import { HStack, VStack } from '@/shared/ui/Stack';
 import { Skeleton } from '@/shared/ui/Skeleton';
 import { Text } from '@/shared/ui/Text';
 import { Avatar } from '@/shared/ui/Avatar';
-import { FormInput, FormSelect, ImageFormUpload } from '@/shared/ui/FormFields';
+import { FormInput, FormSelect } from '@/shared/ui/FormFields';
 import { Profile } from '@/entities/Profile';
 import { ProfileFormValues } from '../../model/types/profileFormValues';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData';
+import cls from './AuthProfileCard.module.scss';
+import { UserAvatarUpload } from '../UserAvatarUpload/UserAvatarUpload';
 
 interface AuthProfileCardProps {
     className?: string;
@@ -24,6 +28,13 @@ export const AuthProfileCard = (props: AuthProfileCardProps) => {
     const { className, readonly, error, isLoading, authData } = props;
     const { t } = useTranslation();
     const { reset } = useFormContext<ProfileFormValues>();
+    const dispatch = useAppDispatch();
+    const onUpdateAvatarHandler = useCallback(
+        (avatar: string | null) => {
+            dispatch(updateProfileData({ avatar }));
+        },
+        [dispatch],
+    );
 
     useEffect(() => {
         if (authData) {
@@ -33,7 +44,6 @@ export const AuthProfileCard = (props: AuthProfileCardProps) => {
                 age: authData?.age,
                 city: authData?.city,
                 username: authData?.username,
-                avatar: authData?.avatar,
                 currency: authData?.currency,
                 country: authData?.country,
             });
@@ -85,7 +95,7 @@ export const AuthProfileCard = (props: AuthProfileCardProps) => {
                 <HStack max justify="center">
                     <Avatar size={128} src={authData?.avatar} />
                 </HStack>
-                <HStack gap="24" max>
+                <HStack gap="24" max align="start">
                     <VStack gap="16" max>
                         <FormInput
                             errorMargin={10}
@@ -118,7 +128,7 @@ export const AuthProfileCard = (props: AuthProfileCardProps) => {
                             placeholder={t('City')}
                         />
                     </VStack>
-                    <VStack gap="24" max>
+                    <VStack gap="16" max>
                         <FormInput
                             errorMargin={10}
                             registerName="username"
@@ -126,22 +136,24 @@ export const AuthProfileCard = (props: AuthProfileCardProps) => {
                             readonly={readonly}
                             placeholder={t('Username')}
                         />
-                        <ImageFormUpload
-                            registerName="avatar"
-                            readonly={readonly}
-                            maxSizeMB={4}
-                        />
                         <FormSelect
                             readonly={readonly}
                             SelectComponent={CountrySelect}
                             registerName="country"
                             defaultValue={authData?.country}
+                            className={cls.height}
                         />
                         <FormSelect
                             readonly={readonly}
                             SelectComponent={CurrencySelect}
                             registerName="currency"
                             defaultValue={authData?.currency}
+                            className={cls.height}
+                        />
+                        <UserAvatarUpload
+                            onUpdateAvatar={onUpdateAvatarHandler}
+                            readonly={readonly}
+                            maxSizeMB={4}
                         />
                     </VStack>
                 </HStack>

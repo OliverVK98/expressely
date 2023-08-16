@@ -11,6 +11,7 @@ const initialState: ProfileSchema = {
     error: undefined,
     isLoading: false,
     readonly: true,
+    imageError: '',
 };
 
 export const profileSlice = createSlice({
@@ -20,9 +21,12 @@ export const profileSlice = createSlice({
         setReadOnly: (state, action: PayloadAction<boolean>) => {
             state.readonly = action.payload;
         },
+        setProfileImageError: (state, action: PayloadAction<string>) => {
+            state.imageError = action.payload;
+        },
         cancelEdit: (state) => {
             state.readonly = true;
-            state.validateErrors = undefined;
+            state.imageError = '';
         },
     },
     extraReducers: (builder) => {

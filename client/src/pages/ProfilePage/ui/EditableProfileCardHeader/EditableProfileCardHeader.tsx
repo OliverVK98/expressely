@@ -6,12 +6,12 @@ import { Button } from '@/shared/ui/Button';
 import { HStack } from '@/shared/ui/Stack';
 import { Text } from '@/shared/ui/Text';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { getProfileReadonly } from '../../model/selectors/getProfileReadonly/getProfileReadonly';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { profileActions } from '../../model/slice/profileSlice';
 import { Card } from '@/shared/ui/Card';
 import { Profile } from '@/entities/Profile';
 import { ProfileFormValues } from '../../model/types/profileFormValues';
+import { getProfileReadonly } from '../../model/selectors/getProfileSelectors';
 
 interface EditableProfileCardHeaderProps {
     className?: string;
@@ -40,7 +40,6 @@ export const EditableProfileCardHeader = memo(
                 age: authData?.age,
                 city: authData?.city,
                 username: authData?.username,
-                avatar: authData?.avatar,
                 currency: authData?.currency,
                 country: authData?.country,
             });

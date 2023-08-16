@@ -9,8 +9,6 @@ import { ProfileFormValues } from '../../model/types/profileFormValues';
 import { profileFormValidationSchema } from '../../model/validation/profileFormValidation';
 import { EditableProfileCardHeader } from '../EditableProfileCardHeader/EditableProfileCardHeader';
 import { EditableProfileCard } from '../EditableProfileCard/EditableProfileCard';
-import { getProfileData } from '../../model/selectors/getProfileAuthData/getProfileData';
-import { getProfilePublicData } from '../../model/selectors/getProfilePublicData/getProfilePublicData';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { fetchAuthProfileData } from '../../model/services/fetchAuthProfileData/fetchAuthProfileData';
 import { fetchProfileData } from '../../model/services/fetchProfileData/fetchProfileData';
@@ -19,11 +17,15 @@ import {
     DynamicModuleLoader,
     ReducersList,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { profileReducer, profileActions } from '../../model/slice/profileSlice';
-import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData';
+import { profileActions, profileReducer } from '../../model/slice/profileSlice';
 import { ArticlesRecommendationsListContainer } from '@/features/articlesRecommendationsList';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import cls from './ProfilePage.module.scss';
+import {
+    getProfileData,
+    getProfilePublicData,
+} from '../../model/selectors/getProfileSelectors';
+import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData';
 
 interface ProfilePageProps {
     className?: string;
@@ -43,8 +45,6 @@ const ProfilePage = ({ className, isAuthUserProfile }: ProfilePageProps) => {
     const authData = useSelector(getProfileData);
     const publicData = useSelector(getProfilePublicData);
 
-    console.log(authData);
-
     useInitialEffect(() => {
         if (isAuthUserProfile) {
             dispatch(fetchAuthProfileData());
@@ -54,9 +54,9 @@ const ProfilePage = ({ className, isAuthUserProfile }: ProfilePageProps) => {
     });
 
     const onFormSubmitHandler = useCallback(
-        (data: ProfileFormValues) => {
+        (data: ProfileFormValues, isDirty: boolean) => {
             dispatch(profileActions.cancelEdit());
-            dispatch(updateProfileData(data));
+            if (isDirty) dispatch(updateProfileData(data));
         },
         [dispatch],
     );

@@ -6,7 +6,7 @@ import { userActions } from '@/entities/User';
 
 export const updateProfileData = createAsyncThunk<
     Profile,
-    ProfileFormValues,
+    Partial<ProfileFormValues> & { avatar?: string | null },
     ThunkConfig<string>
 >('profile/updateProfileData', async (formData, thunkAPI) => {
     const { extra, rejectWithValue, dispatch } = thunkAPI;
@@ -17,11 +17,7 @@ export const updateProfileData = createAsyncThunk<
             formData,
         );
 
-        dispatch(
-            userActions.updateUserAvatar(
-                formData?.avatar ? formData.avatar : null,
-            ),
-        );
+        dispatch(userActions.updateUserAvatar(response.data.avatar));
 
         if (!response.data) {
             throw new Error();

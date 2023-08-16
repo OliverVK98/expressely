@@ -27,13 +27,19 @@ export const AppImage = memo((props: AppImageProps) => {
 
     useLayoutEffect(() => {
         const img = new Image();
-        img.src = src ?? '';
+        setHasError(false);
+        img.src = src || '';
         img.onload = () => {
             setIsLoading(false);
         };
         img.onerror = () => {
             setIsLoading(false);
             setHasError(true);
+        };
+
+        return () => {
+            img.onload = null;
+            img.onerror = null;
         };
     }, [src]);
 
