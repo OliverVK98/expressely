@@ -14,23 +14,24 @@ import {
     getRouteMain,
     getRouteUserProfile,
 } from '@/shared/const/router';
+import i18n from '@/shared/config/i18n/i18n';
 
 export const getSidebarItems = createSelector(getUserAuthData, (userData) => {
     const sidebarItemsList: SidebarItemType[] = [
         {
             path: getRouteMain(),
             Icon: HomeIcon,
-            text: 'Home',
+            text: i18n.t('Home'),
         },
         {
             path: getRouteAbout(),
             Icon: InfoIcon,
-            text: 'About',
+            text: i18n.t('About'),
         },
         {
             path: getRouteArticles(),
             Icon: ArticlesIcon,
-            text: 'Articles',
+            text: i18n.t('Articles'),
         },
     ];
 
@@ -39,13 +40,13 @@ export const getSidebarItems = createSelector(getUserAuthData, (userData) => {
             {
                 path: getRouteUserProfile(),
                 Icon: ProfileIcon,
-                text: 'Profile',
+                text: i18n.t('Profile'),
                 authOnly: true,
             },
             {
                 path: getRouteArticleCreate(),
                 Icon: AddIcon,
-                text: 'Publish Article',
+                text: i18n.t('Publish Article'),
                 authOnly: true,
             },
         );

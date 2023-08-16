@@ -12,7 +12,7 @@ export const LangSwitcher = memo(({ className, short }: LangSwitcherProps) => {
     const { t, i18n } = useTranslation();
 
     const toggle = async () => {
-        i18n.changeLanguage(i18n.language === 'en' ? 'ru' : 'en');
+        await i18n.changeLanguage(i18n.language === 'en' ? 'es' : 'en');
     };
 
     return (

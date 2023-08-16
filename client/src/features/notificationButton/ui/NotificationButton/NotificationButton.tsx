@@ -18,10 +18,9 @@ interface NotificationButtonProps {
 export const NotificationButton = memo((props: NotificationButtonProps) => {
     const { className } = props;
     const [isOpen, setIsOpen] = useState(false);
-    // TODO: change to 5 seconds
     const { data, refetch: refetchNotificationCount } =
         useGetNotificationsCount(null, {
-            pollingInterval: 20000,
+            pollingInterval: 5000,
         });
 
     const onOpenDrawer = useCallback(() => {

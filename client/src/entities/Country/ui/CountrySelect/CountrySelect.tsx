@@ -20,10 +20,6 @@ const options = [
         value: Country.Mexico,
         content: Country.Mexico,
     },
-    {
-        value: Country.Russia,
-        content: Country.Russia,
-    },
 ];
 
 export const CountrySelect = (props: CountrySelectProps) => {

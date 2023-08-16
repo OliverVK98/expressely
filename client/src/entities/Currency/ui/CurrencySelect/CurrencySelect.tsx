@@ -21,8 +21,8 @@ const options = [
         content: Currency.EUR,
     },
     {
-        value: Currency.RUB,
-        content: Currency.RUB,
+        value: Currency.MXN,
+        content: Currency.MXN,
     },
 ];
 

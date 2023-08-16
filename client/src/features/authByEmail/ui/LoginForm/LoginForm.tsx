@@ -29,6 +29,13 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
         loginUser(authData);
     };
 
+    const onLoginTestUser = () => {
+        loginUser({
+            email: 'test@mail.com',
+            password: '123',
+        });
+    };
+
     useEffect(() => {
         if (data) {
             localStorage.setItem(TOKEN_LOCALSTORAGE_KEY, data.accessToken);
@@ -38,14 +45,17 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
     }, [data, dispatch, onSuccess]);
 
     return (
-        <VStack gap="32" className={classNames(cls.LoginForm, {}, [className])}>
-            <Text text={t('Log In (Prefilled with Test User)')} bold size="l" />
+        <VStack
+            gap="32"
+            align="center"
+            className={classNames(cls.LoginForm, {}, [className])}
+        >
+            <Text text={t('Sign In')} bold size="l" align="center" />
             <Form<FormValues>
                 validationSchema={loginFormValidationSchema}
                 max
                 gap="32"
                 onSubmit={onSubmit}
-                defaultValues={{ email: 'test@mail.com', password: '123' }}
             >
                 {error && (
                     <Text
@@ -68,16 +78,27 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
                     registerName="password"
                     errorMargin={24}
                 />
-
-                <Button
-                    className={cls.loginBtn}
-                    disabled={isLoading}
-                    type="submit"
-                    variant="outline"
-                    color="success"
-                >
-                    {t('Log In')}
-                </Button>
+                <VStack max gap="16">
+                    <Button
+                        className={cls.loginBtn}
+                        disabled={isLoading}
+                        type="submit"
+                        variant="outline"
+                        color="success"
+                    >
+                        {t('Sign In')}
+                    </Button>
+                    <Button
+                        className={cls.loginBtn}
+                        disabled={isLoading}
+                        type="button"
+                        variant="outline"
+                        color="success"
+                        onClick={onLoginTestUser}
+                    >
+                        {t('Sign In with Test User')}
+                    </Button>
+                </VStack>
             </Form>
         </VStack>
     );

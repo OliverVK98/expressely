@@ -50,7 +50,7 @@ import * as path from 'path';
         Token,
         ViewedArticle,
       ],
-      synchronize: false,
+      synchronize: true,
       ssl: {
         rejectUnauthorized: false,
       },

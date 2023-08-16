@@ -18,9 +18,9 @@ export const AppDescription = memo((props: AppDescriptionProps) => {
                 <Icon Svg={AppLogo} width={200} height={200} />
                 <VStack max gap="16">
                     {appDescription.map((block, index) => (
-                        <>
+                        <React.Fragment key={index}>
                             {block.title && block.text && (
-                                <VStack key={index} max gap="8">
+                                <VStack max gap="8">
                                     <Text title={block.title} bold size="l" />
                                     <Text text={block.text} />
                                 </VStack>
@@ -29,16 +29,16 @@ export const AppDescription = memo((props: AppDescriptionProps) => {
                                 <VStack key={index} gap="8">
                                     <Text title={block.title} bold size="l" />
                                     {block.paragraphs.map(
-                                        (paragraph, paragraphIndex) => (
+                                        (paragraph, index) => (
                                             <Text
-                                                key={paragraphIndex}
+                                                key={index}
                                                 text={paragraph}
                                             />
                                         ),
                                     )}
                                 </VStack>
                             )}
-                        </>
+                        </React.Fragment>
                     ))}
                 </VStack>
             </VStack>

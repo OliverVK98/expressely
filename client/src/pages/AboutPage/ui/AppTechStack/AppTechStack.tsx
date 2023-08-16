@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { VStack } from '@/shared/ui/Stack';
+import React from 'react';
+import { HStack, VStack } from '@/shared/ui/Stack';
 import { Text } from '@/shared/ui/Text';
 import { Card } from '@/shared/ui/Card';
 import { appTechStack } from '../../model/textContent/textContent';
@@ -17,11 +18,26 @@ export const AppTechStack = (props: AppTechStackProps) => {
     return (
         <Card max padding="24">
             <VStack max gap="32">
-                {appTechStack.map((stack) => (
-                    <VStack className={className} max gap="8">
+                <HStack max justify="center" gap="32">
+                    {/* eslint-disable max-len */}
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png"
+                        width={220}
+                        alt="react"
+                        height={200}
+                    />
+                    <img
+                        src="https://www.codewithvlad.com/assets/svg/nest-logo.svg"
+                        width={200}
+                        alt="nest"
+                        height={200}
+                    />
+                </HStack>
+                {appTechStack.map((stack, index) => (
+                    <VStack className={className} max gap="8" key={index}>
                         <Text text={t(stack.title)} bold size="l" />
-                        {stack.paragraphs.map((paragraph) => (
-                            <div className={cls.font}>
+                        {stack.paragraphs.map((paragraph, index) => (
+                            <div className={cls.font} key={index}>
                                 <span className={cls.bold}>
                                     {paragraph.bold}
                                 </span>

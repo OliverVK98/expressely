@@ -8,7 +8,6 @@ export interface FormValues {
     confirmPassword: string;
     firstname: string;
     lastname: string;
-    avatar?: string;
     age: number;
     country: Country;
     currency: Currency;

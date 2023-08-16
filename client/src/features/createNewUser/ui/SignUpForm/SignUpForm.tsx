@@ -35,14 +35,12 @@ const SignUpForm = memo((props: SignUpFormProps) => {
         age,
         lastname,
         firstname,
-        avatar,
         currency,
         country,
         city,
     }: FormValues) => {
         createUser({
             age,
-            avatar,
             firstname,
             lastname,
             username,
@@ -66,8 +64,10 @@ const SignUpForm = memo((props: SignUpFormProps) => {
         <VStack
             gap="24"
             className={classNames(cls.SignUpForm, {}, [className])}
+            max
+            align="center"
         >
-            <Text align="center" title={t('Create Account')} />
+            <Text align="center" title={t('Sign Up')} />
             {error && (
                 <Text
                     text={(error as RTKApiError).data.message}
@@ -131,14 +131,6 @@ const SignUpForm = memo((props: SignUpFormProps) => {
                 />
                 <FormInput
                     className={cls.input}
-                    placeholder={t('Avatar (URL)')}
-                    type="text"
-                    registerName="avatar"
-                    errorMargin={20}
-                />
-
-                <FormInput
-                    className={cls.input}
                     placeholder={t('Age')}
                     type="text"
                     registerName="age"
@@ -169,7 +161,7 @@ const SignUpForm = memo((props: SignUpFormProps) => {
                     type="submit"
                     color="success"
                 >
-                    {t('Create Account')}
+                    {t('Sign Up')}
                 </Button>
             </Form>
         </VStack>

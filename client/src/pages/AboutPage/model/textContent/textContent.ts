@@ -86,7 +86,7 @@ export const appTechStack: AppTechStackBlock[] = [
             },
             {
                 bold: 'Storybook: ',
-                normal: 'Utilized for building UI components in isolation and documenting shared components.',
+                normal: 'Utilized for building UI components in isolation and documenting selected shared components.',
             },
             {
                 bold: 'Testing: ',
@@ -104,6 +104,10 @@ export const appTechStack: AppTechStackBlock[] = [
             {
                 bold: 'NestJS: ',
                 normal: 'NodeJS Framework with TypeScript integration for type safety and scalable development.',
+            },
+            {
+                bold: 'Deployment: ',
+                normal: 'Utilized NGINX as a reverse proxy and PM2 for process management during deployment.',
             },
             {
                 bold: 'JWT Authentication: ',

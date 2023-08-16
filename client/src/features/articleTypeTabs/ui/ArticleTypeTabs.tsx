@@ -3,6 +3,8 @@ import { memo, useCallback, useMemo } from 'react';
 import { TabItem, Tabs } from '@/shared/ui/Tabs';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ArticleType } from '@/entities/Article';
+import cls from './ArticleTypeTabs.module.scss';
+import { VStack } from '@/shared/ui/Stack';
 
 interface ArticleTypeTabsProps {
     className?: string;
@@ -38,12 +40,15 @@ export const ArticleTypeTabs = memo((props: ArticleTypeTabsProps) => {
     );
 
     return (
-        <Tabs
-            direction="column"
-            tabs={typeTabs}
-            value={value}
-            onTabClick={onTabClick}
-            className={classNames('', {}, [className])}
-        />
+        <VStack max className={cls.textAlign}>
+            <Tabs
+                direction="column"
+                tabs={typeTabs}
+                value={value}
+                onTabClick={onTabClick}
+                className={classNames('', {}, [className])}
+                max
+            />
+        </VStack>
     );
 });
