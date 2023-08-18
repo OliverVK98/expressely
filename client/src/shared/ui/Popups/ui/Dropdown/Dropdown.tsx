@@ -6,13 +6,14 @@ import { AppLink } from '../../../AppLink';
 import { mapDirectionClass } from '../../sharedStyles/consts';
 import cls from './Dropdown.module.scss';
 import popupCls from '../../sharedStyles/popup.module.scss';
+import { TestProps } from '@/shared/types/tests';
 
 export interface SelectOption<T extends string> {
     value: T;
     content: string;
 }
 
-export interface DropdownItem {
+export interface DropdownItem extends TestProps {
     disabled?: boolean;
     content?: ReactNode;
     onClick?: () => void;
@@ -40,6 +41,7 @@ export const Dropdown = memo((props: DropdownProps) => {
             ])}
         >
             <Menu.Button className={popupCls.trigger}>{trigger}</Menu.Button>
+
             <Menu.Items
                 as="div"
                 className={classNames(cls.menu, {}, menuClasses)}
@@ -52,6 +54,7 @@ export const Dropdown = memo((props: DropdownProps) => {
                             className={classNames(cls.item, {
                                 [cls.active]: active,
                             })}
+                            data-testid={item['data-testid']}
                             disabled={item.disabled}
                         >
                             {item.content}

@@ -7,7 +7,6 @@ import {
     ReducersList,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { articleEditPageReducer } from '../../model/slice/articleEditPageSlice';
-import { ArticlePreview } from '../ArticlePreview/ArticlePreview';
 import { ArticleEdit } from '../ArticleEdit/ArticleEdit';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { fetchArticleById } from '@/entities/Article';
@@ -20,6 +19,7 @@ import {
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { updateArticle } from '../../model/services/updateArticle';
 import { ErrorCard } from '@/shared/ui/ErrorCard';
+import { ArticlePreviewContainer } from '../ArticlePreviewContainer/ArticlePreviewContainer';
 
 interface ArticleEditPageProps {
     className?: string;
@@ -56,6 +56,7 @@ const ArticleEditPage = memo((props: ArticleEditPageProps) => {
                     img: state!.article.img,
                     type: state!.article.type,
                     blocks: state!.article.blocks,
+                    views: state!.article.views,
                 },
                 navigate,
             }),
@@ -78,7 +79,7 @@ const ArticleEditPage = memo((props: ArticleEditPageProps) => {
                 />
             )}
             {isPreview && (
-                <ArticlePreview
+                <ArticlePreviewContainer
                     article={article!}
                     onPublishHandler={onPublishHandler}
                     onPreviewButtonClick={onPreviewButtonClick}

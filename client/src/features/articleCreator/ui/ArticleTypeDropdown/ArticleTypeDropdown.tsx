@@ -13,10 +13,12 @@ interface ArticleTypeDropdownProps {
     onTypeAddClick: () => void;
     onChangeType: (newType: UserArticleType, index: number) => void;
     types?: UserArticleType[];
+    onRemoveType: (index: number) => void;
 }
 
 export const ArticleTypeDropdown = memo((props: ArticleTypeDropdownProps) => {
-    const { className, types, onChangeType, onTypeAddClick } = props;
+    const { className, types, onChangeType, onTypeAddClick, onRemoveType } =
+        props;
     const { t } = useTranslation();
 
     return (
@@ -30,6 +32,8 @@ export const ArticleTypeDropdown = memo((props: ArticleTypeDropdownProps) => {
                     value={type}
                     onChange={(value) => onChangeType(value, index)}
                     label={index === 0 ? t('Select Article Types') : ''}
+                    onRemove={() => onRemoveType(index)}
+                    showRemoveOption={index !== 0}
                 />
             ))}
             {types && types.length < 3 && (

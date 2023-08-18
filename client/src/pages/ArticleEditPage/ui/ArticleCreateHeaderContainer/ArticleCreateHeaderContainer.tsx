@@ -30,6 +30,13 @@ export const ArticleCreateHeaderContainer = (
         [dispatch],
     );
 
+    const onRemoveType = useCallback(
+        (index: number) => {
+            dispatch(articleEditPageActions.removeType(index));
+        },
+        [dispatch],
+    );
+
     const onChangeTitle = useCallback(
         (title: string) => {
             dispatch(articleEditPageActions.setTitle(title));
@@ -68,6 +75,7 @@ export const ArticleCreateHeaderContainer = (
             className={className}
             isLoading={isLoading}
             isEditMode
+            onRemoveType={onRemoveType}
         />
     );
 };

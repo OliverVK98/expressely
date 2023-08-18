@@ -86,7 +86,7 @@ export const appTechStack: AppTechStackBlock[] = [
             },
             {
                 bold: 'Storybook: ',
-                normal: 'Utilized for building UI components in isolation and documenting selected shared components.',
+                normal: 'Utilized for building UI components in isolation, documenting selected shared components, and screenshot testing with Loki.',
             },
             {
                 bold: 'Testing: ',

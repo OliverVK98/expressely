@@ -1,6 +1,6 @@
 {
     "Translate": "Traducir",
-    "Language": "Idioma",
+    "Language": "Español",
     "Page not found": "Página no encontrada",
     "Unexpected error occurred": "Ocurrió un error inesperado",
     "Reload page": "Recargar página",
@@ -138,5 +138,7 @@
     "Website User List": "Lista de Usuarios del Sitio Web",
     "Bar Chart": "Gráfico de Barras",
     "Line Chart": "Gráfico de Líneas",
-    "Sign In with Test User": "Iniciar Sesión con Usuario de Prueba"
+    "Sign In with Test User": "Iniciar Sesión con Usuario de Prueba",
+    "Popular": "Popular",
+    "Go Back": "Volver"
 }

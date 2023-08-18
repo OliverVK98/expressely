@@ -5,7 +5,7 @@ import { AdminAnalytics } from '../AdminAnalytics/AdminAnalytics';
 import { AdminControllers } from '../AdminControllers/AdminControllers';
 
 const AdminPage = () => (
-    <Page data-testid="AdminPanelPage">
+    <Page data-testid="AdminPage">
         <VStack gap="16" align="center">
             <AdminAnalytics />
             <AdminControllers />

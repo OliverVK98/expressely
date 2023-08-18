@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import React, { memo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { Dropdown } from '@/shared/ui/Popups';
+import { Dropdown, DropdownItem } from '@/shared/ui/Popups';
 import { Icon } from '@/shared/ui/Icon';
 import ProfileIcon from '@/shared/assets/icons/profile.svg';
 
@@ -15,14 +15,16 @@ export const UnauthorizedDropdown = memo((props: UnauthorizedDropdownProps) => {
     const { className, onToggleAuthModal, onToggleSignUpModal } = props;
     const { t } = useTranslation();
 
-    const items = [
+    const items: DropdownItem[] = [
         {
             content: t('Sign In'),
             onClick: onToggleAuthModal,
+            'data-testid': 'signInButton',
         },
         {
             content: t('Sign Up'),
             onClick: onToggleSignUpModal,
+            'data-testid': 'signUpButton',
         },
     ];
 
@@ -31,7 +33,14 @@ export const UnauthorizedDropdown = memo((props: UnauthorizedDropdownProps) => {
             className={classNames('', {}, [className])}
             direction="bottomLeft"
             items={items}
-            trigger={<Icon height={25} width={25} Svg={ProfileIcon} />}
+            trigger={
+                <Icon
+                    data-testid="loginDropdown"
+                    height={25}
+                    width={25}
+                    Svg={ProfileIcon}
+                />
+            }
         />
     );
 });

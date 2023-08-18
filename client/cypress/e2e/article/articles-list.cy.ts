@@ -1,8 +1,8 @@
 describe('User visits articles page', () => {
-    beforeEach(() => {
-        cy.login().then((data) => {
-            cy.visit('articles');
-        });
+    before(() => {
+        cy.visit(`articles`);
+        cy.login();
+        cy.wait(1000);
     });
 
     it('Articles are successfully loaded', () => {

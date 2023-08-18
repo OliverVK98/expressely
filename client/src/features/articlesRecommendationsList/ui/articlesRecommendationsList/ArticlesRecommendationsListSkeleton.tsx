@@ -27,7 +27,7 @@ export const ArticlesRecommendationsListSkeleton = (
                 )}
                 max
             >
-                <Text text={t('Most Reading')} size="l" bold align="center" />
+                <Text text={t('Popular')} size="l" bold align="center" />
             </Card>
             <VStack gap="16" max>
                 {new Array(5).fill(0).map((_, index) => (

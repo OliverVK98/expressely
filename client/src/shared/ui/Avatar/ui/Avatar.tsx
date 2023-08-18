@@ -5,8 +5,9 @@ import cls from './Avatar.module.scss';
 import { AppImage } from '../../AppImage';
 import { Icon } from '../../Icon';
 import { Skeleton } from '../../Skeleton';
+import { TestProps } from '@/shared/types/tests';
 
-interface AvatarProps {
+interface AvatarProps extends TestProps {
     className?: string;
     src?: string | null;
     size?: number;
@@ -14,7 +15,7 @@ interface AvatarProps {
 }
 
 export const Avatar = (props: AvatarProps) => {
-    const { className, src, size = 100, alt } = props;
+    const { className, src, size = 100, alt, ...otherProps } = props;
 
     const styles = useMemo<CSSProperties>(
         () => ({
@@ -35,6 +36,7 @@ export const Avatar = (props: AvatarProps) => {
             style={styles}
             alt={alt}
             className={classNames(cls.Avatar, {}, [className])}
+            {...otherProps}
         />
     );
 };

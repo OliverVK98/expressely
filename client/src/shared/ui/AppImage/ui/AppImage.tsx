@@ -6,6 +6,7 @@ import {
     useState,
 } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
+import { TestProps } from '@/shared/types/tests';
 
 interface AppImageProps extends ImgHTMLAttributes<HTMLImageElement> {
     className?: string;
@@ -13,7 +14,7 @@ interface AppImageProps extends ImgHTMLAttributes<HTMLImageElement> {
     errorFallback?: ReactElement;
 }
 
-export const AppImage = memo((props: AppImageProps) => {
+export const AppImage = memo((props: AppImageProps & TestProps) => {
     const {
         className,
         src,

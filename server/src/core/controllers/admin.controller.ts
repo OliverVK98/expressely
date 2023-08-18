@@ -20,6 +20,7 @@ import { DeleteCommentDto } from '../dtos/admin/deleteComment.dto';
 import { CurrentUser } from '../decorators/currentUser.decorator';
 import { UserSerializer } from '../serializers/user/user.serializer';
 import { UpdateUserRoleDto } from '../dtos/admin/updateUserRole.dto';
+import { GetNotApprovedArticleDto } from '../dtos/admin/getNotApprovedArticle.dto';
 
 @Controller('admin')
 @UseGuards(AccessTokenGuard)
@@ -34,10 +35,22 @@ export class AdminController {
     private viewedArticleService: ViewedArticleService,
     private userSerializer: UserSerializer,
   ) {}
+
   @Get('/get-pending-articles')
   async getAdminArticles() {
     const articles = await this.articleService.getAdminArticles();
     return this.articleSerializer.serializeMany(articles, 'user');
+  }
+
+  @Get('/get-pending-article/:articleId')
+  async getAdminArticleWithId(
+    @Param() { articleId }: GetNotApprovedArticleDto,
+  ) {
+    const article = await this.articleService.findOneWithApprovalStatus(
+      articleId,
+      false,
+    );
+    return this.articleSerializer.serialize(article, 'user');
   }
 
   @Get('/userlist')

@@ -9,21 +9,37 @@ interface ArticleTypeSelectProps {
     onChange?: (value: UserArticleType) => void;
     readonly?: boolean;
     label?: string;
+    showRemoveOption?: boolean;
+    onRemove?: () => void;
 }
 
 const options = Object.keys(UserArticleType).map((key) => ({
     value: UserArticleType[key as keyof typeof UserArticleType],
     content: UserArticleType[key as keyof typeof UserArticleType],
 }));
+const removeOption = { value: 'REMOVE', content: 'Remove' };
+const optionsWithRemove = [...options, removeOption];
 
 export const ArticleTypeSelect = memo((props: ArticleTypeSelectProps) => {
-    const { className, value, onChange, readonly, label } = props;
+    const {
+        className,
+        value,
+        onChange,
+        readonly,
+        label,
+        showRemoveOption,
+        onRemove,
+    } = props;
 
     const onChangeHandler = useCallback(
-        (value: string) => {
-            onChange?.(value as UserArticleType);
+        (selectedValue: string) => {
+            if (selectedValue === 'REMOVE') {
+                onRemove?.();
+            } else {
+                onChange?.(selectedValue as UserArticleType);
+            }
         },
-        [onChange],
+        [onChange, onRemove],
     );
 
     return (
@@ -31,7 +47,7 @@ export const ArticleTypeSelect = memo((props: ArticleTypeSelectProps) => {
             onChange={onChangeHandler}
             value={value}
             label={label}
-            items={options}
+            items={showRemoveOption ? optionsWithRemove : options}
             className={classNames('', {}, [className])}
             readonly={readonly}
             direction="bottomRight"

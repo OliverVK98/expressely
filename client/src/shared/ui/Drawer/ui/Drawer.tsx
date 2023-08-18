@@ -8,6 +8,7 @@ import { Overlay } from '../../Overlay';
 import { Portal } from '../../Portal';
 import cls from './Drawer.module.scss';
 import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme';
+import { Card } from '../../Card';
 
 interface DrawerProps {
     className?: string;
@@ -79,26 +80,28 @@ export const DrawerContent = memo((props: DrawerProps) => {
 
     return (
         <Portal element={document.getElementById('app') ?? document.body}>
-            <div
+            <Card
                 className={classNames(cls.Drawer, {}, [
                     className,
                     theme,
                     'app_drawer',
                 ])}
+                padding="24"
+                max
             >
                 <Overlay onClick={close} />
                 <Spring.a.div
                     className={cls.sheet}
                     style={{
                         display,
-                        bottom: `calc(-100vh + ${height - 100}px)`,
+                        bottom: `calc(-100vh + ${height - 150}px)`,
                         y,
                     }}
                     {...bind()}
                 >
                     {children}
                 </Spring.a.div>
-            </div>
+            </Card>
         </Portal>
     );
 });

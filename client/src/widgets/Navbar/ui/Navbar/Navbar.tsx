@@ -9,6 +9,9 @@ import { AvatarDropdown } from '@/features/avatarDropdown';
 import cls from './Navbar.module.scss';
 import { SignUpModal } from '@/features/createNewUser';
 import { UnauthorizedDropdown } from '@/features/unauthDropdown';
+import { BrowserView } from '@/shared/ui/BrowserView';
+import { MobileView } from '@/shared/ui/MobileView';
+import { MobileNavbar } from '../MobileNavbar/MobileNavbar';
 
 interface NavbarProps {
     className?: string;
@@ -17,6 +20,7 @@ interface NavbarProps {
 const Navbar = memo(({ className }: NavbarProps) => {
     const [isAuthModal, setIsAuthModal] = useState(false);
     const [isSignUpModal, setIsSignUpModal] = useState(false);
+    const [isMobileOpen, setIsMobileOpen] = useState(false);
     const authData = useSelector(getUserAuthData);
 
     const onToggleAuthModal = useCallback(() => {
@@ -25,6 +29,10 @@ const Navbar = memo(({ className }: NavbarProps) => {
 
     const onToggleSignUpModal = useCallback(() => {
         setIsSignUpModal((prev) => !prev);
+    }, []);
+
+    const onMobileToggle = useCallback(() => {
+        setIsMobileOpen((prev) => !prev);
     }, []);
 
     if (authData) {
@@ -43,10 +51,18 @@ const Navbar = memo(({ className }: NavbarProps) => {
             {isAuthModal && (
                 <LoginModal isOpen={isAuthModal} onClose={onToggleAuthModal} />
             )}
-            <UnauthorizedDropdown
-                onToggleAuthModal={onToggleAuthModal}
-                onToggleSignUpModal={onToggleSignUpModal}
-            />
+            <BrowserView>
+                <UnauthorizedDropdown
+                    onToggleAuthModal={onToggleAuthModal}
+                    onToggleSignUpModal={onToggleSignUpModal}
+                />
+            </BrowserView>
+            <MobileView>
+                <MobileNavbar
+                    isMobileOpen={isMobileOpen}
+                    setIsMobileOpen={onMobileToggle}
+                />
+            </MobileView>
             {isSignUpModal && (
                 <SignUpModal
                     isOpen={isSignUpModal}

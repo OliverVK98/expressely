@@ -20,6 +20,7 @@ interface ArticleCreateHeaderProps {
     onChangeSubtitle: (subtitle: string) => void;
     onChangeUrl: (img: string) => void;
     onTypeAddClick: () => void;
+    onRemoveType: (index: number) => void;
     onChangeType: (newType: UserArticleType, index: number) => void;
     types?: UserArticleType[];
     isLoading?: boolean;
@@ -41,6 +42,7 @@ export const ArticleCreateHeader = memo((props: ArticleCreateHeaderProps) => {
         onChangeType,
         isLoading,
         isEditMode,
+        onRemoveType,
     } = props;
     const { t } = useTranslation();
 
@@ -104,6 +106,7 @@ export const ArticleCreateHeader = memo((props: ArticleCreateHeaderProps) => {
                     types={types}
                     onTypeAddClick={onTypeAddClick}
                     onChangeType={onChangeType}
+                    onRemoveType={onRemoveType}
                 />
             </VStack>
         </Card>

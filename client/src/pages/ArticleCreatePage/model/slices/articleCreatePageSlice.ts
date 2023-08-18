@@ -44,6 +44,9 @@ const articleCreatePageSlice = createSlice({
             updatedTypes[index] = newType;
             state.type = updatedTypes;
         },
+        removeType: (state, action: PayloadAction<number>) => {
+            state.type.splice(action.payload, 1);
+        },
         addCodeBlock: (state, action: PayloadAction<ArticleCodeBlock>) => {
             state.blocks = [...state.blocks, action.payload];
         },

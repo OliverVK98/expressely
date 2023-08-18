@@ -15,6 +15,7 @@ import {
     getRouteArticleCreate,
     getRouteArticleDetails,
     getRouteArticleEdit,
+    getRouteArticlePreview,
     getRouteArticles,
     getRouteForbidden,
     getRouteMain,
@@ -23,6 +24,7 @@ import {
 } from '@/shared/const/router';
 import { ArticleCreatePage } from '@/pages/ArticleCreatePage';
 import { AdminPage } from '@/pages/AdminPage';
+import { ArticleAdminPreviewPage } from '@/pages/ArticleAdminPreviewPage';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.MAIN]: {
@@ -63,6 +65,12 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.ADMIN_PANEL]: {
         path: getRouteAdmin(),
         element: <AdminPage />,
+        authOnly: true,
+        roles: [UserRole.ADMIN],
+    },
+    [AppRoutes.ADMIN_ARTICLE_APPROVE]: {
+        path: getRouteArticlePreview(':id'),
+        element: <ArticleAdminPreviewPage />,
         authOnly: true,
         roles: [UserRole.ADMIN],
     },

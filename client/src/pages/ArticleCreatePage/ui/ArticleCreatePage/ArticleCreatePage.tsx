@@ -6,13 +6,13 @@ import {
     ReducersList,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { articleCreatePageReducer } from '../../model/slices/articleCreatePageSlice';
-import { ArticlePreview } from '../ArticlePreview/ArticlePreview';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { ArticleCreatePageSidebar } from '../ArticleCreatePageSidebar/ArticleCreatePageSidebar';
 import { ArticleCreate } from '../ArticleCreate/ArticleCreate';
 import { addNewArticle } from '../../model/services/addNewArticle';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useArticleCreatePageState } from '../../model/selectors/articleCreatePageSelectors';
+import { ArticlePreviewContainer } from '../ArticlePreviewContainer/ArticlePreviewContainer';
 
 interface ArticleCreatePageProps {
     className?: string;
@@ -57,7 +57,7 @@ const ArticleCreatePage = memo((props: ArticleCreatePageProps) => {
                 />
             )}
             {isPreview && (
-                <ArticlePreview
+                <ArticlePreviewContainer
                     onPublishHandler={onPublishHandler}
                     onPreviewButtonClick={onPreviewButtonClick}
                 />

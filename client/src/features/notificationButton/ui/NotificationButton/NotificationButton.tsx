@@ -34,13 +34,15 @@ export const NotificationButton = memo((props: NotificationButtonProps) => {
     const trigger = (
         <>
             {!!data && (
-                <Icon
-                    className={cls.notificationCount}
-                    Svg={ExclamationIcon}
-                    height={12}
-                    width={12}
-                    color="noColor"
-                />
+                <BrowserView>
+                    <Icon
+                        className={cls.notificationCount}
+                        Svg={ExclamationIcon}
+                        height={12}
+                        width={12}
+                        color="noColor"
+                    />
+                </BrowserView>
             )}
             <Icon
                 className={cls.trigger}

@@ -3,10 +3,8 @@ let profileId: string;
 describe('User visits his profile page', () => {
     beforeEach(() => {
         cy.visit('');
-        cy.login().then((data) => {
-            profileId = data.id;
-            cy.visit(`profile/${data.id}`);
-        });
+        cy.login();
+        cy.wait(1000);
     });
 
     afterEach(() => {

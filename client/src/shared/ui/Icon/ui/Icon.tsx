@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { classNames, Mods } from '@/shared/lib/classNames/classNames';
 import cls from './Icon.module.scss';
+import { TestProps } from '@/shared/types/tests';
 
 type SvgProps = Omit<React.SVGProps<SVGSVGElement>, 'onClick'>;
 type FillProps = 'fill' | 'noFill';
@@ -23,7 +24,7 @@ interface ClickableBaseProps extends IconBaseProps {
     onClick: () => void;
 }
 
-type IconProps = NonClickableIconProps | ClickableBaseProps;
+type IconProps = (NonClickableIconProps | ClickableBaseProps) & TestProps;
 
 export const Icon = memo((props: IconProps) => {
     const {

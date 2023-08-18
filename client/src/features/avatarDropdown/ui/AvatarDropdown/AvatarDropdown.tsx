@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import React, { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { Avatar } from '@/shared/ui/Avatar';
-import { Dropdown } from '@/shared/ui/Popups';
+import { Dropdown, DropdownItem } from '@/shared/ui/Popups';
 import { getUserAuthData, isUserAdmin, userActions } from '@/entities/User';
 import { getRouteAdmin, getRouteUserProfile } from '@/shared/const/router';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
@@ -26,12 +26,13 @@ export const AvatarDropdown = memo((props: AvatarDropdownProps) => {
         return null;
     }
 
-    const items = [
+    const items: DropdownItem[] = [
         ...(isAdmin
             ? [
                   {
                       content: t('Admin Panel'),
                       href: getRouteAdmin(),
+                      'data-testid': 'AvatarDropdown.AdminPage',
                   },
               ]
             : []),
@@ -50,7 +51,13 @@ export const AvatarDropdown = memo((props: AvatarDropdownProps) => {
             className={className}
             direction="bottomLeft"
             items={items}
-            trigger={<Avatar size={40} src={authData.avatar} />}
+            trigger={
+                <Avatar
+                    data-testid="avatarDropdown"
+                    size={40}
+                    src={authData.avatar}
+                />
+            }
         />
     );
 });

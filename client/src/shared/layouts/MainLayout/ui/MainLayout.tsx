@@ -1,6 +1,7 @@
 import { memo, ReactElement } from 'react';
 import cls from './MainLayout.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
+import { BrowserView } from '@/shared/ui/BrowserView';
 
 interface MainLayoutProps {
     className?: string;
@@ -15,7 +16,9 @@ export const MainLayout = memo((props: MainLayoutProps) => {
 
     return (
         <div className={classNames(cls.MainLayout, {}, [className])}>
-            <div className={cls.sidebar}>{sidebar}</div>
+            <BrowserView>
+                <div className={cls.sidebar}>{sidebar}</div>
+            </BrowserView>
             <div className={cls.content}>{content}</div>
             <div className={cls.rightbar}>
                 <div className={cls.header}>{header}</div>

@@ -95,6 +95,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
                         variant="outline"
                         color="success"
                         onClick={onLoginTestUser}
+                        data-testid="LoginForm.testUserLogInButton"
                     >
                         {t('Sign In with Test User')}
                     </Button>

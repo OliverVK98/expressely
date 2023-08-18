@@ -24,7 +24,7 @@ export const ArticlesRecommendationsList = memo(
         }
 
         return (
-            <VStack max gap="8">
+            <VStack max gap="8" data-testid="ArticleRecommendationsList">
                 <Card
                     border="default"
                     max
@@ -33,13 +33,9 @@ export const ArticlesRecommendationsList = memo(
                         {},
                         [className],
                     )}
+                    data-testid="ArticleRecommendationsList"
                 >
-                    <Text
-                        text={t('Most Reading')}
-                        size="l"
-                        bold
-                        align="center"
-                    />
+                    <Text text={t('Popular')} size="l" bold align="center" />
                 </Card>
                 {articles?.map((article) => (
                     <ArticleShortList

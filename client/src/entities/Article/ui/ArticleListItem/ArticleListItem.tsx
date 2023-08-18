@@ -16,7 +16,11 @@ import {
     ArticleExpandedUser,
 } from '../../model/types/article';
 import cls from './ArticleListItem.module.scss';
-import { getRouteArticleDetails, getRouteProfile } from '@/shared/const/router';
+import {
+    getRouteArticleDetails,
+    getRouteArticlePreview,
+    getRouteProfile,
+} from '@/shared/const/router';
 import { HStack, VStack } from '@/shared/ui/Stack';
 
 interface ArticleListItemBaseProps {
@@ -127,7 +131,11 @@ export const ArticleListItem = memo(
                             {!isPendingArticles && (
                                 <AppLink
                                     target={target}
-                                    to={getRouteArticleDetails(article.id)}
+                                    to={
+                                        isAdmin
+                                            ? getRouteArticlePreview(article.id)
+                                            : getRouteArticleDetails(article.id)
+                                    }
                                 >
                                     <Button variant="outline">
                                         {t('Continue reading...')}
