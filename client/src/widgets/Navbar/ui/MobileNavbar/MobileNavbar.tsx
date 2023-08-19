@@ -3,14 +3,21 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Drawer } from '@/shared/ui/Drawer';
-import ProfileIcon from '@/shared/assets/icons/profile.svg';
 import { Icon } from '@/shared/ui/Icon';
 import cls from './MobileNavbar.module.scss';
 import { SignUpForm } from '@/features/createNewUser';
-import { VStack } from '@/shared/ui/Stack';
+import { HStack, VStack } from '@/shared/ui/Stack';
 import { LoginForm } from '@/features/authByEmail';
 import { Button } from '@/shared/ui/Button';
 import { getSidebarItems } from '../../../Sidebar/model/selectors/getSidebarItems';
+import { NotificationButton } from '@/features/notificationButton';
+import { ThemeSwitcher } from '@/features/themeSwitcher';
+import { LangSwitcher } from '@/features/langSwitcher';
+import { getUserAuthData, isUserAdmin, userActions } from '@/entities/User';
+import { DropdownItem } from '@/shared/ui/Popups';
+import { getRouteAdmin } from '@/shared/const/router';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import BurgerIcon from '@/shared/assets/icons/burger.svg';
 
 interface MobileNavbarProps {
     className?: string;
@@ -25,6 +32,13 @@ export const MobileNavbar = (props: MobileNavbarProps) => {
     const [isSignUpFormOpen, setIsSignUpFormOpen] = useState(false);
     const sidebarItemsList = useSelector(getSidebarItems);
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const authData = useSelector(getUserAuthData);
+    const isAdmin = useSelector(isUserAdmin);
+    const onLogout = useCallback(() => {
+        dispatch(userActions.logout());
+        setIsMobileOpen();
+    }, [dispatch]);
 
     const onSignInClickHandler = useCallback(() => {
         setIsSignInFormOpen((prev) => !prev);
@@ -42,14 +56,30 @@ export const MobileNavbar = (props: MobileNavbarProps) => {
         [navigate, setIsMobileOpen],
     );
 
+    const authItems: DropdownItem[] = [
+        ...(isAdmin
+            ? [
+                  {
+                      content: t('Admin Panel'),
+                      href: getRouteAdmin(),
+                      'data-testid': 'AvatarDropdown.AdminPage',
+                  },
+              ]
+            : []),
+        {
+            content: t('Logout'),
+            onClick: onLogout,
+        },
+    ];
+
     return (
         <>
             <Icon
-                height={25}
-                width={25}
+                height={50}
+                width={50}
                 clickable
                 onClick={setIsMobileOpen}
-                Svg={ProfileIcon}
+                Svg={BurgerIcon}
             />
             <Drawer
                 className={className}
@@ -71,24 +101,55 @@ export const MobileNavbar = (props: MobileNavbarProps) => {
                                 </Button>
                             ))}
                         </VStack>
-                        <VStack
-                            max
-                            gap="16"
-                            className={cls.authButtonsContainer}
-                        >
-                            <Button
-                                className={cls.button}
-                                onClick={onSignInClickHandler}
+                        {authData && (
+                            <VStack
+                                max
+                                gap="16"
+                                className={cls.authButtonsContainer}
                             >
-                                {t('Sign In')}
-                            </Button>
-                            <Button
-                                className={cls.button}
-                                onClick={onSignUpClickHandler}
+                                {authItems.map((item, index) => (
+                                    <Button
+                                        className={cls.button}
+                                        key={index}
+                                        onClick={
+                                            item.href
+                                                ? () =>
+                                                      handleNavigateClick(
+                                                          item.href!,
+                                                      )
+                                                : item.onClick
+                                        }
+                                    >
+                                        {item.content}
+                                    </Button>
+                                ))}
+                            </VStack>
+                        )}
+                        {!authData && (
+                            <VStack
+                                max
+                                gap="16"
+                                className={cls.authButtonsContainer}
                             >
-                                {t('Sign Up')}
-                            </Button>
-                        </VStack>
+                                <Button
+                                    className={cls.button}
+                                    onClick={onSignInClickHandler}
+                                >
+                                    {t('Sign In')}
+                                </Button>
+                                <Button
+                                    className={cls.button}
+                                    onClick={onSignUpClickHandler}
+                                >
+                                    {t('Sign Up')}
+                                </Button>
+                            </VStack>
+                        )}
+                        <HStack max gap="8" justify="center" align="center">
+                            <NotificationButton />
+                            <ThemeSwitcher />
+                            <LangSwitcher />
+                        </HStack>
                     </VStack>
                 )}
                 {isSignUpFormOpen && (

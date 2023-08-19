@@ -20,6 +20,9 @@
 }
 
 .sheet {
+    overflow-y: auto;
+    max-height: calc(100vh - 50px);
+    touch-action: pan-y;
     z-index: var(--modal-z-index);
     position: fixed;
     left: 2vw;
@@ -27,6 +30,5 @@
     width: 96vw;
     border-radius: 12px 12px 0;
     background: var(--light-bg-redesigned);
-    touch-action: none;
     padding: 15px;
 }

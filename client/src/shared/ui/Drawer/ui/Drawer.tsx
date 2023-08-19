@@ -94,7 +94,7 @@ export const DrawerContent = memo((props: DrawerProps) => {
                     className={cls.sheet}
                     style={{
                         display,
-                        bottom: `calc(-100vh + ${height - 150}px)`,
+                        bottom: `calc(-100vh + ${height - 50}px)`,
                         y,
                     }}
                     {...bind()}
