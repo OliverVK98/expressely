@@ -20,10 +20,11 @@ import { RTKApiError } from '@/shared/api/rtkApi';
 interface SignUpFormProps {
     className?: string;
     onSuccess: () => void;
+    isMobile?: boolean;
 }
 
 const SignUpForm = memo((props: SignUpFormProps) => {
-    const { className, onSuccess } = props;
+    const { className, onSuccess, isMobile = false } = props;
     const { t } = useTranslation();
     const [createUser, { error, data, isLoading }] = useCreateUser();
     const dispatch = useAppDispatch();
@@ -60,10 +61,14 @@ const SignUpForm = memo((props: SignUpFormProps) => {
         }
     }, [data, dispatch, onSuccess]);
 
+    const mods = {
+        [cls.fixedWidth]: !isMobile,
+    };
+
     return (
         <VStack
             gap="24"
-            className={classNames(cls.SignUpForm, {}, [className])}
+            className={classNames(cls.SignUpForm, mods, [className])}
             max
             align="center"
         >
