@@ -38,15 +38,11 @@ export const MobileNavbar = (props: MobileNavbarProps) => {
     const onLogout = useCallback(() => {
         dispatch(userActions.logout());
         setIsMobileOpen();
-    }, [dispatch]);
+    }, [dispatch, setIsMobileOpen]);
 
-    const onSignInClickHandler = useCallback(() => {
-        setIsSignInFormOpen((prev) => !prev);
-    }, []);
+    const onSignInClickHandler = () => setIsSignInFormOpen((prev) => !prev);
 
-    const onSignUpClickHandler = useCallback(() => {
-        setIsSignUpFormOpen((prev) => !prev);
-    }, []);
+    const onSignUpClickHandler = () => setIsSignUpFormOpen((prev) => !prev);
 
     const handleNavigateClick = useCallback(
         (url: string) => {

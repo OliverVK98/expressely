@@ -1,0 +1,63 @@
+name: linting, testing, building
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build-and-ui-testing:
+    runs-on: ubuntu-latest
+    concurrency: ci-${{ github.ref }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    strategy:
+      matrix:
+        node-version: [ 17.x ]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Staring Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: install modules
+        run: npm install
+
+      - name: build production project
+        run: npm run build
+        if: always()
+
+      - name: build client storybook
+        working-directory: client
+        run: npm run storybook:build
+        if: always()
+
+      - name: client unit testing
+        working-directory: client
+        run: npm run test:unit
+        if: always()
+
+      - name: client linting css
+        working-directory: client
+        run: npm run lint:ts
+
+      - name: client linting scss
+        working-directory: client
+        run: npm run lint:scss
+
+      - name: server linting ts
+        working-directory: client
+        run: npm run lint:ts

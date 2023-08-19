@@ -26,7 +26,7 @@ export const ArticlePreviewActions = (props: ArticlePreviewActionsProps) => {
     const onApproveClick = useCallback(async () => {
         await approveArticleWithId(articleId);
         navigate(getRouteAdmin());
-    }, [approveArticleWithId, articleId]);
+    }, [approveArticleWithId, articleId, navigate]);
 
     if (isLoading || isError)
         return <Skeleton className={className} width="max" height={200} />;

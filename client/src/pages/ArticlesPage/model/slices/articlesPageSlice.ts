@@ -30,11 +30,11 @@ const articlesPageSlice = createSlice({
         error: undefined,
         ids: [],
         entities: {},
-        view: ArticleView.SMALL,
+        view: ArticleView.BIG,
         page: 1,
         hasMore: true,
         _inited: false,
-        limit: 9,
+        limit: 15,
         sort: ArticleSortField.CREATED,
         search: '',
         order: 'asc',
@@ -61,10 +61,9 @@ const articlesPageSlice = createSlice({
             state.type = action.payload;
         },
         initState: (state) => {
-            const view = localStorage.getItem(
+            state.view = localStorage.getItem(
                 ARTICLE_VIEW_LOCALSTORAGE_KEY,
             ) as ArticleView;
-            state.view = view;
             state.limit = 15;
             state._inited = true;
         },
