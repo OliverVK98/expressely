@@ -38,18 +38,18 @@ const Navbar = memo(({ className }: NavbarProps) => {
     if (authData) {
         return (
             <header className={classNames(cls.Navbar, {}, [className])}>
-                <HStack gap="16" className={cls.actions}>
-                    <BrowserView>
+                <BrowserView>
+                    <HStack gap="16" className={cls.actions}>
                         <NotificationButton />
                         <AvatarDropdown />
-                    </BrowserView>
-                    <MobileView>
-                        <MobileNavbar
-                            isMobileOpen={isMobileOpen}
-                            setIsMobileOpen={onMobileToggle}
-                        />
-                    </MobileView>
-                </HStack>
+                    </HStack>
+                </BrowserView>
+                <MobileView>
+                    <MobileNavbar
+                        isMobileOpen={isMobileOpen}
+                        setIsMobileOpen={onMobileToggle}
+                    />
+                </MobileView>
             </header>
         );
     }

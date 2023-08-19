@@ -3,6 +3,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './ScrollToolbar.module.scss';
 import { VStack } from '@/shared/ui/Stack';
 import { ScrollToTopButton } from '@/features/scrollToTopButton';
+import { BrowserView } from '@/shared/ui/BrowserView';
 
 interface ScrollToolbarProps {
     className?: string;
@@ -18,7 +19,9 @@ export const ScrollToolbar = memo((props: ScrollToolbarProps) => {
             max
             className={classNames(cls.ScrollToolbar, {}, [className])}
         >
-            <ScrollToTopButton />
+            <BrowserView>
+                <ScrollToTopButton />
+            </BrowserView>
         </VStack>
     );
 });
