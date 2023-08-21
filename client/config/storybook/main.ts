@@ -1,4 +1,5 @@
 import { Configuration, DefinePlugin, RuleSetRule } from 'webpack';
+// @ts-ignore
 import path from 'path';
 import { buildCssLoader } from '../build/loaders/buildCssLoader';
 
@@ -63,7 +64,6 @@ export default {
                 __PROJECT__: JSON.stringify('storybook'),
             }),
         );
-        // Return the altered config
         return config;
     },
 };

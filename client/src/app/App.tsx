@@ -19,8 +19,10 @@ const App = () => {
     const toolbar = useAppToolbar();
 
     useEffect(() => {
-        dispatch(initAuthData());
-    }, [dispatch]);
+        if (!init) {
+            dispatch(initAuthData());
+        }
+    }, [dispatch, init]);
 
     if (!init) {
         return (
@@ -43,7 +45,5 @@ const App = () => {
         </div>
     );
 };
-
-// TODO: chromatic screenshot testing
 
 export default withTheme(App);

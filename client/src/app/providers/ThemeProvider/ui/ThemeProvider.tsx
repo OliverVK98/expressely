@@ -22,6 +22,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
             setTheme(initialTheme);
             setThemeInitialized(true);
         }
+        setThemeInitialized(false);
     }, [initialTheme, isThemeInitialized]);
 
     const defaultProps = useMemo(
@@ -32,10 +33,8 @@ const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
         [theme],
     );
 
-    useEffect(() => {
-        document.body.className = theme;
-        localStorage.setItem(THEME_LOCALSTORAGE_KEY, theme);
-    });
+    document.body.className = theme;
+    localStorage.setItem(THEME_LOCALSTORAGE_KEY, theme);
 
     return (
         <ThemeContext.Provider value={defaultProps}>

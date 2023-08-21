@@ -43,7 +43,7 @@ export const UserRoleController = memo((props: UserRoleControllerProps) => {
                     <ListBox
                         onChange={onUserRoleChangeHandler}
                         items={items}
-                        direction="bottomRight"
+                        direction="topRight"
                         value={getUserHighestRole(user?.roles)}
                     />
                 </HStack>

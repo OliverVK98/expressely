@@ -147,7 +147,6 @@ export class UserService {
 
     if (action === UserPreferenceAction.ADD) {
       if (index !== -1) {
-        // User already has this preference
         return;
       }
       user.preferences.push(preference);

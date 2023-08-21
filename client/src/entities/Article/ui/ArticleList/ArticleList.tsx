@@ -81,7 +81,7 @@ export const ArticleList = memo(
                 <Card
                     max
                     padding="24"
-                    className={classNames('', {}, [className, cls[view]])}
+                    className={classNames('', {}, [className])}
                 >
                     <Text
                         size="l"

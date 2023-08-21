@@ -17,6 +17,5 @@ export function buildSvgLoader() {
                 }
             }
         }],
-        // use: ['@svgr/webpack']
     };
 }

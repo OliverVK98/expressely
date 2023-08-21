@@ -12,14 +12,14 @@ import {
     UsersAnalytics,
     ViewsAnalytics,
 } from '@/features/analytics';
-import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme';
 import cls from './AdminAnalytics.module.scss';
+import { useGetChartColor } from '../../model/lib/useGetChartColor';
 
 export const AdminAnalytics = memo(() => {
     const { t } = useTranslation();
     const [currentYear, setCurrentYear] = useState(ChartYear.YEAR2023);
     const [chartType, setChartType] = useState(ChartType.BAR);
-    const { color } = useTheme();
+    const color = useGetChartColor();
 
     const onLastYearClick = useCallback(() => {
         setCurrentYear(ChartYear.YEAR2022);

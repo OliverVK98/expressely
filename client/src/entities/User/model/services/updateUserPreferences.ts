@@ -30,13 +30,6 @@ export const updateUserPreferences = createAsyncThunk<
             },
         );
 
-        // const response = await dispatch(
-        //     setJsonSettingsMutation({
-        //         ...currentSettings,
-        //         ...newJsonSettings,
-        //     }),
-        // ).unwrap();
-
         if (!response) {
             return rejectWithValue('');
         }
