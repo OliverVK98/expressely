@@ -6,6 +6,7 @@ export interface BuildPaths {
     html: string;
     src: string;
     locales: string;
+    favicon: string;
     buildLocales: string;
 }
 
